@@ -1,0 +1,500 @@
+
+<link rel="stylesheet" href="/stylesheets/pages/flight.css">
+<link rel="stylesheet" href="/stylesheets/partials/multirange.css"> 
+
+<div class="flight-container">
+    <!--Change Search Bar-->
+    <div class="inforBar d-flex flex-column">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex flex-column">
+                <p class=" text-format">DaLat</p>
+                <p class=" text-format">(DLI)</p>
+                
+            </div>
+
+            <div class="d-flex flex-column align-self-center">
+                <div>
+                    <i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i>
+                    <i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i>
+                    <i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i>
+                    <i class="fas fa-minus arrow-format"></i>
+                    
+
+                    <button class="btn findBtn">Đổi tìm kiếm</button>
+                    
+                    <i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i>
+                    <i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i>
+                    <i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i><i class="fas fa-minus arrow-format"></i>
+                    <i class="fas fa-arrow-right arrow-format"></i>
+                </div>
+                <div class="text-center text-inforSearch" >
+                    <p>08/04/2019 | 1 người lớn | Phổ thông</p>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column align-items-end" >
+                <p class=" text-format" >Ha Noi</p>
+                <p class=" text-format" >(HAN)</p>
+                
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p class=" text-format" style="font-size: 18px;">Da Lat Airport</p>
+            <p class=" text-format" style="font-size: 18px;">Ha Noi International Airport</p>
+        </div>
+    </div>
+    <br>
+
+    <div class="changeSearch-Div">
+        <ul class="nav nav-pills mb-3 nav-change-search" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <button class="btn  btnNavSearch active"  id="pills-home-tab" data-toggle="pill" href="#pills-motchieu" role="tab" aria-controls="pills-home" aria-selected="true">Một chiều</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btnNavSearch" id="pills-profile-tab" data-toggle="pill" href="#pills-khuhoi" role="tab" aria-controls="pills-profile" aria-selected="false">Khứ hồi</button>
+            </li>
+        </ul>
+        <div class="tab-content tab-change-search " id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-khuhoi" role="tabpanel" aria-labelledby="pills-home-tab"  style="padding:30px;">
+                <form >
+                    <div class="d-flex align-self-center align-items-baseline ">
+                        <select class="place-select form-control bold" id="inputGroupSelect01" >
+                            <option selected>Điểm khởi hành</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+
+                        <i class="fas fa-exchange-alt marL20 marR20"></i>
+
+                        <select class="place-select form-control marR20 bold" id="inputGroupSelect01">
+                            <option selected>Điểm đến</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        
+                        <div class="input-group mb-3 marL20">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3"><i class="far fa-calendar-check"></i></span>
+                                </div>
+                                <input type="text" class="form-control bold" placeholder="Ngày đi" id="basic-url" onmouseenter="(this.type='date')">
+                        </div>
+
+                        <i class="fas fa-minus tab-search-item marL20 marR20"></i>
+
+                        <div class="input-group mb-3 marR20">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3"><i class="far fa-calendar-check"></i></span>
+                                </div>
+                                <input type="text" class="form-control bold" placeholder="Ngày về" id="basic-url" onmouseenter="(this.type='date')">
+                        </div>
+
+                        <div class="input-group mb-3 tab-search-item marL20" style=""> 
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3"><i class="fas fa-user-tie"></i></span>
+                            </div>
+                            <select class="place-select form-control bold" >
+                                <option selected>Hạng ghế</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <button class="btn marL20"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="tab-pane fade" id="pills-motchieu" role="tabpanel" style="padding:30px;">
+                <form >
+                    <div class="d-flex align-self-center align-items-baseline ">
+                        <select class="place-select form-control bold" id="inputGroupSelect01" >
+                            <option selected>Điểm khởi hành</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+
+                        <i class="fas fa-exchange-alt marL20 marR20"></i>
+
+                        <select class="place-select form-control marR20 bold" id="inputGroupSelect01">
+                            <option selected>Điểm đến</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        
+                        <div class="input-group mb-3 marL20">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3"><i class="far fa-calendar-check"></i></span>
+                                </div>
+                                <input type="text" class="form-control bold" placeholder="Ngày đi" id="basic-url" onmouseenter="(this.type='date')">
+                        </div>
+
+                        <div class="input-group mb-3 tab-search-item marL20" style=""> 
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3"><i class="fas fa-user-tie"></i></span>
+                            </div>
+                            <select class="place-select form-control bold" >
+                                <option selected>Hạng ghế</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <button class="btn marL20"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        <br>
+    </div>
+    <br>
+
+    <!--Option bar-->
+    <div class="inforBar d-flex justify-content-around">
+            <!--Điểm dừng-->
+            <div class="dropdown mr-1">
+                <button type="button" class="btn dropdown-toggle optionText-format" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                Điểm dừng
+                </button>
+                <div class="dropdown-menu optionText-format boxDiemDung">
+                    <form class="" style="position:relative;">
+                        
+                        <div><p>Số điểm dừng</p></div>
+                        <div class="d-flex justify-content-around">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck" >
+                                <label class="custom-control-label" for="customCheck">Bay thẳng</label>
+                            </div>
+
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" >
+                                <label class="custom-control-label" for="customCheck1">1 điểm dừng</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck2" >
+                                <label class="custom-control-label" for="customCheck2">2+ transits</label>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                            <br>
+                            <p>Thời gian chờ quá cảnh</p>
+                            <p style="font-size:14px;font-weight: 300;">Thời gian chờ tối thiểu 0-20h</p>
+                            </div>
+                            <div class="col" id="rangeHour">
+                                <div class="range-slider">
+                                    <span id="rs-bullet" class="rs-label">0</span>
+                                    <input id="rs-range-line" class="rs-range" type="range" value="0" min="0" max="20">
+                                </div>
+                                <div class="box-minmax" >
+                                    <span>0</span><span>20</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Điểm dừng quá cảnh</p>
+                        </div>
+                        <div>
+                                                    <ul class="placeList justify-content-around justify-content-center">
+                            <li class="placeItem">
+                                <div class="custom-control custom-checkbox ">
+                                    <input type="checkbox" class="custom-control-input" id="customCheckPlaceAll" >
+                                    <label class="custom-control-label" for="customCheckPlaceAll">Tất cả</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox ">
+                                    <input type="checkbox" class="custom-control-input" id="customCheckPlace1" >
+                                    <label class="custom-control-label" for="customCheckPlace1">Da Nang</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox ">
+                                    <input type="checkbox" class="custom-control-input" id="customCheckPlace2" >
+                                    <label class="custom-control-label" for="customCheckPlace2">Nha Trang</label>
+                                </div>
+                            </li>
+                            <li class="placeItem">
+                                <div class="custom-control custom-checkbox ">
+                                    <input type="checkbox" class="custom-control-input" id="customCheckPlaceAll" >
+                                    <label class="custom-control-label" for="customCheckPlaceAll">Tất cả</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox ">
+                                    <input type="checkbox" class="custom-control-input" id="customCheckPlace1" >
+                                    <label class="custom-control-label" for="customCheckPlace1">Da Nang</label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="custom-control custom-checkbox ">
+                                    <input type="checkbox" class="custom-control-input" id="customCheckPlace2" >
+                                    <label class="custom-control-label" for="customCheckPlace2">Nha Trang</label>
+                                </div>
+                            </li>
+                        </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--Thời gian bay-->
+            <div class="dropdown mr-1">
+                <button type="button" class="btn dropdown-toggle optionText-format" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                Thời gian bay
+                </button>
+                <div class="dropdown-menu optionText-format boxThoiGianBay " aria-labelledby="dropdownMenuOffset">
+                    <form class="row">
+                        <div class="col text-center" style="border-right: 2px solid #2e90f1;">
+                            Giờ cất cánh
+                            <hr>
+                            <div class="custom-control custom-checkbox" style="margin-top:10px;">
+                                <input type="checkbox" class="custom-control-input" id="catCanh1" >
+                                <label class="custom-control-label" for="catCanh1">00:00 - 06:00</label>
+                            </div>
+                             <div class="custom-control custom-checkbox" style="margin-top:10px;">
+                                <input type="checkbox" class="custom-control-input" id="catCanh2" >
+                                <label class="custom-control-label" for="catCanh2">06:00 - 12:00</label>
+                            </div>
+                             <div class="custom-control custom-checkbox" style="margin-top:10px;">
+                                <input type="checkbox" class="custom-control-input" id="catCanh3" >
+                                <label class="custom-control-label" for="catCanh3">12:00 - 18:00</label>
+                            </div>
+                             <div class="custom-control custom-checkbox" style="margin-top:10px;">
+                                <input type="checkbox" class="custom-control-input" id="catCanh4" >
+                                <label class="custom-control-label" for="catCanh4">18:00 - 00:00</label>
+                            </div>
+                        </div>
+                        <div class="col text-center">
+                            Giờ hạ cánh
+                            <hr>
+                            <div class="custom-control custom-checkbox" style="margin-top:10px;">
+                                <input type="checkbox" class="custom-control-input" id="haCanh1" >
+                                <label class="custom-control-label" for="haCanh`">00:00 - 06:00</label>
+                            </div>
+                            <div class="custom-control custom-checkbox" style="margin-top:10px;">
+                                <input type="checkbox" class="custom-control-input" id="haCanh2" >
+                                <label class="custom-control-label" for="haCanh2">06:00 - 12:00</label>
+                            </div>
+                             <div class="custom-control custom-checkbox" style="margin-top:10px;">
+                                <input type="checkbox" class="custom-control-input" id="haCanh3" >
+                                <label class="custom-control-label" for="haCanh3">12:00 - 18:00</label>
+                            </div>
+                             <div class="custom-control custom-checkbox" style="margin-top:10px;">
+                                <input type="checkbox" class="custom-control-input" id="haCanh4" >
+                                <label class="custom-control-label" for="haCanh4">18:00 - 00:00</label>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--Hãng hàng không-->    
+            <div class="dropdown mr-1">
+                <button type="button" class="btn dropdown-toggle optionText-format" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                Hãng hàng không
+                </button>
+                <div class="dropdown-menu optionText-format boxHangHangKhong" aria-labelledby="dropdownMenuOffset">
+                    <form class="col" >
+                        <div class=" d-flex justify-content-between ">
+                            <div class=" custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="allHHK" >
+                                <label class="custom-control-label" for="allHHK">Chọn tất cả</label>
+                            </div>
+                            <div class=""><img src="/images/plane_2.svg" class="hhk-icon" style="color:#2e90f1;"></div>
+                        </div>
+                        <div class=" d-flex justify-content-between ">
+                            <div class=" custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="JetAir" >
+                                <label class="custom-control-label" for="JetAir">Jetstar</label>
+                            </div>
+                            <div class=""><img src="/images/jetair-icon.png" class="hhk-icon" style="color:#2e90f1;"></div>
+                        </div>
+                        <div class=" d-flex justify-content-between ">
+                            <div class=" custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="VietJet" >
+                                <label class="custom-control-label" for="VietJet">Vietjet Air</label>
+                            </div>
+                            <div class=""><img src="/images/vietjet-icon.svg" class="hhk-icon" style="color:#2e90f1;"></div>
+                        </div>
+                        <div class=" d-flex justify-content-between ">
+                            <div class=" custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="VNAirline" >
+                                <label class="custom-control-label" for="VNAirline">VietNam Airlines</label>
+                            </div>
+                            <div class=""><img src="/images/plane_2.svg" class="hhk-icon" style="color:#2e90f1;"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--Thêm bộ lọc-->
+            <div class="dropdown mr-1">
+                <button type="button" class="btn dropdown-toggle optionText-format" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                Thêm bộ lọc
+                </button>
+                <div class="dropdown-menu optionText-format boxBoLocThem" aria-labelledby="dropdownMenuOffset">
+                    <form class="col">
+                        <p style="font-size:20px;">Giá/Hành khách</p>
+                        <div class=" d-flex text-center justify-content-around"style="font-size:14px;">
+                            <div class="row">
+                                <p id="tienMinPoint" style="color:#2e90f1;">1771000</p> 
+                                <p style="margin-left:7px;">VND</p>
+                            </div>
+                            <p>-</p> 
+                            <div class="row">
+                                <p id="tienMaxPoint" style="color:#2e90f1;">2156607</p>
+                                <p style="margin-left:7px;">VND</p>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="range" multiple value="0,100" style="width: 320px !important;" />
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p id="tienMin" style="font-size:12px;color:#2e90f1;">1771000</p> 
+                            <p id="tienMax" style="font-size:12px;color:#2e90f1;">2156607</p>
+                        </div>
+                        <div>
+                            <p style="font-size:20px;">Tiện ích</p>
+                            <div class=" d-flex justify-content-between" >
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="hanhLi" >
+                                    <label class="custom-control-label" for="hanhLi">Hành lí</label>
+                                </div>
+                                <div class=""><img src="/images/hanhli-icon.svg" class="hhk-icon" style="color:#2e90f1;"></div>
+                            </div>
+                            <div class=" d-flex justify-content-between" style="padding-top: 5px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="suatAn" >
+                                    <label class="custom-control-label" for="suatAn">Suất ăn</label>
+                                </div>
+                                <div class=""><img src="/images/suatan-icon.svg" class="hhk-icon" style="color:#2e90f1;"></div>
+                            </div>
+                            <div class=" d-flex justify-content-between" style="padding-top: 5px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="giaitri" >
+                                    <label class="custom-control-label" for="giaitri">Giải trí</label>
+                                </div>
+                                <div class=""><img src="/images/giaitri-icon.svg" class="hhk-icon" style="color:#2e90f1;"></div>
+                            </div>
+                            <div class=" d-flex justify-content-between" style="padding-top: 5px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="wifi" >
+                                    <label class="custom-control-label" for="wifi">Wifi</label>
+                                </div>
+                                <div class=""><img src="/images/wifi-icon.svg" class="hhk-icon" style="color:#2e90f1;"></div>
+                            </div>
+                            <div class=" d-flex justify-content-between" style="padding-top: 5px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="jack" >
+                                    <label class="custom-control-label" for="jack">Nguồn sạc/Cổng USB</label>
+                                </div>
+                                <div class=""><img src="/images/usb-icon.svg" class="hhk-icon" style="color:#2e90f1;"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <p style="font-size:20px;">Lựa chọn ưu tiên</p>
+                            <div class=" d-flex justify-content-between" style="padding-top: 5px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="qcdem" >
+                                    <label class="custom-control-label" for="qcdem">Không quá cảnh qua đêm</label>
+                                </div>
+                                <div class=""><img src="/images/qcdem-icon.svg" class="hhk-icon" style="color:#2e90f1;"></div>
+                            </div>
+                            <div class=" d-flex justify-content-between" style="padding-top: 5px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="baymuon" >
+                                    <label class="custom-control-label" for="baymuon">Không chọn chuyến bay muộn</label>
+                                </div>
+                                <div class=""><img src="/images/baymuon-icon.svg" class="hhk-icon" style="color:#2e90f1;"></div>
+                            </div>
+                            <div class=" d-flex justify-content-between" style="padding-top: 5px;">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="thutuc" >
+                                    <label class="custom-control-label" for="thutuc">Chỉ làm thủ tục một lần</label>
+                                </div>
+                                <div class=""><img src="/images/thutuc-icon.svg" class="hhk-icon" style="color:#2e90f1;"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--Sắp xếp-->
+            <div class="dropdown mr-1">
+                <button type="button" class="btn dropdown-toggle optionText-format" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                Sắp xếp
+                </button>
+                <div class="boxSapXep dropdown-menu optionText-format" aria-labelledby="dropdownMenuOffset">
+                    <form class="col" style="font-size:17px;">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="giaThapNhat" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="giaThapNhat">Giá thấp nhất</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="catCanhSomNhat" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="catCanhSomNhat">Cất cánh sớm nhất</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="catCanhMuonNhat" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="catCanhMuonNhat">Cất cánh muộn nhất</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="haCanhSomNhat" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="haCanhSomNhat">Hạ cánh sớm nhất</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="haCanhMuonNhat" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="haCanhMuonNhat">Hạ cánh muộn nhất</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="bayNganNhat" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="bayNganNhat">Thời gian bay ngắn nhất</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+    
+    <br>
+
+    <div class="col">
+        {{>flight-item}}
+        {{>flight-item}}
+    </div>
+</div>
+<script>
+    var rangeSlider = document.getElementById("rs-range-line");
+    var rangeBullet = document.getElementById("rs-bullet");
+
+    rangeSlider.addEventListener("input", showSliderValue, false);
+
+    function loadTienTotal(){
+
+		var min1 = document.getElementById("tienMin");
+		var max1 = document.getElementById("tienMax");
+		var total1 = document.getElementById("tienTotal");
+        var rs=parseInt(max1.textContent,10) - parseInt(min1.textContent,10);
+        total1.innerHTML = rs;
+    }
+
+    loadTienTotal(tienTotal);
+
+    function loadPos(){
+    rangeBullet.innerHTML = rangeSlider.value;
+    var bulletPosition = (rangeSlider.value /rangeSlider.max);
+    rangeBullet.style.left = (bulletPosition * 270) + "px";
+    }
+    loadPos(rangeHour);
+    function showSliderValue() {
+    rangeBullet.innerHTML = rangeSlider.value;
+    var bulletPosition = (rangeSlider.value /rangeSlider.max);
+    rangeBullet.style.left = (bulletPosition * 270) + "px";
+    }
+
+    
+</script>
+<script src="/javascripts/multirange.js"></script>

@@ -1,0 +1,27 @@
+body {
+  padding: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #000;
+  transition: 200ms;
+}
+
+a:hover {
+  color: #00B7FF;
+}
+
+.main {
+  position: relative;
+  min-height: 100vh;
+}
+
+.wrapper {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 172px;
+  margin-right: auto;
+  margin-left: auto;
+}

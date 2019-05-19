@@ -1,0 +1,43 @@
+
+.navbarFlicket{
+    
+    height: 104px;
+    width: 100%;
+    margin: 0px;
+    padding-left: 50px;
+    padding-right: 50px;
+    background-color:  none;
+}
+
+.format{
+    color:#7A9ED5;
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+    background-color:  none;
+    border: none;
+    
+}
+
+.logoFormat{
+    font-family: SVN-Heart And Soul Smooth;
+    font-size: 60px;
+    line-height: 60px;
+}
+
+.ml5{
+    margin-left: 50px;
+}
+
+.format:hover{
+    background-color: none;
+    color:#7A9ED5;
+    border-color: #7A9ED5;
+    border-width: 2px;
+}
+
+a:hover{
+    background: #7A9ED5;
+}

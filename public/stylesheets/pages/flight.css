@@ -1,0 +1,318 @@
+/*css flight item*/
+.flight-container{
+    width: 95% !important;
+    margin: auto;
+    font-family: Quicksand;
+
+}
+
+.inforBar{
+
+    padding: 10px 80px 10px 80px;
+    border-style: solid;
+    border-width: 0.1pc;
+    border-color: #e0e0eb;
+}
+
+.text-format{
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 28px;
+
+    color: #000000;
+}
+
+.arrow-format{
+    color: #2E86DE;
+    margin-right: 7px;
+    margin-left: 7px;
+    font-size: 20px;
+}
+
+.findBtn{
+    background-color: #7A9ED5;
+    color: white;
+    font-weight: bold;
+}
+
+.findBtn:hover{
+    background-color: white;
+    color:#7A9ED5;
+    border-color: #7A9ED5;
+    border-width: 2px;
+}
+
+.text-inforSearch{
+    font-size:18px;
+    margin-top:18px;
+    font-weight: bold;
+}
+
+
+.changeSearch-Div{
+    background-color: #2e90f1;
+}
+
+.nav-change-search{
+    padding: 20px 40px 0px 40px;
+    
+    color: white !important;
+}
+
+.tab-change-search{
+    margin: 10px 40px 10px 40px;
+    background-color: white;
+    height: 100px;
+    
+}
+
+.btnNavSearch{
+    background-color: #2e90f1 !important;
+    color: white;
+    border-bottom: white;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+.btnNavSearch:hover{
+    border-radius: 0%;
+    border-style: solid;
+    border-color: #2e90f1;
+    border-bottom-color: white;
+    color: white;
+}
+
+.btnNavSearch:active{
+    border-radius: 0%;
+    border-style: solid;
+    border-color: #2e90f1;
+    border-bottom-color: white;
+}
+
+
+.btnNavSearch:focus{
+    border-radius: 0%;
+    border-style: solid;
+    border-color: #2e90f1;
+    border-bottom-color: white;
+}
+
+select{
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+.place-select{
+    background-color: white;
+    border: none;
+    border-bottom-style: solid !important;
+    border-bottom-width: 3px;
+    padding: 3px;
+    color: gray;
+
+}
+
+.form-control{
+    width:200px important;
+}
+
+.tab-search-item{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.marR20{
+    margin-right: 20px;
+}
+
+.marL20{
+    margin-left: 20px;
+}
+.bold{
+    font-weight:bold;
+}
+.fa-paper-plane{
+    font-size: 25px;
+  color: #447aeee7; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+    /*Phan tuy chon tim kiem*/
+.optionText-format{
+    font-size:18px;
+    color: #000000;
+    font-family: Quicksand;
+    font-weight: 500;
+
+}
+
+.boxDiemDung{
+    margin: 0px !important;
+    width: 613px;
+    height: auto;
+    overflow: auto;
+    padding: 20px;
+    background: #FFFFFF;
+    position: absolute;
+   
+}
+
+.boxThoiGianBay{
+    margin: 0px !important;
+    width: 453px;
+    height: auto;
+    padding: 20px;
+    background: #FFFFFF;
+    position: absolute;
+   
+}
+
+.boxHangHangKhong{
+    margin: 0px !important;
+    width: 353px;
+    height: auto;
+    padding: 15px;
+    background: #FFFFFF;
+    position: absolute;
+   
+}
+
+.boxBoLocThem{
+    margin: 0px !important;
+    width: 383px;
+    height: auto;
+    padding: 15px;
+    background: #FFFFFF;
+    position: absolute;
+   
+}
+
+.boxSapXep{
+    margin: 0px !important;
+    width: 303px;
+    height: auto;
+    padding: 15px;
+    background: #FFFFFF;
+    position: absolute;
+   
+}
+
+.box-minmax {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    color: #2E86DE;
+  }
+  .box-minmax span:first-child {
+    margin-left: 10px;
+  }
+  
+  .range-slider {
+  }
+  
+  .rs-range {
+    margin-top: 20px;
+    width: 300px;
+    -webkit-appearance: none;
+  }
+  .rs-range:focus {
+    outline: none;
+  }
+  .rs-range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 1px;
+    cursor: pointer;
+    box-shadow: none;
+    background: #2E86DE;
+    border-radius: 0px;
+    border: 0px solid #010101;
+  }
+  .rs-range::-moz-range-track {
+    width: 100%;
+    height: 1px;
+    cursor: pointer;
+    box-shadow: none;
+    background: #2E86DE;
+    border-radius: 0px;
+    border: 0px solid #010101;
+  }
+  .rs-range::-webkit-slider-thumb {
+    box-shadow: none;
+    border: 0px solid #2E86DE;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+    height: 42px;
+    width: 22px;
+    border-radius: 22px;
+    background: #2E86DE;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -20px;
+  }
+  .rs-range::-moz-range-thumb {
+    box-shadow: none;
+    border: 0px solid #2E86DE;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+    height: 42px;
+    width: 22px;
+    border-radius: 22px;
+    background: #2E86DE;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -20px;
+  }
+  .rs-range::-moz-focus-outer {
+    border: 0;
+  }
+  
+  .rs-label {
+    position: relative;
+    transform-origin: center center;
+    display: block;
+    width: 38px;
+    height: 38px;
+    background: transparent;
+    border-radius: 50%;
+    line-height: 30px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 7px;
+    box-sizing: border-box;
+    border: 2px solid #2E86DE;
+    margin-left:-2.5px;
+    left: attr(value);
+    color: #2E86DE;
+    font-style: normal;
+    font-weight: normal;
+    line-height: normal;
+    font-size: 16px;
+  }
+  .rs-label::after {
+    display: block;
+    font-size: 16px;
+    letter-spacing: 0.07em;
+    margin-top: -2px;
+  }
+  
+.placeList{
+    width:100%;
+    display: flex;
+    flex-flow: row wrap;
+    list-style: none;
+  }
+  
+.placeItem{
+    padding: 3px;
+    text-align: center;
+    flex: 1 0 calc(33.333% - 20px); 
+    max-width: calc(33.333% - 20px); 
+  }
+
+  /* Hãng hàng không*/
+.hhk-icon{
+    width: 68px;
+    height: 30px;
+    color: #2E86DE;
+}

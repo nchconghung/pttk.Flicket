@@ -1,0 +1,17 @@
+.itemBox{
+    border-style: solid;
+    border-width: 0.1pc;
+    border-color: #e0e0eb;
+    margin-top: 7px;
+    font-family: Quicksand;
+}
+
+.logo{
+    width: 84px;
+    height: 40px;
+}
+
+.brand{
+    font-size: 24px;
+    font-weight: 500;
+}

@@ -3,11 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var exphbs = require("express-handlebars");
+const exphbs = require("express-handlebars");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var flightRouter = require('./routes/flights')
 var app = express();
 
 // view engine setup
@@ -15,12 +15,13 @@ app.engine(
   "handlebars",
   exphbs({
     defaultLayout: "main",
-    layoutsDir: path.join(__dirname,"views/layouts"),
-    partialDir: path.join(__dirname,"views/partials"),
+    layoutsDir: path.join(__dirname, "views/layouts"),
+    partialsDir: path.join(__dirname, "views/partials"),
   })
 );
-app.set('views', path.join(__dirname, 'views/pages'));
-app.set('view engine', 'handlebars');
+app.set("views", path.join(__dirname, "views/pages"));
+app.set("view engine", "handlebars");
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -29,7 +30,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/user', usersRouter);
+app.use('/users', usersRouter);
+app.use('/flight',flightRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,7 +46,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  //res.render('error');
 });
 
 module.exports = app;

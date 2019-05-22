@@ -1,0 +1,19 @@
+.font{
+    font-family: Quicksand;
+}
+.font_format{
+    font-size: 16px;
+    
+}
+.font_bold{
+    font-weight: bold;
+}
+
+.header_tv{
+    margin-left:30px;
+    color:#4257b2;
+}
+
+.table_data{
+    padding-right: 100px;
+}

@@ -1,0 +1,23 @@
+.format_font{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Quicksand;
+}
+.nav_format{
+    padding-top: 20px;
+}
+.nav-item{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.active{
+    background-color:#6f93b7 !important;
+}
+
+.nav-link:hover{
+    border-style: solid;
+    border-color: #6f93b7;
+    background-color: #6f93b7;
+    color:white;
+}

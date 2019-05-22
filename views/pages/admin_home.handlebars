@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="/stylesheets/pages/admin.css">
+{{> nav_admin}}
+<hr>
+<h2 class="header_tv font">Thành viên</h2>
+<div class="row font font_format"> 
+    <div class="col d-flex justify-content-center">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header font_bold">
+                Danh mục
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-9 table_data">
+        <div>
+            <div class="form-group row d-flex align-items-center" >
+                <select id="inputState" class="form-control col-2 mglr" > 
+                    <option selected>Choose...</option>
+                    <option>...</option>
+                </select>
+                <div class="col-8">
+                    <input type="text" class="form-control form-control-sm "  id="colFormLabelSm" placeholder="Nhập dữ liệu cần tìm">
+                </div>
+                <div class="col-2 d-flex justify-content-center">
+                    <button type="submit" class=" btn btn-secondary">Tìm kiếm</button>
+                </div>
+                
+            </div>
+            <div class="row">
+                <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Thao tác
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                        </div>
+                    </td>
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>

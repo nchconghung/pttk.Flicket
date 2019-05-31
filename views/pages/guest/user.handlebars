@@ -114,14 +114,14 @@
                 <img src="/images/guest/calendar.png">
                 <span class="user-account-menu-option-info">Đặt chỗ của tôi</span>
             </div>
-            <div class="user-account-menu-option">
+            <div class="user-account-menu-option" id="user-account-my-point-option">
                 <img src="/images/guest/star.png">
                 <span class="user-account-menu-option-info">Điểm thưởng</span>
             </div>
-            <div class="user-account-menu-option">
+            {{!-- <div class="user-account-menu-option">
                 <img src="/images/guest/credit-card.png">
                 <span class="user-account-menu-option-info">Thẻ của tôi</span>
-            </div>
+            </div> --}}
             <div class="user-account-menu-option">
                 <img src="/images/guest/exit.png">
                 <span class="user-account-menu-option-info">Đăng xuất</span>
@@ -393,6 +393,23 @@
                     </div>
                     <div class="reservation-more-info-container">
                         <span class="reservation-more-info">Chi tiết chuyến bay</span>
+                    </div>
+                </div>
+            </div>
+            <div class="user-account-content-element" id="my-point-interface" style="display: none">
+                <div id="my-point-container">
+                    <div id="my-point-sub-container1">
+                        <span id="my-point-text1">Điểm thưởng</span>
+                        <span id="my-point-text2">100</span>
+                        <span id="my-point-text3">(trị giá VND 500.000)</span>
+                    </div>
+                    <div id="my-point-sub-container2">
+                        <span id="my-point-process-text1">Tiến trình tích điểm</span>
+                        <div id="my-point-animation-container">
+                            <div id="my-point-animation"></div>
+                            <img src="/images/guest/planeBig.png" id="my-point-img">
+                            <span id="my-point-process-text2">1400 to go</span>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1026,4 +1026,39 @@ $("#user-account-my-reservation-option").click(function(){
     $(".user-account-content-element").hide();
     $("#my-reservation-interface").show();
 })
+//My point
+var bar = new ProgressBar.Circle('#my-point-animation', {
+    color: '#2E86DE',
+    trailColor: '#eee',
+    trailWidth: 6,
+    duration: 1400,
+    easing: 'easeInOut',
+    strokeWidth: 6,
+    from: { color: '#2E86DE', a: 0 },
+    to: { color: '#2E86DE', a: 0.5 },
+    // Set default step function for all animate calls
+    step: function (state, circle) {
+        circle.path.setAttribute('stroke', state.color);
+    }
+});
+$("#user-account-my-point-option").click(function () {
+    $(".user-account-content-element").hide();
+    $("#my-point-interface").show();
+    bar.animate(0.06);
+})
+$('#user-btn-container').click(function () {
+    var panel = $('#user-instant-panel-container');
+    if ($(panel).css('display') == 'none') {
+        $(panel).show();
+    } else {
+        $(panel).hide();
+    }
+})
+$(document).mouseup(function (e) {
+    var container = $("#user-instant-panel-container");
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+        container.hide();
+    }
+});
 

@@ -1,0 +1,403 @@
+<div class="modal-container">
+    <div class="gray-background"></div>
+    <div class="flight-detail-container" style="width: 450px;">
+        <div class="flight-detail-title" style="border: none;">
+            <span>Chi tiết đặt chỗ</span>
+        </div>
+        <div id="modal-menu-bar">
+            <div class="modal-menu-bar-option modal-menu-bar-option-active" id="flight-info-model3-btn">
+                <img class="modal-menu-bar-icon" src="/images/guest/airplane.png">
+                <span class="modal-menu-bar-title">Chuyến bay</span>
+            </div>
+            <div class="modal-menu-bar-option" id="payment-info-model3-btn">
+                <img class="modal-menu-bar-icon" src="/images/guest/money.png">
+                <span class="modal-menu-bar-title">Thanh toán</span>
+            </div>
+        </div>
+        <div id="modal2-content-container">
+            <div class="modal2-content-element" id="flight-modal3-info">
+                <div class="flight-model3-info-record">
+                    <span class="flight-model3-info-title">Mã đặt vé</span>
+                    <span class="flight-model3-info-detail flight-model3-code">123123123</span>
+                </div>
+                <div class="flight-model3-info-record" style="align-items: flex-start">
+                    <span class="flight-model3-info-title">Hãng máy bay</span>
+                    <div class="modal3-arline-info">
+                        <span class="flight-model3-info-detail">Vietjet</span>
+                        <img src="/images/guest/VietJet.png" height="25px" width="auto">
+                    </div>
+                </div>
+                <div class="flight-model3-info-record">
+                    <span class="flight-model3-info-title">Máy bay</span>
+                    <span class="flight-model3-info-detail">Airbus A320</span>
+                </div>
+                <div class="flight-model3-info-record">
+                    <span class="flight-model3-info-title">Lộ trình</span>
+                    <span class="flight-model3-info-detail">Da Lat → Hanoi</span>
+                </div>
+                <div class="flight-model3-info-record">
+                    <span class="flight-model3-info-title">Thời gian</span>
+                    <span class="flight-model3-info-detail">04/05/2019</span>
+                </div>
+                <div class="flight-model3-info-record" style="align-items: flex-start;">
+                    <span class="flight-model3-info-title">Hành khách</span>
+                    <div class="modal3-arline-info">
+                        <span class="flight-model3-info-detail">Người lớn x<span class="modal3-quantity">1</span></span>
+                        <span class="flight-model3-info-detail">Trẻ em x<span class="modal3-quantity">1</span></span>
+                        <span class="flight-model3-info-detail">Em bé x<span class="modal3-quantity">1</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal2-content-element" id="payment-modal3-info" style="display:none">
+                <div class="payment-model3-info-record row">
+                    <div class="col-5">
+                        <span>Vietjet (Người lớn)</span>
+                    </div>
+                    <div class="col-2 payment-model3-center">
+                        <span>1</span>
+                    </div>
+                    <div class="col-5 payment-model3-last">
+                        <span>VND 1.554.720</span>
+                    </div>
+                </div>
+                <div class="payment-model3-info-record row">
+                    <div class="col-5">
+                        <span>Vietjet (Trẻ em)</span>
+                    </div>
+                    <div class="col-2 payment-model3-center">
+                        <span>1</span>
+                    </div>
+                    <div class="col-5 payment-model3-last">
+                        <span>VND 1.514.485</span>
+                    </div>
+                </div>
+                <div class="payment-model3-info-record row">
+                    <div class="col-5">
+                        <span>Vietjet (Em bé)</span>
+                    </div>
+                    <div class="col-2 payment-model3-center">
+                        <span>1</span>
+                    </div>
+                    <div class="col-5 payment-model3-last">
+                        <span>VND 109.205</span>
+                    </div>
+                </div>
+                <div class="payment-model3-info-record">
+                    <div id="modal3-line"></div>
+                </div>
+                <div class="payment-model3-info-record-total row">
+                    <div class="col-6">
+                        <span>Tổng tiền</span>
+                    </div>
+                    <div class="col-6 payment-model3-last modal-3-total-price">
+                        <span>VND 109.205</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{> "guest/header_user"}}
+<div id="user-account-main-container">
+    <div id="user-account-container" class="row">
+        <div class="col-3" id="user-account-menu">
+            <div class="user-account-menu-option user-account-menu-option-active" id="user-account-edit-profile-option">
+                <img src="/images/guest/user3.png">
+                <span class="user-account-menu-option-info">Chỉnh sửa thông tin</span>
+            </div>
+            <div class="user-account-menu-option" id="user-account-transaction-history-option">
+                <img src="/images/guest/newspaper.png">
+                <span class="user-account-menu-option-info">Lịch sử giao dịch</span>
+            </div>
+            <div class="user-account-menu-option" id="user-account-my-reservation-option">
+                <img src="/images/guest/calendar.png">
+                <span class="user-account-menu-option-info">Đặt chỗ của tôi</span>
+            </div>
+            <div class="user-account-menu-option">
+                <img src="/images/guest/star.png">
+                <span class="user-account-menu-option-info">Điểm thưởng</span>
+            </div>
+            <div class="user-account-menu-option">
+                <img src="/images/guest/credit-card.png">
+                <span class="user-account-menu-option-info">Thẻ của tôi</span>
+            </div>
+            <div class="user-account-menu-option">
+                <img src="/images/guest/exit.png">
+                <span class="user-account-menu-option-info">Đăng xuất</span>
+            </div>
+        </div>
+        <div class="col-9" id="user-account-content">
+            <div class="user-account-content-element" id="edit-profile-interface">
+                <form>
+                    <div class="edit-profile-input">
+                        <label for="txtUserName">Họ và tên</label>
+                        <input type="text" id="txtUserName" placeholder="Nguyen Van A" required>
+                    </div>
+                    <div class="edit-profile-input">
+                        <label for="txtEmail">Email</label>
+                        <input type="email" id="txtEmail" placeholder="email@example.com" style="opacity: 0.42;"
+                            disabled>
+                    </div>
+                    <div class="edit-profile-input">
+                        <span id="password-edit-title">Mật khẩu</span>
+                        <span id="password-edit-button">Thay đổi</span>
+                    </div>
+                    <div id="password-edit-container">
+                        <div class="edit-profile-input">
+                            <label for="txtFormerPassword">Mật khẩu cũ</label>
+                            <input type="password" id="txtFormerPassword" required>
+                        </div>
+                        <div class="edit-profile-input">
+                            <label for="txtNewPassword">Mật khẩu mới</label>
+                            <input type="password" id="txtNewPassword" required>
+                        </div>
+                        <div class="edit-profile-input">
+                            <label for="txtConfirmPassword">Xác nhận mật khẩu mới</label>
+                            <input type="password" id="txtConfirmPassword" required>
+                        </div>
+                        <div class="edit-profile-button-container">
+                            <button type="button" id="edit-profile-button-container-cancel">Hủy</button>
+                            <button type="submit" id="edit-profile-button-save">Lưu thay đổi</button>
+                        </div>
+                    </div>
+                    <div class="edit-profile-button-container">
+                        <button type="submit" id="edit-profile-button-update">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+            <div class="user-account-content-element" id="transaction-history-interface" style="display: none">
+                <div id="transaction-history-title" class="row">
+                    <div class="col-2">
+                        <span>Mã vé</span>
+                    </div>
+                    <div class="col-3">
+                        <span>Thời gian</span>
+                    </div>
+                    <div class="col-3">
+                        <span>Giá tiền</span>
+                    </div>
+                    <div class="col-4">
+                        <span>Ngân hàng</span>
+                    </div>
+                </div>
+                <div class="transaction-history-record row">
+                    <div class="col-2">
+                        <span>123123123</span>
+                    </div>
+                    <div class="col-3">
+                        <span>19/05/2019</span>
+                    </div>
+                    <div class="col-3">
+                        <span>VND 3,350,000</span>
+                    </div>
+                    <div class="col-4">
+                        <span>BIDV</span>
+                    </div>
+                </div>
+                <div class="transaction-history-record row">
+                    <div class="col-2">
+                        <span>123123123</span>
+                    </div>
+                    <div class="col-3">
+                        <span>19/05/2019</span>
+                    </div>
+                    <div class="col-3">
+                        <span>VND 3,350,000</span>
+                    </div>
+                    <div class="col-4">
+                        <span>BIDV</span>
+                    </div>
+                </div>
+                <div class="transaction-history-record row">
+                    <div class="col-2">
+                        <span>123123123</span>
+                    </div>
+                    <div class="col-3">
+                        <span>19/05/2019</span>
+                    </div>
+                    <div class="col-3">
+                        <span>VND 3,350,000</span>
+                    </div>
+                    <div class="col-4">
+                        <span>BIDV</span>
+                    </div>
+                </div>
+                <div class="transaction-history-record row">
+                    <div class="col-2">
+                        <span>123123123</span>
+                    </div>
+                    <div class="col-3">
+                        <span>19/05/2019</span>
+                    </div>
+                    <div class="col-3">
+                        <span>VND 3,350,000</span>
+                    </div>
+                    <div class="col-4">
+                        <span>BIDV</span>
+                    </div>
+                </div>
+                <div class="transaction-history-record row">
+                    <div class="col-2">
+                        <span>123123123</span>
+                    </div>
+                    <div class="col-3">
+                        <span>19/05/2019</span>
+                    </div>
+                    <div class="col-3">
+                        <span>VND 3,350,000</span>
+                    </div>
+                    <div class="col-4">
+                        <span>BIDV</span>
+                    </div>
+                </div>
+                <div class="transaction-history-record row">
+                    <div class="col-2">
+                        <span>123123123</span>
+                    </div>
+                    <div class="col-3">
+                        <span>19/05/2019</span>
+                    </div>
+                    <div class="col-3">
+                        <span>VND 3,350,000</span>
+                    </div>
+                    <div class="col-4">
+                        <span>BIDV</span>
+                    </div>
+                </div>
+                <div class="transaction-history-record row">
+                    <div class="col-2">
+                        <span>123123123</span>
+                    </div>
+                    <div class="col-3">
+                        <span>19/05/2019</span>
+                    </div>
+                    <div class="col-3">
+                        <span>VND 3,350,000</span>
+                    </div>
+                    <div class="col-4">
+                        <span>BIDV</span>
+                    </div>
+                </div>
+                <div class="transaction-history-record row">
+                    <div class="col-2">
+                        <span>123123123</span>
+                    </div>
+                    <div class="col-3">
+                        <span>19/05/2019</span>
+                    </div>
+                    <div class="col-3">
+                        <span>VND 3,350,000</span>
+                    </div>
+                    <div class="col-4">
+                        <span>BIDV</span>
+                    </div>
+                </div>
+            </div>
+            <div class="user-account-content-element" id="my-reservation-interface" style="display: none">
+                <div class="reservation-record">
+                    <div class="row" style="height: 65px">
+                        <div class="col-4 reservation-first-column">
+                            <span class="reservation-code-title">Mã vé: &nbsp;&nbsp;<span
+                                    class="reservation-code-text">123123123</span></span>
+                            <span class="reservation-journey-info">Da Lat → Hanoi</span>
+                        </div>
+                        <div class="col-4 reservation-second-column">
+                            <span class="reservation-arline-name">Vietjet</span>
+                            <img src="/images/guest/VietJet.png" class="reservation-arline-img">
+                        </div>
+                        <div class="col-4 reservation-third-column">
+                            <span class="reservation-date">04/05/2019</span>
+                            <span class="reservation-price">VND 3,354,000</span>
+                        </div>
+                    </div>
+                    <div class="reservation-more-info-container">
+                        <span class="reservation-more-info">Chi tiết chuyến bay</span>
+                    </div>
+                </div>
+                <div class="reservation-record">
+                    <div class="row" style="height: 65px">
+                        <div class="col-4 reservation-first-column">
+                            <span class="reservation-code-title">Mã vé: &nbsp;&nbsp;<span
+                                    class="reservation-code-text">123123123</span></span>
+                            <span class="reservation-journey-info">Da Lat → Hanoi</span>
+                        </div>
+                        <div class="col-4 reservation-second-column">
+                            <span class="reservation-arline-name">Vietjet</span>
+                            <img src="/images/guest/VietJet.png" class="reservation-arline-img">
+                        </div>
+                        <div class="col-4 reservation-third-column">
+                            <span class="reservation-date">04/05/2019</span>
+                            <span class="reservation-price">VND 3,354,000</span>
+                        </div>
+                    </div>
+                    <div class="reservation-more-info-container">
+                        <span class="reservation-more-info">Chi tiết chuyến bay</span>
+                    </div>
+                </div>
+                <div class="reservation-record">
+                    <div class="row" style="height: 65px">
+                        <div class="col-4 reservation-first-column">
+                            <span class="reservation-code-title">Mã vé: &nbsp;&nbsp;<span
+                                    class="reservation-code-text">123123123</span></span>
+                            <span class="reservation-journey-info">Da Lat → Hanoi</span>
+                        </div>
+                        <div class="col-4 reservation-second-column">
+                            <span class="reservation-arline-name">Vietjet</span>
+                            <img src="/images/guest/VietJet.png" class="reservation-arline-img">
+                        </div>
+                        <div class="col-4 reservation-third-column">
+                            <span class="reservation-date">04/05/2019</span>
+                            <span class="reservation-price">VND 3,354,000</span>
+                        </div>
+                    </div>
+                    <div class="reservation-more-info-container">
+                        <span class="reservation-more-info">Chi tiết chuyến bay</span>
+                    </div>
+                </div>
+                <div class="reservation-record">
+                    <div class="row" style="height: 65px">
+                        <div class="col-4 reservation-first-column">
+                            <span class="reservation-code-title">Mã vé: &nbsp;&nbsp;<span
+                                    class="reservation-code-text">123123123</span></span>
+                            <span class="reservation-journey-info">Da Lat → Hanoi</span>
+                        </div>
+                        <div class="col-4 reservation-second-column">
+                            <span class="reservation-arline-name">Vietjet</span>
+                            <img src="/images/guest/VietJet.png" class="reservation-arline-img">
+                        </div>
+                        <div class="col-4 reservation-third-column">
+                            <span class="reservation-date">04/05/2019</span>
+                            <span class="reservation-price">VND 3,354,000</span>
+                        </div>
+                    </div>
+                    <div class="reservation-more-info-container">
+                        <span class="reservation-more-info">Chi tiết chuyến bay</span>
+                    </div>
+                </div>
+                <div class="reservation-record">
+                    <div class="row" style="height: 65px">
+                        <div class="col-4 reservation-first-column">
+                            <span class="reservation-code-title">Mã vé: &nbsp;&nbsp;<span
+                                    class="reservation-code-text">123123123</span></span>
+                            <span class="reservation-journey-info">Da Lat → Hanoi</span>
+                        </div>
+                        <div class="col-4 reservation-second-column">
+                            <span class="reservation-arline-name">Vietjet</span>
+                            <img src="/images/guest/VietJet.png" class="reservation-arline-img">
+                        </div>
+                        <div class="col-4 reservation-third-column">
+                            <span class="reservation-date">04/05/2019</span>
+                            <span class="reservation-price">VND 3,354,000</span>
+                        </div>
+                    </div>
+                    <div class="reservation-more-info-container">
+                        <span class="reservation-more-info">Chi tiết chuyến bay</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{> "guest/footer"}}

@@ -1,0 +1,579 @@
+<div class="main-container">
+    <nav class="navigation-bar" style="position: fixed;">
+        <a class="brand-logo" href="#">
+            <img src="/images/guest/logo/Flicket.png" width="100" height="auto">
+        </a>
+        <div class="navbar-content">
+            <div class="navbar-item">
+                <select class="custom-select">
+                    <option value="" selected>VND</option>
+                    <option value="">USD</option>
+                </select>
+            </div>
+            <div class="navbar-item signIn-container">
+                <a class="nav-link main-signInBTN" href="#">Đăng nhập</a>
+                <div id="signIn-model">
+                    <form>
+                        <p class="signInTitle">Đăng nhập tài khoản</p>
+                        <label class="signInsubTitle" for="emailSignInInput">Email</label>
+                        <input type="text" class="signInInput" id="emailSignInInput" required>
+                        <label class="signInsubTitle" for="passwordSignInInput">Password</label>
+                        <input type="text" id="passwordSignInInput" class="signInInput" required>
+                        <button type="submit" class="btn-signIn">Đăng nhập</button>
+                    </form>
+                </div>
+            </div>
+            <div class="navbar-item">
+                <div id="signUp">
+                    <a class="nav-link" href="#">Đăng ký</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="relative-container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/images/guest/IMG Hanoi2.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption ">
+                        <h1>Hanoi</h1>
+                        <div>
+                            <img src="/images/guest/ICON.png" width="28px" height="28px">
+                            <p>Vietnam</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/guest/IMG Hanoi.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption ">
+                        <h1>Hanoi</h1>
+                        <div>
+                            <img src="/images/guest/ICON.png" width="28px" height="28px">
+                            <p>Vietnam</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/guest/IMG Hanoi.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption ">
+                        <h1>Hanoi</h1>
+                        <div>
+                            <img src="/images/guest/ICON.png" width="28px" height="28px">
+                            <p>Vietnam</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panelContainer">
+            <div class="ticket-type">
+                <p class="roundtrip ticket-type-active">Khứ hồi&nbsp;&nbsp;&nbsp;</p>
+                <p class="oneway">Một chiều&nbsp;&nbsp;&nbsp;</p>
+            </div>
+            <div class="main-panel row">
+                <div class="col-4 main-panel-section">
+                    <div class="panel">
+                        <div class="airport">
+                            <input value="DaLat (DLI)" class="airport-input" id="depart-airport" readonly>
+                            <div class="airport-panel row" id="depart-panel">
+                                <div class="airport-category col-3">
+                                    <div style="border-radius: 5px 0px 0px 0px" class="popular airport-category-active">
+                                        Điểm đến phổ biến</div>
+                                    <div class="vn">VIỆT NAM<br>THÁI LAN<br>CAMPUCHIA</div>
+                                    <div class="china">TRUNG QUỐC <br>HỒNG KHÔNG<br>NHẬT BẢN<br>HÀN QUỐC</div>
+                                    <div class="eu">CHÂU ÂU</div>
+                                    <div style="border-radius: 0px 0px 0px 5px" class="other">Các địa điểm khác
+                                    </div>
+                                </div>
+                                <div class="airport-selection col-4">
+                                    <p><b>VIỆT NAM</b></p>
+                                    <option class="air-option" value="Hanoi (HAN)">Hà Nội</option>
+                                    <option class="air-option" value="Da Lat (DLI)">Đà Lạt</option>
+                                    <option class="air-option" value="TP HCM (SGN)">Thành phố Hồ Chí Minh</option>
+                                    <option class="air-option" value="Phu Quoc (PQC)">Phú Quốc</option>
+                                    <p><b>HÀN QUỐC</b></p>
+                                    <option class="air-option" value="Busan (PUS)">Busan</option>
+                                    <option class="air-option" value="Seoul (INC)">Seoul</option>
+                                    <p><b>NHẬT BẢN</b></p>
+                                </div>
+                                <div class="airport-selection col-4">
+                                    <option class="air-option" value="Osaka (OSAA)">Osaka</option>
+                                    <option class="air-option" value="Tokyo (NRT)">Tokyo</option>
+                                    <p><b>ÚC</b></p>
+                                    <option class="air-option" value="Melbourne (MEL)">Melbourne</option>
+                                    <option class="air-option" value="Sydney (SYD)">Sydney</option>
+                                </div>
+                                <div class="col-1">
+                                    <button class="airport-close depart-close">
+                                        <img src="/images/guest/[BTN] Close.png">
+                                    </button>
+                                </div>
+                                <div class="content vn-content row">
+                                    <div class="airport-selection col-5">
+                                        <p><b>VIỆT NAM</b></p>
+                                        <option class="air-option" value="Hanoi (HAN)">Hà Nội</option>
+                                        <option class="air-option" value="Da Lat (DLI)">Đà Lạt</option>
+                                        <option class="air-option" value="TP HCM (SGN)">Thành phố Hồ Chí Minh
+                                        </option>
+                                        <option class="air-option" value="Phu Quoc (PQC)">Phú Quốc</option>
+                                        <p><b>THÁI LAN</b></p>
+                                        <option class="air-option" value="Bangkok (DMK)">Bangkok</option>
+                                        <option class="air-option" value="Sukhothai (THS)">Sukhothai</option>
+                                        <p><b>CAMPUCHIA</b></p>
+                                    </div>
+                                    <div class="airport-selection col-5">
+                                        <option class="air-option" value="Phnom Penh (PNH)">Phnom Penh</option>
+                                        <option class="air-option" value="Siem Reap (REP)">Siem Reap</option>
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="airport-close depart-close">
+                                            <img src="/images/guest/[BTN] Close.png">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="content china-content row">
+                                    <div class="airport-selection col-5">
+                                        <p><b>TRUNG QUỐC</b></p>
+                                        <option class="air-option" value="Sanghai (SHA)">Thượng Hải</option>
+                                        <option class="air-option" value="Hengyang (HNY)">Hành Dương</option>
+                                        <option class="air-option" value="Lianyungang (LYG)">Liên Vân Cảng</option>
+                                        <p><b>HỒNG KHÔNG</b></p>
+                                        <option class="air-option" value="Hongkong (HKG)">Hồng Kông</option>
+                                        <p><b>NHẬT BẢN</b></p>
+                                        <option class="air-option" value="Osaka (OSAA)">Osaka</option>
+                                        <option class="air-option" value="Tokyo (NRT)">Tokyo</option>
+                                    </div>
+                                    <div class="airport-selection col-5">
+                                        <option class="air-option" value="Sendai (SDJ)">Sendai</option>
+                                        <option class="air-option" value="Okinawa (OKA)">Okinawa</option>
+                                        <p><b>HÀN QUỐC</b></p>
+                                        <option class="air-option" value="Seoul (INC)">Seoul</option>
+                                        <option class="air-option" value="Jeju (CJU)">Jeju</option>
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="airport-close depart-close">
+                                            <img src="/images/guest/[BTN] Close.png">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="content eu-content row">
+                                    <div class="airport-selection col-5">
+                                        <p><b>ANH QUỐC</b></p>
+                                        <option class="air-option" value="London (STN)">London</option>
+                                        <option class="air-option" value="Birmingham(BHX)">Birmingham</option>
+                                        <option class="air-option" value="Manchester (MAN)">Manchester</option>
+                                        <p><b>Ý</b></p>
+                                        <option class="air-option" value="Florence (FLR)">Florence</option>
+                                        <option class="air-option" value="Milan (MXP)">Milan</option>
+                                        <option class="air-option" value="Venice (VCE)">Venice</option>
+                                        <p><b>PHÁP</b></p>
+                                    </div>
+                                    <div class="airport-selection col-5">
+                                        <option class="air-option" value="Lyon (LYS)">Lyon</option>
+                                        <option class="air-option" value="Paris (ORY)">Paris</option>
+                                        <option class="air-option" value="Bordeaux (BOD)">Bordeaux</option>
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="airport-close depart-close">
+                                            <img src="/images/guest/[BTN] Close.png">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="content other-content row">
+                                    <div class="airport-selection col-5">
+                                        <p><b>HOA KỲ</b></p>
+                                        <option class="air-option" value="Dallas (DFW)">Dallas-Fort Worth</option>
+                                        <option class="air-option" value="Honolulu (HNL)">Honolulu</option>
+                                        <option class="air-option" value="Oakland (BOAK)">Oakland</option>
+                                        <option class="air-option" value="Chicago (ORD)">Chicago</option>
+                                        <option class="air-option" value="Miami (MIA)">Miami</option>
+                                        <option class="air-option" value="New York(NEWA)">New York</option>
+                                    </div>
+                                    <div class="airport-selection col-5">
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="airport-close depart-close">
+                                            <img src="/images/guest/[BTN] Close.png">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="switch">
+                            <img src="/images/guest/arrow.png" width="24px" height="auto">
+                        </div>
+                        <div class="airport">
+                            <input value="DaLat (DLI)" class="airport-input" id="arrival-airport" readonly>
+                            <div class="airport-panel row" id="arrival-panel">
+                                <div class="airport-category col-3">
+                                    <div style="border-radius: 5px 0px 0px 0px" class="popular airport-category-active">
+                                        Điểm đến phổ biến</div>
+                                    <div class="vn">VIỆT NAM<br>THÁI LAN<br>CAMPUCHIA</div>
+                                    <div class="china">TRUNG QUỐC &<br>HỒNG KHÔNG<br>NHẬT BẢN<br>HÀN QUỐC</div>
+                                    <div class="eu">CHÂU ÂU</div>
+                                    <div style="border-radius: 0px 0px 0px 5px" class="other">Các địa điểm khác
+                                    </div>
+                                </div>
+                                <div class="airport-selection col-4">
+                                    <p><b>VIỆT NAM</b></p>
+                                    <option class="air-option" value="Hanoi (HAN)">Hà Nội</option>
+                                    <option class="air-option" value="Da Lat (DLI)">Đà Lạt</option>
+                                    <option class="air-option" value="TP HCM (SGN)">Thành phố Hồ Chí Minh</option>
+                                    <option class="air-option" value="Phu Quoc (PQC)">Phú Quốc</option>
+                                    <p><b>HÀN QUỐC</b></p>
+                                    <option class="air-option" value="Busan (PUS)">Busan</option>
+                                    <option class="air-option" value="Seoul (INC)">Seoul</option>
+                                    <p><b>NHẬT BẢN</b></p>
+                                </div>
+                                <div class="airport-selection col-4">
+                                    <option class="air-option" value="Osaka (OSAA)">Osaka</option>
+                                    <option class="air-option" value="Tokyo (NRT)">Tokyo</option>
+                                    <p><b>ÚC</b></p>
+                                    <option class="air-option" value="Melbourne (MEL)">Melbourne</option>
+                                    <option class="air-option" value="Sydney (SYD)">Sydney</option>
+                                </div>
+                                <div class="col-1">
+                                    <button class="airport-close arrival-close">
+                                        <img src="/images/guest/[BTN] Close.png">
+                                    </button>
+                                </div>
+                                <div class="content vn-content row">
+                                    <div class="airport-selection col-5">
+                                        <p><b>VIỆT NAM</b></p>
+                                        <option class="air-option" value="Hanoi (HAN)">Hà Nội</option>
+                                        <option class="air-option" value="Da Lat (DLI)">Đà Lạt</option>
+                                        <option class="air-option" value="TP HCM (SGN)">Thành phố Hồ Chí Minh
+                                        </option>
+                                        <option class="air-option" value="Phu Quoc (PQC)">Phú Quốc</option>
+                                        <p><b>THÁI LAN</b></p>
+                                        <option class="air-option" value="Bangkok (DMK)">Bangkok</option>
+                                        <option class="air-option" value="Sukhothai (THS)">Sukhothai</option>
+                                        <p><b>CAMPUCHIA</b></p>
+                                    </div>
+                                    <div class="airport-selection col-5">
+                                        <option class="air-option" value="Phnom Penh (PNH)">Phnom Penh</option>
+                                        <option class="air-option" value="Siem Reap (REP)">Siem Reap</option>
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="airport-close arrival-close">
+                                            <img src="/images/guest/[BTN] Close.png">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="content china-content row">
+                                    <div class="airport-selection col-5">
+                                        <p><b>TRUNG QUỐC</b></p>
+                                        <option class="air-option" value="Sanghai (SHA)">Thượng Hải</option>
+                                        <option class="air-option" value="Hengyang (HNY)">Hành Dương</option>
+                                        <option class="air-option" value="Lianyungang (LYG)">Liên Vân Cảng</option>
+                                        <p><b>HỒNG KHÔNG</b></p>
+                                        <option class="air-option" value="Hongkong (HKG)">Hồng Kông</option>
+                                        <p><b>NHẬT BẢN</b></p>
+                                        <option class="air-option" value="Osaka (OSAA)">Osaka</option>
+                                        <option class="air-option" value="Tokyo (NRT)">Tokyo</option>
+                                    </div>
+                                    <div class="airport-selection col-5">
+                                        <option class="air-option" value="Sendai (SDJ)">Sendai</option>
+                                        <option class="air-option" value="Okinawa (OKA)">Okinawa</option>
+                                        <p><b>HÀN QUỐC</b></p>
+                                        <option class="air-option" value="Seoul (INC)">Seoul</option>
+                                        <option class="air-option" value="Jeju (CJU)">Jeju</option>
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="airport-close arrival-close">
+                                            <img src="/images/guest/[BTN] Close.png">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="content eu-content row">
+                                    <div class="airport-selection col-5">
+                                        <p><b>ANH QUỐC</b></p>
+                                        <option class="air-option" value="London (STN)">London</option>
+                                        <option class="air-option" value="Birmingham(BHX)">Birmingham</option>
+                                        <option class="air-option" value="Manchester (MAN)">Manchester</option>
+                                        <p><b>Ý</b></p>
+                                        <option class="air-option" value="Florence (FLR)">Florence</option>
+                                        <option class="air-option" value="Milan (MXP)">Milan</option>
+                                        <option class="air-option" value="Venice (VCE)">Venice</option>
+                                        <p><b>PHÁP</b></p>
+                                    </div>
+                                    <div class="airport-selection col-5">
+                                        <option class="air-option" value="Lyon (LYS)">Lyon</option>
+                                        <option class="air-option" value="Paris (ORY)">Paris</option>
+                                        <option class="air-option" value="Bordeaux (BOD)">Bordeaux</option>
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="airport-close arrival-close">
+                                            <img src="/images/guest/[BTN] Close.png">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="content other-content row">
+                                    <div class="airport-selection col-5">
+                                        <p><b>HOA KỲ</b></p>
+                                        <option class="air-option" value="Dallas (DFW)">Dallas-Fort Worth</option>
+                                        <option class="air-option" value="Honolulu (HNL)">Honolulu</option>
+                                        <option class="air-option" value="Oakland (BOAK)">Oakland</option>
+                                        <option class="air-option" value="Chicago (ORD)">Chicago</option>
+                                        <option class="air-option" value="Miami (MIA)">Miami</option>
+                                        <option class="air-option" value="New York(NEWA)">New York</option>
+                                    </div>
+                                    <div class="airport-selection col-5">
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="airport-close arrival-close">
+                                            <img src="/images/guest/[BTN] Close.png">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 main-panel-section">
+                    <div class="panel">
+                        <div class="airport">
+                            <div class="date-picker-container">
+                                <input type='text' class="date-input" readonly id="depart-date" data-language='en' />
+                                <div class="date-logo">
+                                    <img src="/images/guest/departure (1).png" width="24px" height="auto">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tiny-line"></div>
+
+                        <div class="airport">
+                            <div class="date-picker-container">
+                                <input type='text' class="date-input" readonly id="arrival-date" data-language='en' />
+                                <div class="date-logo">
+                                    <img src="/images/guest/land.png" width="24px" height="auto">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 main-panel-section">
+                    <div class="panel">
+                        <div class="passenger">
+                            <div class="passenger-input-container">
+                                <input value="1 người, Phổ thông" class="passenger-input" readonly>
+                                <div class="date-logo">
+                                    <img src="/images/guest/user.png" width="24px" height="auto">
+                                </div>
+                            </div>
+                            <div id="passenger-panel" class="row">
+                                <div class="passenger-type-area col-7">
+                                    <h6>Số hành khách</h6>
+                                    <div class="passenger-type">
+                                        <img src="/images/guest/adult.png">
+                                        <p class="type-detail"><b>Người lớn</b><br><span>(từ 12 tuổi)</span></p>
+                                        <div class="number">
+                                            <input type="text" value="1" class="type-quantity" id="adult" />
+                                            <div class="minus-adult">
+                                                <img src="/images/guest/-.png">
+                                            </div>
+                                            <div class="plus">
+                                                <img src="/images/guest/+.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="passenger-type">
+                                        <img src="/images/guest/boy.png">
+                                        <p class="type-detail"><b>Trẻ em</b><br><span>(từ 2 - 12 tuổi)</span></p>
+                                        <div class="number">
+                                            <input type="text" value="0" class="type-quantity" id="kid" />
+                                            <div class="minus">
+                                                <img src="/images/guest/-.png">
+                                            </div>
+                                            <div class="plus">
+                                                <img src="/images/guest/+.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="passenger-type">
+                                        <img src="/images/guest/baby.png">
+                                        <p class="type-detail"><b>Em bé</b><br><span>(dưới 2 tuổi)</span></p>
+                                        <div class="number">
+                                            <input type="text" value="0" class="type-quantity" id="baby" />
+                                            <div class="minus">
+                                                <img src="/images/guest/-.png">
+                                            </div>
+                                            <div class="plus">
+                                                <img src="/images/guest/+.png">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <div class="vertical-line"></div>
+                                </div>
+                                <div class="class-area col-4">
+                                    <h6>Hạng ghế</h6>
+                                    <form>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="customRadio1"
+                                                name="txtClass" checked="checked" value="Phổ thông">
+                                            <label class="custom-control-label" for="customRadio1">Phổ thông</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="customRadio2"
+                                                name="txtClass" value="Thương gia">
+                                            <label class="custom-control-label" for="customRadio2">Thương
+                                                gia</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="customRadio3"
+                                                name="txtClass" value="Hạng nhất">
+                                            <label class="custom-control-label" for="customRadio3">Hạng nhất</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="customRadio4"
+                                                name="txtClass" value="Phổ thông đặc biệt">
+                                            <label class="custom-control-label" for="customRadio4">Phổ thông đặc
+                                                biệt</label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <img class="btn-home-submit" src="/images/guest/paper-plane.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="company-info row">
+        <div class="col-6 text-container">
+            <p class="heading1">Đối tác hàng không</p>
+            <p class="heading2">Đối tác hàng không nội địa và quốc tế</p>
+            <p class="info-detail">Những đối tác hàng không hàng đầu sẽ chắp cánh đưa bạn đến mọi điểm đến trên thế
+                giới</p>
+        </div>
+        <div class="col-6 image-info-container">
+            <div class="image-row">
+                <img class="image-element" src="/images/guest/ThaiLion.png">
+                <img class="image-element" src="/images/guest/KoreanAir.png">
+                <img class="image-element" src="/images/guest/CathayPacific.png">
+                <img class="image-element" src="/images/guest/AirAsia.png">
+            </div>
+            <div class="image-row">
+                <img class="image-element" src="/images/guest/VietJet.png">
+                <img class="image-element" src="/images/guest/JetStar.png">
+                <img class="image-element" src="/images/guest/VietnamAirlines.png">
+                <img class="image-element" src="/images/guest/ThaiAirAsia.png">
+            </div>
+        </div>
+    </div>
+    <div class="company-info row" style="margin-top: 70px;">
+        <div class="col-6 image-info-container">
+            <div class="image-row">
+                <img class="image-element" src="/images/guest/visa.png">
+                <img class="image-element" src="/images/guest/mastercard.png">
+                <img class="image-element" src="/images/guest/Payoo.png">
+                <img class="image-element" src="/images/guest/VietinBank.png">
+            </div>
+            <div class="image-row">
+                <img class="image-element" src="/images/guest/FamilyMart.png">
+                <img class="image-element" src="/images/guest/VinMart.png">
+                <img class="image-element" src="/images/guest/BIDV.png">
+                <img class="image-element" src="/images/guest/VietnamPost.png">
+            </div>
+        </div>
+        <div class="col-6 text-container1">
+            <p class="heading1">Đối tác thanh toán</p>
+            <p class="info-detail">Những đối tác thanh toán đáng tin cậy của chúng tôi sẽ giúp bạn luôn an tâm thực
+                hiện giao dịch của mình một cách thuận lợi nhất!</p>
+        </div>
+    </div>
+    <div class="relative-container">
+        <div class="why-area row">
+            <div class="col-5 why-part1">
+                <p>Tại sao chọn</p>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-5 why-part2">
+                <p class="flicket">
+                    <img src="/images/guest/Flicket.png">
+                </p>
+            </div>
+        </div>
+        <div class="feature">
+            <div class="feature-content">
+                <div class="row">
+                    <div class="col-6 feature1">
+                        <img class="feature-img" src="/images/guest/search.png">
+                        <p class="feature-title">Tìm kiếm toàn diện</p>
+                        <p class="feature-detail">Dễ dàng so sánh các chuyến bay giữa các hãng hàng không khác nhau
+                            chỉ với một cú nhấp chuột</p>
+                    </div>
+                    <div class="col-6 feature2">
+                        <img class="feature-img" src="/images/guest/coin.png">
+                        <p class="feature-title">Giá tốt nhất</p>
+                        <p class="feature-detail">Không phụ thu.<br>Giá bạn thấy là giá bạn phải trả, giúp bạn dễ
+                            dàng so sánh hơn.</p>
+                    </div>
+                </div>
+                <div class="feature3">
+                    <img class="feature-img" src="/images/guest/padlock.png">
+                    <p class="feature-title">An toàn và linh hoạt</p>
+                    <p class="feature-detail">Giao dịch trực tuyến với nhiều lựa chọn đến từ các đối tác tin cậy.
+                        <br>Không tính phí giao dịch.</p>
+                </div>
+            </div>
+        </div>
+        <div class="img-plane">
+            <img src="/images/guest/Plane.png">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-content row">
+            <div class="col-4 footer-head">
+                <img class="footer-logo" src="/images/guest/Flicket-footer.png">
+                <div class="subsequent-object">
+                    <img src="/images/guest/24-hours.png" class="time24h-img">
+                    <p>Liên hệ chúng tôi<br><b>123-123-123</b></p>
+                </div>
+                <div class="subsequent-object">
+                    <img src="/images/guest/VeriSignSecure.png" class="secure-img">
+                    <img src="/images/guest/RapidSSL.png" class="secure-img">
+                </div>
+            </div>
+            <div class="col-8 footer-tail">
+                <div class="row bank-info">
+                    <div class="col-4 footer-tail-title">
+                        <p>Đối tác thanh toán</p>
+                    </div>
+                    <div class="col-8 image-bank-group">
+                        <div class="image-row">
+                            <img class="small-image" src="/images/guest/visa.png">
+                            <img class="small-image" src="/images/guest/mastercard.png">
+                            <img class="small-image" src="/images/guest/VietnamPost.png">
+                            <img class="small-image" src="/images/guest/Payoo.png">
+                        </div>
+                        <div class="row">
+                            <div class="col-6 image-row">
+                                <img class="small-image" src="/images/guest/BIDV.png">
+                                <img class="small-image" src="/images/guest/VietinBank.png">
+                            </div>
+                            <div class="col-6"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row social-network-info">
+                    <div class="col-4 footer-tail-title">
+                        <p>Theo dõi chúng tôi trên</p>
+                    </div>
+                    <div class="col-8 image-row social-img-row">
+                        <img src="/images/guest/ICON FACEBOOK.png" class="social-network-icon">
+                        <img src="/images/guest/ICON TWITTER.png" class="social-network-icon">
+                        <img src="/images/guest/ICON PINTEREST.png" class="social-network-icon">
+                        <img src="/images/guest/ICON GOOGLE+.png" class="social-network-icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,246 @@
+<div class="modal-container">
+    <div class="gray-background"></div>
+    <div class="flight-detail-container">
+        <div class="flight-detail-title">
+            <span>Chi tiết đặt chỗ</span>
+            <span id="flight-detail-booking-id">Mã đặt chỗ<span
+                    id="flight-detail-booking-id-detail">&nbsp;&nbsp;467688254</span></span>
+        </div>
+        <div id="contact-person-info">
+            <span id="contact-person-name">Nguyen Van A</span>
+            <div id="contact-other-info">
+                <div class="contact-other-info-element">
+                    <img class="contact-other-info-img" src="/images/guest/phone-call.png">
+                    <span class="contact-other-info-detail">+84123123123</span>
+                </div>
+                <div class="contact-other-info-element">
+                    <img class="contact-other-info-img" src="/images/guest/email.png">
+                    <span class="contact-other-info-detail">email@example.com</span>
+                </div>
+            </div>
+        </div>
+        <div id="modal-menu-bar">
+            <div class="modal-menu-bar-option modal-menu-bar-option-active" id="flight-info-btn">
+                <img class="modal-menu-bar-icon" src="/images/guest/airplane.png">
+                <span class="modal-menu-bar-title">Chuyến bay</span>
+            </div>
+            <div class="modal-menu-bar-option" id="passenger-info-btn">
+                <img class="modal-menu-bar-icon" src="/images/guest/user.png">
+                <span class="modal-menu-bar-title">Thông tin khách hàng</span>
+            </div>
+        </div>
+        <div id="modal2-content-container">
+            <div class="modal2-content-element" id="flight-modal2-info">
+                <dic id="modal2-date-info">
+                    <span>18/05/2019</span>
+                </dic>
+                <div id="modal2-airline-info">
+                    <img src="/images/guest/VietJet.png">
+                    <div id="modal2-airline-info-detail">
+                        <span id="modal2-airline-name">Vietjet</span>
+                        <span id="modal2-class">Phổ thông</span>
+                    </div>
+                </div>
+                <div id="modal2-trip-info">
+                    <div class="modal2-location">
+                        <span class="modal2-time">9:10</span>
+                        <span class="modal2-location">Da Lat</span>
+                    </div>
+                    <img src="/images/guest/arrow-pointing-to-right.png" height="15px" width="auto">
+                    <div class="modal2-location">
+                        <span class="modal2-time">12:30</span>
+                        <span class="modal2-location">Hanoi</span>
+                    </div>
+                    <div class="modal2-location" id="modal2-duration-transit">
+                        <span id="modal2-duration">3h20m</span>
+                        <div id="modal2-transit">
+                            <div id="modal2-circle"></div>
+                            <span class="modal2-location">1 điểm dừng</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal2-content-element" id="passenger-modal2-info">
+                <div class="passenger-modal2-element">
+                    <span>Nguyen Van A</span>
+                </div>
+                <div class="passenger-modal2-element">
+                    <span>Tran Thi B</span>
+                </div>
+                <div class="passenger-modal2-element">
+                    <span>Le Van C</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{> "guest/header_stages"}}
+<div class="passenger-info-container">
+
+    <div class="main-info-container">
+        <div class="main-info-table-container">
+            <form>
+                <div class="relative-container">
+                    <img src="/images/guest/payment-title-img.png" width="100%" height="auto">
+                    <span class="booking-title">Thanh toán</span>
+                </div>
+                <div class="info-table-title">
+                    <span id="change1">Thẻ tín dụng</span>
+                    <div class="payment-method-img">
+                        <img src="/images/guest/guarantee.png">
+                        <img src="/images/guest/visa.png">
+                        <img src="/images/guest/mastercard.png">
+                    </div>
+                </div>
+                <div class="main-info-table">
+                    <div class="before-content">
+                        <div class="info-row">
+                            <label for="txtCardID">Số thẻ tín dụng</label>
+                            <input id="txtCardID" type="text" required placeholder="16 chữ số mặt trên của mặt thẻ">
+                        </div>
+                        <div class="info-row row">
+                            <div class="col-6">
+                                <label for="txtDueDate">Hiệu lực đến ngày</label>
+                                <input id="txtDueDate" type="text" class="date-input" data-language='en' required
+                                    placeholder="MM/YYYY" data-min-view="months" data-view="months"
+                                    data-date-format="MM/yyyy">
+                            </div>
+                            <div class="col-6">
+                                <label for="txtCVV">CVV</label>
+                                <input id="txtCVV" type="text" required placeholder="3 số CVV">
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <label for="txtCardName">Tên trên thẻ</label>
+                            <input id="txtCardIName" type="text" required placeholder="Tên trên thẻ">
+                        </div>
+                    </div>
+                    <div class="price-detail-coutainter">
+                        <div id="price-detail-title-container">
+                            <span id="price-detail-title">Chi tiết giá</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Vietjet (Người lớn)</span>
+                            </div>
+                            <div class="col-2">
+                                <span>1</span>
+                            </div>
+                            <div class="col-5 col-5-last">
+                                <span>VND 1.554.720</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Vietjet (Trẻ em)</span>
+                            </div>
+                            <div class="col-2">
+                                <span>1</span>
+                            </div>
+                            <div class="col-5 col-5-last">
+                                <span>VND 1.514.485</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Vietjet (Em bé)</span>
+                            </div>
+                            <div class="col-2">
+                                <span>1</span>
+                            </div>
+                            <div class="col-5 col-5-last">
+                                <span>VND 109.205</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span>Hành lý</span>
+                            </div>
+                            <div class="col-2">
+                            </div>
+                            <div class="col-5 col-5-last">
+                                <span>VND 0</span>
+                            </div>
+                        </div>
+                        <div id="price-line"></div>
+                        <div class="row " id="price-last-row">
+                            <div class="col-5">
+                                <span>Tổng giá tiền</span>
+                            </div>
+                            <div class="col-2">
+                            </div>
+                            <div class="col-5 col-5-last">
+                                <span>VND 3.178.410</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="btn-payment-container">
+                        <button type="submit" id="btn-payment">Thanh toán bằng thẻ tín dụng</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="plane-info-box">
+            <div class="info-table-title" style="margin-top: 0px;">
+                <span>Thông tin chuyến bay</span>
+                <a class="change-button hide-before-content">Thay đổi</a>
+            </div>
+            <div class="main-info-table">
+                <div id="flight-id-info">
+                    <span id="flight-id-title">Mã chuyến bay</span>
+                    <span id="flight-id-detail">467688254</span>
+                </div>
+                <span class="depart-date-text">T4, 15 Th05 2019</span>
+                <div class="journey-info">
+                    <div class="place-and-time">
+                        <div class="sub-place-time1">
+                            <span style="font-weight: 500">Da Lat</span>
+                            <span>8:30</span>
+                        </div>
+                        <span class="arrow1">→</span>
+                        <div class="sub-place-time2">
+                            <span style="font-weight: 500">Hanoi</span>
+                            <span>12:20</span>
+                        </div>
+                    </div>
+                    <div class="other-info">
+                        <span>3h50m</span>
+                        <div class="transit-detail">
+                            <div class="circle"></div>
+                            <span>1 điểm dừng</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="airline-info">
+                    <div class="airline-info-text">
+                        <span style="font-size: 15px;font-weight: 500">Vietjet Air</span>
+                        <span style="font-weight: 300">Phổ thông</span>
+                    </div>
+                    <img src="/images/guest/VietJet.png" height="30px" width="auto">
+                </div>
+                <div class="transit-remind">
+                    <span><b>9h30</b>&nbsp;&nbsp;quá cảnh tại Phú Quốc </span>
+                </div>
+                <div id="passenger-list">
+                    <span id="passenger-list-title">Danh sách hành khách</span>
+                    <div class="passenger-list-element">
+                        <span>Nguyen Van A</span>
+                        <span>Người lớn</span>
+                    </div>
+                    <div class="passenger-list-element">
+                        <span>Tran Thi B</span>
+                        <span>Trẻ em</span>
+                    </div>
+                    <div class="passenger-list-element">
+                        <span>Le Van C</span>
+                        <span>Em bé</span>
+                    </div>
+                </div>
+                <div class="btn-detail-container">
+                    <span>Chi tiết</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{> "guest/footer"}}

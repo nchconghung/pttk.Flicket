@@ -7,6 +7,7 @@ const exphbs = require("express-handlebars");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var guestRouter = require('./routes/guest');
 var flightRouter = require('./routes/flights');
 var adminRouter = require('./routes/admin');
 
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/guest',guestRouter);
 app.use('/users', usersRouter);
 app.use('/flight',flightRouter);
 app.use('/admin',adminRouter);

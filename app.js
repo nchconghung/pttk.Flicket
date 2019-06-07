@@ -9,6 +9,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var flightRouter = require('./routes/flights');
 var adminRouter = require('./routes/admin');
+var adminAdminRouter = require('./routes/admin/admin.route');
+var khachhangAdminRouter = require('./routes/admin/thongtinkhachhanggiaodich.route');
+var thanhvienAdminRouter = require('./routes/admin/thanhvien.route');
+var chuyenbayAdminRouter = require('./routes/admin/chuyenbay.route');
+// var hangHangKhongAdminRouter = require('./routes/admin/hanghangkhong.route');
+
 
 var app = express();
 
@@ -35,6 +41,11 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/flight',flightRouter);
 app.use('/admin',adminRouter);
+app.use('/admin/thanhvien',thanhvienAdminRouter);
+app.use('/admin/admin',adminAdminRouter);
+app.use('/admin/khachhang',khachhangAdminRouter);
+app.use('/admin/chuyenbay',chuyenbayAdminRouter);
+// app.use('/admin/hanghangkhong',hangHangKhongAdminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

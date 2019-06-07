@@ -1,0 +1,168 @@
+<link rel="stylesheet" href="stylesheets/pages/admin/form-style.css">
+
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="card d-flex flex-column justify-content-center">
+            <div class="card-body d-flex justify-content-center ">
+                <div class="contact1-form validate-form" style="width: 1000px;">
+                    <span class="contact1-form-title">
+                        Thông tin thành viên
+                    </span>
+                    <div class="row" >
+                         <div class="col"> 
+                            <span><i class="far fa-user-circle" style="margin-right: 5px;"></i>Tài khoản</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="text" value="nchconghung" >
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span><i class="fas fa-coins" style="margin-right: 5px;"></i>Điểm thưởng</span>
+                            <div class="wrap-input1 validate-input" >   
+                                <input class="input1" type="text"  value="250" >
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col"> 
+                                <span><i class="far fa-id-card" style="margin-right: 5px;"></i>CMND</span>
+                                <div class="wrap-input1 validate-input">
+                                    <input class="input1" type="email" value="281144960" >
+                                    <span class="shadow-input1"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Họ tên</span>
+                                <div class="wrap-input1 validate-input" >   
+                                    <input class="input1" type="text"  value="Nguyễn Công Hưng" >
+                                    <span class="shadow-input1"></span>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        
+                        <div class="col"> 
+                            <span><i class="far fa-envelope" style="margin-right: 5px;"></i>Email</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="email" value="nchconghung@gmail.com" >
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span><i class="fas fa-phone" style="margin-right: 5px;"></i>SĐT</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="text" value="0969327333" >
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Giới tính</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="text" value="Nam" >
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Ngày sinh</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="text" value="01/06/1998" >
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <span style="font-size:18px;color:#721777;font-weight: bold;">
+                        Lịch sử giao dịch
+                    </span>  
+                </div>
+            </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <hr>
+                                        <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
+                                            <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
+                                                <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Mã vé</th>
+                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Mã chuyến bay</th>
+                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thời điểm giao dịch</th>
+                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Ngày bay</th>
+                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Điểm khởi hành</th>
+                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Điểm đến</th>
+                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Công cụ</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>  
+                                                <tr role="row" >
+                                                        <td class="sorting_1">1</td>  
+                                                        <td>345279</td>         
+                                                        <td>VNA432545</td>
+                                                        <td>2019-06-01 13:23:00</td>
+                                                        <td>2019-06-05 12:00:00</td>
+                                                        <td>Hà Nội</td>
+                                                        <td>Moskva</td>
+                                                        <td >
+                                                            <btn class="btn btn-success">Xóa</btn>
+                                                        </td>
+                                                    </tr>                        
+                                                    <tr role="row">
+                                                        <td class="sorting_1">2</td>  
+                                                        <td>325626</td>         
+                                                        <td>VNA432675</td>
+                                                        <td>2019-06-10 20:12:00</td>
+                                                        <td>2019-06-12 14:00:00</td>
+                                                        <td>Moskva</td>
+                                                        <td>Hồ Chí Minh</td>
+                                                        <td >
+                                                            <btn class="btn btn-success">Xóa</btn>
+                                                        </td>
+                                                    </tr>         
+                                                {{#each list}}
+                                                    <tr role="row" >
+                                                        <td class="sorting_1">1</td> 
+                                                        <td>45238</td>          
+                                                        <td>VNA432545</td>
+                                                        <td>3500000</td>
+                                                        <td>2019-06-05 12:00:00</td>
+                                                        <td>Hà Nội</td>
+                                                        <td>Moskva</td>
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    Lựa chọn
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" href="#">Xem chi tiết vé</a>
+                                                                    <div class="dropdown-divider"></div>
+                                                                    <a class="dropdown-item" href="#">Xóa</a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+

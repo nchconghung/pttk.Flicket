@@ -1,0 +1,155 @@
+<link rel="stylesheet" href="stylesheets/pages/admin/form-style.css">
+
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="card d-flex flex-column justify-content-center">
+            <div class="card-body d-flex justify-content-center">
+                <form class="contact1-form validate-form">
+                    <span class="contact1-form-title">
+                        Thêm mới khách hàng
+                    </span>
+
+                    <div class="d-flex justify-content-around align-items-cente" >
+                        <div class="wrap-input1 validate-input" data-validate = "CMND is required" style="margin-right: 15px;">
+                            <input class="input1" type="text" name="cmnd" placeholder="Nhập CMND/Căn cước khách hàng" >
+                            <span class="shadow-input1"></span>
+                        </div>
+
+                        <div class="" >
+                            <button class=" btn-search-fk btn btn-success" type="submit">
+                                   <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+                       <hr>
+                        <div class="d-flex justify-content-center">
+                            <div class="alert alert-primary br30" role="alert" style="text-align: center;width:400px;">
+                                        <i class="fas fa-check-circle"></i>Nhập dữ liệu vào form dưới
+                            </div> 
+                        </div>
+                        
+                        <div class="card-body d-flex justify-content-center">
+                            <form class="contact1-form validate-form" style="width:1000px;">
+                                
+                                <div class="d-flex justify-content-center">
+                                    <div class="wrap-input1 validate-input" style="width:400px;" data-validate = "Tài khoản cần được nhập">
+                                        <span>CMND</span> 
+                                        <input class="input1" type="text" name="username" value="281144960" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="row" >
+                                    <div class="col">
+                                        <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Họ tên</span>
+                                        <div class="wrap-input1 validate-input" data-validate = "Mật khẩu cần được nhập">   
+                                            <input class="input1" type="text" name="password" placeholder="Mật khẩu" >
+                                            <span class="shadow-input1"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col"> 
+                                        <span><i class="far fa-envelope" style="margin-right: 5px;"></i>Email</span>
+                                        <div class="wrap-input1 validate-input" data-validate = "Tối thiểu là 0">
+                                            <input class="input1" type="email" name="password" placeholder="Điểm thưởng" >
+                                            <span class="shadow-input1"></span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <span><i class="fas fa-phone" style="margin-right: 5px;"></i>SĐT</span>
+                                        <div class="wrap-input1 validate-input" data-validate = "Tối thiểu là 0">
+                                            <input class="input1" type="text" name="password" placeholder="Điểm thưởng" >
+                                            <span class="shadow-input1"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Ngày sinh</span>
+                                        <div class="wrap-input1 validate-input" data-validate = "Tối thiểu là 0">
+                                            <input class="input1" type="date" name="password" placeholder="Điểm thưởng" >
+                                            <span class="shadow-input1"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <span><i class="fas fa-venus-mars" style="margin-right: 5px;"></i>Giới tính:</span>
+                                <div class="wrap-input1 validate-input" style="width: 270px;">
+                                    <select class="input1 select-search-fk " aria-placeholder="Giới tính">
+                                        <option>Nam</option>
+                                        <option>Nữ</option>
+                                    </select>
+                                    <span class="shadow-input1"></span>
+                                </div>
+
+                                <div class="container-contact1-form-btn">
+                                     <button class="contact1-form-btn" type="submit" style="margin-right: 50px;">
+                                        <span>
+                                            Tạo mới
+                                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                    <button class="contact1-form-btn" type="submit">
+                                        <span>
+                                            Trở về
+                                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div> 
+                {{!-- {{#if error}}
+                    <hr>
+                    <div class="d-flex justify-content-center">
+                        <div class="alert alert-success br30" role="alert" style="text-align: center;width:400px;">
+                                    <i class="fas fa-exclamation-circle"></i>Khách hàng đã tồn tại.<a class="badge badge-info" >Nhấp vào để chỉnh sửa.</a>
+                        </div> 
+                    </div>
+                {{#else}}
+                    {{#if cmnd}}
+                       <hr>
+                        <div class="d-flex justify-content-center">
+                            <div class="alert alert-primary bd30" role="alert" style="text-align: center;width:400px;">
+                                        Nhập dữ liệu vào form dưới
+                            </div> 
+                        </div>
+                        
+                        <div class="card-body d-flex justify-content-center">
+                            <form class="contact1-form validate-form">
+                                <div class="wrap-input1 validate-input" data-validate = "Tài khoản cần được nhập">
+                                    <input class="input1" type="text" name="username" placeholder="Tài khoản" >
+                                    <span class="shadow-input1"></span>
+                                </div>
+
+                                <div class="wrap-input1 validate-input" data-validate = "Mật khẩu cần được nhập">
+                                    <input class="input1" type="text" name="password" placeholder="Mật khẩu" >
+                                    <span class="shadow-input1"></span>
+                                </div>
+
+                                    <div class="wrap-input1 validate-input" data-validate = "Tối thiểu là 0">
+                                    <input class="input1" type="text" name="password" placeholder="Điểm thưởng" >
+                                    <span class="shadow-input1"></span>
+                                </div>
+
+                                <div class="container-contact1-form-btn">
+                                    <button class="contact1-form-btn" type="submit">
+                                        <span>
+                                            Tạo mới
+                                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div> 
+                    {{/if}}
+                {{/if}} --}}
+        </div>
+    </div>
+</div>
+
+
+

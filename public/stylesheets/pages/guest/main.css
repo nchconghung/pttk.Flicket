@@ -363,6 +363,15 @@
     border-radius: 5px;
     cursor: pointer;
   }
+  #btn-home-submit-box{
+    border: none; 
+    background-color: 
+    transparent;
+    height: 72px;
+  }
+  #btn-home-submit-box:focus{
+    outline: none;
+  }
   .airport-close{
     background-color: transparent;
     border: none;
@@ -2698,7 +2707,7 @@
     justify-content: center;
     align-items: center;
     padding: 10px 50px;
-    background-image: url("images/change-searching-info.png");
+    background-image: url("/images/guest/change-searching-info.png");
     height: 162px;
     width: 100%;
     margin-top: 10px;
@@ -3361,4 +3370,12 @@
 .user-instant-panel-element img {
   height: 15px;
   width: auto;
+}
+.transits-visual{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: absolute;
+  top: 37px;
+  width: 100%;
 }

@@ -1,8 +1,11 @@
 exports.index = function(req,res,next){
-    res.render('guest/home');
+    res.render('guest/home',{title: 'Flicket'});
 }
 exports.pick = function(req,res,next){
     res.render('guest/flight_picking');
+}
+exports.pick_post = function(req,res,next){
+    res.send(req.body);
 }
 exports.info = function(req,res,next){
     res.render('guest/check_info');

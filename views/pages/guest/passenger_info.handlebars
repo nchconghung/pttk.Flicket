@@ -7,7 +7,7 @@
         <div class="flight-detail-content">
             <div class="flight-detail-subcontent row">
                 <div class="col-2 flight-airline-detail">
-                    <img src="images/VietJet.png" width="50px" height="auto">
+                    <img src="/images/guest/VietJet.png" width="50px" height="auto">
                     <span class="flight-airplane-id">Vietjet BL-123</span>
                     <span class="flight-airphone-class">Phổ thông</span>
                 </div>
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="duration">
-                            <img src="images/clock.png" width="15px" height="15px">
+                            <img src="/images/guest/clock.png" width="15px" height="15px">
                             <span>1h50m</span>
                         </div>
                         <div class="depart-schedule row">
@@ -60,13 +60,13 @@
                 </div>
             </div>
             <div class="transit-detail-container">
-                <img src="images/warning.png" width="15px" height="auto">
+                <img src="/images/guest/warning.png" width="15px" height="auto">
                 <span>Quá cảnh khoảng 8h 0m tại TP HCM (SGN)<br>Bạn cần phải tự di chuyển hành lý và làm lại thủ tục
                     bay.</span>
             </div>
             <div class="flight-detail-subcontent row">
                 <div class="col-2 flight-airline-detail">
-                    <img src="images/VietJet.png" width="50px" height="auto">
+                    <img src="/images/guest/VietJet.png" width="50px" height="auto">
                     <span class="flight-airplane-id">Vietjet BL-123</span>
                     <span class="flight-airphone-class">Phổ thông</span>
                 </div>
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <div class="duration">
-                            <img src="images/clock.png" width="15px" height="15px">
+                            <img src="/images/guest/clock.png" width="15px" height="15px">
                             <span>1h50m</span>
                         </div>
                         <div class="depart-schedule row">
@@ -215,8 +215,8 @@
                 <img src="/images/guest/passenger-img.png" width="250px" height="auto">
                 <span class="passenger-info-title">Thông tin hành khách</span>
             </div>
-            <div class="passenger-info-type-main-content">
-                <div class="passenger-info-type-subcontent">
+            <div class="passenger-info-type-main-content" data-adult="1" data-kid="1" data-baby="1">
+                {{!-- <div class="passenger-info-type-subcontent">
                     <div class="info-table-title" style="margin-top: 0px;">
                         <span>Người lớn 1</span>
                         <a class="change-button hide-before-content">Thay đổi</a>
@@ -243,7 +243,6 @@
                             <span class="tempName" style="display:none">aaaaa</span>
                         </div>
                     </div>
-
                 </div>
                 <div class="passenger-info-type-subcontent">
                     <div class="info-table-title" style="margin-top: 0px;">
@@ -298,7 +297,7 @@
                             <span class="tempName" style="display:none"></span>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="luggage-container">
@@ -372,8 +371,9 @@
             </div>
         </div>
         <div id="btn-container">
-            <button type="submit" class="btn-next1">Tiếp tục</button>
+            <button type="button" class="btn-next1">Tiếp tục</button>
         </div>
     </form>
 </div>
+
 {{> "guest/footer"}}

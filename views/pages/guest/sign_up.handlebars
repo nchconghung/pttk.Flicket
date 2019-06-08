@@ -1,0 +1,48 @@
+{{> "guest/header"}}
+<div id="sign-up-main-container">
+    <div id="sign-up-img">
+        <img src="/images/guest/sign-up-img.png" height="350px" width="auto">
+    </div>
+    <form>
+        <div id="sign-up-container">
+            <div id="sign-up-main-title">
+                <span>Đăng ký thành viên Flicket</span>
+            </div>
+            <div class="sign-up-input-element">
+                <div class="sign-up-title">
+                    <span>Email</span>
+                </div>
+                <div class="sign-up-note">
+                    <span>Thông tin của bạn hoàn toàn được bảo mật</span>
+                </div>
+                <input type="email" class="sign-up-input" required>
+            </div>
+            <div class="sign-up-input-element">
+                <div class="sign-up-title">
+                    <span>Họ và tên</span>
+                </div>
+                <div class="sign-up-note">
+                    <span>Không được chứa dấu, số và ký tự đặc biệt</span>
+                </div>
+                <input type="text" class="sign-up-input" required>
+            </div>
+            <div class="sign-up-input-element">
+                <div class="sign-up-title">
+                    <span>Mật khẩu</span>
+                </div>
+                <div class="sign-up-note">
+                    <span>Tối thiểu 6 ký tự</span>
+                </div>
+                <input type="text" minlength="6" class="sign-up-input" required>
+            </div>
+            <div class="sign-up-input-element">
+                <div class="sign-up-title">
+                    <span>Gõ lại mật khẩu</span>
+                </div>
+                <input type="text" minlength="6" class="sign-up-input" required>
+            </div>
+            <div id="sign-up-page-btn-container">
+                <button type="submit" id="sign-up-page-btn">Đăng ký</button>
+            </div>
+    </form>
+</div>

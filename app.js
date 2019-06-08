@@ -4,9 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const exphbs = require("express-handlebars");
+var bodyParser = require('body-parser')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var guestRouter = require('./routes/guest');
 var flightRouter = require('./routes/flights');
 var adminRouter = require('./routes/admin');
 var adminAdminRouter = require('./routes/admin/admin.route');
@@ -36,8 +38,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json()); // get information from html forms
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', indexRouter);
+app.use('/guest',guestRouter);
 app.use('/users', usersRouter);
 app.use('/flight',flightRouter);
 app.use('/admin',adminRouter);

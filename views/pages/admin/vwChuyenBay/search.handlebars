@@ -1,0 +1,94 @@
+
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="card">
+            <div class="card-body">
+                <form class="d-flex justify-content-center">
+                    <select class="custom-select select-search-fk" disabled>
+                        <option value="1" disabled selected>Mã chuyến bay</option>
+                    </select>
+                    <input type="text" class="form-control input-search-fk" placeholder="Keyword...">
+                    <btn class="btn btn-success btn-search-fk"><i class="fas fa-search"></i></btn>
+                </form>
+                <br>
+                <h5>Kết quả</h5>
+                                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                        <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                            <div class="row">
+                            <div class="col-sm-12">
+                                <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
+                            <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
+                                <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Mã chuyến bay</th>
+                                <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Thời gian bay</th>
+                                <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Điểm khởi hành</th>
+                                <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Điểm đến</th>
+                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Loại máy bay</th>
+                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Chi tiết</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr role="row" >
+                                        <td class="sorting_1">1</td>           
+                                        <td>VNA432545</td>
+                                        <td>2019-06-05 12:00:00</td>
+                                        <td>Hà Nội</td>
+                                        <td>Moskva</td>
+                                        <td>A340</td>
+                                        <td>
+                                            <btn class="btn btn-success">Chi tiết</btn>
+                                        </td>
+                                    </tr>
+
+                                    <tr role="row" >
+                                        <td class="sorting_1">2</td>           
+                                        <td>VNA432675</td>
+                                        <td>2019-06-12 14:00:00</td>
+                                        <td>Moskva</td>
+                                        <td>Hồ Chí Minh</td>
+                                        <td>A340</td>
+                                        <td>
+                                            <btn class="btn btn-success">Chi tiết</btn>
+                                        </td>
+                                    </tr>
+                                {{#each list}}
+                                    <tr role="row" >
+                                        <td class="sorting_1">1</td>           
+                                        <td>VNA432545</td>
+                                        <td>2019-06-05 12:00:00</td>
+                                        <td>Hà Nội</td>
+                                        <td>Moskva</td>
+                                        <td>A340</td>
+                                        <td>
+                                            <btn class="btn btn-success">Chi tiết</btn>
+                                        </td>
+                                    </tr>
+
+                                    <tr role="row" >
+                                        <td class="sorting_1">2</td>           
+                                        <td>VNA432675</td>
+                                        <td>2019-06-12 14:00:00</td>
+                                        <td>Moskva</td>
+                                        <td>Hồ Chí Minh</td>
+                                        <td>A340</td>
+                                        <td>
+                                            <btn class="btn btn-success">Chi tiết</btn>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

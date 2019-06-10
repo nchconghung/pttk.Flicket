@@ -1,0 +1,165 @@
+
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="card">
+            <div class="card-body">
+                <form class="d-flex justify-content-center">
+                    <select class="custom-select select-search-fk" >
+                        <option value="tk" disabled selected>Tài khoản</option>
+                    </select>    
+                    <input type="text" class="form-control input-search-fk" placeholder="Keyword...">
+                    <btn class="btn btn-success btn-search-fk"><i class="fas fa-search"></i></btn>
+                </form>
+                <br>
+                <h5>Kết quả</h5>
+                <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                            <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                                <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
+                                <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
+                                    <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Tài khoản</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Điểm thưởng</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Số giao dịch</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thông tin chi tiết</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Công cụ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr role="row" >
+                                            <td class="sorting_1">1</td>           
+                                            <td>nchconghung</td>
+                                            <td>250</td>
+                                            <td>2</td>
+                                            <td>
+                                                <a class="badge badge-info" href="#" style="font-weight: bold;font-size:13px;">Xem</a>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Xem chi tiết</a>
+                                                        <a class="dropdown-item" href="#">Chỉnh sửa</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Xóa</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {{#each list}}
+                                        <tr role="row" >
+                                            <td class="sorting_1">1</td>           
+                                            <td>nchconghung</td>
+                                            <td>240</td>
+                                            <td>10</td>
+                                            <td>
+                                                <a class="badge badge-info" href="#" style="font-weight: bold;font-size:13px;">Xem</a>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Xem chi tiết</a>
+                                                        <a class="dropdown-item" href="#">Chỉnh sửa</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Xóa</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                {{#if result}}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                            <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                                <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
+                                <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
+                                    <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Tài khoản</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Điểm thưởng</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Số giao dịch</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thông tin chi tiết</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Công cụ</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr role="row" >
+                                            <td class="sorting_1">1</td>           
+                                            <td>nchconghung</td>
+                                            <td>250</td>
+                                            <td>2</td>
+                                            <td>
+                                                <a class="badge badge-info" href="#" style="font-weight: bold;font-size:13px;">Xem</a>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Xem chi tiết</a>
+                                                        <a class="dropdown-item" href="#">Chỉnh sửa</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Xóa</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {{#each list}}
+                                        <tr role="row" >
+                                            <td class="sorting_1">1</td>           
+                                            <td>nchconghung</td>
+                                            <td>240</td>
+                                            <td>10</td>
+                                            <td>
+                                                <a class="badge badge-info" href="#" style="font-weight: bold;font-size:13px;">Xem</a>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Xem chi tiết</a>
+                                                        <a class="dropdown-item" href="#">Chỉnh sửa</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item" href="#">Xóa</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>

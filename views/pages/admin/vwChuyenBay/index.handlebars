@@ -25,51 +25,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr role="row" >
-                                        <td class="sorting_1">1</td>           
-                                        <td>VNA432545</td>
-                                        <td>2019-06-05 12:00:00</td>
-                                        <td>Hà Nội</td>
-                                        <td>Moskva</td>
-                                        <td>A340</td>
-                                        <td>
-                                            <btn class="btn btn-success">Chi tiết</btn>
-                                        </td>
-                                    </tr>
-
-                                    <tr role="row" >
-                                        <td class="sorting_1">2</td>           
-                                        <td>VNA432675</td>
-                                        <td>2019-06-12 14:00:00</td>
-                                        <td>Moskva</td>
-                                        <td>Hồ Chí Minh</td>
-                                        <td>A340</td>
-                                        <td>
-                                            <btn class="btn btn-success">Chi tiết</btn>
-                                        </td>
-                                    </tr>
+                            
                                 {{#each list}}
                                     <tr role="row" >
-                                        <td class="sorting_1">1</td>           
-                                        <td>VNA432545</td>
-                                        <td>2019-06-05 12:00:00</td>
-                                        <td>Hà Nội</td>
-                                        <td>Moskva</td>
-                                        <td>A340</td>
+                                        <td class="sorting_1">{{this.IdChuyenBay}}</td>           
+                                        <td>{{this.MaChuyenBay}}</td>
+                                        <td>{{this.GioCatCanh}}</td>
+                                        <td>{{this.DiaDiemDi}}</td>
+                                        <td>{{this.DiaDiemDen}}</td>
+                                        <td>{{this.LoaiMayBay}}</td>
                                         <td>
-                                            <btn class="btn btn-success">Chi tiết</btn>
-                                        </td>
-                                    </tr>
-
-                                    <tr role="row" >
-                                        <td class="sorting_1">2</td>           
-                                        <td>VNA432675</td>
-                                        <td>2019-06-12 14:00:00</td>
-                                        <td>Moskva</td>
-                                        <td>Hồ Chí Minh</td>
-                                        <td>A340</td>
-                                        <td>
-                                            <btn class="btn btn-success">Chi tiết</btn>
+                                            <a class="btn btn-success" href="/admin/flight/detail?id={{this.IdChuyenBay}}">Chi tiết</a>
                                         </td>
                                     </tr>
                                 {{/each}}

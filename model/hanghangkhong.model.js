@@ -1,8 +1,12 @@
 var db = require("../utils/db-mysql");
 
 module.exports = {
-    all: () =>{
-        return db.load(`select * from ChangBay`);
+	all: () =>{
+        return db.load(`SELECT hhk.*,COUNT(cb.IdChuyenBay) as TongChuyenBay 
+                        FROM HangHangKhong hhk
+                        INNER JOIN ChuyenBay cb
+                        ON cb.HangHangKhong = hhk.idHangHangKhong
+                        GROUP BY hhk.idHangHangKhong`);
     },
 
     single: id => {

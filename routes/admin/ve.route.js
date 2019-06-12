@@ -15,8 +15,8 @@ router.get("/",(req,res) => {
         });
 })
 
-router.get('detail/:id',(req,res)=>{
-    var id = req.params.cmnd;
+router.get('/:id/detail',(req,res)=>{
+    var id = req.params.id;
     
     veModel.single(id).then(rows => {
         if (rows.length >0){
@@ -31,5 +31,7 @@ router.get('detail/:id',(req,res)=>{
         }
     })
 })
+
+
 
 module.exports = router;

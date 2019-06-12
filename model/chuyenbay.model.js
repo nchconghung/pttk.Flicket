@@ -1,8 +1,55 @@
 var db = require("../utils/db-mysql");
 
 module.exports = {
-    all: () =>{
-        return db.load(`select * from ChuyenBay`);
+ all: () =>{
+        return db.load(`SELECT cb.*,cab.GioCatCanh,ddi.DiaDiem as DiaDiemDi,dden.DiaDiem as DiaDiemDen
+                        FROM ChuyenBay cb
+                        INNER JOIN LichTrinh lt
+                        ON cb.IdChuyenBay = lt.ChuyenBay and lt.ThuTu = 1
+                        INNER JOIN ChangBay cab
+                        ON cab.IdChangBay = lt.ChangBay
+                        INNER JOIN DiaDiem ddi
+                        ON ddi.Id = cb.DiemDi
+                        INNER JOIN DiaDiem dden
+                        ON dden.Id = cb.DiemDen
+                        ORDER BY cab.GioCatCanh DESC,cb.IdChuyenBay ASC
+                        LIMIT 1000`);
+    },
+
+    allByHHK: (id) =>{
+        return db.load(`SELECT cb.*,cab.GioCatCanh,ddi.DiaDiem as DiaDiemDi,dden.DiaDiem as DiaDiemDen
+                        FROM ChuyenBay cb
+                        INNER JOIN LichTrinh lt
+                        ON cb.IdChuyenBay = lt.ChuyenBay and lt.ThuTu = 1
+                        INNER JOIN ChangBay cab
+                        ON cab.IdChangBay = lt.ChangBay
+                        INNER JOIN DiaDiem ddi
+                        ON ddi.Id = cb.DiemDi
+                        INNER JOIN DiaDiem dden
+                        ON dden.Id = cb.DiemDen
+                        WHERE cb.HangHangKhong = ${id}
+                        ORDER BY cab.GioCatCanh DESC,cb.IdChuyenBay ASC
+                        LIMIT 1000`);
+    },
+
+    single: id => {
+        return db.load(`select * form ChuyenBay where IdChuyenBay=${id}`);
+    },
+
+    searchByMaChuyenBay: ma => {
+        return db.load(`SELECT cb.*,cab.GioCatCanh,ddi.DiaDiem as DiaDiemDi,dden.DiaDiem as DiaDiemDen
+        FROM ChuyenBay cb
+        INNER JOIN LichTrinh lt
+        ON cb.IdChuyenBay = lt.ChuyenBay and lt.ThuTu = 1
+        INNER JOIN ChangBay cab
+        ON cab.IdChangBay = lt.ChangBay
+        INNER JOIN DiaDiem ddi
+        ON ddi.Id = cb.DiemDi
+        INNER JOIN DiaDiem dden
+        ON dden.Id = cb.DiemDen
+        WHERE cb.MaChuyenBay like  '%${ma}%'
+        ORDER BY cab.GioCatCanh DESC,cb.IdChuyenBay ASC
+        LIMIT 1000`);
     },
 
     listWithDetailByParams: (diemdi,diemden,ngaydi,hangghe) => {

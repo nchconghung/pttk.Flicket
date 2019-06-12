@@ -1,35 +1,37 @@
 var express = require('express');
-var chuyenbayModel = require('../../model/hanghangkhong.model');
+var chuyenbayModel = require('../../model/chuyenbay.model');
+var hhkModel = require('../../model/hanghangkhong.model');
 
 var router = express.Router()
 
 router.get("/",(req,res) => {
-    chuyenbayModel.all()
+    hhkModel.all()
         .then(rows => {
-            res.render('admin/vwChuyenBay/index',{
+            res.render('admin/vwHangHangKhong/index',{
+                layout:'admin',
                 list: rows
             });
         }).catch(err => {
             console.log(err);
             res.end("error occured.")
         });
-})
+});
 
-router.get('detail/:id',(req,res)=>{
+router.get('/list/:id',(req,res)=>{ 
     var id = req.params.id;
     
-    chuyenbayModel.single(id).then(rows => {
+    chuyenbayModel.allByHHK(id).then(rows => {
         if (rows.length >0){
-            res.render('admin/vwChuyenBay/detail',{
-                error: false,
-                chuyenbay: rows[0]
+            res.render('admin/vwHangHangKhong/flight-index',{
+                layout:'admin',
+                list: rows
             });
         } else {
-            res.render('admin/vwChuyenBay/detail',{
-                error: true
+            res.render('admin/vwHangHangKhong/flight-index',{
+                layout:'admin'
             });
         }
     })
-})
+});
 
 module.exports = router;

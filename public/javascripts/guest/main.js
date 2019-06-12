@@ -466,7 +466,6 @@ $("#price-range-slide").ionRangeSlider({
                 $(this).show();
             }
         })
-
     }
 });
 $("#flight-filter-other-filter").click(function () {

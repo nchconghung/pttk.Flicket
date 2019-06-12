@@ -17,7 +17,6 @@ router.get("/",(req,res) => {
 
 router.get('detail/:id',(req,res)=>{
     var id = req.params.id;
-    
     chuyenbayModel.single(id).then(rows => {
         if (rows.length >0){
             res.render('admin/vwChuyenBay/detail',{

@@ -7,6 +7,7 @@ router.get("/",(req,res) => {
     thanhvienModel.all()
         .then(rows => {
             res.render('admin/vwThanhVien/index',{
+                layout: 'admin',
                 list: rows
             });
         }).catch(err => {
@@ -15,13 +16,14 @@ router.get("/",(req,res) => {
         });
 })
 
-router.get('detail/:id',(req,res)=>{
+router.get('/:id/detail',(req,res)=>{
     var id = req.params.id;
     
     thanhvienModel.single(id).then(rows => {
         if (rows.length >0){
             res.render('admin/vwThanhVien/detail',{
                 error: false,
+                layout: 'admin',
                 thanhvien: rows[0]
             });
         } else {
@@ -32,10 +34,18 @@ router.get('detail/:id',(req,res)=>{
     })
 })
 
-router.get('edit/:id',(req,res)=>{
+router.get('/search',(req,res)=>{
+    res.render('admin/vwThanhVien/search',{
+        layout: 'admin',
+        flat: false
+    })
+})
+
+router.get('/:id/edit',(req,res)=>{
     var id = req.params.id;
     if (isNaN(id)){
         res.render('admin/vwThanhVien/edit',{
+            layout: 'admin',
             error: true
         });
     }
@@ -43,6 +53,7 @@ router.get('edit/:id',(req,res)=>{
     thanhvienModel.single(id).then(rows => {
         if (rows.length >0){
             res.render('admin/vwThanhVien/edit',{
+                layout: 'admin',
                 error: false,
                 thanhvien: rows[0]
             });
@@ -55,21 +66,23 @@ router.get('edit/:id',(req,res)=>{
 })
 
 router.get('/add',(req,res) => {
-    res.render('/admin/vwThanhVien/add');
+    res.render('/admin/vwThanhVien/add',{
+        layout: 'admin'
+    });
 })
 
 router.post('/add',(req,res)=>{
     thanhvienModel.add(req.body).then(id=>{
-        res.render('/admin/vwThanhVien/add');
+        res.redirect('admin/member/'+id+'/detail');
     }).catch(err => {
         console.log(err),
         res.end('error occured.')
     });
 })
 
-router.post('admins/update',(req,res) => {
+router.post('/update',(req,res) => {
     thanhvienModel.update(req.body).then(n => {
-        res.redirect('/admin/thanhvien');
+        res.redirect('/admin/member');
     }).catch(err => {
         console.log(err),
         res.end('error occured.')
@@ -78,7 +91,7 @@ router.post('admins/update',(req,res) => {
 
 router.post('/delete', (req, res) => {
     thanhvienModel.delete(req.body.IdGiaoDich).then(n => {
-      res.redirect('/admin/thanhvien');
+      res.redirect('/admin/member');
     }).catch(err => {
       console.log(err);
       res.end('error occured.')

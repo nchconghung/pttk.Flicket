@@ -24,53 +24,19 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-
-                                            <tr role="row" >
-                                                    <td class="sorting_1">1</td>           
-                                                    <td>JetStar</td>
-                                                    <td>
-                                                        <img style="height: 52px;width:110px;" src="images/jetair-icon.png">
-                                                    </td>
-                                                    <td>2</td>
-                                                    <td>
-                                                        <btn class="btn btn-success">Xem</btn>
-                                                    </td>
-                                            </tr>
-                                            <tr role="row" >
-                                                    <td class="sorting_1">2</td>           
-                                                    <td>VietJet Air</td>
-                                                    <td>
-                                                        <img style="height: 52px;width:110px;" src="images/vietjet-icon.svg">
-                                                    </td>
-                                                    <td>20</td>
-                                                    <td>
-                                                        <btn class="btn btn-success">Xem</btn>
-                                                    </td>
-                                            </tr>
-                                            <tr role="row" >
-                                                    <td class="sorting_1">3</td>           
-                                                    <td>VietNamAirline</td>
-                                                     <td>
-                                                        <img style="height: 52px;width:110px;" src="images/vna-icon.png">
-                                                    </td>
-                                                    <td>20</td>
-                                                    <td>
-                                                        <btn class="btn btn-success">Xem</btn>
-                                                    </td>
-                                            </tr>
-                                            {{!-- {{#each list}}
+                                            {{#each list}}
                                                 <tr role="row" >
-                                                    <td class="sorting_1">1</td>           
-                                                    <td>VietNamAirline</td>
-                                                    <td>20</td>
+                                                    <td class="sorting_1">{{this.idHangHangKhong}}</td>           
+                                                    <td>{{this.HangHangKhong}}</td>
+                                                    <td>{{this.TongChuyenBay}}</td>
                                                     <td>
-                                                        <img src="">
+                                                        <img style="height: 52px;width:110px;" src="{{this.Logo}}">
                                                     </td>
                                                     <td>
-                                                        <btn class="btn btn-success">Xem</btn>
+                                                        <a class="btn btn-success" href="/admin/airlines/list/{{this.idHangHangKhong}}">Xem</a>
                                                     </td>
                                                 </tr>
-                                            {{/each}} --}}
+                                            {{/each}}
                                         </tbody>
                                     </table>
                                     </div>

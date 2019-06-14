@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0,shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="stylesheets/pages/admin/admin-style.css">
-    <link rel="stylesheet" href="stylesheets/pages/admin/dataTables.css">
-    <link rel="stylesheet" href="stylesheets/pages/admin/style.css">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/stylesheets/pages/admin/admin-style.css">
+    <link rel="stylesheet" href="/stylesheets/pages/admin/dataTables.css">
+    <link rel="stylesheet" href="/stylesheets/pages/admin/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 </head>
-<body>
+<body onload="closeCollapse()">
     <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row" >
       <div class="navbar-brand-wrapper d-flex justify-content-center" style="background-color: #ffff !important;">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-          <a class="navbar-brand brand-logo" style="color: #721777;"href="#">Flicket Admin</a>
+          <a class="navbar-brand brand-logo" style="color: #721777;"href="/admin">Flicket Admin</a>
           <button class="navbar-toggler navbar-toggler align-self-center" style="margin-left: 27px;" type="button" data-toggle="minimize">
             <span><i class="fas fa-bars" style="color: #721777;"></i></span>
           </button>
@@ -62,15 +63,15 @@
                 </li>
                 <!--Admin-->
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="collapse" href="#ui-admin" aria-expanded="false" aria-controls="ui-basic">
+                  <a class="nav-link" data-toggle="collapse" href="#ui-admin" role="button" aria-expanded="false" aria-controls="ui-basic">
                     <i class=" menu-icon fas fa-user-cog"></i>
                     <span class="menu-title">Admin</span>
                     <i class = "menu-arrow fas fa-plus"></i>
                   </a>
                   <div class="collapse" id="ui-admin">
                     <ul class="nav flex-column sub-menu">
-                      <li class="nav-item"> <a class="nav-link" href="#">Danh sách</a></li>
-                      <li class="nav-item"> <a class="nav-link" href="#">Thêm</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="/admin/admin/index">Danh sách</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="/admin/admin/add">Thêm</a></li>
                     </ul>
                   </div>
                 </li>
@@ -84,10 +85,10 @@
                   </a>
                   <div class="collapse" id="ui-khachhang">
                     <ul class="nav flex-column sub-menu">
-                      <li class="nav-item"> <a class="nav-link" href="#">Danh sách</a></li>
-                      <li class="nav-item"> <a class="nav-link" href="#">Tìm kiếm</a></li>
-                      <li class="nav-item"> <a class="nav-link" href="#">Thêm</a></li>
-                      <li class="nav-item"> <a class="nav-link" href="#">Chỉnh sửa thông tin</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="/admin/customer/index">Danh sách</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="/admin/customer/search">Tìm kiếm</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="/admin/customer/add">Thêm</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="/admin/customer/edit">Chỉnh sửa thông tin</a></li>
                     </ul>
                   </div>
                 </li>
@@ -102,10 +103,10 @@
                     </a>
                     <div class="collapse" id="ui-thanhvien">
                       <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="#">Danh sách</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="#">Tìm kiếm</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="#">Thêm</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="#">Chỉnh sửa thông tin</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/admin/member/index">Danh sách</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/admin/member/search">Tìm kiếm</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/admin/member/add">Thêm</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/admin/member/edit">Chỉnh sửa thông tin</a></li>
                       </ul>
                     </div>
                   </li>
@@ -119,8 +120,8 @@
                     </a>
                     <div class="collapse" id="ui-chuyenbay">
                       <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="#">Danh sách</a></li>
-                        <li class="nav-item"> <a class="nav-link" href="#">Tìm kiếm</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/admin/flight/index">Danh sách</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/admin/flight/search">Tìm kiếm</a></li>
                       </ul>
                     </div>
                   </li>
@@ -134,7 +135,7 @@
                     </a>
                     <div class="collapse" id="ui-hanghangkhong">
                       <ul class="nav flex-column sub-menu">
-                        <li class="nav-item"> <a class="nav-link" href="#">Danh sách</a></li>
+                        <li class="nav-item"> <a class="nav-link" href="/admin/airlines">Danh sách</a></li>
                       </ul>
                     </div>
                   </li>
@@ -144,12 +145,22 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-  <script src="javascripts/admin/vendor.js"></script>
-  <script src="javascripts/admin/hoverable-collapse.js"></script>
-  <script src="javascripts/admin/template.js"></script>
-  <script src="javascripts/admin/jquery.js"></script>
-  <script src="javascripts/admin/dataTables.js"></script>
-  <script src="javascripts/admin/data-table.js"></script>
+  <script>
+    function closeCollapse(){
+      var collapse = document.getElementsByClassName("collapse");
+      collapse[0].collapse('hide');
+      collapse.forEach(function(item){
+        item.collapse('hide');
+      }
+      );
+    }
+  </script>
+  <script src="/javascripts/admin/vendor.js"></script>
+  <script src="/javascripts/admin/hoverable-collapse.js"></script>
+  <script src="/javascripts/admin/template.js"></script>
+  <script src="/javascripts/admin/jquery.js"></script>
+  <script src="/javascripts/admin/dataTables.js"></script>
+  <script src="/javascripts/admin/data-table.js"></script>
 
 </body>
 </html>

@@ -332,7 +332,6 @@ $(".flight-list-element-option-1").click(function () {
     var option2 = $(this).parent().find(".flight-list-element-option-2");
     var content = $(this).parent().parent().find(".flight-list-element-menu-bar-content");
     if ($(flight_info).hasClass("flight-list-element-hide") && $(ticket).hasClass("flight-list-element-hide")) {
-        console.log("inside");
         $(menu_bar).addClass("flight-list-element-menu-bar-active");
         $(flight_info).removeClass("flight-list-element-hide");
         $(option).addClass("flight-list-element-menu-bar-option1");
@@ -945,18 +944,82 @@ $(document).ready(function () {
         $(arrive_output).text($(this).data("arrive-time"));
         var airline_O = $(this).find(".airline-output");
         var airline_I = $(this).data("airline");
+        var airline_subO = $(this).find(".flight-specific-detail-airline");
         var s = null;
-        if (airline_I == "vietjet") {
+        if (airline_I == "Vietjet") {
             s = "Vietjet Air";
-        } else if (airline_I == "jetstar") {
+        } else if (airline_I == "Jetstar") {
             s = "Jetstar";
-        } else if (airline_I == "vnairline") {
+        } else if (airline_I == "VietNamAirlines") {
             s = "Vietnam Airlines";
         }
         $(airline_O).text(s);
+        $(airline_subO).text(s);
         var price_I = currencyFormatDE(parseInt($(this).data("price")));
         $(this).find(".price-output").text(price_I);
+        var class_I = parseInt($(".flight-list-container").data("class"));
+        var class_O = $(this).find(".flight-specific-detail-class");
+        switch (class_I) {
+            case 1: $(class_O).text("Phổ thông"); break;
+            case 2: $(class_O).text("Thương gia"); break;
+            case 3: $(class_O).text("Hạng nhất"); break;
+            case 4: $(class_O).text("Phổ thông đặc biệt"); break;
+        }
+        var adultNum = $(".flight-list-container").data("adult-num");
+        var kidNum = $(".flight-list-container").data("kid-num");
+        var babyNum = $(".flight-list-container").data("baby-num");
+        var adultPrice = $(this).data("adult");
+        var kidPrice = $(this).data("kid");
+        var babyPrice = $(this).data("baby");
+        var kq = 0;
+        if (adultNum != "0") {
+            var t = currencyFormatDE(parseInt(adultPrice) * parseInt(adultNum));
+            kq += parseInt(adultPrice) * parseInt(adultNum);
+            $(this).find(".passenger-record-list").append('<div class="col-6-passenger-record"><span>Vé người lớn cơ bản (x' + adultNum + ')</span><span>' + t + '</span></div>')
+        }
+        if (kidNum != "0") {
+            var t = currencyFormatDE(parseInt(kidPrice) * parseInt(kidNum));
+            kq += parseInt(kidPrice) * parseInt(kidNum);
+            $(this).find(".passenger-record-list").append('<div class="col-6-passenger-record"><span>Vé trẻ em cơ bản (x' + kidNum + ')</span><span>' + t + '</span></div>')
+        }
+        if (babyNum != "0") {
+            var t = currencyFormatDE(parseInt(babyPrice) * parseInt(babyNum));
+            kq += parseInt(babyPrice) * parseInt(babyNum);
+            $(this).find(".passenger-record-list").append('<div class="col-6-passenger-record"><span>Vé em bé cơ bản (x' + babyNum + ')</span><span>' + t + '</span></div>')
+        }
+        kq = currencyFormatDE(kq);
+        $(this).find(".passenger-record-list").append('<div class="col-6-passenger-record col-6-passenger-total"><span>Bạn trả</span><span>' + kq + '</span></div>');
     })
+    var adultNum = $(".flight-list-container").data("adult-num");
+    var kidNum = $(".flight-list-container").data("kid-num");
+    var babyNum = $(".flight-list-container").data("baby-num");
+    var class_I = parseInt($(".flight-list-container").data("class"));
+    var date = $(".flight-list-container").data("date");
+    var d = new Date(date);
+    var day = d.getDay();
+    var month = d.getMonth();
+    var year = d.getFullYear();
+    day = day < 10 ? '0' + day : day;
+    month = month < 10 ? '0' + month : month;
+    date = day + "/" + month + "/" + year;
+    var s = date + " | ";
+    
+    if (adultNum != "0") {
+        s += adultNum + " người lớn ";
+    }
+    if (kidNum != "0") {
+        s += kidNum + " trẻ em ";
+    }
+    if (babyNum != "0") {
+        s += babyNum + " em bé ";
+    }
+    switch (class_I) {
+        case 1: s += "| Phổ thông"; break;
+        case 2: s += "| Thương gia"; break;
+        case 3: s += "| Hạng nhất"; break;
+        case 4: s += "| Phổ thông đặc biệt"; break;
+    }
+    $("#information-text2").append(s);    
 })
 $("#change-searching-info").click(function () {
     if (!$(this).hasClass("change-searching-active")) {
@@ -1082,46 +1145,45 @@ $(document).ready(function () {
     }
     /*Passenger-info */
 
-$("#extra-content").hide();
-$('#passenger-info-form').submit(function (e) {
-    e.preventDefault();
-    if ($(".btn-next1").data("id") == "0") {
-        UpdateLuggageTitle();
-        $(".btn-next1").data("id", "1");
-        $("#extra-content").show();
-        $(".before-content").addClass('hide-before-content');
-        $(".after-content, .after-content2,.change-button").removeClass('hide-before-content');
-        var name1 = $("#txtNameContact").val();
-        $("#change1").text(name1);
-        var phoneNumber = $(".national-code span").text() + $("#txtPhoneNum").val();
-        var email = $("#txtEmail").val();
-        $("#number-text").text(phoneNumber);
-        $("#email-text").text(email);
-        $(".passenger-info-type-subcontent").each(function (i, obj) {
-            var nameInput = $(obj).find('.txtNamePassenger');
-            var title = $(obj).find('.info-table-title span');
-            title.text(nameInput.val());
-            var dateInput = $(obj).find('.txtDateOfBirth').datepicker().data('datepicker').selectedDates[0];
-            var date = $(obj).find('.dateOfBirthOutput');
-            var day = dateInput.getDate();
-            if (day < 10) {
-                day = "0" + day;
-            }
-            var month = dateInput.getMonth() + 1;
-            if (month < 9) {
-                month = "0" + month;
-            }
-            var year = dateInput.getFullYear();
-            var dateResult = day + '/' + month + '/' + year;
-            date.text(dateResult);
-        })
+    $("#extra-content").hide();
+    $('#passenger-info-form').submit(function (e) {
+        e.preventDefault();
+        if ($(".btn-next1").data("id") == "0") {
+            UpdateLuggageTitle();
+            $(".btn-next1").data("id", "1");
+            $("#extra-content").show();
+            $(".before-content").addClass('hide-before-content');
+            $(".after-content, .after-content2,.change-button").removeClass('hide-before-content');
+            var name1 = $("#txtNameContact").val();
+            $("#change1").text(name1);
+            var phoneNumber = $(".national-code span").text() + $("#txtPhoneNum").val();
+            var email = $("#txtEmail").val();
+            $("#number-text").text(phoneNumber);
+            $("#email-text").text(email);
+            $(".passenger-info-type-subcontent").each(function (i, obj) {
+                var nameInput = $(obj).find('.txtNamePassenger');
+                var title = $(obj).find('.info-table-title span');
+                title.text(nameInput.val());
+                var dateInput = $(obj).find('.txtDateOfBirth').datepicker().data('datepicker').selectedDates[0];
+                var date = $(obj).find('.dateOfBirthOutput');
+                var day = dateInput.getDate();
+                if (day < 10) {
+                    day = "0" + day;
+                }
+                var month = dateInput.getMonth() + 1;
+                if (month < 9) {
+                    month = "0" + month;
+                }
+                var year = dateInput.getFullYear();
+                var dateResult = day + '/' + month + '/' + year;
+                date.text(dateResult);
+            })
 
-    } 
-    else 
-    {
-        $('#passenger-info-form').submit();
-    }
-})
+        }
+        else {
+            $('#passenger-info-form').submit();
+        }
+    })
     /*Luggage input */
     $('.luggage-input-box').click(function () {
         $(this).parent().addClass('above')

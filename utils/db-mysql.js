@@ -15,14 +15,14 @@ module.exports={
        return new Promise((resolve,reject) =>{
             var conn = createConnection();
             conn.connect();
-            con.query(sql,(error,result,fields)=>{
+            conn.query(sql,(error,result,fields)=>{
                 if (error){
                     reject(error);
                 } else{
                     resolve(result);
                 }
             });
-            con.end();
+            conn.end();
        });
     },
     add: (tableName, entity) => {

@@ -2380,7 +2380,7 @@
   }
   
   .flight-list-element-airport {
-    font-size: 12px;
+    font-size: 14px;
     font-family: Quicksand-Bold;
     color: #9E9D9D;
   }
@@ -2650,12 +2650,12 @@
 
 .right {
     left: -5px;
-    transform: rotate(-45deg);
+    transform: rotate(45deg);
 }
 
 .left {
     right: -5px;
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
 }
 
 #prior-information-first-col {

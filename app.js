@@ -4,7 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const exphbs = require("express-handlebars");
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var handlebars  = require('./helpers/handlebars.js')(exphbs,path);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,11 +24,7 @@ var app = express();
 // view engine setup
 app.engine(
   "handlebars",
-  exphbs({
-    defaultLayout: "main",
-    layoutsDir: path.join(__dirname, "views/layouts"),
-    partialsDir: path.join(__dirname, "views/partials"),
-  })
+  handlebars.engine
 );
 app.set("views", path.join(__dirname, "views/pages"));
 app.set("view engine", "handlebars");
@@ -67,5 +64,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   //res.render('error');
 });
+
+
 
 module.exports = app;

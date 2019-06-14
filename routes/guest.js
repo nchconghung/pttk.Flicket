@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router()
 var guest_controller = require('../controllers/guestController');
 
+
 router.get("/", guest_controller.index);
+router.post("/",guest_controller.index_post)
 router.get('/pick',guest_controller.pick);
 router.post('/pick',guest_controller.pick_post);
 router.get('/info',guest_controller.info);

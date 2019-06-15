@@ -79,6 +79,26 @@ module.exports = {
         GROUP BY cb.IdChuyenBay,bgv.Id,hhk.idHangHangKhong`);
     },
 
+    singleWithDetailById: (id,hangghe) => {
+        return db.load(`SELECT cb.IdChuyenBay,cb.MaChuyenBay,hhk.HangHangKhong,cb.LoaiMayBay,hhk.Logo,
+        COUNT(lt.IdLichTrinh) as SoChangBay,SEC_TO_TIME(SUM(TIME_TO_SEC(cab.ThoiGianBay))) as TongGioBay,bgv.NguoiLon,bgv.TreEm,bgv.EmBe
+        FROM ChuyenBay cb
+        
+        INNER JOIN HangHangKhong hhk
+        ON hhk.idHangHangKhong = cb.HangHangKhong
+        
+        INNER JOIN BangGiaVe bgv
+        ON bgv.ChuyenBay=cb.IdChuyenBay AND bgv.HangGhe=${{hangghe}}
+        
+        INNER JOIN LichTrinh lt 
+        ON lt.ChuyenBay = cb.IdChuyenBay 
+        
+        INNER JOIN ChangBay cab
+        ON lt.ChangBay = cab.IdChangBay 
+        
+        WHERE cb.IdChuyenBay = ${id}
+        GROUP BY cb.IdChuyenBay,bgv.Id,hhk.idHangHangKhong`);
+    },
 
     single: id => {
         return db.load(`select * form ChuyenBay where IdChuyenBay=${id}`);

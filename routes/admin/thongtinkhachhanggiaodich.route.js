@@ -16,6 +16,19 @@ router.get("/",(req,res) => {
         });
 })
 
+router.get("/index",(req,res) => {
+    thongtinkhachhangModel.all()
+        .then(rows => {
+            res.render('admin/vwKhachHang/index',{
+                layout: 'admin',
+                list: rows
+            });
+        }).catch(err => {
+            console.log(err);
+            res.end("error occured.")
+        });
+})
+
 router.get('/:cmnd/detail',(req,res)=>{
     var cmnd = req.params.cmnd;
     

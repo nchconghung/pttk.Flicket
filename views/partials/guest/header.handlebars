@@ -9,24 +9,49 @@
                 <option value="">USD</option>
             </select>
         </div>
-        <div class="navbar-item signIn-container">
+        {{#if isAuthenticated}}
+        <form id="frmSignout" action="/guest/signout" method="POST"></form>
+            <div class="navbar-item">
+                <div class="navbar-item" id="user-btn-container">
+                <div class="user-btn">
+                    <img src="/images/guest/users1.png" height="12px" width="auto">
+                    <span>{{authUser.TaiKhoan}}</span>
+                </div>
+                </div>
+                <div id="user-instant-panel-container">
+                    <div id="user-instant-panel">
+                        <a class="user-instant-panel-element" href="/guest/info">
+                            <span>Tùy chỉnh</span>
+                            <img src="/images/guest/edit.png">
+                        </a>
+                        <a class="user-instant-panel-element" href="javascript: $('#frmSignout').submit();">
+                            <span>Đăng xuất</span>
+                            <img src="/images/guest/exit.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {{else}}
+            <div class="navbar-item signIn-container">
             <a class="nav-link main-signInBTN2" href="#" style="color:#7A9ED5">Đăng nhập</a>
             <div id="signIn-model2">
-                <form>
+                <form action="/guest/signin" method="POST">
                     <p class="signInTitle2">Đăng nhập tài khoản</p>
-                    <label class="signInsubTitle2" for="emailSignInInput">Email</label>
-                    <input type="text" class="signInInput2" id="emailSignInInput" required>
+                    <label class="signInsubTitle2" for="emailSignInInput">Tài khoản</label>
+                    <input type="text" class="signInInput2" id="emailSignInInput" name="username" required>
                     <label class="signInsubTitle2" for="passwordSignInInput">Password</label>
-                    <input type="text" id="passwordSignInInput" class="signInInput2" required>
+                    <input type="password" id="passwordSignInInput" class="signInInput2" name="password" required>
                     <button type="submit" class="btn-signIn">Đăng nhập</button>
                 </form>
             </div>
-        </div>
-        <div class="navbar-item">
-            <div id="signUp">
-                <a class="nav-link" href="#" style="color:#7A9ED5">Đăng ký</a>
             </div>
-        </div>
+            <div class="navbar-item">
+                <div id="signUp">
+                    <a class="nav-link" href="#" style="color:#7A9ED5">Đăng ký</a>
+                </div>
+            </div>
+        {{/if}}
+
     </div>
 </nav>
 <div class="header-bg-container">

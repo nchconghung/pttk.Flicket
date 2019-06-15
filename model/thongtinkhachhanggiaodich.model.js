@@ -2,11 +2,11 @@ var db = require("../utils/db-mysql");
 
 module.exports = {
     all: () =>{
-        return db.load(`select * from ThongTinKhachHangGiaoDich`);
+        return db.load(`select *,IF (GioiTinh < 1,'Nữ','Nam') as LoaiGioiTinh from ThongTinKhachHangGiaoDich`);
     },
 
     single: cmnd => {
-        return db.load(`select e.* form ThongTinKhachHangGiaoDich e where e.CMND like ${cmnd}`);
+        return db.load(`select e.*, IF (e.GioiTinh < 1,'Nữ','Nam') as LoaiGioiTinh from ThongTinKhachHangGiaoDich e where e.CMND like '${cmnd}'`);
     },
 
     add: entity =>{

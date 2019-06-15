@@ -1,18 +1,70 @@
-<link rel="stylesheet" href="stylesheets/pages/admin/form-style.css">
-
+<link rel="stylesheet" href="/stylesheets/pages/admin/form-style.css">
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script>
+    $(function(){
+        $('#addForm').validate({
+            rules:{
+                TaiKhoan: {
+                    required: true,
+                    remote: {
+                        url: '/guest/is-available-username'
+                    }
+                },
+                MatKhau: {
+                    required: true,
+                    minlength: 6
+                },
+                Confirm: {
+                    required: true,
+                    equalTo: "#pass"
+                },
+                DiemThuong: {
+                    min: 0
+                }
+            },
+            messages:{
+                TaiKhoan: {
+                    required: 'Tài khoản cần được nhập',
+                    remote: 'Tài khoản này đã bị đăng kí'
+                },
+                MatKhau: {
+                    required: 'Mật khẩu cần được nhập',
+                    minlength: 'Mật khẩu ít nhất 6 kí tự'
+                },
+                Confirm: {
+                    required: 'Vui lòng xác nhận mật khẩu',
+                    equalTo: 'Không trùng với mật khẩu'
+                },
+                DiemThuong: {
+                    min: 'Nhỏ nhất là 0'
+                }
+            },
+            errorElement: 'small',
+            errorClass: 'help-block text-danger',
+            highlight: function(e){
+                $(e).removeClass('is-valid').addClass('is-invalid');
+            },
+            unhighlight: function(e){
+                $(e).removeClass('is-invalid').addClass('is-valid');
+            }
+        });
+    })
+</script>
+{{/section}}
 <!-- partial -->
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="card d-flex flex-column justify-content-center">
             <div class="card-body d-flex justify-content-center">
-                <form class="contact1-form validate-form">
+                <form novalidate class="contact1-form validate-form "  action="/admin/member/add/" method="POST">
                     <span class="contact1-form-title">
                         Thêm mới thành viên
                     </span>
 
-                    <div class="d-flex justify-content-around align-items-cente" >
+                    <div class="d-flex align-items-start" >
                         <div class="wrap-input1 validate-input" data-validate = "CMND is required" style="margin-right: 15px;">
-                            <input class="input1" type="text" name="cmnd" placeholder="CMND/Căn cước" >
+                            <input class="input1" type="text" name="CMND" placeholder="Nhập CMND/Căn cước để thêm" >
                             <span class="shadow-input1"></span>
                         </div>
 
@@ -24,76 +76,90 @@
                     </div>
                 </form>
             </div>
-            <hr>
-             <div class="d-flex justify-content-center">
-                <div class="alert alert-success bd30" role="alert" style="text-align: center;width:400px;">
-                            <i class="fas fa-exclamation-circle"></i>Khách hàng đã là thành viên.<a class="badge badge-info" >Nhấp vào để chỉnh sửa.</a>
-                </div> 
-            </div>         
-                {{!-- {{#if error}}
-                    <hr>
+            {{#if exists}}
+                {{#if hasAcc}}
                     <div class="d-flex justify-content-center">
-                        <div class="alert alert-danger bd30" role="alert" style="text-align: center;width:400px;">
-                                    Nhập dữ liệu vào form dưới
+                        <div class="alert alert-success bd30" role="alert" style="text-align: center;width:400px;">
+                            <i class="fas fa-exclamation-circle"></i>Khách hàng đã là thành viên.<a class="badge badge-info" href="/admin/member/{{IdThanhVien}}/edit/">Nhấp vào để chỉnh sửa.</a>
                         </div> 
                     </div>
-                {{#else}}
-                    {{#if cmnd}}
-                       <hr>
-                        <div class="d-flex justify-content-center">
-                            <div class="alert alert-primary bd30" role="alert" style="text-align: center;width:400px;">
-                                        Nhập dữ liệu vào form dưới
-                            </div> 
-                        </div>
-                        <span style="font-size:18px;padding-left:50px;">Thông tin chi tiết</span>
-                        <table class="table dataTable no-footer" style="padding-right: 50px;padding-left:50px;">
-                            <tr role="row">
-                                <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >CMND</th>
-                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Họ tên</th>
-                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Email</th>
-                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >SĐT</th>
-                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giới tính</th>
-                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Ngày Sinh</th>
-                            </tr>
-                            <tr>          
-                                <td>281144960</td>
-                                <td>Nguyễn Công Hưng</td>
-                                <td>nchconghung@gmail.com</td>
-                                <td>0969327027</td>
-                                <td>Nam</td>
-                                <td>27-08-1998</td>
-                            </tr>
-                        </table>
-                        <span style="font-size:18px;padding-left:50px;">Form tạo tài khoản</span>
-                        <div class="card-body d-flex justify-content-center">
-                            <form class="contact1-form validate-form">
-                                <div class="wrap-input1 validate-input" data-validate = "Tài khoản cần được nhập">
-                                    <input class="input1" type="text" name="username" placeholder="Tài khoản" >
-                                    <span class="shadow-input1"></span>
-                                </div>
-
-                                <div class="wrap-input1 validate-input" data-validate = "Mật khẩu cần được nhập">
-                                    <input class="input1" type="password" name="password" placeholder="Mật khẩu" >
-                                    <span class="shadow-input1"></span>
-                                </div>
-
-                                    <div class="wrap-input1 validate-input" data-validate = "Tối thiểu là 0">
-                                    <input class="input1" type="text" name="point" placeholder="Điểm thưởng" >
-                                    <span class="shadow-input1"></span>
-                                </div>
-
-                                <div class="container-contact1-form-btn">
-                                    <button class="contact1-form-btn" type="submit">
-                                        <span>
-                                            Tạo mới
-                                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                        </span>
-                                    </button>
-                                </div>
-                            </form>
+                {{else}}
+                    <span style="font-size:18px;padding-left:50px;">Thông tin chi tiết</span>
+                    <table class="table dataTable no-footer" style="padding-right: 50px;padding-left:50px;">
+                        <tr role="row">
+                            <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >CMND</th>
+                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Họ tên</th>
+                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Email</th>
+                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >SĐT</th>
+                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giới tính</th>
+                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Ngày Sinh</th>
+                        </tr>
+                        <tr>          
+                            <td>{{customer.CMND}}</td>
+                            <td>{{customer.HoTen}}</td>
+                            <td>{{customer.Email}}</td>
+                            <td>{{customer.SDT}}</td>
+                            <td>{{#if customer.GioiTinh}}
+                                    Nam
+                                {{else}}
+                                    Nữ
+                                {{/if}}
+                            </td>
+                            <td>{{customer.NgaySinh}}</td>
+                        </tr>
+                    </table>
+                    <div style="padding-right: 50px;padding-left:50px;">
+                        <hr>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="alert alert-primary bd30" role="alert" style="text-align: center;width:400px;">
+                                    Vui lòng nhập dữ liệu vào form dưới
                         </div> 
-                    {{/if}}
-                {{/if}} --}}
+                    </div>
+                    <div class="card-body d-flex justify-content-center">
+                        <form class="contact1-form validate-form" action="/admin/member/insert/" method="POST" id="addForm">
+                            <input class="input1" type="hidden" name="CMND" value="{{customer.CMND}}">
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="text" name="TaiKhoan" placeholder="Tài khoản" focus >
+                                <span class="shadow-input1"></span>
+                            </div>
+
+                            <div class="wrap-input1 validate-input" >
+                                <input class="input1" type="password" name="MatKhau" id="pass" placeholder="Mật khẩu" >
+                                <span class="shadow-input1"></span>
+                            </div>
+
+                            <div class="wrap-input1 validate-input" >
+                                <input class="input1" type="password" name="Confirm" placeholder="Xác nhận mật khẩu" >
+                                <span class="shadow-input1"></span>
+                            </div>
+
+                            <div class="wrap-input1 validate-input" >
+                                <input class="input1" type="text" name="DiemThuong" placeholder="Điểm thưởng" >
+                                <span class="shadow-input1"></span>
+                            </div>
+
+                            <div class="container-contact1-form-btn">
+                                <button class="contact1-form-btn" type="submit">
+                                    <span>
+                                        Tạo mới
+                                        <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div> 
+                {{/if}}
+            {{else}}
+                {{#if search}}
+                {{else}}
+                    <div class="d-flex justify-content-center">
+                        <div class="alert alert-danger bd30" role="alert" style="text-align: center;width:400px;">
+                                    <i class="fas fa-exclamation-circle"></i>Không tồn tại khách hàng.
+                        </div> 
+                    </div>
+                {{/if}}
+            {{/if}}       
         </div>
     </div>
 </div>

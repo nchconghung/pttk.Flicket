@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="/stylesheets/pages/admin/form-style.css">
+
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="card d-flex flex-column justify-content-center">
+            <div class="card-body d-flex justify-content-center ">
+                <div class="contact1-form validate-form" style="width: 1000px;">
+                    <span class="contact1-form-title">
+                        Thông tin chuyến bay
+                    </span>
+                    <div class="row" >
+                         <div class="col"> 
+                            <span><i class="far fa-user-circle" style="margin-right: 5px;"></i>Mã chuyến bay</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="text" value="{{thanhvien.TaiKhoan}}" disabled>
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span><i class="fas fa-coins" style="margin-right: 5px;"></i>Hãng hàng không</span>
+                            <div class="wrap-input1 validate-input" >   
+                                <input class="input1" type="text" disabled value="{{thanhvien.DiemThuong}}" >
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col"> 
+                                <span><i class="far fa-id-card" style="margin-right: 5px;"></i>Loại máy bay</span>
+                                <div class="wrap-input1 validate-input">
+                                    <input class="input1" type="email" value="{{thanhvien.CMND}}" disabled>
+                                    <span class="shadow-input1"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Tổng giờ bay</span>
+                                <div class="wrap-input1 validate-input" >   
+                                    <input class="input1" type="text" disabled value="{{thanhvien.HoTen}}" >
+                                    <span class="shadow-input1"></span>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        
+                        <div class="col"> 
+                            <span><i class="far fa-envelope" style="margin-right: 5px;"></i>Điểm khởi hành</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="email" value="{{thanhvien.Email}}" disabled>
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span><i class="fas fa-phone" style="margin-right: 5px;"></i>Điểm đến</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="text" value="{{thanhvien.SDT}}" disabled>
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <hr>
+                </div>
+            </div>
+                <div class="row" style="margin-bottom:50px;">
+                    <span style="font-size:18px;color:#721777;font-weight: bold;">
+                        Lịch trình
+                    </span>  
+                    <table class="table dataTable no-footer" style="padding-right: 50px;padding-left:50px;">
+                        <tr role="row">
+                            <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >#</th>
+                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Điểm khởi hành</th>
+                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giờ cất cánh</th>
+                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Điểm đến</th>
+                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giờ hạ cánh</th>
+                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thời gian bay</th>
+                        </tr>
+                        <tr>          
+                            <td>{{customer.CMND}}</td>
+                            <td>{{customer.HoTen}}</td>
+                            <td>{{customer.Email}}</td>
+                            <td>{{customer.SDT}}</td>
+                            <td>{{#if customer.GioiTinh}}
+                                    Nam
+                                {{else}}
+                                    Nữ
+                                {{/if}}
+                            </td>
+                            <td>{{customer.NgaySinh}}</td>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,6 +1,6 @@
 var express = require('express');
 var chuyenbayModel = require('../../model/chuyenbay.model');
-
+var moment = require('moment');
 var router = express.Router();
 
 router.get("/",(req,res) => {
@@ -19,6 +19,9 @@ router.get("/",(req,res) => {
 router.get("/index",(req,res) => {
     chuyenbayModel.all()
         .then(rows => {
+            for (var i =0;i< rows.length;i++){
+                rows[i].GioCatCanh = moment(rows[i].GioCatCanh).format('MM Do YYYY, hh:mm:ss');
+            }
             res.render('admin/vwChuyenBay/index',{
                 layout:'admin',
                 list: rows
@@ -48,7 +51,7 @@ router.post("/index",(req,res) => {
     });
 });
 
-router.get('/detail/:id',(req,res)=>{
+router.get('/:id/detail',(req,res)=>{
     var id = req.params.id;
     
     chuyenbayModel.single(id).then(rows => {

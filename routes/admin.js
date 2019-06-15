@@ -42,8 +42,8 @@ router.get('/',function(req,res,next){
 			};
 			listEntity.push(e);
 		}
-		console.log(listEntity[0].lichTrinh[0].DiemKhoiHanh);
-		res.render("admin/vwAdmin/add",{layout:'admin'},{
+		console.log(listEntity[0]);
+		res.render("admin/vwAdmin/add",{layout:'admin',
 			listItem: listEntity,
 		});
 	}).catch(err =>{
@@ -53,4 +53,3 @@ router.get('/',function(req,res,next){
 });
 
 module.exports = router;
-

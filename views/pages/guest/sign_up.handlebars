@@ -1,30 +1,87 @@
 {{> "guest/header"}}
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script>
+    $(function(){
+        $('#registerForm').validate({
+            rules:{
+                CMND: {
+                    required: true,
+                    remote: {
+                        url: '/guest/is-available-cmnd'
+                    }
+                },
+                TaiKhoan: {
+                    required: true,
+                    remote: {
+                        url: '/guest/is-available-username'
+                    }
+                },
+                MatKhau: {
+                    required: true,
+                    minlength: 6
+                },
+                Confirm: {
+                    required: true,
+                    equalTo:'#pass'
+                }
+            },
+            messages: {
+                CMND: {
+                    required: 'CMND/Căn cước cần được nhập',
+                    remote: 'CMND/Căn cước này đã bị đăng kí'
+                },
+                TaiKhoan: {
+                    required: 'Tài khoản cần được nhập',
+                    remote: 'Tài khoản này đã được dùng'
+                },
+                MatKhau: {
+                    required: "Mật khẩu cần được nhập",
+                    minlength: "Mật khẩu cần dài hơn 6 kí tự"
+                },
+                Confirm: {
+                    required: "Vui lòng xác nhận lại mật khẩu",
+                    equalTo: "Không trùng với mật khẩu"
+                }
+            },
+            errorElement: 'small',
+            errorClass: 'help-block text-danger',
+            highlight: function(e){
+                $(e).removeClass('is-valid').addClass('is-invalid');
+            },
+            unhighlight: function(e){
+                $(e).removeClass('is-invalid').addClass('is-valid');
+            }
+        });
+    })
+</script>
+{{/section}}
 <div id="sign-up-main-container">
     <div id="sign-up-img">
         <img src="/images/guest/sign-up-img.png" height="350px" width="auto">
     </div>
-    <form>
+    <form novalidate action="/guest/signup" method="POST" id="registerForm">
         <div id="sign-up-container">
             <div id="sign-up-main-title">
                 <span>Đăng ký thành viên Flicket</span>
             </div>
             <div class="sign-up-input-element">
                 <div class="sign-up-title">
-                    <span>Email</span>
+                    <span>CMND/Thẻ căn cước</span>
                 </div>
                 <div class="sign-up-note">
                     <span>Thông tin của bạn hoàn toàn được bảo mật</span>
                 </div>
-                <input type="email" class="sign-up-input" required>
+                <input type="text" class="sign-up-input" name="CMND" >
             </div>
             <div class="sign-up-input-element">
                 <div class="sign-up-title">
-                    <span>Họ và tên</span>
+                    <span>Tài khoản</span>
                 </div>
                 <div class="sign-up-note">
                     <span>Không được chứa dấu, số và ký tự đặc biệt</span>
                 </div>
-                <input type="text" class="sign-up-input" required>
+                <input type="text" class="sign-up-input" name = "TaiKhoan">
             </div>
             <div class="sign-up-input-element">
                 <div class="sign-up-title">
@@ -33,13 +90,13 @@
                 <div class="sign-up-note">
                     <span>Tối thiểu 6 ký tự</span>
                 </div>
-                <input type="text" minlength="6" class="sign-up-input" required>
+                <input type="password" name="MatKhau" id="pass"class="sign-up-input" >
             </div>
             <div class="sign-up-input-element">
                 <div class="sign-up-title">
-                    <span>Gõ lại mật khẩu</span>
+                    <span>Xác nhận mật khẩu</span>
                 </div>
-                <input type="text" minlength="6" class="sign-up-input" required>
+                <input type="password" class="sign-up-input" name="Confirm">
             </div>
             <div id="sign-up-page-btn-container">
                 <button type="submit" id="sign-up-page-btn">Đăng ký</button>

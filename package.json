@@ -14,12 +14,9 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-handlebars": "^3.0.2",
-<<<<<<< HEAD
     "express-handlebars-sections": "^1.0.1",
     "express-session": "^1.16.2",
-=======
     "handlebars-intl": "^1.1.2",
->>>>>>> 237bb3d056e455249b0fcd0ad5fbc3042cdfe295
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "moment": "^2.24.0",

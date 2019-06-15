@@ -1,25 +1,9 @@
-<<<<<<< HEAD
+
 var bcrypt = require('bcrypt');
 var thanhvienModel = require('../model/thanhvien.model');
 var khachhangModel = require('../model/thongtinkhachhanggiaodich.model');
 var passport = require('passport');
-
-exports.index = function(req,res,next){
-    console.log(req.session);
-    res.render('guest/home',{title: 'Flicket'});
-}
-exports.pick = function(req,res,next){
-    console.log(req.session);
-    res.render('guest/flight_picking');
-}
-exports.pick_post = function(req,res,next){
-    console.log(req.session);
-    res.send(req.body);
-}
-exports.info = function(req,res,next){
-    console.log(req.session);
-    res.render('guest/check_info');
-=======
+	
 var chuyenBayModel = require('../model/chuyenbay.model');
 var lichTrinhModel = require('../model/lichtrinh.model');
 
@@ -85,6 +69,7 @@ exports.pick_post = function (req, res, next) {
 	var adult = parseInt(req.body.txtAdult);
 	var kid = parseInt(req.body.txtKid);
 	var baby = parseInt(req.body.txtBaby);
+
 	Promise.all([
 		chuyenBayModel.listWithDetailByParams(diemdi, diemden, ngaydi, hangghe),
 		lichTrinhModel.listWithDetailByParams(diemdi, diemden, ngaydi, hangghe),
@@ -112,6 +97,13 @@ exports.pick_post = function (req, res, next) {
 		}else{
 			isEmpty = false;
 		}
+		var userdata = {
+			HangGhe: hangghe,
+			NguoiLon: adult,
+			TreEm: kid,
+			EmBe: baby
+		};
+		req.session.userdata = userdata;
 		res.render("guest/flight_picking", {
 			isEmpty: isEmpty,
 			list: listEntity,
@@ -142,7 +134,6 @@ exports.info = function (req, res, next) {
 			class: classs
 		});
 	});
->>>>>>> 237bb3d056e455249b0fcd0ad5fbc3042cdfe295
 }
 exports.passenger = function (req, res, next) {
 	res.render('guest/passenger_info',{
@@ -153,14 +144,9 @@ exports.passenger = function (req, res, next) {
 		class: 1
 	});
 }
-<<<<<<< HEAD
 exports.payment = function(req,res,next){
     console.log(req.originalUrl);
-    res.render('guest/payment');
-=======
-exports.payment = function (req, res, next) {
 	res.render('guest/payment');
->>>>>>> 237bb3d056e455249b0fcd0ad5fbc3042cdfe295
 }
 exports.processing = function (req, res, next) {
 	res.render('guest/processing');
@@ -168,7 +154,6 @@ exports.processing = function (req, res, next) {
 exports.signup = function (req, res, next) {
 	res.render('guest/sign_up');
 }
-<<<<<<< HEAD
 exports.signup_post = function(req,res,next){
     var saltRounds = 10;
     bcrypt.hash(req.body.MatKhau, saltRounds, function(err, hash) {
@@ -249,11 +234,8 @@ exports.signout_post = function(req,res,next){
 }
 
 exports.user = function(req,res,next){
-    res.render('guest/user');
-=======
-exports.user = function (req, res, next) {
+	console.log(req.session);
 	res.render('guest/user');
->>>>>>> 237bb3d056e455249b0fcd0ad5fbc3042cdfe295
 }
 exports.ticket = function (req, res, next) {
 	res.render('guest/ticket');

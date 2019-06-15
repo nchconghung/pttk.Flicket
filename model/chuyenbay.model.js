@@ -1,7 +1,7 @@
 var db = require("../utils/db-mysql");
 
 module.exports = {
-    all: () => {
+ all: () =>{
         return db.load(`SELECT cb.*,cab.GioCatCanh,ddi.DiaDiem as DiaDiemDi,dden.DiaDiem as DiaDiemDen
                         FROM ChuyenBay cb
                         INNER JOIN LichTrinh lt
@@ -16,7 +16,7 @@ module.exports = {
                         LIMIT 1000`);
     },
 
-    allByHHK: (id) => {
+    allByHHK: (id) =>{
         return db.load(`SELECT cb.*,cab.GioCatCanh,ddi.DiaDiem as DiaDiemDi,dden.DiaDiem as DiaDiemDen
                         FROM ChuyenBay cb
                         INNER JOIN LichTrinh lt
@@ -52,7 +52,7 @@ module.exports = {
         LIMIT 1000`);
     },
 
-    listWithDetailByParams: (diemdi, diemden, ngaydi, hangghe) => {
+    listWithDetailByParams: (diemdi,diemden,ngaydi,hangghe) => {
         return db.load(`SELECT cb.IdChuyenBay,cb.MaChuyenBay,hhk.HangHangKhong,cb.LoaiMayBay,hhk.Logo,
         COUNT(lt1.IdLichTrinh) as SoChangBay,SEC_TO_TIME(SUM(TIME_TO_SEC(cab1.ThoiGianBay))) as TongGioBay,bgv.NguoiLon,bgv.TreEm,bgv.EmBe
         FROM ChuyenBay cb
@@ -88,7 +88,7 @@ module.exports = {
         ON hhk.idHangHangKhong = cb.HangHangKhong
         
         INNER JOIN BangGiaVe bgv
-        ON bgv.ChuyenBay=cb.IdChuyenBay AND bgv.HangGhe=${{hangghe}}
+        ON bgv.ChuyenBay=cb.IdChuyenBay AND bgv.HangGhe=${hangghe}
         
         INNER JOIN LichTrinh lt 
         ON lt.ChuyenBay = cb.IdChuyenBay 
@@ -102,25 +102,5 @@ module.exports = {
 
     single: id => {
         return db.load(`select * form ChuyenBay where IdChuyenBay=${id}`);
-    },
-    singleWithDetailById: (id,hangghe) => {
-        return db.load(`SELECT cb.IdChuyenBay,cb.MaChuyenBay,hhk.HangHangKhong,cb.LoaiMayBay,hhk.Logo,
-        COUNT(lt.IdLichTrinh) as SoChangBay,SEC_TO_TIME(SUM(TIME_TO_SEC(cab.ThoiGianBay))) as TongGioBay,bgv.NguoiLon,bgv.TreEm,bgv.EmBe
-        FROM ChuyenBay cb
-        
-        INNER JOIN HangHangKhong hhk
-        ON hhk.idHangHangKhong = cb.HangHangKhong
-        
-        INNER JOIN BangGiaVe bgv
-        ON bgv.ChuyenBay=cb.IdChuyenBay AND bgv.HangGhe=${hangghe}
-        
-        INNER JOIN LichTrinh lt 
-        ON lt.ChuyenBay = cb.IdChuyenBay 
-        
-        INNER JOIN ChangBay cab
-        ON lt.ChangBay = cab.IdChangBay 
-        
-        WHERE cb.IdChuyenBay = ${id}
-        GROUP BY cb.IdChuyenBay,bgv.Id,hhk.idHangHangKhong`);
     },
 }

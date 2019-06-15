@@ -35,6 +35,7 @@ $(function () {
 });
 //Nav bar
 $(".main-signInBTN").click(function () {
+    console.log("clicked");
     $("#signIn-model").toggleClass("show-panel");
 });
 $(document).mouseup(function (e) {

@@ -793,8 +793,8 @@
   
   .journey-info-container {
     margin-top: 43px;
-    padding-left: 350px;
-    padding-right: 350px;
+    padding-left: 300px;
+    padding-right: 300px;
     margin-bottom: 100px;
   }
   
@@ -804,7 +804,7 @@
   
   .main-table-title p {
     font-family: Quicksand-Medium;
-    font-size: 17px;
+    font-size: 18px;
     position: absolute;
     color: white;
     top: 50%;
@@ -825,10 +825,10 @@
   }
   
   .category {
-    font-family: Quicksand-Medium;
-    font-size: 15px;
+    font-family: Quicksand-Bold;
+    font-size: 16px;
     margin-right: 85px;
-    width: 85px;
+    width: 91px;
   }
   
   .detail {
@@ -840,8 +840,11 @@
   .detail p {
     font-family: Quicksand;
     font-weight: 300;
+    font-size: 16px;
   }
-  
+  .passenger-info p{
+    font-size: 16px;
+  }
   .depart-info {
     margin-right: 26px;
   }
@@ -873,14 +876,14 @@
     margin-top: 50px; 
   }
   .second-table{
-    width: 347px;
+    width: 400px;
   }
   .image-title-second-table{
     position: relative;
   }
   #second-table-title{
     font-family: Quicksand-Medium;
-    font-size: 17px;
+    font-size: 18px;
     position: absolute;
     color: white;
     top: 50%;
@@ -897,7 +900,10 @@
   }
   .second-table-inner-content span{
     font-family: Quicksand-Light;
-    font-size: 15px;
+    font-size: 16px;
+  }
+  .second-table-total span{
+    font-size: 18px;
   }
   .second-table-type{
     width: 142px;
@@ -941,6 +947,10 @@
     background-color: #2E86DE;
     box-shadow: -5px 10px 8px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+  }
+  #btn-next-second-table a{
+    color: white;
+    text-decoration: none;
   }
   .footer2{
     padding: 0px 222px;
@@ -2380,7 +2390,7 @@
   }
   
   .flight-list-element-airport {
-    font-size: 12px;
+    font-size: 14px;
     font-family: Quicksand-Bold;
     color: #9E9D9D;
   }
@@ -2650,12 +2660,12 @@
 
 .right {
     left: -5px;
-    transform: rotate(-45deg);
+    transform: rotate(45deg);
 }
 
 .left {
     right: -5px;
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
 }
 
 #prior-information-first-col {

@@ -2,9 +2,9 @@
 <div class="flight-picking-container">
     <div id="prior-information-container" class="row">
         <div class="col-3" id="prior-information-first-col">
-            <span class="prior-information-text1">Da Lat</span>
-            <span class="prior-information-text1">(DLI)</span>
-            <span class="prior-information-text2">Lien Khuong Airport</span>
+            <span class="prior-information-text1">{{list.[0].lichTrinh.[0].DiemKhoiHanh}}</span>
+            <span class="prior-information-text1">&nbsp;</span>
+            <span class="prior-information-text2">{{list.[0].lichTrinh.[0].SanBayKhoiHanh}}</span>
         </div>
         <div class="col-6" id="prior-information-second-col">
             <a id="change-searching-info">
@@ -17,13 +17,14 @@
             </div>
 
             <div class="prior-informantion-description">
-                <span class="prior-information-text2">24/05/2010 | 1 người lớn | Phổ thông</span>
+                <span class="prior-information-text2" id="information-text2"></span>
             </div>
         </div>
         <div class="col-3" id="prior-information-third-col">
-            <span class="prior-information-text1">Hanoi</span>
-            <span class="prior-information-text1">(HAN)</span>
-            <span class="prior-information-text2">Noibai International Airport</span>
+            <span class="prior-information-text1">{{diemHaCanh list.[0].chuyenBay.SoChangBay list.[0].lichTrinh}}</span>
+            <span class="prior-information-text1">&nbsp;</span>
+            <span
+                class="prior-information-text2">{{sanBayHaCanh list.[0].chuyenBay.SoChangBay list.[0].lichTrinh}}</span>
         </div>
     </div>
 </div>
@@ -905,37 +906,50 @@
     </div>
 </div>
 <div class="flight-picking-container" style="min-height: 100px;">
-    <div class="flight-list-container">
-        <div class="flight-list-element" data-numtransit="0" data-transit-time="1" data-depart-time="05:30"
-            data-arrive-time="08:50" data-airline="vietjet" data-price="1750000">
+    <div class="flight-list-container" data-class="{{class}}" data-adult-num="{{adult}}" data-kid-num="{{kid}}"
+        data-baby-num="{{baby}}" data-date="{{list.[0].lichTrinh.[0].GioCatCanh}}">
+        {{#if isEmpty}}
+        <div class="no-result">
+            Không tìm thấy chuyến bay phù hợp
+        </div>
+        {{else}}
+        {{#each list}}
+        <div class="flight-list-element" data-numtransit="{{math this.chuyenBay.SoChangBay "-" 1}}"
+            data-transit-time="{{thoiGianQuaCanh this.lichTrinh}}"
+            data-depart-time="{{formatTime this.lichTrinh.[0].GioCatCanh}}"
+            data-arrive-time="{{gioHaCanh this.chuyenBay.SoChangBay this.lichTrinh}}"
+            data-airline="{{this.chuyenBay.HangHangKhong}}" data-price="{{this.chuyenBay.NguoiLon}}"
+            data-adult="{{this.chuyenBay.NguoiLon}}" data-kid="{{this.chuyenBay.TreEm}}"
+            data-baby="{{this.chuyenBay.EmBe}}">
             <div class="flight-list-element-info row">
                 <div class="col-3 flight-list-element-left">
-                    <img src="/images/guest/VietJet.png">
+                    <img src="{{this.chuyenBay.Logo}}">
                     <span class="airline-output">Vietjet Air</span>
                 </div>
                 <div class="col-7 flight-list-element-center row">
                     <div class="col-3" style="align-items: flex-end">
                         <span class="flight-list-element-time real-depart-time">19:05</span>
                         <div class="flight-list-element-circle" style="background-color: #55EFC4;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
+                        <span class="flight-list-element-airport">{{this.lichTrinh.[0].DiemKhoiHanh}}</span>
                     </div>
                     <div class="col-6">
                         <div class="flight-list-element-line"></div>
                         <div class="transits-visual">
-                            <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>                            
                         </div>
-                        <span class="flight-list-time-info">1h50m | <span class="real-num-transit">Bay
-                                thẳng</span></span>
+                        <span class="flight-list-time-info">{{tongGioBay this.chuyenBay.TongGioBay}} | <span
+                                class="real-num-transit"></span></span>
                     </div>
                     <div class="col-3" style="align-items: flex-start">
                         <span class="flight-list-element-time real-arrive-time">19:05</span>
                         <div class="flight-list-element-circle" style="background-color: #00A8FF;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
+                        <span
+                            class="flight-list-element-airport">{{diemHaCanh this.chuyenBay.SoChangBay this.lichTrinh}}</span>
                     </div>
                 </div>
                 <div class="col-2 flight-list-element-right">
                     <span class="flight-list-element-price price-output">1.154.123 VND</span>
-                    <button class="flight-list-element-btn">Chọn</button>
+                    <a class="flight-list-element-btn" style="color: white"
+                        href="/guest/info?id={{this.chuyenBay.IdChuyenBay}}&&adult={{../adult}}&&kid={{../kid}}&&baby={{../baby}}&&class={{../class}}">Chọn</a>
                 </div>
             </div>
             <div class="flight-list-element-menu-bar">
@@ -945,9 +959,10 @@
                     style="margin-left: 57px;">Chi tiết vé</span>
             </div>
             <div class="flight-list-element-menu-bar-content flight-list-element-hide flight-list-element-flight-info">
+                {{#each this.lichTrinh}}
                 <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
+                    <div class="col-2" style="padding-left: 0px;">
+                        <img class="flight-specific-detail-img" src="{{../this.chuyenBay.Logo}}">
                         <span class="flight-specific-detail-airline">Vietjet Air</span>
                         <span class="flight-specific-detail-class">Phổ thông</span>
                     </div>
@@ -961,26 +976,26 @@
                         <div class="flight-specific-detail-time">
                             <div class="row">
                                 <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
+                                    <span class="col-above">{{getGioBay this.GioCatCanh}}</span>
+                                    <span class="col-below">{{getNgayBay this.GioCatCanh}}</span>
                                 </div>
                                 <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
+                                    <span class="col-above">{{this.DiemKhoiHanh}}</span>
+                                    <span class="col-below">{{this.SanBayKhoiHanh}}</span>
                                 </div>
                             </div>
                             <div class="clock-time-container">
                                 <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
+                                <span class="clock-time">{{tongGioBay this.ThoiGianBay}}</span>
                             </div>
                             <div class="row">
                                 <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
+                                    <span class="col-above">{{getGioBay this.GioHaCanh}}</span>
+                                    <span class="col-below">{{getNgayBay this.GioHaCanh}}</span>
                                 </div>
                                 <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
+                                    <span class="col-above">{{this.DiemDen}}</span>
+                                    <span class="col-below">{{this.SanBayHaCanh}}</span>
                                 </div>
                             </div>
                         </div>
@@ -991,7 +1006,7 @@
                                 <span class="flight-seat-detail-title">Máy bay</span>
                             </div>
                             <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
+                                <span class="flight-seat-detail-info">{{../this.chuyenBay.LoaiMayBay}}</span>
                             </div>
                         </div>
                         <div class="row">
@@ -1020,1266 +1035,60 @@
                         </div>
                     </div>
                 </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-3"></div>
-                    <div class="col-9">
-                        <div class="transit-alert">
-                            <img src="/images/guest/warning.png" height="15px" width="auto">
-                            <span>Quá cảnh khoảng 8h 0m tại TP HCM (SGN)<br>
-                                Bạn cần phải tự di chuyển hành lý và làm lại thủ tục bay.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
-                        <span class="flight-specific-detail-airline">Vietjet Air</span>
-                        <span class="flight-specific-detail-class">Phổ thông</span>
-                    </div>
-                    <div class="col-1">
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;margin-top: 16px;">
-                        </div>
-                        <div class="flight-list-element-vertical-line"></div>
-                        <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>
-                    </div>
-                    <div class="col-5">
-                        <div class="flight-specific-detail-time">
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
-                                </div>
-                            </div>
-                            <div class="clock-time-container">
-                                <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 flight-seat-detail-list">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Máy bay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Sơ đồ ghế ngồi</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">3 - 3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Khoảng cách ghê</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">29 inches</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Hành lý xách tay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">7kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flight-list-element-menu-bar-content row flight-list-element-hide flight-list-element-ticket">
-                <div class="col-3 col-3-col-first">
-                    <div class="col-3-airline">
-                        <img src="/images/guest/VietJet.png" height="20px" width="auto">
-                        <span>Vietjet Air</span>
-                    </div>
-                    <span class="col-3-trip">Da Lat (DLI) → Hanoi (HAN)</span>
-                    <span class="col-3-class">Phổ thông</span>
-                </div>
-                <div class="col-3"></div>
-                <div class="col-6">
-                    <div class="col-6-passenger-record">
-                        <span>Vé người lớn cơ bản (x1)</span>
-                        <span>VND 1.812.450</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé trẻ em cơ bản (x1)</span>
-                        <span>VND 1.772.230</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé em bé cơ bản (x1)</span>
-                        <span>VND 110.190</span>
-                    </div>
-                    <div class="col-6-passenger-record col-6-passenger-total">
-                        <span>Bạn trả</span>
-                        <span>VND 3.694.520</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--
-        <div class="flight-list-element" data-numtransit="0" data-transit-time="2" data-depart-time="08:15"
-            data-arrive-time="12:50" data-airline="jetstar" data-price="2750000">
-            <div class="flight-list-element-info row">
-                <div class="col-3 flight-list-element-left">
-                    <img src="/images/guest/VietJet.png">
-                    <span class="airline-output">Vietjet Air</span>
-                </div>
-                <div class="col-7 flight-list-element-center row">
-                    <div class="col-3" style="align-items: flex-end">
-                        <span class="flight-list-element-time real-depart-time">19:05</span>
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
-                    </div>
-                    <div class="col-6">
-                        <div class="flight-list-element-line"></div>
-                        <span class="flight-list-time-info">1h50m | <span class="real-num-transit">Bay
-                                thẳng</span></span>
-                    </div>
-                    <div class="col-3" style="align-items: flex-start">
-                        <span class="flight-list-element-time real-arrive-time">19:05</span>
-                        <div class="flight-list-element-circle" style="background-color: #00A8FF;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
-                    </div>
-                </div>
-                <div class="col-2 flight-list-element-right">
-                    <span class="flight-list-element-price price-output">1.154.123 VND</span>
-                    <button class="flight-list-element-btn">Chọn</button>
-                </div>
-            </div>
-            <div class="flight-list-element-menu-bar">
-                <span class="flight-list-element-menu-bar-option flight-list-element-option-1">Chi tiết chuyến
-                    bay</span>
-                <span class="flight-list-element-menu-bar-option flight-list-element-option-2"
-                    style="margin-left: 57px;">Chi tiết vé</span>
-            </div>
-            <div class="flight-list-element-menu-bar-content flight-list-element-hide flight-list-element-flight-info">
-                <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
-                        <span class="flight-specific-detail-airline">Vietjet Air</span>
-                        <span class="flight-specific-detail-class">Phổ thông</span>
-                    </div>
-                    <div class="col-1">
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;margin-top: 16px;">
-                        </div>
-                        <div class="flight-list-element-vertical-line"></div>
-                        <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>
-                    </div>
-                    <div class="col-5">
-                        <div class="flight-specific-detail-time">
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
-                                </div>
-                            </div>
-                            <div class="clock-time-container">
-                                <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 flight-seat-detail-list">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Máy bay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Sơ đồ ghế ngồi</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">3 - 3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Khoảng cách ghê</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">29 inches</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Hành lý xách tay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">7kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-3"></div>
-                    <div class="col-9">
-                        <div class="transit-alert">
-                            <img src="/images/guest/warning.png" height="15px" width="auto">
-                            <span>Quá cảnh khoảng 8h 0m tại TP HCM (SGN)<br>
-                                Bạn cần phải tự di chuyển hành lý và làm lại thủ tục bay.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
-                        <span class="flight-specific-detail-airline">Vietjet Air</span>
-                        <span class="flight-specific-detail-class">Phổ thông</span>
-                    </div>
-                    <div class="col-1">
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;margin-top: 16px;">
-                        </div>
-                        <div class="flight-list-element-vertical-line"></div>
-                        <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>
-                    </div>
-                    <div class="col-5">
-                        <div class="flight-specific-detail-time">
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
-                                </div>
-                            </div>
-                            <div class="clock-time-container">
-                                <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 flight-seat-detail-list">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Máy bay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Sơ đồ ghế ngồi</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">3 - 3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Khoảng cách ghê</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">29 inches</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Hành lý xách tay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">7kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flight-list-element-menu-bar-content row flight-list-element-hide flight-list-element-ticket">
-                <div class="col-3 col-3-col-first">
-                    <div class="col-3-airline">
-                        <img src="/images/guest/VietJet.png" height="20px" width="auto">
-                        <span>Vietjet Air</span>
-                    </div>
-                    <span class="col-3-trip">Da Lat (DLI) → Hanoi (HAN)</span>
-                    <span class="col-3-class">Phổ thông</span>
-                </div>
-                <div class="col-3"></div>
-                <div class="col-6">
-                    <div class="col-6-passenger-record">
-                        <span>Vé người lớn cơ bản (x1)</span>
-                        <span>VND 1.812.450</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé trẻ em cơ bản (x1)</span>
-                        <span>VND 1.772.230</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé em bé cơ bản (x1)</span>
-                        <span>VND 110.190</span>
-                    </div>
-                    <div class="col-6-passenger-record col-6-passenger-total">
-                        <span>Bạn trả</span>
-                        <span>VND 3.694.520</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="flight-list-element" data-numtransit="1" data-transit-time="15" data-depart-time="15:10"
-            data-arrive-time="20:50" data-airline="vnairline" data-price="1000000">
-            <div class="flight-list-element-info row">
-                <div class="col-3 flight-list-element-left">
-                    <img src="/images/guest/VietJet.png">
-                    <span class="airline-output">Vietjet Air</span>
-                </div>
-                <div class="col-7 flight-list-element-center row">
-                    <div class="col-3" style="align-items: flex-end">
-                        <span class="flight-list-element-time real-depart-time">19:05</span>
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
-                    </div>
-                    <div class="col-6">
-                        <div class="flight-list-element-line"></div>
-                        <span class="flight-list-time-info">1h50m | <span class="real-num-transit">Bay
-                                thẳng</span></span>
-                    </div>
-                    <div class="col-3" style="align-items: flex-start">
-                        <span class="flight-list-element-time real-arrive-time">19:05</span>
-                        <div class="flight-list-element-circle" style="background-color: #00A8FF;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
-                    </div>
-                </div>
-                <div class="col-2 flight-list-element-right">
-                    <span class="flight-list-element-price price-output">1.154.123 VND</span>
-                    <button class="flight-list-element-btn">Chọn</button>
-                </div>
-            </div>
-            <div class="flight-list-element-menu-bar">
-                <span class="flight-list-element-menu-bar-option flight-list-element-option-1">Chi tiết chuyến
-                    bay</span>
-                <span class="flight-list-element-menu-bar-option flight-list-element-option-2"
-                    style="margin-left: 57px;">Chi tiết vé</span>
-            </div>
-            <div class="flight-list-element-menu-bar-content flight-list-element-hide flight-list-element-flight-info">
-                <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
-                        <span class="flight-specific-detail-airline">Vietjet Air</span>
-                        <span class="flight-specific-detail-class">Phổ thông</span>
-                    </div>
-                    <div class="col-1">
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;margin-top: 16px;">
-                        </div>
-                        <div class="flight-list-element-vertical-line"></div>
-                        <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>
-                    </div>
-                    <div class="col-5">
-                        <div class="flight-specific-detail-time">
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
-                                </div>
-                            </div>
-                            <div class="clock-time-container">
-                                <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 flight-seat-detail-list">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Máy bay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Sơ đồ ghế ngồi</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">3 - 3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Khoảng cách ghê</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">29 inches</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Hành lý xách tay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">7kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-3"></div>
-                    <div class="col-9">
-                        <div class="transit-alert">
-                            <img src="/images/guest/warning.png" height="15px" width="auto">
-                            <span>Quá cảnh khoảng 8h 0m tại TP HCM (SGN)<br>
-                                Bạn cần phải tự di chuyển hành lý và làm lại thủ tục bay.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
-                        <span class="flight-specific-detail-airline">Vietjet Air</span>
-                        <span class="flight-specific-detail-class">Phổ thông</span>
-                    </div>
-                    <div class="col-1">
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;margin-top: 16px;">
-                        </div>
-                        <div class="flight-list-element-vertical-line"></div>
-                        <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>
-                    </div>
-                    <div class="col-5">
-                        <div class="flight-specific-detail-time">
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
-                                </div>
-                            </div>
-                            <div class="clock-time-container">
-                                <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 flight-seat-detail-list">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Máy bay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Sơ đồ ghế ngồi</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">3 - 3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Khoảng cách ghê</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">29 inches</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Hành lý xách tay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">7kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flight-list-element-menu-bar-content row flight-list-element-hide flight-list-element-ticket">
-                <div class="col-3 col-3-col-first">
-                    <div class="col-3-airline">
-                        <img src="/images/guest/VietJet.png" height="20px" width="auto">
-                        <span>Vietjet Air</span>
-                    </div>
-                    <span class="col-3-trip">Da Lat (DLI) → Hanoi (HAN)</span>
-                    <span class="col-3-class">Phổ thông</span>
-                </div>
-                <div class="col-3"></div>
-                <div class="col-6">
-                    <div class="col-6-passenger-record">
-                        <span>Vé người lớn cơ bản (x1)</span>
-                        <span>VND 1.812.450</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé trẻ em cơ bản (x1)</span>
-                        <span>VND 1.772.230</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé em bé cơ bản (x1)</span>
-                        <span>VND 110.190</span>
-                    </div>
-                    <div class="col-6-passenger-record col-6-passenger-total">
-                        <span>Bạn trả</span>
-                        <span>VND 3.694.520</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="flight-list-element" data-numtransit="2" data-transit-time="20" data-depart-time="17:20"
-            data-arrive-time="17:50" data-airline="vietjet" data-price="2000000">
-            <div class="flight-list-element-info row">
-                <div class="col-3 flight-list-element-left">
-                    <img src="/images/guest/VietJet.png">
-                    <span class="airline-output">Vietjet Air</span>
-                </div>
-                <div class="col-7 flight-list-element-center row">
-                    <div class="col-3" style="align-items: flex-end">
-                        <span class="flight-list-element-time real-depart-time">19:05</span>
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
-                    </div>
-                    <div class="col-6">
-                        <div class="flight-list-element-line"></div>
-                        <span class="flight-list-time-info">1h50m | <span class="real-num-transit">Bay
-                                thẳng</span></span>
-                    </div>
-                    <div class="col-3" style="align-items: flex-start">
-                        <span class="flight-list-element-time real-arrive-time">19:05</span>
-                        <div class="flight-list-element-circle" style="background-color: #00A8FF;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
-                    </div>
-                </div>
-                <div class="col-2 flight-list-element-right">
-                    <span class="flight-list-element-price price-output">1.154.123 VND</span>
-                    <button class="flight-list-element-btn">Chọn</button>
-                </div>
-            </div>
-            <div class="flight-list-element-menu-bar">
-                <span class="flight-list-element-menu-bar-option flight-list-element-option-1">Chi tiết chuyến
-                    bay</span>
-                <span class="flight-list-element-menu-bar-option flight-list-element-option-2"
-                    style="margin-left: 57px;">Chi tiết vé</span>
-            </div>
-            <div class="flight-list-element-menu-bar-content flight-list-element-hide flight-list-element-flight-info">
-                <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
-                        <span class="flight-specific-detail-airline">Vietjet Air</span>
-                        <span class="flight-specific-detail-class">Phổ thông</span>
-                    </div>
-                    <div class="col-1">
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;margin-top: 16px;">
-                        </div>
-                        <div class="flight-list-element-vertical-line"></div>
-                        <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>
-                    </div>
-                    <div class="col-5">
-                        <div class="flight-specific-detail-time">
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
-                                </div>
-                            </div>
-                            <div class="clock-time-container">
-                                <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 flight-seat-detail-list">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Máy bay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Sơ đồ ghế ngồi</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">3 - 3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Khoảng cách ghê</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">29 inches</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Hành lý xách tay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">7kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-3"></div>
-                    <div class="col-9">
-                        <div class="transit-alert">
-                            <img src="/images/guest/warning.png" height="15px" width="auto">
-                            <span>Quá cảnh khoảng 8h 0m tại TP HCM (SGN)<br>
-                                Bạn cần phải tự di chuyển hành lý và làm lại thủ tục bay.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
-                        <span class="flight-specific-detail-airline">Vietjet Air</span>
-                        <span class="flight-specific-detail-class">Phổ thông</span>
-                    </div>
-                    <div class="col-1">
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;margin-top: 16px;">
-                        </div>
-                        <div class="flight-list-element-vertical-line"></div>
-                        <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>
-                    </div>
-                    <div class="col-5">
-                        <div class="flight-specific-detail-time">
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
-                                </div>
-                            </div>
-                            <div class="clock-time-container">
-                                <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 flight-seat-detail-list">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Máy bay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Sơ đồ ghế ngồi</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">3 - 3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Khoảng cách ghê</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">29 inches</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Hành lý xách tay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">7kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flight-list-element-menu-bar-content row flight-list-element-hide flight-list-element-ticket">
-                <div class="col-3 col-3-col-first">
-                    <div class="col-3-airline">
-                        <img src="/images/guest/VietJet.png" height="20px" width="auto">
-                        <span>Vietjet Air</span>
-                    </div>
-                    <span class="col-3-trip">Da Lat (DLI) → Hanoi (HAN)</span>
-                    <span class="col-3-class">Phổ thông</span>
-                </div>
-                <div class="col-3"></div>
-                <div class="col-6">
-                    <div class="col-6-passenger-record">
-                        <span>Vé người lớn cơ bản (x1)</span>
-                        <span>VND 1.812.450</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé trẻ em cơ bản (x1)</span>
-                        <span>VND 1.772.230</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé em bé cơ bản (x1)</span>
-                        <span>VND 110.190</span>
-                    </div>
-                    <div class="col-6-passenger-record col-6-passenger-total">
-                        <span>Bạn trả</span>
-                        <span>VND 3.694.520</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="flight-list-element" data-numtransit="1" data-transit-time="1" data-depart-time="19:00"
-            data-arrive-time="08:50" data-airline="jetstar" data-price="750000">
-            <div class="flight-list-element-info row">
-                <div class="col-3 flight-list-element-left">
-                    <img src="/images/guest/VietJet.png">
-                    <span class="airline-output">Vietjet Air</span>
-                </div>
-                <div class="col-7 flight-list-element-center row">
-                    <div class="col-3" style="align-items: flex-end">
-                        <span class="flight-list-element-time real-depart-time">19:05</span>
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
-                    </div>
-                    <div class="col-6">
-                        <div class="flight-list-element-line"></div>
-                        <span class="flight-list-time-info">1h50m | <span class="real-num-transit">Bay
-                                thẳng</span></span>
-                    </div>
-                    <div class="col-3" style="align-items: flex-start">
-                        <span class="flight-list-element-time real-arrive-time">19:05</span>
-                        <div class="flight-list-element-circle" style="background-color: #00A8FF;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
-                    </div>
-                </div>
-                <div class="col-2 flight-list-element-right">
-                    <span class="flight-list-element-price price-output">1.154.123 VND</span>
-                    <button class="flight-list-element-btn">Chọn</button>
-                </div>
-            </div>
-            <div class="flight-list-element-menu-bar">
-                <span class="flight-list-element-menu-bar-option flight-list-element-option-1">Chi tiết chuyến
-                    bay</span>
-                <span class="flight-list-element-menu-bar-option flight-list-element-option-2"
-                    style="margin-left: 57px;">Chi tiết vé</span>
-            </div>
-            <div class="flight-list-element-menu-bar-content flight-list-element-hide flight-list-element-flight-info">
-                <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
-                        <span class="flight-specific-detail-airline">Vietjet Air</span>
-                        <span class="flight-specific-detail-class">Phổ thông</span>
-                    </div>
-                    <div class="col-1">
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;margin-top: 16px;">
-                        </div>
-                        <div class="flight-list-element-vertical-line"></div>
-                        <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>
-                    </div>
-                    <div class="col-5">
-                        <div class="flight-specific-detail-time">
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
-                                </div>
-                            </div>
-                            <div class="clock-time-container">
-                                <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 flight-seat-detail-list">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Máy bay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Sơ đồ ghế ngồi</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">3 - 3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Khoảng cách ghê</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">29 inches</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Hành lý xách tay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">7kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-3"></div>
-                    <div class="col-9">
-                        <div class="transit-alert">
-                            <img src="/images/guest/warning.png" height="15px" width="auto">
-                            <span>Quá cảnh khoảng 8h 0m tại TP HCM (SGN)<br>
-                                Bạn cần phải tự di chuyển hành lý và làm lại thủ tục bay.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
-                        <span class="flight-specific-detail-airline">Vietjet Air</span>
-                        <span class="flight-specific-detail-class">Phổ thông</span>
-                    </div>
-                    <div class="col-1">
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;margin-top: 16px;">
-                        </div>
-                        <div class="flight-list-element-vertical-line"></div>
-                        <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>
-                    </div>
-                    <div class="col-5">
-                        <div class="flight-specific-detail-time">
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
-                                </div>
-                            </div>
-                            <div class="clock-time-container">
-                                <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 flight-seat-detail-list">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Máy bay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Sơ đồ ghế ngồi</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">3 - 3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Khoảng cách ghê</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">29 inches</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Hành lý xách tay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">7kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flight-list-element-menu-bar-content row flight-list-element-hide flight-list-element-ticket">
-                <div class="col-3 col-3-col-first">
-                    <div class="col-3-airline">
-                        <img src="/images/guest/VietJet.png" height="20px" width="auto">
-                        <span>Vietjet Air</span>
-                    </div>
-                    <span class="col-3-trip">Da Lat (DLI) → Hanoi (HAN)</span>
-                    <span class="col-3-class">Phổ thông</span>
-                </div>
-                <div class="col-3"></div>
-                <div class="col-6">
-                    <div class="col-6-passenger-record">
-                        <span>Vé người lớn cơ bản (x1)</span>
-                        <span>VND 1.812.450</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé trẻ em cơ bản (x1)</span>
-                        <span>VND 1.772.230</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé em bé cơ bản (x1)</span>
-                        <span>VND 110.190</span>
-                    </div>
-                    <div class="col-6-passenger-record col-6-passenger-total">
-                        <span>Bạn trả</span>
-                        <span>VND 3.694.520</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="flight-list-element" data-numtransit="3" data-transit-time="1" data-depart-time="23:00"
-            data-arrive-time="01:50" data-airline="vnairline" data-price="3050000">
-            <div class="flight-list-element-info row">
-                <div class="col-3 flight-list-element-left">
-                    <img src="/images/guest/VietJet.png">
-                    <span class="airline-output">Vietjet Air</span>
-                </div>
-                <div class="col-7 flight-list-element-center row">
-                    <div class="col-3" style="align-items: flex-end">
-                        <span class="flight-list-element-time real-depart-time">19:05</span>
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
-                    </div>
-                    <div class="col-6">
-                        <div class="flight-list-element-line"></div>
-                        <span class="flight-list-time-info">1h50m | <span class="real-num-transit">Bay
-                                thẳng</span></span>
-                    </div>
-                    <div class="col-3" style="align-items: flex-start">
-                        <span class="flight-list-element-time real-arrive-time">19:05</span>
-                        <div class="flight-list-element-circle" style="background-color: #00A8FF;"></div>
-                        <span class="flight-list-element-airport">Da Lat (DLI)</span>
-                    </div>
-                </div>
-                <div class="col-2 flight-list-element-right">
-                    <span class="flight-list-element-price price-output">1.154.123 VND</span>
-                    <button class="flight-list-element-btn">Chọn</button>
-                </div>
-            </div>
-            <div class="flight-list-element-menu-bar">
-                <span class="flight-list-element-menu-bar-option flight-list-element-option-1">Chi tiết chuyến
-                    bay</span>
-                <span class="flight-list-element-menu-bar-option flight-list-element-option-2"
-                    style="margin-left: 57px;">Chi tiết vé</span>
-            </div>
-            <div class="flight-list-element-menu-bar-content flight-list-element-hide flight-list-element-flight-info">
-                <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
-                        <span class="flight-specific-detail-airline">Vietjet Air</span>
-                        <span class="flight-specific-detail-class">Phổ thông</span>
-                    </div>
-                    <div class="col-1">
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;margin-top: 16px;">
-                        </div>
-                        <div class="flight-list-element-vertical-line"></div>
-                        <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>
-                    </div>
-                    <div class="col-5">
-                        <div class="flight-specific-detail-time">
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
-                                </div>
-                            </div>
-                            <div class="clock-time-container">
-                                <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 flight-seat-detail-list">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Máy bay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Sơ đồ ghế ngồi</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">3 - 3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Khoảng cách ghê</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">29 inches</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Hành lý xách tay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">7kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-3"></div>
-                    <div class="col-9">
-                        <div class="transit-alert">
-                            <img src="/images/guest/warning.png" height="15px" width="auto">
-                            <span>Quá cảnh khoảng 8h 0m tại TP HCM (SGN)<br>
-                                Bạn cần phải tự di chuyển hành lý và làm lại thủ tục bay.
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flight-specific-detail row">
-                    <div class="col-2">
-                        <img class="flight-specific-detail-img" src="/images/guest/VietJet.png">
-                        <span class="flight-specific-detail-airline">Vietjet Air</span>
-                        <span class="flight-specific-detail-class">Phổ thông</span>
-                    </div>
-                    <div class="col-1">
-                        <div class="flight-list-element-circle" style="background-color: #55EFC4;margin-top: 16px;">
-                        </div>
-                        <div class="flight-list-element-vertical-line"></div>
-                        <div class="flight-list-element-circle" style="background-color: #EC501F;"></div>
-                    </div>
-                    <div class="col-5">
-                        <div class="flight-specific-detail-time">
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">16:15</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">Da Lat (DLI)</span>
-                                    <span class="col-below">Sân bay Liên Khương</span>
-                                </div>
-                            </div>
-                            <div class="clock-time-container">
-                                <img src="/images/guest/clock.png" height="20px" width="auto">
-                                <span class="clock-time">1h50m</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <span class="col-above">18:35</span>
-                                    <span class="col-below">09/05/2019</span>
-                                </div>
-                                <div class="col-8">
-                                    <span class="col-above">TP HCM (SGN)</span>
-                                    <span class="col-below">Sân bay Tân Sơn Nhất</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 flight-seat-detail-list">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Máy bay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">Airbus-A320</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Sơ đồ ghế ngồi</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">3 - 3</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Khoảng cách ghê</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">29 inches</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="flight-seat-detail-title">Hành lý xách tay</span>
-                            </div>
-                            <div class="col-6">
-                                <span class="flight-seat-detail-info">7kg</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flight-list-element-menu-bar-content row flight-list-element-hide flight-list-element-ticket">
-                <div class="col-3 col-3-col-first">
-                    <div class="col-3-airline">
-                        <img src="/images/guest/VietJet.png" height="20px" width="auto">
-                        <span>Vietjet Air</span>
-                    </div>
-                    <span class="col-3-trip">Da Lat (DLI) → Hanoi (HAN)</span>
-                    <span class="col-3-class">Phổ thông</span>
-                </div>
-                <div class="col-3"></div>
-                <div class="col-6">
-                    <div class="col-6-passenger-record">
-                        <span>Vé người lớn cơ bản (x1)</span>
-                        <span>VND 1.812.450</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé trẻ em cơ bản (x1)</span>
-                        <span>VND 1.772.230</span>
-                    </div>
-                    <div class="col-6-passenger-record">
-                        <span>Vé em bé cơ bản (x1)</span>
-                        <span>VND 110.190</span>
-                    </div>
-                    <div class="col-6-passenger-record col-6-passenger-total">
-                        <span>Bạn trả</span>
-                        <span>VND 3.694.520</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
-    </div>
-</div>
 
-{{> "guest/footer"}}
+                {{#ifCond this.ThuTu '<' ../this.lichTrinh.length}}
+
+                <div class="flight-specific-detail row">
+                    <div class="col-3"></div>
+                    <div class="col-9">
+                        <div class="transit-alert">
+                            <img src="/images/guest/warning.png" height="15px" width="auto">
+                            <span>Quá cảnh khoảng {{tgianQuaCanh this.ThuTu ../this.lichTrinh}} tại {{this.DiemDen}}<br>
+                                Bạn cần phải tự di chuyển hành lý và làm lại thủ tục bay.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {{/ifCond}}
+                {{/each}}
+            </div>
+            <div class="flight-list-element-menu-bar-content row flight-list-element-hide flight-list-element-ticket">
+                <div class="col-3 col-3-col-first">
+                    <div class="col-3-airline">
+                        <img src="{{this.chuyenBay.Logo}}" height="20px" width="auto">
+                        <span class="airline-output">Vietjet Air</span>
+                    </div>
+                    <span class="col-3-trip">{{this.lichTrinh.[0].DiemKhoiHanh}} →
+                        {{diemHaCanh this.chuyenBay.SoChangBay this.lichTrinh}}</span>
+                    <span class="col-3-class flight-specific-detail-class">Phổ thông</span>
+                </div>
+                <div class="col-3"></div>
+                <div class="col-6 passenger-record-list">
+                </div>
+            </div>            
+        </div>
+        {{/each}}
+        {{/if}}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".flight-list-element").each(function (e) {
+                var num = $(this).data("numtransit");
+                var num_text = $(this).find(".real-num-transit");
+                var visual = $(this).find(".transits-visual");
+                if (num == "0") {
+                    $(num_text).text("Bay thắng");
+                }
+                else {
+                    var i;
+                    for (i = 0; i < num; i++) {
+                        $(visual).append('<div class="flight-list-element-circle" style="background-color: #EC501F;"></div>');
+                    }
+                    $(num_text).text(num + "điểm dừng");
+                }
+            })
+        })
+    </script>
+    {{> "guest/footer"}}

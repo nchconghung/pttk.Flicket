@@ -63,4 +63,19 @@ module.exports = {
     single: id => {
         return db.load(`select * form LichTrinh where IdLichTrinh=${id}`);
     },
+    singleWithDetailByIdChuyenBay: (id) =>{
+
+        return db.load(`SELECT lt.*,cab.DiemKhoiHanh as IdDiemKhoiHanh,dd.DiaDiem as DiemKhoiHanh,dd.SanBay as SanBayKhoiHanh,cab.GioCatCanh,cab.DiemDen as IdDiemDen,dd1.DiaDiem as DiemDen,dd1.SanBay as SanBayHaCanh,cab.GioHaCanh,cab.ThoiGianBay
+        FROM LichTrinh lt
+        INNER JOIN ChangBay cab
+        ON cab.IdChangBay = lt.ChangBay
+        
+        INNER JOIN DiaDiem dd
+        ON dd.Id = cab.DiemKhoiHanh
+        
+        INNER JOIN DiaDiem dd1
+        ON dd1.Id = cab.DiemDen
+        
+        WHERE lt.ChuyenBay = ${id}`);
+        },
 }

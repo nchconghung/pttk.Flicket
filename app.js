@@ -3,10 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+<<<<<<< HEAD
 var bodyParser = require('body-parser');
 var exphbs = require("express-handlebars");
 var hbs_sections = require('express-handlebars-sections');
 var numeral = require('numeral');
+=======
+const exphbs = require("express-handlebars");
+var bodyParser = require('body-parser');
+var handlebars  = require('./helpers/handlebars.js')(exphbs,path);
+>>>>>>> 237bb3d056e455249b0fcd0ad5fbc3042cdfe295
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -27,6 +33,7 @@ var app = express();
 // view engine setup
 app.engine(
   "handlebars",
+<<<<<<< HEAD
   exphbs({
   defaultLayout: "main",
   layoutsDir: path.join(__dirname, "views/layouts"),
@@ -38,6 +45,9 @@ app.engine(
       section: hbs_sections()
   }
   })
+=======
+  handlebars.engine
+>>>>>>> 237bb3d056e455249b0fcd0ad5fbc3042cdfe295
 );
 app.set("views", path.join(__dirname, "views/pages"));
 app.set("view engine", "handlebars");
@@ -84,5 +94,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   //res.render('error');
 });
+
+
 
 module.exports = app;

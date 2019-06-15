@@ -23,7 +23,8 @@
         <div class="col-3" id="prior-information-third-col">
             <span class="prior-information-text1">{{diemHaCanh list.[0].chuyenBay.SoChangBay list.[0].lichTrinh}}</span>
             <span class="prior-information-text1">&nbsp;</span>
-            <span class="prior-information-text2">{{sanBayHaCanh list.[0].chuyenBay.SoChangBay list.[0].lichTrinh}}</span>
+            <span
+                class="prior-information-text2">{{sanBayHaCanh list.[0].chuyenBay.SoChangBay list.[0].lichTrinh}}</span>
         </div>
     </div>
 </div>
@@ -905,12 +906,21 @@
     </div>
 </div>
 <div class="flight-picking-container" style="min-height: 100px;">
-    <div class="flight-list-container"  data-class="{{class}}" data-adult-num="{{adult}}" data-kid-num="{{kid}}" data-baby-num="{{baby}}" data-date="{{list.[0].lichTrinh.[0].GioCatCanh}}">
+    <div class="flight-list-container" data-class="{{class}}" data-adult-num="{{adult}}" data-kid-num="{{kid}}"
+        data-baby-num="{{baby}}" data-date="{{list.[0].lichTrinh.[0].GioCatCanh}}">
+        {{#if isEmpty}}
+        <div class="no-result">
+            Không tìm thấy chuyến bay phù hợp
+        </div>
+        {{else}}
         {{#each list}}
-        <div class="flight-list-element" data-numtransit="{{math this.chuyenBay.SoChangBay "-" 1}}" data-transit-time="{{thoiGianQuaCanh this.lichTrinh}}"
+        <div class="flight-list-element" data-numtransit="{{math this.chuyenBay.SoChangBay "-" 1}}"
+            data-transit-time="{{thoiGianQuaCanh this.lichTrinh}}"
             data-depart-time="{{formatTime this.lichTrinh.[0].GioCatCanh}}"
-            data-arrive-time="{{gioHaCanh this.chuyenBay.SoChangBay this.lichTrinh}}" data-airline="{{this.chuyenBay.HangHangKhong}}"
-            data-price="{{this.chuyenBay.NguoiLon}}" data-adult="{{this.chuyenBay.NguoiLon}}" data-kid="{{this.chuyenBay.TreEm}}" data-baby="{{this.chuyenBay.EmBe}}">
+            data-arrive-time="{{gioHaCanh this.chuyenBay.SoChangBay this.lichTrinh}}"
+            data-airline="{{this.chuyenBay.HangHangKhong}}" data-price="{{this.chuyenBay.NguoiLon}}"
+            data-adult="{{this.chuyenBay.NguoiLon}}" data-kid="{{this.chuyenBay.TreEm}}"
+            data-baby="{{this.chuyenBay.EmBe}}">
             <div class="flight-list-element-info row">
                 <div class="col-3 flight-list-element-left">
                     <img src="{{this.chuyenBay.Logo}}">
@@ -926,17 +936,20 @@
                         <div class="flight-list-element-line"></div>
                         <div class="transits-visual">
                         </div>
-                        <span class="flight-list-time-info">{{tongGioBay this.chuyenBay.TongGioBay}} | <span class="real-num-transit"></span></span>
+                        <span class="flight-list-time-info">{{tongGioBay this.chuyenBay.TongGioBay}} | <span
+                                class="real-num-transit"></span></span>
                     </div>
                     <div class="col-3" style="align-items: flex-start">
                         <span class="flight-list-element-time real-arrive-time">19:05</span>
                         <div class="flight-list-element-circle" style="background-color: #00A8FF;"></div>
-                        <span class="flight-list-element-airport">{{diemHaCanh this.chuyenBay.SoChangBay this.lichTrinh}}</span>
+                        <span
+                            class="flight-list-element-airport">{{diemHaCanh this.chuyenBay.SoChangBay this.lichTrinh}}</span>
                     </div>
                 </div>
                 <div class="col-2 flight-list-element-right">
                     <span class="flight-list-element-price price-output">1.154.123 VND</span>
-                    <a class="flight-list-element-btn" style="color: white" href="/guest/info?id={{this.chuyenBay.IdChuyenBay}}&&adult={{../adult}}&&kid={{../kid}}&&baby={{../baby}}&&class={{../class}}">Chọn</a>
+                    <a class="flight-list-element-btn" style="color: white"
+                        href="/guest/info?id={{this.chuyenBay.IdChuyenBay}}&&adult={{../adult}}&&kid={{../kid}}&&baby={{../baby}}&&class={{../class}}">Chọn</a>
                 </div>
             </div>
             <div class="flight-list-element-menu-bar">
@@ -1022,9 +1035,10 @@
                         </div>
                     </div>
                 </div>
-                
+
                 {{#ifCond this.ThuTu '<' ../this.lichTrinh.length}}
-                    <div class="flight-specific-detail row">
+
+                <div class="flight-specific-detail row">
                     <div class="col-3"></div>
                     <div class="col-9">
                         <div class="transit-alert">
@@ -1044,35 +1058,37 @@
                         <img src="{{this.chuyenBay.Logo}}" height="20px" width="auto">
                         <span class="airline-output">Vietjet Air</span>
                     </div>
-                    <span class="col-3-trip">{{this.lichTrinh.[0].DiemKhoiHanh}} → {{diemHaCanh this.chuyenBay.SoChangBay this.lichTrinh}}</span>
+                    <span class="col-3-trip">{{this.lichTrinh.[0].DiemKhoiHanh}} →
+                        {{diemHaCanh this.chuyenBay.SoChangBay this.lichTrinh}}</span>
                     <span class="col-3-class flight-specific-detail-class">Phổ thông</span>
                 </div>
                 <div class="col-3"></div>
                 <div class="col-6 passenger-record-list">
                 </div>
-            </div>
+            </div>            
         </div>
         {{/each}}
+        {{/if}}
     </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
-<script>
-    $(document).ready(function () {
-        $(".flight-list-element").each(function (e) {
-            var num = $(this).data("numtransit");
-            var num_text = $(this).find(".real-num-transit");
-            var visual = $(this).find(".transits-visual");
-            if (num == "0") {
-                $(num_text).text("Bay thắng");
-            }
-            else {
-                var i;
-                for (i = 0; i < num; i++) {
-                    $(visual).append('<div class="flight-list-element-circle" style="background-color: #EC501F;"></div>');
+
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".flight-list-element").each(function (e) {
+                var num = $(this).data("numtransit");
+                var num_text = $(this).find(".real-num-transit");
+                var visual = $(this).find(".transits-visual");
+                if (num == "0") {
+                    $(num_text).text("Bay thắng");
                 }
-                $(num_text).text(num + "điểm dừng");
-            }
+                else {
+                    var i;
+                    for (i = 0; i < num; i++) {
+                        $(visual).append('<div class="flight-list-element-circle" style="background-color: #EC501F;"></div>');
+                    }
+                    $(num_text).text(num + "điểm dừng");
+                }
+            })
         })
-    })
-</script>
-{{> "guest/footer"}}
+    </script>
+    {{> "guest/footer"}}

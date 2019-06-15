@@ -10,58 +10,45 @@
                 <p class="category">Lộ trình</p>
                 <div class="detail">
                     <div class="depart-info">
-                        <p style="font-weight: 500;">Da Lat</p>
-                        <p>12:45</p>
+                        <p style="font-weight: 500;">{{lichTrinh.[0].DiemKhoiHanh}}</p>
+                        <p>{{formatTime lichTrinh.[0].GioCatCanh}}</p>
                     </div>
                     <div class="arrow1">
                         <p> → </p>
                     </div>
                     <div class="arrival-info">
-                        <p style="font-weight: 500;">Hanoi</p>
-                        <p>14:35</p>
+                        <p style="font-weight: 500;">{{diemHaCanh chuyenBay.SoChangBay lichTrinh}}</p>
+                        <p>{{gioHaCanh chuyenBay.SoChangBay lichTrinh}}</p>
                     </div>
                 </div>
             </div>
             <div class="single-info">
                 <p class="category">Thời gian</p>
                 <div class="detail">
-                    <p>15/05/2019</p>
+                    <p>{{getNgayBay lichTrinh.[0].GioCatCanh}}</p>
                 </div>
             </div>
             <div class="single-info">
                 <p class="category">Máy bay</p>
                 <div class="detail">
                     <div class="img-airline">
-                        <img src="/images/guest/VietJet.png" height="25px" width="auto">
+                        <img src="{{chuyenBay.Logo}}" height="25px" width="auto">
                     </div>
-                    <p class="airplane-id">VietJet BL-244</p>
+                    <p class="airplane-id">{{chuyenBay.LoaiMayBay}}</p>
 
                 </div>
             </div>
             <div class="single-info">
                 <p class="category">Hạng ghế</p>
-                <div class="detail">
-                    <p>Phổ thông</p>
+                <div class="detail" data-id="{{class}}" id="detail-class-info">
+                    <p></p>
                 </div>
             </div>
             <div class="single-info">
                 <p class="category">Hành khách</p>
-                <div class="detail-last">
-                    <div class="passenger-info">
-                        <p class="type-of-passenger">Người lớn</p>
-                        <p>x1</p>
-                    </div>
-                    <div class="passenger-info">
-                        <p class="type-of-passenger">Trẻ em</p>
-                        <p>x1</p>
-                    </div>
-                    <div class="passenger-info">
-                        <p class="type-of-passenger">Em bé</p>
-                        <p>x1</p>
-                    </div>
+                <div class="detail-last" data-adult="{{adult}}" data-kid="{{kid}}" data-baby="{{baby}}">                    
                 </div>
             </div>
-
         </div>
     </div>
     <div class="sub-table">
@@ -70,32 +57,58 @@
                 <img src="/images/guest/second-table-title.png" height="auto" width="100%">
                 <p id="second-table-title">Tóm tắt</p>
             </div>
-            <div class="second-table-content">
-                <div class="second-table-inner-content">
-                    <span class="second-table-type">Vietjet (Người lớn)</span>
-                    <span class="second-table-quantity">1</span>
-                    <span class="second-table-price">VND 1.554.720</span>
-                </div>
-                <div class="second-table-inner-content" id="second-table-middle">
-                    <span class="second-table-type">Vietjet (Trẻ em)</span>
-                    <span class="second-table-quantity">1</span>
-                    <span class="second-table-price">VND 1.514.485</span>
-                </div>
-                <div class="second-table-inner-content">
-                    <span class="second-table-type">Vietjet (Em bé)</span>
-                    <span class="second-table-quantity">1</span>
-                    <span class="second-table-price">VND 109.205</span>
-                </div>
+            <div class="second-table-content" data-airline="{{chuyenBay.HangHangKhong}}" data-adult="{{chuyenBay.NguoiLon}}" data-kid="{{chuyenBay.TreEm}}" data-baby="{{chuyenBay.EmBe}}">
             </div>
             <div class="second-table-total">
                 <span>Giá bạn trả</span>
-                <span>VND 3.178.410</span>
+                <span id="second-table-total-field">VND 3.178.410</span>
             </div>
         </div>
         <div class="continue-container">
-            <img src="/images/guest/continue-img.png" height="238px" width="auto">
-            <button id="btn-next-second-table">Tiếp tục</button>
+            <img src="/images/guest/continue-img.png" height="255px" width="auto">
+            <button id="btn-next-second-table"><a href="/guest/passenger?id={{chuyenBay.IdChuyenBay}}&&adult={{adult}}&&kid={{kid}}&&baby={{baby}}&&class={{class}}">Tiếp tục</a></button>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+<script>
+    $(document).ready(function(){
+        var classs = $("#detail-class-info").data("id");
+        var classs_O = $("#detail-class-info p");
+        switch(classs){
+            case 1: $(classs_O).text("Phổ thông");break;
+            case 2: $(classs_O).text("Thương gia");break;
+            case 3: $(classs_O).text("Hạng nhất");break;
+            case 4: $(classs_O).text("Phổ thông đặc biệt");break;
+        }
+        var nAdult = $(".detail-last").data("adult");
+        var nKid = $(".detail-last").data("kid");
+        var nBaby = $(".detail-last").data("baby");
+        var priceAdult = parseInt($(".second-table-content").data("adult"));
+        var priceKid = parseInt($(".second-table-content").data("kid"));
+        var priceBaby = parseInt($(".second-table-content").data("baby"));
+        var airline = $(".second-table-content").data("airline");
+        var total_field = 0;
+        if(nAdult!="0"){
+            total_field += priceAdult*parseInt(nAdult);
+            $(".detail-last").append('<div class="passenger-info"><p class="type-of-passenger">Người lớn</p><p>x'+nAdult+'</p></div>');
+            $(".second-table-content").append('<div class="second-table-inner-content"><span class="second-table-type">'+airline+' (Người lớn)</span><span class="second-table-quantity">'+nAdult+'</span><span class="second-table-price">'+currencyFormatDE(priceAdult*parseInt(nAdult))+'</span></div>')
+        }
+        if(nKid!="0"){
+            total_field += priceKid*parseInt(nKid);
+            if(nAdult!="0"){
+                $(".second-table-content").append('<div class="second-table-inner-content" id="second-table-middle"><span class="second-table-type">'+airline+' (Trẻ em)</span><span class="second-table-quantity">'+nKid+'</span><span class="second-table-price">'+currencyFormatDE(priceKid*parseInt(nKid))+'</span></div>')
+            }else{
+                $(".second-table-content").append('<div class="second-table-inner-content"><span class="second-table-type">'+airline+' (Trẻ em)</span><span class="second-table-quantity">'+nKid+'</span><span class="second-table-price">'+currencyFormatDE(priceKid*parseInt(nKid))+'</span></div>')
+            }
+            $(".detail-last").append('<div class="passenger-info"><p class="type-of-passenger">Trẻ em</p><p>x'+nKid+'</p></div>');
+        }
+        if(nBaby!="0"){
+            total_field += priceBaby*parseInt(nBaby);
+            $(".second-table-content").append('<div class="second-table-inner-content"><span class="second-table-type">'+airline+' (Em bé)</span><span class="second-table-quantity">'+nBaby+'</span><span class="second-table-price">'+currencyFormatDE(priceBaby*parseInt(nBaby))+'</span></div>')
+            $(".detail-last").append('<div class="passenger-info"><p class="type-of-passenger">Em bé</p><p>x'+nBaby+'</p></div>');
+        }
+        $("#second-table-total-field").text(currencyFormatDE(total_field));
+    })
+</script>
 {{> "guest/footer"}}

@@ -129,26 +129,27 @@
         </div>
         <div class="col-9" id="user-account-content">
             <div class="user-account-content-element" id="edit-profile-interface">
-                <form>
-                    <label style="margin-bottom: 10px;font-size: 17px;font-weight: 500;color: #7A9ED5;">Thông tin cá nhân</label>
+                <form action="/guest/user" method="POST" id="payment-form">
+                    <label style="margin-bottom: 10px;font-size: 17px;font-weight: 500;color: #7A9ED5;">Thông tin cá
+                        nhân</label>
                     <div class="edit-profile-input">
                         <label for="txtUserName">Họ và tên</label>
                         <input type="text" id="txtUserName" placeholder="Nguyen Van A" required>
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtEmail">Email</label>
-                        <input type="email" id="txtEmail" placeholder="email@example.com" >
+                        <input type="email" id="txtEmail" placeholder="email@example.com" required>
                     </div>
                     <div class="edit-profile-input">
-                        <label for="txtPhone">Số đi</label>
-                        <input type="tel" id="txtPhone" name="txtPhone">
+                        <label for="txtPhone">Số điện thoại</label>
+                        <input type="tel" id="txtPhone" name="txtPhone" required>
                     </div>
                     <div class="edit-profile-input">
                         <span id="password-edit-title">Mật khẩu</span>
                         <span id="password-edit-button">Thay đổi</span>
                     </div>
                     <div id="password-edit-container">
-                        <div class="edit-profile-input">
+                        {{!-- <div class="edit-profile-input">
                             <label for="txtFormerPassword">Mật khẩu cũ</label>
                             <input type="password" id="txtFormerPassword" required>
                         </div>
@@ -159,29 +160,40 @@
                         <div class="edit-profile-input">
                             <label for="txtConfirmPassword">Xác nhận mật khẩu mới</label>
                             <input type="password" id="txtConfirmPassword" required>
-                        </div>
-                        <div class="edit-profile-button-container">
+                        </div>--}}
+                        <div class="edit-profile-button-container edit-profile-button-container1">
                             <button type="button" id="edit-profile-button-container-cancel">Hủy</button>
                             <button type="submit" id="edit-profile-button-save">Lưu thay đổi</button>
-                        </div>
+                        </div> 
+                        {{!-- <div class="edit-profile-button-container"><button type="button" id="edit-profile-button-container-cancel">Hủy</button><button type="submit" id="edit-profile-button-save">Lưu thay đổi</button></div> --}}
                     </div>
 
-                    <label style="margin-top: 30px;margin-bottom: 10px;font-size: 17px;font-weight: 500;color: #7A9ED5;">Thẻ ngân hàng</label>
+                    <label
+                        style="margin-top: 30px;margin-bottom: 10px;font-size: 17px;font-weight: 500;color: #7A9ED5;">Thẻ
+                        ngân hàng</label>
                     <div class="edit-profile-input">
                         <label for="txtCardID">Mã số thẻ</label>
-                        <input type="text" id="txtCardID" name="txtCardID" placeholder="16 chữ số mặt trên của thẻ" required>
+                        <input type="text" id="txtCardID" name="txtCardID" placeholder="16 chữ số mặt trên của thẻ"
+                            required>
                     </div>
                     <div class="edit-profile-input">
-                        <label for="txtExpDate">Hiệu lực đến</label>
-                        <input type="text" id="txtExpDate" name="txtExpDate" placeholder="MM/yyyy" required>
+                        <label for="txtDueDate">Hiệu lực đến</label>
+                        <input id="txtDueDate" type="text" class="date-input" data-language='en' required
+                            placeholder="MM/YYYY" data-min-view="months" data-view="months" data-date-format="mm/yyyy"
+                            name="txtExpiryDate">
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtCVV">Mã CVV</label>
-                        <input type="text" id="txtCVV" name="txtCVV" placeholder="3 số CVV" required>
+                        <input type="text" id="txtCVV" pattern="^[0-9]{3}" name="txtCVV" placeholder="3 số CVV"
+                            required>
                     </div>
                     <div class="edit-profile-input" style="margin-bottom: 15px">
                         <label for="txtCardHolderName">Tên trên thẻ</label>
-                        <input type="text" id="txtCardHolderName" name="txtCardHolderName" placeholder="Tên trên thẻ" required>
+                        <input type="text" id="txtCardName" name="txtCardHolderName" placeholder="Tên trên thẻ"
+                            required>
+                    </div>
+                    <div id="charge-error" class="alert alert-danger d-none" style="margin-top: 20px;">
+
                     </div>
                     <div class="edit-profile-button-container">
                         <button type="submit" id="edit-profile-button-update">Cập nhật</button>
@@ -440,3 +452,10 @@
 </div>
 
 {{> "guest/footer"}}
+<script src="https://js.stripe.com/v2/"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+<script src="/javascripts/guest/user.js"></script>

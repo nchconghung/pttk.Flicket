@@ -334,7 +334,7 @@ exports.signin_post = function(req,res,next){
             }
             req.session.username=user.TaiKhoan;
             req.session.pass = user.MatKhau;
-          return res.redirect('/guest/info');
+          return res.redirect('/guest');
         });
       })(req, res, next);
 }
@@ -346,6 +346,9 @@ exports.signout_post = function(req,res,next){
 exports.user = function(req,res,next){
 	console.log(req.session);
 	res.render('guest/user');
+}
+exports.user_post = function(req,res,next){
+	res.send(req.body);
 }
 exports.ticket = function (req, res, next) {
 	res.render('guest/ticket');

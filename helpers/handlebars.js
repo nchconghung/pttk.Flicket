@@ -7,7 +7,7 @@ function hbsHelpers(hbs, path) {
     partialsDir: path.join(__dirname, "../views/partials"),
     helpers: {
       format: val => {
-        return numeral(val).format('0,0');
+      return numeral(val).format('0,0');
       },
       section: hbs_sections(),
       inc: function (value, options) {

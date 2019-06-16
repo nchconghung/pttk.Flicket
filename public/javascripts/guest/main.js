@@ -232,6 +232,12 @@ $(document).ready(function () {
     $("input[type='radio']").click(function () {
         var val = $("input[name='txtClass']:checked").val();
         if (val) {
+            switch(parseInt(val)){
+                case 1: val = "Phổ thông"; break;
+                case 2: val = "Thương gia"; break;
+                case 3: val = "Hạng nhất"; break;
+                case 4: val = "Phổ thông đặc biệt"; break;
+            }
             var s = $(".passenger-input").val();
             s = s.split(',')[0];
             s += ", " + val;
@@ -1185,7 +1191,7 @@ $(document).ready(function () {
         }
         else {
             var total = $("#sub-total-amount-data").data("price");
-            $("#passenger-info-form").append('<input name="txtTotalAmount" value="'+total+'">')
+            $("#passenger-info-form").append('<input name="txtTotalAmount" style="visibility: hidden" value="'+total+'">')
             $(this).unbind('submit').submit();
         }
     })

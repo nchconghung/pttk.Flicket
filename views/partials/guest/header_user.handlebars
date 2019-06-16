@@ -3,27 +3,27 @@
         <img src="/images/guest/logo/Flicket2.png" width="100" height="auto">
     </a>
     <div class="navbar-content">
-        
+        <form id="frmSignout" action="/guest/signout" method="POST"></form>
         <div class="navbar-item" id="user-btn-container">
             <div class="user-btn">
                 <img src="/images/guest/users1.png" height="12px" width="auto">
-                <span>Nguyen Van A</span>
+                <span>{{authUser.TaiKhoan}}</span>
             </div>
         </div>
         <div id="user-instant-panel-container">
             <div id="user-instant-panel">
-                <div class="user-instant-panel-element">
+                <a class="user-instant-panel-element" href="/guest/user" style="text-decoration: none;color: black;">
                     <span>Tùy chỉnh</span>
                     <img src="/images/guest/edit.png">
-                </div>
-                <div class="user-instant-panel-element">
+                </a>
+                <a class="user-instant-panel-element" href="javascript: $('#frmSignout').submit();" style="text-decoration: none;color: black;">
                     <span>Đăng xuất</span>
                     <img src="/images/guest/exit.png">
-                </div>
+                </a>
             </div>
         </div>
     </div>
 </nav>
 <div class="header-bg-container">
-    <img src="//images/guest/guest/header_bg.png" width="auto" height="170px">
+    <img src="/images/guest/header_bg.png" width="auto" height="170px">
 </div>

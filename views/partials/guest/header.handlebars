@@ -1,53 +1,61 @@
+
+{{#if isAuthenticated}}
 <nav class="navigation-bar" style="position: fixed;" id="navigation-bar2">
     <a class="brand-logo" href="/guest">
         <img src="/images/guest/logo/Flicket2.png" width="100" height="auto">
     </a>
     <div class="navbar-content">
-        {{#if isAuthenticated}}
         <form id="frmSignout" action="/guest/signout" method="POST"></form>
-            <div class="navbar-item">
-                <div class="navbar-item" id="user-btn-container">
-                <div class="user-btn">
-                    <img src="/images/guest/users1.png" height="12px" width="auto">
-                    <span>{{authUser.TaiKhoan}}</span>
-                </div>
-                </div>
-                <div id="user-instant-panel-container">
-                    <div id="user-instant-panel">
-                        <a class="user-instant-panel-element" href="/guest/info">
-                            <span>Tùy chỉnh</span>
-                            <img src="/images/guest/edit.png">
-                        </a>
-                        <a class="user-instant-panel-element" href="javascript: $('#frmSignout').submit();">
-                            <span>Đăng xuất</span>
-                            <img src="/images/guest/exit.png">
-                        </a>
-                    </div>
-                </div>
+        <div class="navbar-item" id="user-btn-container">
+            <div class="user-btn" style="background-color: #7A9ED5">
+                <img src="/images/guest/users1.png" height="12px" width="auto">
+                <span style="color: white">{{authUser.TaiKhoan}}</span>
             </div>
-        {{else}}
-            <div class="navbar-item signIn-container">
-            <a class="nav-link main-signInBTN2" href="#" style="color:#7A9ED5">Đăng nhập</a>
-            <div id="signIn-model2">
+        </div>
+        <div id="user-instant-panel-container" style="top: 56px;">
+            <div id="user-instant-panel" style="background-color: #7A9ED5">
+                <a class="user-instant-panel-element" href="/guest/user" style="text-decoration: none;color: white;">
+                    <span>Tùy chỉnh</span>
+                    <img src="/images/guest/edit.png">
+                </a>
+                <a class="user-instant-panel-element" href="javascript: $('#frmSignout').submit();"
+                    style="text-decoration: none;color: white;">
+                    <span>Đăng xuất</span>
+                    <img src="/images/guest/exit.png">
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+{{else}}
+<nav class="navigation-bar" style="position: fixed;">
+    <a class="brand-logo" href="#">
+        <img src="/images/guest/logo/Flicket.png" width="100" height="auto">
+    </a>
+    <div class="navbar-content">
+
+        <div class="navbar-item signIn-container">
+            <a class="nav-link main-signInBTN" href="#">Đăng nhập</a>
+            <div id="signIn-model">
                 <form action="/guest/signin" method="POST">
-                    <p class="signInTitle2">Đăng nhập tài khoản</p>
-                    <label class="signInsubTitle2" for="emailSignInInput">Tài khoản</label>
-                    <input type="text" class="signInInput2" id="emailSignInInput" name="username" required>
-                    <label class="signInsubTitle2" for="passwordSignInInput">Password</label>
-                    <input type="password" id="passwordSignInInput" class="signInInput2" name="password" required>
+                    <p class="signInTitle">Đăng nhập tài khoản</p>
+                    <label class="signInsubTitle" for="emailSignInInput">Tài khoản</label>
+                    <input type="text" class="signInInput" id="emailSignInInput" name="username" id="username" required>
+                    <label class="signInsubTitle" for="passwordSignInInput">Mật khẩu</label>
+                    <input type="password" id="passwordSignInInput" class="signInInput" name="password" id="password"
+                        required>
                     <button type="submit" class="btn-signIn">Đăng nhập</button>
                 </form>
             </div>
+        </div>
+        <div class="navbar-item">
+            <div id="signUp">
+                <a class="nav-link" href="/guest/signup">Đăng ký</a>
             </div>
-            <div class="navbar-item">
-                <div id="signUp">
-                    <a class="nav-link" href="/guest/signup" style="color:#7A9ED5">Đăng ký</a>
-                </div>
-            </div>
-        {{/if}}
-
+        </div>
     </div>
 </nav>
+{{/if}}
 <div class="header-bg-container">
     <img src="/images/guest/header_bg.png" width="auto" height="170px">
 </div>

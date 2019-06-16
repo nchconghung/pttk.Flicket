@@ -2799,7 +2799,7 @@
 }
 
 .user-account-content-element {
-  padding-bottom: 60px;
+  
 }
 
 .edit-profile-input {
@@ -2856,7 +2856,7 @@
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 0px;
 }
 
 #edit-profile-button-container-cancel {

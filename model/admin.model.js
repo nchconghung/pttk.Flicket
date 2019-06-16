@@ -2,13 +2,15 @@ var db = require("../utils/db-mysql");
 
 module.exports = {
     all: () =>{
-        return db.load(`select * from Admin`);
+        return db.load(`select Id,TaiKhoan,DATE_FORMAT(LanDangNhapCuoi,"%H:%m:%s %d-%c-%Y") as LanDangNhapCuoi from Admin`);
     },
 
     single: id => {
-        return db.load(`select * form Admin where Id=${id}`);
+        return db.load(`select * from Admin where Id=${id}`);
     },
-
+    singleByTaiKhoan: tk => {
+        return db.load(`select * from Admin where TaiKhoan like '${tk}'`);
+    },
     add: entity =>{
         return db.add(`Admin`,entity);
     },

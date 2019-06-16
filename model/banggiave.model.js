@@ -5,12 +5,12 @@ module.exports = {
         return db.load(`select * from BangGiaVe`);
     },
 
-    allWithDetail:() => {
-        return db.load(``);  
-    },
-
-    single: id => {
-        return db.load(`select * form ChangBay where IdChangBay=${id}`);
-    },
+    listByChuyenBay: id =>{
+        var query = `SELECT bgv.*,hg.HangGhe as LoaiHangGhe
+                    FROM BangGiaVe bgv,HangGhe hg
+                    WHERE bgv.ChuyenBay = ${id} and hg.idHangGhe = bgv.HangGhe
+                    ORDER BY bgv.HangGhe ASC`;
+        return db.load(query);
+    }
 }
 

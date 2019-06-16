@@ -1,5 +1,7 @@
 var express = require('express');
 var chuyenbayModel = require('../../model/chuyenbay.model');
+var lichtrinhModel = require('../../model/lichtrinh.model');
+var bgvModel = require('../../model/banggiave.model');
 var moment = require('moment');
 var router = express.Router();
 
@@ -54,20 +56,23 @@ router.post("/index",(req,res) => {
 router.get('/:id/detail',(req,res)=>{
     var id = req.params.id;
     
-    chuyenbayModel.single(id).then(rows => {
-        if (rows.length >0){
-            res.render('admin/vwChuyenBay/detail',{
-                layout:'admin',
-                error: false,
-                chuyenbay: rows[0]
-            });
-        } else {
-            res.render('admin/vwChuyenBay/detail',{
-                layout:'admin',
-                error: true
-            });
-        }
-    })
+    Promise.all([
+        chuyenbayModel.single(id),
+        lichtrinhModel.lichTrinhByChuyenBay(id),
+        bgvModel.listByChuyenBay(id)
+    ]).then(([cb,lt,bgv])=>{
+        
+        res.render('admin/vwChuyenBay/detail',{
+            layout:'admin',
+            error: false,
+            chuyenbay: cb[0],
+            lichtrinh: lt,
+            bgv: bgv
+        });
+    }).catch(err => {
+        console.log(err);
+        res.end("error occured.")
+    });
 });
 
 module.exports = router;

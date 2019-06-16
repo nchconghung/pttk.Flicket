@@ -5,7 +5,7 @@ module.exports = {
         return db.load(`select *,IF (GioiTinh < 1,'Nữ','Nam') as LoaiGioiTinh from ThongTinKhachHangGiaoDich`);
     },
 
-    single: cmnd => {
+    single: id => {
         return db.load(`select e.*, IF (e.GioiTinh < 1,'Nữ','Nam') as LoaiGioiTinh from ThongTinKhachHangGiaoDich e where e.CMND like '${cmnd}'`);
     },
 
@@ -14,10 +14,10 @@ module.exports = {
     },
 
     update: entity =>{
-        return db.updateWithVarcharID(`ThongTinKhachHangGiaoDich`,`CMND`,entity);
+        return db.update(`ThongTinKhachHangGiaoDich`,`CMND`,entity);
     },
 
-    delete: cmnd => {
-        return db.deleteWithVarcharID(`ThongTinKhachHangGiaoDich`,`CMND`,cmnd);
+    delete: id => {
+        return db.delete(`ThongTinKhachHangGiaoDich`,`CMND`,id);
     }
 }

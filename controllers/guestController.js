@@ -10,60 +10,6 @@ var lichTrinhModel = require('../model/lichtrinh.model');
 exports.index = function (req, res, next) {
 	res.render('guest/home', { title: 'Flicket' });
 }
-<<<<<<< HEAD
-exports.index_post = function (req, res, next) {
-
-}
-exports.pick = function (req, res, next) {
-	var diemdi = req.body.txtDepart;
-	var diemden = req.body.txtArrive;
-	var ngaydi = req.body.txtDate;
-	var hangghe = req.body.txtClass;
-	var adult = req.body.txtAdult;
-	var kid = req.body.txtKid;
-	var baby = req.body.txtBaby;
-	res.send(req.body);
-	Promise.all([
-		chuyenBayModel.listWithDetailByParams(diemdi, diemden, ngaydi, hangghe),
-		lichTrinhModel.listWithDetailByParams(diemdi, diemden, ngaydi, hangghe),
-	]).then(([cb_rows, lt_rows]) => {
-		var listEntity = [];
-
-		for (var i = 0; i < cb_rows.length; i++) {
-
-			var listLichTrinh = [];
-			for (var k = 0; k < lt_rows.length; k++) {
-				if (lt_rows[k].ChuyenBay === cb_rows[i].IdChuyenBay) {
-					listLichTrinh.push(lt_rows[k]);
-				}
-			}
-			var e = {
-				chuyenBay: cb_rows[i],
-				lichTrinh: listLichTrinh,
-			};
-			listEntity.push(e);
-		}
-		// console.log(listEntity[0].lichTrinh[0].GioCatCanh);
-		res.render("guest/flight_picking", {
-			list: listEntity,
-			adult: adult,
-			kid: kid,
-			baby: baby,
-			class: hangghe,
-		});
-	}).catch(err => {
-		console.log(err);
-		res.render("guest/flight_picking", {
-			list: null,
-			adult: adult,
-			kid: kid,
-			baby: baby,
-			class: hangghe,
-		});
-	});
-}
-=======
->>>>>>> 14e0550b01ea500c04c4a254e825b139cb58eb23
 exports.pick_post = function (req, res, next) {
 	var diemdi = parseInt(req.body.txtDepart);
 	var diemden = parseInt(req.body.txtArrive);
@@ -128,10 +74,7 @@ exports.info = function (req, res, next) {
 	var baby = req.query.baby;
 	var classs = req.query.class;
 	Promise.all([chuyenBayModel.singleWithDetailById(id,classs),lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay,lichtrinh])=>{
-<<<<<<< HEAD
 		req.session.userdata.IdChuyenBay = parseInt(id);
-=======
->>>>>>> 14e0550b01ea500c04c4a254e825b139cb58eb23
 		res.render('guest/check_info',{
 			chuyenBay: chuyenbay[0],
 			lichTrinh: lichtrinh,

@@ -5,8 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var exphbs = require("express-handlebars");
-var hbs_sections = require('express-handlebars-sections');
-var numeral = require('numeral');
+
 var bodyParser = require('body-parser');
 
 var handlebars  = require('./helpers/handlebars.js')(exphbs,path);

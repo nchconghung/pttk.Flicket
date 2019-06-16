@@ -67,7 +67,8 @@ router.get('/:id/detail',(req,res)=>{
             error: false,
             chuyenbay: cb[0],
             lichtrinh: lt,
-            bgv: bgv
+            bgv: bgv,
+            TongGioBay: 0
         });
     }).catch(err => {
         console.log(err);

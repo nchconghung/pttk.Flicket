@@ -97,7 +97,7 @@ singleWithDetailById: (id,hangghe) => {
 },
 
 single: id => {
-    return db.load(`SELECT cb.IdChuyenBay,cb.MaChuyenBay,hhk.HangHangKhong as hhk,cb.LoaiMayBay,ddi.DiaDiem as DiemKhoiHanh,dden.DiaDiem as DiemDen
+    return db.load(`SELECT cb.IdChuyenBay,cb.MaChuyenBay,hhk.HangHangKhong as HHK,cb.LoaiMayBay,ddi.DiaDiem as DiemKhoiHanh,dden.DiaDiem as DiemDen
     FROM ChuyenBay cb,HangHangKhong hhk,DiaDiem ddi,DiaDiem dden
     WHERE cb.IdChuyenBay=${id} and hhk.idHangHangKhong = cb.HangHangKhong and cb.DiemDi = ddi.Id and cb.DiemDen = dden.Id`);
 },

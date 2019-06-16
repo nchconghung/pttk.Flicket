@@ -35,6 +35,7 @@ $(function () {
 });
 //Nav bar
 $(".main-signInBTN").click(function () {
+    console.log("aaaaa");
     $("#signIn-model").toggleClass("show-panel");
 });
 $(document).mouseup(function (e) {
@@ -996,8 +997,8 @@ $(document).ready(function () {
     var class_I = parseInt($(".flight-list-container").data("class"));
     var date = $(".flight-list-container").data("date");
     var d = new Date(date);
-    var day = d.getDay();
-    var month = d.getMonth();
+    var day = d.getDate();
+    var month = d.getMonth()+1;
     var year = d.getFullYear();
     day = day < 10 ? '0' + day : day;
     month = month < 10 ? '0' + month : month;
@@ -1122,25 +1123,29 @@ $(document).ready(function () {
     var kid = parseInt($(".passenger-info-type-main-content").data("kid"));
     var baby = parseInt($(".passenger-info-type-main-content").data("baby"));
     var index = 1;
+    var id = 1;
     if (adult != 0) {
         for (i = 1; i <= adult; i++) {
-            $(".passenger-info-type-main-content").append('<div class="passenger-info-type-subcontent"><div class="info-table-title" style="margin-top: 0px;"><span>Người lớn ' + i + '</span><a class="change-button hide-before-content" data-id="0">Thay đổi</a></div><div class="main-info-table"><div class="before-content"><span class="name-condition">Tên không dấu</span><div class="info-row" style="margin-top: 10px;"><label for="txtNamePassenger">Họ và tên (VD: Nguyen Thi Ngoc Anh)</label><input name="txtAdultName[]" class="txtNamePassenger" type="text"  ><span class="input-note">như trên CMND (không dấu)</span></div><div class="info-row"><label for="txtDateOfBirth">Ngày sinh</label><input name="txtAdultBirth[]" class="txtDateOfBirth date-input date-of-birth" type="text" data-language="en" data-date-format="D, dd/mm/yyyy"  ><span class="input-note">Hành khách người lớn (trên 12 tuổi) như trên CMND (không dấu)</span></div></div><div class="after-content2 hide-before-content"><span class="dateOfBirthTitle">Ngày sinh</span><span class="dateOfBirthOutput"> </span><span class="tempName" style="display:none">aaaa</span></div></div></div>');
-            $("#luggage-list").append('<div class="luggage-element"><input name="txtLuggage[]" class="luggage-input-hidden" value="0"><span class="passenger-name">Nguyen Van A</span><div class="relative-container"><div class="luggage-input-box"><span>0 kg - 0 VND</span><img src="/images/guest/BTN Expand.png" width="12px" height="auto"></div><div class="luggage-input"><option value="0">0kg - 0 VND</option><option value="15">15kg - 168.000 VND</option><option value="30">20kg - 250.000 VND</option></div></div></div>');
+            $(".passenger-info-type-main-content").append('<div class="passenger-info-type-subcontent" data-id="'+id+'"><div class="info-table-title" style="margin-top: 0px;"><span>Người lớn ' + i + '</span><a class="change-button hide-before-content" data-id="0">Thay đổi</a></div><div class="main-info-table"><div class="before-content"><span class="name-condition">Tên không dấu</span><div class="info-row" style="margin-top: 10px;"><label for="txtNamePassenger">Họ và tên (VD: Nguyen Thi Ngoc Anh)</label><input required name="txtAdultName" class="txtNamePassenger" type="text"  ><span class="input-note">như trên CMND (không dấu)</span></div><div class="info-row"><label for="txtDateOfBirth">Ngày sinh</label><input data-date-format="dd/mm/yyyy" required name="txtAdultBirth" class="txtDateOfBirth date-input date-of-birth" type="text" data-language="en"><span class="input-note">Hành khách người lớn (trên 12 tuổi) như trên CMND (không dấu)</span></div></div><div class="after-content2 hide-before-content"><span class="dateOfBirthTitle">Ngày sinh</span><span class="dateOfBirthOutput"> </span><span class="tempName" style="display:none">aaaa</span></div></div></div>');
+            $("#luggage-list").append('<div class="luggage-element" data-id="'+id+'"><input required name="txtAdultLuggage" class="luggage-input-hidden" value="0"><span class="passenger-name">Nguyen Van A</span><div class="relative-container"><div class="luggage-input-box"><span>0 kg - 0 VND</span><img src="/images/guest/BTN Expand.png" width="12px" height="auto"></div><div class="luggage-input"><option value="0">0kg - 0 VND</option><option value="168000">15kg - 168.000 VND</option><option value="250000">20kg - 250.000 VND</option></div></div></div>');
             index++;
+            id++;
         }
     }
     if (kid != 0) {
         for (i = 1; i <= kid; i++) {
-            $(".passenger-info-type-main-content").append('<div class="passenger-info-type-subcontent"><div class="info-table-title" style="margin-top: 0px;"><span>Trẻ em ' + i + '</span><a class="change-button hide-before-content" data-id="0">Thay đổi</a></div><div class="main-info-table"><div class="before-content"><span class="name-condition">Tên không dấu</span><div class="info-row" style="margin-top: 10px;"><label for="txtNamePassenger">Họ và tên (VD: Nguyen Thi Ngoc Anh)</label><input name="txtKidName[]" class="txtNamePassenger" type="text"  ><span class="input-note">như trên CMND (không dấu)</span></div><div class="info-row"><label for="txtDateOfBirth">Ngày sinh</label><input name="txtKidBirth[]" class="txtDateOfBirth date-input date-of-birth" type="text" data-language="en" data-date-format="D, dd/mm/yyyy"  ><span class="input-note">Hành khách trẻ em (từ 2 - 11 tuổi)</span></div></div><div class="after-content2 hide-before-content"><span class="dateOfBirthTitle">Ngày sinh</span><span class="dateOfBirthOutput"> </span><span class="tempName" style="display:none">aaaa</span></div></div></div>');
-            $("#luggage-list").append('<div class="luggage-element"><input name="txtLuggage[]" class="luggage-input-hidden" value="0"><span class="passenger-name">Nguyen Van A</span><div class="relative-container"><div class="luggage-input-box"><span>0 kg - 0 VND</span><img src="/images/guest/BTN Expand.png" width="12px" height="auto"></div><div class="luggage-input"><option value="0">0kg - 0 VND</option><option value="15">15kg - 168.000 VND</option><option value="30">20kg - 250.000 VND</option></div></div></div>');
+            $(".passenger-info-type-main-content").append('<div class="passenger-info-type-subcontent" data-id="'+id+'"><div class="info-table-title" style="margin-top: 0px;"><span>Trẻ em ' + i + '</span><a class="change-button hide-before-content" data-id="0">Thay đổi</a></div><div class="main-info-table"><div class="before-content"><span class="name-condition">Tên không dấu</span><div class="info-row" style="margin-top: 10px;"><label for="txtNamePassenger">Họ và tên (VD: Nguyen Thi Ngoc Anh)</label><input required name="txtKidName" class="txtNamePassenger" type="text"  ><span class="input-note">như trên CMND (không dấu)</span></div><div class="info-row"><label for="txtDateOfBirth">Ngày sinh</label><input required name="txtKidBirth" class="txtDateOfBirth date-input date-of-birth" type="text" data-language="en" data-date-format="dd/mm/yyyy"  ><span class="input-note">Hành khách trẻ em (từ 2 - 11 tuổi)</span></div></div><div class="after-content2 hide-before-content"><span class="dateOfBirthTitle">Ngày sinh</span><span class="dateOfBirthOutput"> </span><span class="tempName" style="display:none">aaaa</span></div></div></div>');
+            $("#luggage-list").append('<div class="luggage-element" data-id="'+id+'"><input name="txtKidLuggage" class="luggage-input-hidden" value="0"><span class="passenger-name">Nguyen Van A</span><div class="relative-container"><div class="luggage-input-box"><span>0 kg - 0 VND</span><img src="/images/guest/BTN Expand.png" width="12px" height="auto"></div><div class="luggage-input"><option value="0">0kg - 0 VND</option><option value="1680000">15kg - 168.000 VND</option><option value="250000">20kg - 250.000 VND</option></div></div></div>');
             index++;
+            id++;
         }
     }
     if (baby != 0) {
         for (i = 1; i <= baby; i++) {
-            $(".passenger-info-type-main-content").append('<div class="passenger-info-type-subcontent"><div class="info-table-title" style="margin-top: 0px;"><span>Em bé ' + i + '</span><a class="change-button hide-before-content" data-id="0">Thay đổi</a></div><div class="main-info-table"><div class="before-content"><span class="name-condition">Tên không dấu</span><div class="info-row" style="margin-top: 10px;"><label for="txtNamePassenger">Họ và tên (VD: Nguyen Thi Ngoc Anh)</label><input name="txtBabyName[]" class="txtNamePassenger" type="text"  ><span class="input-note">như trên CMND (không dấu)</span></div><div class="info-row"><label for="txtDateOfBirth">Ngày sinh</label><input name="txtBabyBirth[]" class="txtDateOfBirth date-input date-of-birth" type="text" data-language="en" data-date-format="D, dd/mm/yyyy"  ><span class="input-note">Hành khách trẻ sơ sinh (dưới 2 tuổi)</span></div></div><div class="after-content2 hide-before-content"><span class="dateOfBirthTitle">Ngày sinh</span><span class="dateOfBirthOutput"> </span><span class="tempName" style="display:none">aaaa</span></div></div></div>');
-            $("#luggage-list").append('<div class="luggage-element"><input name="txtLuggage[]" class="luggage-input-hidden" value="0"><span class="passenger-name">Nguyen Van A</span><div class="relative-container"><div class="luggage-input-box"><span>0 kg - 0 VND</span><img src="/images/guest/BTN Expand.png" width="12px" height="auto"></div><div class="luggage-input"><option value="0">0kg - 0 VND</option><option value="15">15kg - 168.000 VND</option><option value="30">20kg - 250.000 VND</option></div></div></div>');
+            $(".passenger-info-type-main-content").append('<div class="passenger-info-type-subcontent" data-id="'+id+'"><div class="info-table-title" style="margin-top: 0px;"><span>Em bé ' + i + '</span><a class="change-button hide-before-content" data-id="0">Thay đổi</a></div><div class="main-info-table"><div class="before-content"><span class="name-condition">Tên không dấu</span><div class="info-row" style="margin-top: 10px;"><label for="txtNamePassenger">Họ và tên (VD: Nguyen Thi Ngoc Anh)</label><input required name="txtBabyName" class="txtNamePassenger" type="text"  ><span class="input-note">như trên CMND (không dấu)</span></div><div class="info-row"><label for="txtDateOfBirth">Ngày sinh</label><input required name="txtBabyBirth" class="txtDateOfBirth date-input date-of-birth" type="text" data-language="en" data-date-format="dd/mm/yyyy"  ><span class="input-note">Hành khách trẻ sơ sinh (dưới 2 tuổi)</span></div></div><div class="after-content2 hide-before-content"><span class="dateOfBirthTitle">Ngày sinh</span><span class="dateOfBirthOutput"> </span><span class="tempName" style="display:none">aaaa</span></div></div></div>');
+            $("#luggage-list").append('<div class="luggage-element" data-id="'+id+'"><input name="txtBabyLuggage" class="luggage-input-hidden" value="0"><span class="passenger-name">Nguyen Van A</span><div class="relative-container"><div class="luggage-input-box"><span>0 kg - 0 VND</span><img src="/images/guest/BTN Expand.png" width="12px" height="auto"></div><div class="luggage-input"><option value="0">0kg - 0 VND</option><option value="168000">15kg - 168.000 VND</option><option value="250000">20kg - 250.000 VND</option></div></div></div>');
             index++;
+            id++;
         }
     }
     /*Passenger-info */
@@ -1178,10 +1183,9 @@ $(document).ready(function () {
                 var dateResult = day + '/' + month + '/' + year;
                 date.text(dateResult);
             })
-
         }
         else {
-            $('#passenger-info-form').submit();
+            $(this).unbind('submit').submit();
         }
     })
     /*Luggage input */
@@ -1194,8 +1198,18 @@ $(document).ready(function () {
         $(this).parent().removeClass('show-panel')
         $(this).parent().parent().find('span').text(temp)
         $(this).parent().parent().removeClass('above')
-        alert($(this).val())
         $(this).parent().parent().parent().find(".luggage-input-hidden").val($(this).val());
+        var rs = 0;
+        $(".luggage-input-hidden").each(function(){
+            rs += parseInt($(this).val());
+        })
+        $(".price-luggage").text(currencyFormatDE(rs));
+        var oldPrice = parseInt($(".price-luggage").data("price"));
+        var total = parseInt($("#sub-total-amount-data").data("price"));
+        total = total - oldPrice + rs;
+        $(".price-luggage").data("price",rs);
+        $("#sub-total-amount-data").text(currencyFormatDE(total));
+        $("#sub-total-amount-data").data("price",total);
     })
     $(document).mouseup(function (e) {
         var container = $(".luggage-input");
@@ -1207,7 +1221,7 @@ $(document).ready(function () {
         }
     });
     $(".date-of-birth").datepicker({
-        dateFormat: "D, dd/mm/yyyy"
+        
     })
     $('.change-button').click(function () {
         if ($(this).data("id") == "0") {
@@ -1215,8 +1229,9 @@ $(document).ready(function () {
             $(this).parent().parent().find('.after-content, .after-content2').addClass('hide-before-content');
             $(this).data("id", "1");
             $(this).text("Lưu");
-            UpdateLuggageTitle();
         } else {
+            console.log("aaaaa");
+            UpdateLuggageTitle();
             $(this).data("id", "0");
             $(this).text("Thay đổi");
             $(this).parent().parent().find('.before-content').addClass('hide-before-content');
@@ -1237,13 +1252,13 @@ $(document).ready(function () {
             }
             var year = dateInput.getFullYear();
             var dateResult = day + '/' + month + '/' + year;
-            date.text(dateResult);
+            date.text(dateResult);            
         }
     })
 })
 function UpdateLuggageTitle() {
-    $(".passenger-info-type-subcontent").each(function (i, a) {
-        $(".luggage-element").each(function (j, b) {
+    $(".passenger-info-type-subcontent").each(function(i, a) {
+        $(".luggage-element").each(function(j, b) {
             if (i == j) {
                 var nameInput = $(a).find('.txtNamePassenger');
                 var nameOutput = $(b).find('.passenger-name');

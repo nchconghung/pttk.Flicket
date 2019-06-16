@@ -4,57 +4,6 @@ var lichTrinhModel = require('../model/lichtrinh.model');
 exports.index = function (req, res, next) {
 	res.render('guest/home', { title: 'Flicket' });
 }
-exports.index_post = function (req, res, next) {
-
-}
-exports.pick = function (req, res, next) {
-	var diemdi = req.body.txtDepart;
-	var diemden = req.body.txtArrive;
-	var ngaydi = req.body.txtDate;
-	var hangghe = req.body.txtClass;
-	var adult = req.body.txtAdult;
-	var kid = req.body.txtKid;
-	var baby = req.body.txtBaby;
-	res.send(req.body);
-	Promise.all([
-		chuyenBayModel.listWithDetailByParams(diemdi, diemden, ngaydi, hangghe),
-		lichTrinhModel.listWithDetailByParams(diemdi, diemden, ngaydi, hangghe),
-	]).then(([cb_rows, lt_rows]) => {
-		var listEntity = [];
-
-		for (var i = 0; i < cb_rows.length; i++) {
-
-			var listLichTrinh = [];
-			for (var k = 0; k < lt_rows.length; k++) {
-				if (lt_rows[k].ChuyenBay === cb_rows[i].IdChuyenBay) {
-					listLichTrinh.push(lt_rows[k]);
-				}
-			}
-			var e = {
-				chuyenBay: cb_rows[i],
-				lichTrinh: listLichTrinh,
-			};
-			listEntity.push(e);
-		}
-		console.log(listEntity[0].lichTrinh[0].GioCatCanh);
-		res.render("guest/flight_picking", {
-			list: listEntity,
-			adult: adult,
-			kid: kid,
-			baby: baby,
-			class: hangghe,
-		});
-	}).catch(err => {
-		console.log(err);
-		res.render("guest/flight_picking", {
-			list: null,
-			adult: adult,
-			kid: kid,
-			baby: baby,
-			class: hangghe,
-		});
-	});
-}
 exports.pick_post = function (req, res, next) {
 	var diemdi = parseInt(req.body.txtDepart);
 	var diemden = parseInt(req.body.txtArrive);
@@ -83,7 +32,6 @@ exports.pick_post = function (req, res, next) {
 			};
 			listEntity.push(e);
 		}
-		console.log(listEntity);
 		var isEmpty;
 		if(listEntity.length==0){
 			isEmpty = true;
@@ -110,7 +58,6 @@ exports.info = function (req, res, next) {
 	var classs = req.query.class;
 	
 	Promise.all([chuyenBayModel.singleWithDetailById(id,classs),lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay,lichtrinh])=>{
-		console.log(chuyenbay[0]);
 		res.render('guest/check_info',{
 			chuyenBay: chuyenbay[0],
 			lichTrinh: lichtrinh,
@@ -122,16 +69,67 @@ exports.info = function (req, res, next) {
 	});
 }
 exports.passenger = function (req, res, next) {
-	res.render('guest/passenger_info',{
-		id: 1,
-		adult: 1,
-		kid: 1,
-		baby: 1,
-		class: 1
+	var id = 1;
+	var adult = 2;
+	var kid = 0;
+	var baby = 0;
+	var classs = 1;
+	
+	Promise.all([chuyenBayModel.singleWithDetailById(id,classs),lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay,lichtrinh])=>{
+		res.render('guest/passenger_info',{
+			chuyenBay: chuyenbay[0],
+			lichTrinh: lichtrinh,
+			adult: adult,
+			kid: kid,
+			baby: baby,
+			class: classs
+		});
 	});
 }
+exports.passenger_post = function (req, res, next){
+	// upload to session here
+	
+	// //redirect
+	//res.redirect('/guest/payment');
+	res.send(req.body);
+}
+
+
 exports.payment = function (req, res, next) {
-	res.render('guest/payment');
+	var id = 1;
+	var adult = 2;
+	var kid = 1;
+	var baby = 1;
+	var classs = 1;
+	var adultName = ["Nguyen Van A","Tran Van B"];
+	var kidName = [];
+	var babyName = [];
+	var contactName = "Nguyen Thi Ngoc Anh";
+	var phone = "123123123";
+	var email = "example@email.com";
+	var adultLuggage = ["0","168000"];
+	var kidLuggage = [];
+	var babyLuggage = [];
+
+	Promise.all([chuyenBayModel.singleWithDetailById(id,classs),lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay,lichtrinh])=>{
+		res.render('guest/payment',{
+			chuyenBay: chuyenbay[0],
+			lichTrinh: lichtrinh,
+			adult: adult,
+			kid: kid,
+			baby: baby,
+			class: classs,
+			adultName: adultName,
+			kidName: kidName,
+			babyName: babyName,
+			contactName: contactName,
+			phone: phone,
+			email: email,
+			adultLuggage: adultLuggage,
+			kidLuggage: kidLuggage,
+			babyLuggage: babyLuggage
+		});
+	});
 }
 exports.processing = function (req, res, next) {
 	res.render('guest/processing');

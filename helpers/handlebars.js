@@ -5,7 +5,6 @@ function hbsHelpers(hbs, path) {
     partialsDir: path.join(__dirname, "../views/partials"),
     helpers: {
       inc: function (value, options) {
-        console.log('reading it');
         return parseInt(value) + 1;
       },
       math: function (lvalue, operator, rvalue, options) {
@@ -61,11 +60,11 @@ function hbsHelpers(hbs, path) {
       tongGioBay: function (time, options) {
         var pieces = time.split(':');
         var hour = pieces[0];
-        if(hour[0] == '0'){
+        if (hour[0] == '0') {
           hour = hour.substr(1);
         }
         var min = pieces[1];
-        if(min[0] == '0'){
+        if (min[0] == '0') {
           min = min.substr(1);
         }
         return hour + "h" + min + "m";
@@ -81,8 +80,8 @@ function hbsHelpers(hbs, path) {
       },
       getNgayBay: function (date, options) {
         var d = new Date(date);
-        var day = d.getDay();
-        var month = d.getMonth();
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
         var year = d.getFullYear();
         day = day < 10 ? '0' + day : day;
         month = month < 10 ? '0' + month : month;
@@ -114,20 +113,63 @@ function hbsHelpers(hbs, path) {
             return options.inverse(this);
         }
       },
-      tgianQuaCanh: function(index, list, options){
-        var rs = new Date(list[index].GioCatCanh - list[index-1].GioHaCanh);
+      tgianQuaCanh: function (index, list, options) {
+        var rs = new Date(list[index].GioCatCanh - list[index - 1].GioHaCanh);
         var milliseconds = parseInt((rs % 1000) / 100),
           seconds = Math.floor((rs / 1000) % 60),
           minutes = Math.floor((rs / (1000 * 60)) % 60),
           hours = Math.floor((rs / (1000 * 60 * 60)) % 24);
-        rs = hours + "h"+minutes+"m";
+        rs = hours + "h" + minutes + "m";
         return rs;
       },
       sanBayHaCanh: function (num, list, options) {
         return list[num - 1].SanBayHaCanh;
+      },
+      hienThiTien: function (money, options) {
+        return (
+          money
+            .toFixed(0)
+            .replace('.', ',')
+            .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' VND'
+        )
+      },
+      tongTienHanhLy: function (adult, kid, baby, options) {
+        var rs = 0;
+        adult.forEach(function (a) {
+          rs += parseInt(a);
+        })
+        kid.forEach(function (k) {
+          rs += parseInt(k);
+        })
+        baby.forEach(function (b) {
+          rs += parseInt(b);
+        })
+        return (
+          rs
+            .toFixed(0)
+            .replace('.', ',')
+            .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' VND'
+        )
+      },
+      tongTienThanhToan: function(adultNum, adultPrice, kidNum, kidPrice, babyNum, babyPrice, adultLuggage, kidLuggage, babyLuggage, options){
+        var rs = parseInt(adultNum)*parseInt(adultPrice)+parseInt(kidNum)*parseInt(kidPrice)+parseInt(babyNum)*parseInt(babyPrice);
+        adultLuggage.forEach(function (a) {
+          rs += parseInt(a);
+        })
+        kidLuggage.forEach(function (k) {
+          rs += parseInt(k);
+        })
+        babyLuggage.forEach(function (b) {
+          rs += parseInt(b);
+        })
+        return (
+          rs
+            .toFixed(0)
+            .replace('.', ',')
+            .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' VND'
+        )
       }
     }
-
   });
 }
 

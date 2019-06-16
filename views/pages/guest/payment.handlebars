@@ -7,15 +7,15 @@
                     id="flight-detail-booking-id-detail">&nbsp;&nbsp;467688254</span></span>
         </div>
         <div id="contact-person-info">
-            <span id="contact-person-name">Nguyen Van A</span>
+            <span id="contact-person-name">{{contactName}}</span>
             <div id="contact-other-info">
                 <div class="contact-other-info-element">
                     <img class="contact-other-info-img" src="/images/guest/phone-call.png">
-                    <span class="contact-other-info-detail">+84123123123</span>
+                    <span class="contact-other-info-detail">+84{{phone}}</span>
                 </div>
                 <div class="contact-other-info-element">
                     <img class="contact-other-info-img" src="/images/guest/email.png">
-                    <span class="contact-other-info-detail">email@example.com</span>
+                    <span class="contact-other-info-detail">{{email}}</span>
                 </div>
             </div>
         </div>
@@ -32,44 +32,51 @@
         <div id="modal2-content-container">
             <div class="modal2-content-element" id="flight-modal2-info">
                 <dic id="modal2-date-info">
-                    <span>18/05/2019</span>
+                    <span>{{getNgayBay lichTrinh.[0].GioCatCanh}}</span>
                 </dic>
                 <div id="modal2-airline-info">
-                    <img src="/images/guest/VietJet.png">
+                    <img src="{{chuyenBay.Logo}}">
                     <div id="modal2-airline-info-detail">
-                        <span id="modal2-airline-name">Vietjet</span>
-                        <span id="modal2-class">Phổ thông</span>
+                        <span id="modal2-airline-name">{{chuyenBay.HangHangKhong}}</span>
+                        <span id="modal2-class" data-id="{{class}}">Phổ thông</span>
                     </div>
                 </div>
                 <div id="modal2-trip-info">
                     <div class="modal2-location">
-                        <span class="modal2-time">9:10</span>
-                        <span class="modal2-location">Da Lat</span>
+                        <span class="modal2-time">{{getGioBay lichTrinh.[0].GioCatCanh}}</span>
+                        <span class="modal2-location">{{lichTrinh.[0].DiemKhoiHanh}}</span>
                     </div>
                     <img src="/images/guest/arrow-pointing-to-right.png" height="15px" width="auto">
                     <div class="modal2-location">
-                        <span class="modal2-time">12:30</span>
-                        <span class="modal2-location">Hanoi</span>
+                        <span class="modal2-time">{{gioHaCanh chuyenBay.SoChangBay lichTrinh}}</span>
+                        <span class="modal2-location">{{diemHaCanh chuyenBay.SoChangBay lichTrinh}}</span>
                     </div>
                     <div class="modal2-location" id="modal2-duration-transit">
-                        <span id="modal2-duration">3h20m</span>
+                        <span id="modal2-duration">{{tongGioBay chuyenBay.TongGioBay}}</span>
                         <div id="modal2-transit">
                             <div id="modal2-circle"></div>
-                            <span class="modal2-location">1 điểm dừng</span>
+                            <span class="modal2-location" id="modal2-location-transit"
+                                data-numtransit="{{math chuyenBay.SoChangBay "-" 1}}">1 điểm dừng</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal2-content-element" id="passenger-modal2-info">
+                {{#each adultName}}
                 <div class="passenger-modal2-element">
-                    <span>Nguyen Van A</span>
+                    <span>{{this}}</span>
                 </div>
+                {{/each}}
+                {{#each kidName}}
                 <div class="passenger-modal2-element">
-                    <span>Tran Thi B</span>
+                    <span>{{this}}</span>
                 </div>
+                {{/each}}
+                {{#each babyName}}
                 <div class="passenger-modal2-element">
-                    <span>Le Van C</span>
+                    <span>{{this}}</span>
                 </div>
+                {{/each}}
             </div>
         </div>
     </div>
@@ -96,62 +103,68 @@
                     <div class="before-content">
                         <div class="info-row">
                             <label for="txtCardID">Số thẻ tín dụng</label>
-                            <input id="txtCardID" type="text" required placeholder="16 chữ số mặt trên của mặt thẻ">
+                            <input id="txtCardID" type="text" required placeholder="16 chữ số mặt trên của mặt thẻ" name="txtCardID">
                         </div>
                         <div class="info-row row">
                             <div class="col-6">
                                 <label for="txtDueDate">Hiệu lực đến ngày</label>
                                 <input id="txtDueDate" type="text" class="date-input" data-language='en' required
                                     placeholder="MM/YYYY" data-min-view="months" data-view="months"
-                                    data-date-format="MM/yyyy">
+                                    data-date-format="mm/yyyy" name="txtExpiryDate">
                             </div>
                             <div class="col-6">
                                 <label for="txtCVV">CVV</label>
-                                <input id="txtCVV" type="text" required placeholder="3 số CVV">
+                                <input id="txtCVV" type="text" required placeholder="3 số CVV" name="txtCardCVC">
                             </div>
                         </div>
                         <div class="info-row">
                             <label for="txtCardName">Tên trên thẻ</label>
-                            <input id="txtCardIName" type="text" required placeholder="Tên trên thẻ">
+                            <input id="txtCardIName" type="text" required placeholder="Tên trên thẻ" name="txtCardHolderName">
                         </div>
                     </div>
                     <div class="price-detail-coutainter">
                         <div id="price-detail-title-container">
                             <span id="price-detail-title">Chi tiết giá</span>
                         </div>
+                        {{#if adultName}}
                         <div class="row">
                             <div class="col-5">
-                                <span>Vietjet (Người lớn)</span>
+                                <span>{{chuyenBay.HangHangKhong}} (Người lớn)</span>
                             </div>
                             <div class="col-2">
-                                <span>1</span>
+                                <span>{{adult}}</span>
                             </div>
                             <div class="col-5 col-5-last">
-                                <span>VND 1.554.720</span>
+                                <span>{{hienThiTien chuyenBay.NguoiLon}}</span>
                             </div>
                         </div>
+                        {{/if}}
+                        {{#if kidName}}
                         <div class="row">
                             <div class="col-5">
-                                <span>Vietjet (Trẻ em)</span>
+                                <span>{{chuyenBay.HangHangKhong}} (Trẻ em)</span>
                             </div>
                             <div class="col-2">
-                                <span>1</span>
+                                <span>{{kid}}</span>
                             </div>
                             <div class="col-5 col-5-last">
-                                <span>VND 1.514.485</span>
+                                <span>{{hienThiTien chuyenBay.TreEm}}</span>
                             </div>
                         </div>
+                        {{/if}}
+                        {{#if babyName}}
                         <div class="row">
                             <div class="col-5">
-                                <span>Vietjet (Em bé)</span>
+                                <span>{{chuyenBay.HangHangKhong}} (Em bé)</span>
                             </div>
                             <div class="col-2">
-                                <span>1</span>
+                                <span>{{baby}}</span>
                             </div>
                             <div class="col-5 col-5-last">
-                                <span>VND 109.205</span>
+                                <span>{{hienThiTien chuyenBay.EmBe}}</span>
                             </div>
                         </div>
+                        {{/if}}
                         <div class="row">
                             <div class="col-5">
                                 <span>Hành lý</span>
@@ -159,7 +172,7 @@
                             <div class="col-2">
                             </div>
                             <div class="col-5 col-5-last">
-                                <span>VND 0</span>
+                                <span>{{tongTienHanhLy adultLuggage kidLuggage babyLuggage}}</span>
                             </div>
                         </div>
                         <div id="price-line"></div>
@@ -170,7 +183,7 @@
                             <div class="col-2">
                             </div>
                             <div class="col-5 col-5-last">
-                                <span>VND 3.178.410</span>
+                                <span>{{tongTienThanhToan adult chuyenBay.NguoiLon kid chuyenBay.TreEm baby chuyenBay.EmBe adultLuggage kidLuggage babyLuggage}}</span>
                             </div>
                         </div>
                     </div>
@@ -190,51 +203,61 @@
                     <span id="flight-id-title">Mã chuyến bay</span>
                     <span id="flight-id-detail">467688254</span>
                 </div>
-                <span class="depart-date-text">T4, 15 Th05 2019</span>
+                <span class="depart-date-text">{{getNgayBay lichTrinh.[0].GioCatCanh}}</span>
                 <div class="journey-info">
                     <div class="place-and-time">
                         <div class="sub-place-time1">
-                            <span style="font-weight: 500">Da Lat</span>
-                            <span>8:30</span>
+                            <span style="font-weight: 500">{{lichTrinh.[0].DiemKhoiHanh}}</span>
+                            <span>{{getGioBay lichTrinh.[0].GioCatCanh}}</span>
                         </div>
                         <span class="arrow1">→</span>
                         <div class="sub-place-time2">
-                            <span style="font-weight: 500">Hanoi</span>
-                            <span>12:20</span>
+                            <span style="font-weight: 500">{{diemHaCanh chuyenBay.SoChangBay lichTrinh}}</span>
+                            <span>{{gioHaCanh chuyenBay.SoChangBay lichTrinh}}</span>
                         </div>
                     </div>
                     <div class="other-info">
-                        <span>3h50m</span>
+                        <span>{{tongGioBay chuyenBay.TongGioBay}}</span>
                         <div class="transit-detail">
                             <div class="circle"></div>
-                            <span>1 điểm dừng</span>
+                            <span >1 điểm dừng</span>
                         </div>
                     </div>
                 </div>
                 <div class="airline-info">
                     <div class="airline-info-text">
-                        <span style="font-size: 15px;font-weight: 500">Vietjet Air</span>
-                        <span style="font-weight: 300">Phổ thông</span>
+                        <span style="font-size: 15px;font-weight: 500">{{chuyenBay.HangHangKhong}}</span>
+                        <span style="font-weight: 300" id="class-no-2">Phổ thông</span>
                     </div>
-                    <img src="/images/guest/VietJet.png" height="30px" width="auto">
+                    <img src="{{chuyenBay.Logo}}" height="30px" width="auto">
                 </div>
-                <div class="transit-remind">
-                    <span><b>9h30</b>&nbsp;&nbsp;quá cảnh tại Phú Quốc </span>
-                </div>
+                {{#each lichTrinh}}
+                    {{#ifCond this.ThuTu '<' ../this.lichTrinh.length}}
+                    <div class="transit-remind">
+                        <span><b>{{getGioBay this.GioHaCanh}}</b>&nbsp;&nbsp;quá cảnh tại {{this.DiemDen}} </span>
+                    </div>
+                    {{/ifCond}}
+                {{/each}}
                 <div id="passenger-list">
                     <span id="passenger-list-title">Danh sách hành khách</span>
+                    {{#each adultName}}
                     <div class="passenger-list-element">
-                        <span>Nguyen Van A</span>
+                        <span>{{this}}</span>
                         <span>Người lớn</span>
                     </div>
+                    {{/each}}
+                    {{#each kidName}}
                     <div class="passenger-list-element">
-                        <span>Tran Thi B</span>
+                        <span>{{this}}</span>
                         <span>Trẻ em</span>
                     </div>
+                    {{/each}}
+                    {{#each babyName}}
                     <div class="passenger-list-element">
-                        <span>Le Van C</span>
+                        <span>{{this}}</span>
                         <span>Em bé</span>
                     </div>
+                    {{/each}}
                 </div>
                 <div class="btn-detail-container">
                     <span>Chi tiết</span>
@@ -247,5 +270,22 @@
 <script>
     $("#stage-two-num").addClass("index-active");
     $("#stage-two-text").addClass("stage-name-active");
+    $(document).ready(function () {
+        var classs = $("#modal2-class").data("id");
+        switch (classs) {
+            case 1: $("#modal2-class").text("Phổ thông"); $("#class-no-2").text("Phổ thông"); break;
+            case 2: $("#modal2-class").text("Thương gia"); $("#class-no-2").text("Thương gia"); break;
+            case 3: $("#modal2-class").text("Hạng nhất"); $("#class-no-2").text("Hạng nhất"); break;
+            case 4: $("#modal2-class").text("Phổ thông đặc biệt"); $("#class-no-2").text("Phổ thông đặc biệt"); break;
+        }
+        var n = $("#modal2-location-transit").data("numtransit");
+        if (n == "0") {
+            $("#modal2-location-transit").text("Bay thẳng");
+            $(".transit-detail span").text("Bay thẳng")
+        } else {
+            $("#modal2-location-transit").text(n + " điểm dừng");
+            $(".transit-detail span").text(n + " điểm dừng");
+        }
+    })
 </script>
 {{> "guest/footer"}}

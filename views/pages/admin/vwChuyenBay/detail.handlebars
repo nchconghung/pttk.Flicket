@@ -13,14 +13,14 @@
                          <div class="col"> 
                             <span><i class="far fa-user-circle" style="margin-right: 5px;"></i>Mã chuyến bay</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="{{chuyenbay.Ma}}" disabled>
+                                <input class="input1" type="text" value="{{chuyenbay.MaChuyenBay}}" disabled>
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                         <div class="col">
                             <span><i class="fas fa-coins" style="margin-right: 5px;"></i>Hãng hàng không</span>
                             <div class="wrap-input1 validate-input" >   
-                                <input class="input1" type="text" disabled value="{{thanhvien.DiemThuong}}" >
+                                <input class="input1" type="text" disabled value="{{chuyenbay.HHK}}" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
@@ -30,14 +30,14 @@
                         <div class="col"> 
                                 <span><i class="far fa-id-card" style="margin-right: 5px;"></i>Loại máy bay</span>
                                 <div class="wrap-input1 validate-input">
-                                    <input class="input1" type="email" value="{{thanhvien.CMND}}" disabled>
+                                    <input class="input1" type="email" value="{{chuyenbay.LoaiMayBay}}" disabled>
                                     <span class="shadow-input1"></span>
                                 </div>
                             </div>
                             <div class="col">
                                 <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Tổng giờ bay</span>
                                 <div class="wrap-input1 validate-input" >   
-                                    <input class="input1" type="text" disabled value="{{thanhvien.HoTen}}" >
+                                    <input class="input1" type="text" disabled value="{{TongGioBay}}" >
                                     <span class="shadow-input1"></span>
                                 </div>
                         </div>
@@ -47,14 +47,14 @@
                         <div class="col"> 
                             <span><i class="far fa-envelope" style="margin-right: 5px;"></i>Điểm khởi hành</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="email" value="{{thanhvien.Email}}" disabled>
+                                <input class="input1" type="email" value="{{chuyenbay.DiemKhoiHanh}}" disabled>
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                         <div class="col">
                             <span><i class="fas fa-phone" style="margin-right: 5px;"></i>Điểm đến</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="{{thanhvien.SDT}}" disabled>
+                                <input class="input1" type="text" value="{{chuyenbay.DiemDen}}" disabled>
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="row" style="margin-bottom:50px;">
-                <span style="font-size:18px;color:#721777;font-weight: bold;">
+                <span style="font-size:18px;color:#721777;font-weight: bold;margin-left:60px;">
                     Bảng giá vé
                 </span>  
                 <table class="table dataTable no-footer" style="padding-right: 50px;padding-left:50px;">
@@ -76,17 +76,19 @@
                         <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Em bé</th>
                     </tr>
                     <tr>      
-                        <td>{{bgv}.HangGhe}}</td>    
-                        <td>{{bgv.LoaiHangGhe}}</td>
-                        <td>{{bgv.NguoiLon}}</td>
-                        <td>{{bgv.TreEm}}</td>
-                        <td>{{bgv.EmBe}}</td>
+                        {{#each bgv}}
+                            <td>{{this.HangGhe}}</td>    
+                            <td>{{this.LoaiHangGhe}}</td>
+                            <td>{{this.NguoiLon}}</td>
+                            <td>{{this.TreEm}}</td>
+                            <td>{{this.EmBe}}</td>
+                        {{/each}}
                     </tr>
                 </table>
             </div>
             <br>
             <div class="row" style="margin-bottom:50px;">
-                <span style="font-size:18px;color:#721777;font-weight: bold;">
+                <span style="font-size:18px;color:#721777;font-weight: bold;margin-left:60px;">
                     Lịch trình
                 </span>  
                 <table class="table dataTable no-footer" style="padding-right: 50px;padding-left:50px;">
@@ -98,14 +100,18 @@
                         <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giờ hạ cánh</th>
                         <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thời gian bay</th>
                     </tr>
-                    <tr>      
-                        <td>{{lichtrinh.ThuTu}}</td>    
-                        <td>{{lichtrinh.DiemKhoiHanh}}</td>
-                        <td>{{lichtrinh.GioCatCanh}}</td>
-                        <td>{{lichtrinh.DiemDen}}</td>
-                        <td>{{lichtrinh.GioHaCanh}}</td>
-                        <td>{{lichtrinh.ThoiGianBay}}</td>
-                    </tr>
+                    <tbody>
+                        {{#each lichtrinh}}
+                            <tr> 
+                                <td>{{this.ThuTu}}</td>    
+                                <td>{{this.DiemKhoiHanh}}</td>
+                                <td>{{this.GioCatCanh}}</td>
+                                <td>{{this.DiemDen}}</td>
+                                <td>{{this.GioHaCanh}}</td>
+                                <td>{{this.ThoiGianBay}}</td>
+                            <tr>
+                        {{/each}}
+                    </tbody>
                 </table>
             </div>
         </div>

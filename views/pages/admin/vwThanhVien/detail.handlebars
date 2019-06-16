@@ -13,66 +13,92 @@
                          <div class="col"> 
                             <span><i class="far fa-user-circle" style="margin-right: 5px;"></i>Tài khoản</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="{{thanhvien.TaiKhoan}}" disabled>
+                                <input class="input1" type="text" value="nchconghung" disabled>
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                         <div class="col">
                             <span><i class="fas fa-coins" style="margin-right: 5px;"></i>Điểm thưởng</span>
                             <div class="wrap-input1 validate-input" >   
-                                <input class="input1" type="text" disabled value="{{thanhvien.DiemThuong}}" >
+                                <input class="input1" type="text"  value="0" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col"> 
-                                <span><i class="far fa-id-card" style="margin-right: 5px;"></i>CMND</span>
-                                <div class="wrap-input1 validate-input">
-                                    <input class="input1" type="email" value="{{thanhvien.CMND}}" disabled>
-                                    <span class="shadow-input1"></span>
-                                </div>
+                        <div class="col">
+                            <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Họ tên</span>
+                            <div class="wrap-input1 validate-input" >   
+                                <input class="input1" type="text"  value="Nguyễn Công Hưng" >
+                                <span class="shadow-input1"></span>
                             </div>
-                            <div class="col">
-                                <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Họ tên</span>
-                                <div class="wrap-input1 validate-input" >   
-                                    <input class="input1" type="text" disabled value="{{thanhvien.HoTen}}" >
-                                    <span class="shadow-input1"></span>
-                                </div>
                         </div>
-                    </div>
-                    <div class="row" >
-                        
                         <div class="col"> 
                             <span><i class="far fa-envelope" style="margin-right: 5px;"></i>Email</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="email" value="{{thanhvien.Email}}" disabled>
+                                <input class="input1" type="email" value="nchconghung@gmail.com" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
+                    </div>
+                    <div class="row" >
                         <div class="col">
                             <span><i class="fas fa-phone" style="margin-right: 5px;"></i>SĐT</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="{{thanhvien.SDT}}" disabled>
+                                <input class="input1" type="text" value="0969327333" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
-                        
+                        <div class="col">
+                            <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Ngày sinh</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="date" value="" >
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
                     </div>
+                    <span><i class="fas fa-venus-mars" style="margin-right: 5px;"></i>Giới tính:</span>
+                    <div class="wrap-input1 validate-input" style="width: 270px;">
+                        <select class="input1 select-search-fk " aria-placeholder="Giới tính" name="GioiTinh">
+                            <option value="1">Nam</option>
+                            <option value="0">Nữ</option>
+                        </select>
+                        <span class="shadow-input1"></span>
+                    </div>
+                    <hr>
+                    <span class="contact1-form-title">
+                        Thông tin thẻ tín dụng
+                    </span>
                     <div class="row">
                         <div class="col">
-                            <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Giới tính</span>
+                            <span><i class="far fa-id-badge" style="margin-right: 5px;"></i>Số hiệu thẻ:</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="{{thanhvien.LoaiGioiTinh}}" disabled>
+                                <input class="input1" type="email" value="{{thanhvien.Email}}" >
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Họ tên</span>
+                            <div class="wrap-input1 validate-input" >   
+                                <input class="input1" type="text"  value="{{thanhvien.HoTen}}" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
 
+                    </div>
+                    <div class="row" >
                         <div class="col">
-                            <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Ngày sinh</span>
+                            <span><i class="fas fa-pencil-alt" style="margin-right: 5px;"></i>Mã CSC</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="{{thanhvien.NgaySinh}}" disabled>
+                                <input class="input1" type="text" value="{{thanhvien.SDT}}" >
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Ngày hết hạn</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="text" value="{{thanhvien.NgaySinh}}" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
@@ -100,10 +126,25 @@
                                                 <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Ngày bay</th>
                                                 <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Điểm khởi hành</th>
                                                 <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Điểm đến</th>
-                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Chi tiết vé</th>
+                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Công cụ</th>
                                             </tr>
                                             </thead>
                                             <tbody>  
+                                                <tr role="row" >
+                                                        <td class="sorting_1">1</td>  
+                                                        <td>8980465</td>         
+                                                        <td>VN3435990</td>
+                                                        <td>20:30:00 13-06-2019</td>
+                                                        <td>16:30:00 14-06-2019</td>
+                                                        <td>Hà Nội</td>
+                                                        <td>Hồ Chí Minh</td>
+                                                        <td >
+                                                            <form action="/admin/history/delete" method="POST">
+                                                                <button class="btn btn-success" type="submit" >Chi tiết</button>
+                                                                <input type="hidden" name="IdGiaoDich" value="{{this.IdGiaoDich}}">
+                                                            </form>
+                                                        </td>
+                                                    </tr>          
                                                 {{#each history}}
                                                     <tr role="row" >
                                                         <td class="sorting_1">{{this.IdGiaoDich}}</td>  
@@ -115,7 +156,10 @@
                                                         <td>{{this.DiemDen}}</td>
                                                         <td>
                                                         <td >
-                                                            <a class="badge badge-info" href="/admin/ve/{{this.MaVe}}/detail/">Xem</a>
+                                                            <form action="/admin/history/delete" method="POST">
+                                                            <input type="hidden" name="IdGiaoDich" value="{{this.IdGiaoDich}}">
+                                                                <button class="btn btn-danger" type="submit">Xóa</button>
+                                                            </form>
                                                         </td>
                                                     </tr>                        
                                                 {{/each}}
@@ -127,6 +171,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>

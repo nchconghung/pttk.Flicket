@@ -2,9 +2,9 @@ var db = require("../utils/db-mysql");
 
 module.exports = {
     all: () =>{
-        return db.load(`select Id,TaiKhoan,DATE_FORMAT(LanDangNhapCuoi,"%H:%m:%s %d-%c-%Y") as LanDangNhapCuoi from Admin`);
+        return db.load(`select Id,TaiKhoan from Admin`);
     },
-
+    // DATE_FORMAT(LanDangNhapCuoi,"%H:%m:%s %d-%c-%Y") as LanDangNhapCuoi
     single: id => {
         return db.load(`select * from Admin where Id=${id}`);
     },

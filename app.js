@@ -6,7 +6,6 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var exphbs = require("express-handlebars");
 
-
 var bodyParser = require('body-parser');
 
 var handlebars  = require('./helpers/handlebars.js')(exphbs,path);

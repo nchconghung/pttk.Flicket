@@ -6,11 +6,9 @@
             <div class="card-body">
                 <form class="d-flex justify-content-center">
                     <select class="custom-select select-search-fk" >
-                        <option value="" disabled selected>Lựa chọn</option>
-                        <option value="cmnd">CMND</option>
+                        <option value="" selected>Id</option>
                         <option value="hoten" >Họ tên</option>
-                        <option value="matv">Mã thành viên</option>
-                        <option value="ve">Mã vé đặt hiện tại</option>
+                        <option value="ve">Email</option>
                     </select>    
                     <input type="text" class="form-control input-search-fk" placeholder="Keyword...">
                     <btn class="btn btn-success btn-search-fk"><i class="fas fa-search"></i></btn>
@@ -27,37 +25,34 @@
                                 <thead>
                                 <tr role="row">
                                     <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
-                                    <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >CMND</th>
                                     <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Họ tên</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thành Viên</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Vé đặt hiện tại</th>
                                     <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Email</th>
                                     <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >SĐT</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giới tính</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Ngày Sinh</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thành viên</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thời điểm giao dịch</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giao dịch</th>
                                     <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Công cụ</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                         <tr role="row" >
                                             <td class="sorting_1">1</td>           
-                                            <td>281144960</td>
                                             <td>Nguyễn Công Hưng</td>
+                                            <td>nchconghung@gmail.com</td>
+                                            <td>0969327333</td>
                                             <td>
                                                 <a class="badge badge-info" href="#" style="font-weight: bold;font-size:13px;">Xem</a>
                                             </td>
-                                            <td>45238</td>
-                                            <td>nchconghung@gmail.com</td>
-                                            <td>0969327333</td>
-                                            <td>Nam</td>
-                                            <td>01-06-1998</td>
+                                            <td>14:30:00 14-6-2019</td>
+                                            <td>
+                                                <a class="badge badge-info" href="#" style="font-weight: bold;font-size:13px;">Chi tiết</a>
+                                            </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Action
+                                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-cog"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Xem vé hiện tại</a>
                                                         <a class="dropdown-item" href="#">Chỉnh sửa</a>
                                                         <div class="dropdown-divider"></div>
                                                         <a class="dropdown-item" href="#">Xóa</a>
@@ -113,7 +108,7 @@
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Action
+                                                       <i class="fas fa-cog"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="#">Xem chi tiết vé</a>

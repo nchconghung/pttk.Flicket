@@ -29,42 +29,62 @@ router.get("/index",(req,res) => {
         });
 })
 
-router.get('/:cmnd/detail',(req,res)=>{
-    var cmnd = req.params.cmnd;
-    
-    thongtinkhachhangModel.single(cmnd).then(rows => {
-        if (rows.length >0){
-            res.render('admin/vwKhachHang/detail',{
-                layout: 'admin',
-                error: false,
-                khachhang: rows[0]
-            });
-        } else {
-            res.render('admin/vwKhachHang/detail',{
-                layout: 'admin',
-                error: true
-            });
-        }
-    })
+router.get("/search",(req,res) => {
+    res.render('admin/vwKhachHang/search',{
+        layout: 'admin'
+    });
 })
 
-router.get('/:cmnd/edit',(req,res)=>{
-    var id = req.params.cmnd;
+router.get('/:id/detail',(req,res)=>{
+    var id = req.params.id;
+    
+    res.render('admin/vwKhachHang/detail',{
+        layout: 'admin',
+    });
 
-    thongtinkhachhangModel.single(cmnd).then(rows => {
-        if (rows.length >0){
-            res.render('admin/vwKhachHang/edit',{
-                layout: 'admin',
-                error: false,
-                khachhang: rows[0]
-            });
-        } else {
-            res.render('admin/vwKhachHang/edit',{
-                layout: 'admin',
-                error: true
-            });
-        }
-    })
+    // thongtinkhachhangModel.single(id).then(rows => {
+    //     if (rows.length >0){
+    //         res.render('admin/vwKhachHang/detail',{
+    //             layout: 'admin',
+    //             error: false,
+    //             khachhang: rows[0]
+    //         });
+    //     } else {
+    //         res.render('admin/vwKhachHang/detail',{
+    //             layout: 'admin',
+    //             error: true
+    //         });
+    //     }
+    // })
+})
+
+
+
+router.get('/:id/edit',(req,res)=>{
+    var id = req.params.id;
+    res.render('admin/vwKhachHang/edit',{
+        layout: 'admin',
+    });
+    // thongtinkhachhangModel.single(id).then(rows => {
+    //     if (rows.length >0){
+    //         res.render('admin/vwKhachHang/edit',{
+    //             layout: 'admin',
+    //             error: false,
+    //             khachhang: rows[0]
+    //         });
+    //     } else {
+    //         res.render('admin/vwKhachHang/edit',{
+    //             layout: 'admin',
+    //             error: true
+    //         });
+    //     }
+    // })
+})
+
+router.get('/add',(req,res) => {
+    res.render('admin/vwKhachHang/add',{
+        layout: 'admin'
+    });
 })
 
 router.get('/add',(req,res) => {
@@ -84,7 +104,7 @@ router.post('/add',(req,res)=>{
     });
 })
 
-router.post('admins/update',(req,res) => {
+router.post('/update',(req,res) => {
     thongtinkhachhangModel.update(req.body).then(n => {
         res.redirect('/admin/member');
     }).catch(err => {
@@ -100,6 +120,7 @@ router.post('/delete', (req, res) => {
       console.log(err);
       res.end('error occured.')
     });
+
 })
 
 module.exports = router;

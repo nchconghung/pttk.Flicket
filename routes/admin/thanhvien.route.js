@@ -32,32 +32,34 @@ router.get("/index",(req,res) => {
 
 router.get('/:id/detail',(req,res)=>{
     var id = req.params.id;
-    
-    Promise.all([
-        thanhvienModel.detailWithId(id),
-        lichsugiaodichModel.listWithDetailByIdThanhVien(id)
-    ]).then(([detail,rows])=>{
-        if (detail.length > 0) {
-            for (var i =0;i< rows.length;i++){
-                rows[i].ThoiDiemGiaoDich = moment(rows[i].ThoiDiemGiaoDich).format('MM Do YYYY, hh:mm:ss');
-                rows[i].GioCatCanh = moment(rows[i].GioCatCanh).format('MM Do YYYY, hh:mm:ss');
-            }
-            res.render('admin/vwThanhVien/detail',{
-                result: true,
-                layout: 'admin',
-                thanhvien: detail[0],
-                history: rows
-            });
-        } else {
-            res.render('admin/vwThanhVien/detail',{
-                layout: 'admin',
-                result: false
-            });
-        }
-    }).catch(err => {
-      console.log(err);
-      res.end('error occured.')
+    res.render('admin/vwThanhVien/detail',{
+        layout: 'admin',
     });
+    // Promise.all([
+    //     thanhvienModel.detailWithId(id),
+    //     lichsugiaodichModel.listWithDetailByIdThanhVien(id)
+    // ]).then(([detail,rows])=>{
+    //     if (detail.length > 0) {
+    //         for (var i =0;i< rows.length;i++){
+    //             rows[i].ThoiDiemGiaoDich = moment(rows[i].ThoiDiemGiaoDich).format('MM Do YYYY, hh:mm:ss');
+    //             rows[i].GioCatCanh = moment(rows[i].GioCatCanh).format('MM Do YYYY, hh:mm:ss');
+    //         }
+    //         res.render('admin/vwThanhVien/detail',{
+    //             result: true,
+    //             layout: 'admin',
+    //             thanhvien: detail[0],
+    //             history: rows
+    //         });
+    //     } else {
+    //         res.render('admin/vwThanhVien/detail',{
+    //             layout: 'admin',
+    //             result: false
+    //         });
+    //     }
+    // }).catch(err => {
+    //   console.log(err);
+    //   res.end('error occured.')
+    // });
 })
 
 router.get('/search',(req,res)=>{
@@ -134,6 +136,14 @@ router.get('/add',(req,res) => {
         layout: 'admin',
         exists: false,
         search: true
+    });
+})
+
+router.get('/add/:id/infor',(req,res)=>{
+    var id = req.params.id;
+    console.log("infor");
+    res.render('admin/vwThanhVien/add_infor',{
+        layout: 'admin'
     });
 })
 

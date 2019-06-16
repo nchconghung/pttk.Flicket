@@ -29,7 +29,6 @@ router.get("/index",(req,res) => {
             res.end("error occured.")
         });
 })
-
 router.get('edit/:id',(req,res)=>{
     var id = req.params.id;
     if (isNaN(id)){
@@ -56,23 +55,22 @@ router.get('edit/:id',(req,res)=>{
 })
 
 router.get('/add',(req,res) => {
-    
-    console.log(date);
+    console.log("add");
     res.render('admin/vwAdmin/add',{
         layout: 'admin'
     });
 })
 
 router.post('/add',(req,res)=>{
-    var now = new Date();
-    var date = moment(now).format('YYYY-MM-DD HH:mm:ss');
+    // var now = new Date();
+    // var date = moment(now).format('YYYY-MM-DD HH:mm:ss');
     console.log(date);
     var saltRounds = 10;
     bcrypt.hash(req.body.MatKhau, saltRounds, function(err, hash) {
         var member = {
             TaiKhoan: req.body.TaiKhoan,
-            MatKhau: hash,
-            LanDangNhapCuoi: date
+            MatKhau: hash
+            // LanDangNhapCuoi: date
         }
         adminModel.add(member).then(id =>{
 			res.redirect('/admin/admin/index/');

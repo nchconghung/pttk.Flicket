@@ -1,4 +1,3 @@
-
 var bcrypt = require('bcrypt');
 var thanhvienModel = require('../model/thanhvien.model');
 var khachhangModel = require('../model/thongtinkhachhanggiaodich.model');
@@ -65,12 +64,20 @@ exports.pick = function (req, res, next) {
 			listEntity.push(e);
 		}
 		var isEmpty;
-		if (listEntity.length == 0) {
+		if(listEntity.length==0){
 			isEmpty = true;
-		} else {
+		}else{
 			isEmpty = false;
 		}
-				
+		var userdata = {
+			IdChuyenBay: 0,
+			HangGhe: hangghe,
+			NguoiLon: adult,
+			TreEm: kid,
+			EmBe: baby	
+		};
+		req.session.userdata = userdata;
+		console.log(req.session);
 		res.render("guest/flight_picking", {
 			isEmpty: isEmpty,
 			list: listEntity,
@@ -101,6 +108,7 @@ exports.info = function (req, res, next) {
 	var baby = req.session.userdata.EmBe;
 	var classs = req.session.userdata.HangGhe;
 	Promise.all([chuyenBayModel.singleWithDetailById(id,classs),lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay,lichtrinh])=>{
+		req.session.userdata.IdChuyenBay = parseInt(id);
 		res.render('guest/check_info',{
 			chuyenBay: chuyenbay[0],
 			lichTrinh: lichtrinh,

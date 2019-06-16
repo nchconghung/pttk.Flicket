@@ -1206,6 +1206,7 @@ $(document).ready(function () {
         $(this).parent().parent().find('span').text(temp)
         $(this).parent().parent().removeClass('above')
         $(this).parent().parent().parent().find(".luggage-input-hidden").val($(this).val());
+        $("#voucher-input").val($(this).val());
         var rs = 0;
         $(".luggage-input-hidden").each(function(){
             rs += parseInt($(this).val());

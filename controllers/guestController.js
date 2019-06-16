@@ -6,6 +6,15 @@ var passport = require('passport');
 var chuyenBayModel = require('../model/chuyenbay.model');
 var lichTrinhModel = require('../model/lichtrinh.model');
 
+function randomString() {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 10; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 exports.index = function (req, res, next) {
 	res.render('guest/home', { title: 'Flicket' });
 }
@@ -145,6 +154,7 @@ exports.passenger_post = function (req, res, next) {
 		email: req.body.txtEmail
 	}
 	req.session.contact = contact;
+	req.session.bookingID = randomString();
 	if(Array.isArray(req.body.txtAdultName)){
 		req.session.adultName = req.body.txtAdultName;
 		req.session.adultBirth = req.body.txtAdultBirth;
@@ -191,8 +201,6 @@ exports.passenger_post = function (req, res, next) {
 		req.session.babyLuggage = [req.body.txtBabyLuggage];
 		}
 	}
-	
-	req.session.totalAmount = req.body.txtTotalAmount;
 	console.log("Passenger session:");
 	console.log(req.session);
 	//
@@ -215,7 +223,7 @@ exports.payment = function (req, res, next) {
 	var adultLuggage = req.session.adultLuggage;
 	var kidLuggage = req.session.kidLuggage;
 	var babyLuggage = req.session.babyLuggage;
-	console.log(adultName+" "+kidName+" "+babyName+" "+contactName+" "+phone+" "+email+" "+adultLuggage+" "+kidLuggage+" "+babyLuggage+" ");
+	var bookingID = req.session.bookingID;
 
 	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
 		res.render('guest/payment', {
@@ -233,7 +241,9 @@ exports.payment = function (req, res, next) {
 			email: email,
 			adultLuggage: adultLuggage,
 			kidLuggage: kidLuggage,
-			babyLuggage: babyLuggage
+			babyLuggage: babyLuggage,
+			bookingID: bookingID,
+			point: 0
 		});
 	});
 }
@@ -247,10 +257,13 @@ exports.payment_post = function (req, res, next) {
 		name: req.body.txtCardHolderName
 	}
 	req.session.card = card;
+	req.session.totalAmount = req.body.txtTotalAmount;
+	req.session.voucher = req.body.txtVoucher;
 	console.log("Payment session:");
 	console.log(req.session);
 	//
-	res.redirect("/guest/processing")
+	res.send(req.body);
+	//res.redirect("/guest/processing")
 }
 
 

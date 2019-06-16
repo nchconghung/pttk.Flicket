@@ -174,6 +174,19 @@ function hbsHelpers(hbs, path) {
             .replace('.', ',')
             .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' VND'
         )
+      },
+      tongTien: function(adultNum, adultPrice, kidNum, kidPrice, babyNum, babyPrice, adultLuggage, kidLuggage, babyLuggage, options){
+        var rs = parseInt(adultNum)*parseInt(adultPrice)+parseInt(kidNum)*parseInt(kidPrice)+parseInt(babyNum)*parseInt(babyPrice);
+        adultLuggage.forEach(function (a) {
+          rs += parseInt(a);
+        })
+        kidLuggage.forEach(function (k) {
+          rs += parseInt(k);
+        })
+        babyLuggage.forEach(function (b) {
+          rs += parseInt(b);
+        })
+        return rs;
       }
     }
   });

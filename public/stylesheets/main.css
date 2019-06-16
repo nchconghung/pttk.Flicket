@@ -23,8 +23,8 @@ a:hover {
   margin-left: auto;
 }
 .luggage-input-hidden{
-  height: 0px;
-  width: 0px;
+  height: 0px !important;
+  width: 0px !important;
   padding: 0px !important;
-  border: none;
+  border: none !important;
 }

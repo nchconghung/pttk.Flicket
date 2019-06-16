@@ -62,7 +62,7 @@ router.get('/add',(req,res) => {
 
 router.post('/add',(req,res)=>{
     adminModel.add(req.body).then(id=>{
-        res.redirect('admin/admin/index');
+        res.redirect('/admin/admin/index/');
     }).catch(err => {
         console.log(err),
         res.end('error occured.')

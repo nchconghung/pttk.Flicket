@@ -9,8 +9,30 @@ module.exports = {
     //     return db.load(`select t.*,count(l.IdGiaoDich) as soLanGiaoDich from ThanhVien t left join LichSuGiaoDich l on c.IdThanhVien=p.IdThanhVien group by `);
     // },
 
+    index: () =>{
+        return db.load(`SELECT tv.IdThanhVien,tv.TaiKhoan,tv.DiemThuong
+                        FROM ThanhVien tv  `);
+    },
+
+    searchWithKey: keyword =>{
+        return db.load(`SELECT tv.IdThanhVien,tv.TaiKhoan,tv.DiemThuong
+                        FROM	ThanhVien tv 
+                        WHERE tv.TaiKhoan like '%${keyword}%'
+                        `);
+    },
+
+    detailWithId: id => {
+        return db.load(`SELECT tv.*,kh.*, IF (kh.GioiTinh < 1,'Nữ','Nam') as LoaiGioiTinh
+                        FROM ThanhVien tv,ThongTinKhachHangGiaoDich kh
+                        WHERE tv.IdThanhVien = kh.IdThanhVien and tv.IdThanhVien  = ${id}`);
+    },
+
     single: id => {
-        return db.load(`select * form ThanhVien where id=${id}`);
+        return db.load(`select * from ThanhVien where id=${id}`);
+    },
+
+    singleByTaiKhoan: tk => {
+        return db.load(`select * from ThanhVien where TaiKhoan like '${tk}'`);
     },
 
     add: entity =>{
@@ -18,7 +40,7 @@ module.exports = {
     },
 
     update: entity =>{
-        return db.update(`ThanhVien`,`CMND`,entity);
+        return db.update(`ThanhVien`,`IdThanhVien`,entity);
     },
 
     delete: cmnd => {

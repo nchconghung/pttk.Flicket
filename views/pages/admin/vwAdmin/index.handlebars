@@ -23,17 +23,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr role="row" >
-                                    <td class="sorting_1">1</td>           
-                                    <td>nchconghung</td>
-                                    <td>2019-06-05</td>
-                                </tr>
                                 {{#each list}}
                                     <tr role="row" >
-                                        <td class="sorting_1">1</td>           
-                                        <td>nchconghung</td>
-                                        <td>2019-06-05</td>
-                                        
+                                        <td class="sorting_1">{{this.Id}}</td>           
+                                        <td>{{this.TaiKhoan}}</td>
+                                        <td>{{this.LanDangNhapCuoi}}</td>
                                     </tr>
                                 {{/each}}
                             </tbody>

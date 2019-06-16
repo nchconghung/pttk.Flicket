@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="stylesheets/pages/admin/form-style.css">
+<link rel="stylesheet" href="/stylesheets/pages/admin/form-style.css">
 
 <!-- partial -->
 <div class="main-panel">
@@ -13,14 +13,14 @@
                          <div class="col"> 
                             <span><i class="far fa-user-circle" style="margin-right: 5px;"></i>Tài khoản</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="nchconghung" >
+                                <input class="input1" type="text" value="{{thanhvien.TaiKhoan}}" disabled>
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                         <div class="col">
                             <span><i class="fas fa-coins" style="margin-right: 5px;"></i>Điểm thưởng</span>
                             <div class="wrap-input1 validate-input" >   
-                                <input class="input1" type="text"  value="250" >
+                                <input class="input1" type="text" disabled value="{{thanhvien.DiemThuong}}" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
@@ -30,14 +30,14 @@
                         <div class="col"> 
                                 <span><i class="far fa-id-card" style="margin-right: 5px;"></i>CMND</span>
                                 <div class="wrap-input1 validate-input">
-                                    <input class="input1" type="email" value="281144960" >
+                                    <input class="input1" type="email" value="{{thanhvien.CMND}}" disabled>
                                     <span class="shadow-input1"></span>
                                 </div>
                             </div>
                             <div class="col">
                                 <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Họ tên</span>
                                 <div class="wrap-input1 validate-input" >   
-                                    <input class="input1" type="text"  value="Nguyễn Công Hưng" >
+                                    <input class="input1" type="text" disabled value="{{thanhvien.HoTen}}" >
                                     <span class="shadow-input1"></span>
                                 </div>
                         </div>
@@ -47,14 +47,14 @@
                         <div class="col"> 
                             <span><i class="far fa-envelope" style="margin-right: 5px;"></i>Email</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="email" value="nchconghung@gmail.com" >
+                                <input class="input1" type="email" value="{{thanhvien.Email}}" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                         <div class="col">
                             <span><i class="fas fa-phone" style="margin-right: 5px;"></i>SĐT</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="0969327333" >
+                                <input class="input1" type="text" value="{{thanhvien.SDT}}" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                         <div class="col">
                             <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Giới tính</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="Nam" >
+                                <input class="input1" type="text" value="{{thanhvien.LoaiGioiTinh}}" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                         <div class="col">
                             <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Ngày sinh</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="01/06/1998" >
+                                <input class="input1" type="text" value="{{thanhvien.NgaySinh}}" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
@@ -83,8 +83,7 @@
                     </span>  
                 </div>
             </div>
-
-                <div class="row">
+                <div class="row" style="margin-bottom:50px;">
                     <div class="col-12">
                         <div class="table-responsive">
                             <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
@@ -105,52 +104,23 @@
                                             </tr>
                                             </thead>
                                             <tbody>  
-                                                <tr role="row" >
-                                                        <td class="sorting_1">1</td>  
-                                                        <td>345279</td>         
-                                                        <td>VNA432545</td>
-                                                        <td>2019-06-01 13:23:00</td>
-                                                        <td>2019-06-05 12:00:00</td>
-                                                        <td>Hà Nội</td>
-                                                        <td>Moskva</td>
+                                                {{#each history}}
+                                                    <tr role="row" >
+                                                        <td class="sorting_1">{{this.IdGiaoDich}}</td>  
+                                                        <td>{{this.MaVe}}</td>         
+                                                        <td>{{this.MaChuyenBay}}</td>
+                                                        <td>{{this.ThoiDiemGiaoDich}}</td>
+                                                        <td>{{this.GioCatCanh}}</td>
+                                                        <td>{{this.DiemKhoiHanh}}</td>
+                                                        <td>{{this.DiemDen}}</td>
+                                                        <td>
                                                         <td >
-                                                            <btn class="btn btn-success">Xóa</btn>
+                                                            <form action="/admin/history/delete" method="POST">
+                                                            <input type="hidden" name="IdGiaoDich" value="{{this.IdGiaoDich}}">
+                                                                <button class="btn btn-danger" type="submit">Xóa</button>
+                                                            </form>
                                                         </td>
                                                     </tr>                        
-                                                    <tr role="row">
-                                                        <td class="sorting_1">2</td>  
-                                                        <td>325626</td>         
-                                                        <td>VNA432675</td>
-                                                        <td>2019-06-10 20:12:00</td>
-                                                        <td>2019-06-12 14:00:00</td>
-                                                        <td>Moskva</td>
-                                                        <td>Hồ Chí Minh</td>
-                                                        <td >
-                                                            <btn class="btn btn-success">Xóa</btn>
-                                                        </td>
-                                                    </tr>         
-                                                {{#each list}}
-                                                    <tr role="row" >
-                                                        <td class="sorting_1">1</td> 
-                                                        <td>45238</td>          
-                                                        <td>VNA432545</td>
-                                                        <td>3500000</td>
-                                                        <td>2019-06-05 12:00:00</td>
-                                                        <td>Hà Nội</td>
-                                                        <td>Moskva</td>
-                                                        <td>
-                                                            <div class="btn-group">
-                                                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    Lựa chọn
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="#">Xem chi tiết vé</a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="#">Xóa</a>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
                                                 {{/each}}
                                             </tbody>
                                         </table>

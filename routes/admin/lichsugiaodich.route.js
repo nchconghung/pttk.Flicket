@@ -30,9 +30,9 @@ router.post('/update',(req,res) => {
 })
 
 router.post('/delete', (req, res) => {
-    var id = req.params.id;
+    var id = req.body.IdGiaoDich;
     lichSuGiaoDichModel.delete(req.body.IdGiaoDich).then(n => {
-      res.redirect('admin/member/'+id+'/detail');
+      res.redirect('admin/member/'+id+'/edit');
     }).catch(err => {
       console.log(err);
       res.end('error occured.')

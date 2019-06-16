@@ -1,3 +1,9 @@
+
+var bcrypt = require('bcrypt');
+var thanhvienModel = require('../model/thanhvien.model');
+var khachhangModel = require('../model/thongtinkhachhanggiaodich.model');
+var passport = require('passport');
+	
 var chuyenBayModel = require('../model/chuyenbay.model');
 var lichTrinhModel = require('../model/lichtrinh.model');
 
@@ -12,6 +18,7 @@ exports.pick_post = function (req, res, next) {
 	var adult = parseInt(req.body.txtAdult);
 	var kid = parseInt(req.body.txtKid);
 	var baby = parseInt(req.body.txtBaby);
+
 	Promise.all([
 		chuyenBayModel.listWithDetailByParams(diemdi, diemden, ngaydi, hangghe),
 		lichTrinhModel.listWithDetailByParams(diemdi, diemden, ngaydi, hangghe),
@@ -38,6 +45,13 @@ exports.pick_post = function (req, res, next) {
 		}else{
 			isEmpty = false;
 		}
+		var userdata = {
+			HangGhe: hangghe,
+			NguoiLon: adult,
+			TreEm: kid,
+			EmBe: baby
+		};
+		req.session.userdata = userdata;
 		res.render("guest/flight_picking", {
 			isEmpty: isEmpty,
 			list: listEntity,
@@ -137,7 +151,87 @@ exports.processing = function (req, res, next) {
 exports.signup = function (req, res, next) {
 	res.render('guest/sign_up');
 }
-exports.user = function (req, res, next) {
+exports.signup_post = function(req,res,next){
+    var saltRounds = 10;
+    bcrypt.hash(req.body.MatKhau, saltRounds, function(err, hash) {
+        var member = {
+            TaiKhoan: req.body.TaiKhoan,
+            MatKhau: hash
+        }
+        thanhvienModel.add(member).then(id =>{
+            var customer = {
+                CMND: req.body.CMND,
+                IdThanhVien: id
+            };
+            khachhangModel.add(customer).then(id => {
+                res.redirect('/guest/:'+id+'/edit');
+            }).catch(err => {
+                console.log(err);
+                res.end("error occured.")
+            });
+        }).catch(err => {
+            console.log(err);
+            res.end("error occured.")
+        });
+    });
+}
+exports.availabe_cmnd = function(req,res,next){
+    var cmnd = req.query.CMND;
+    khachhangModel.single(cmnd).then(rows => {
+        if (rows.length > 0){
+            return res.json(false);
+        } else {
+            return res.json(true);
+        }
+    });
+}
+exports.availabe_username = function(req,res,next){
+    var tk = req.query.TaiKhoan;
+    thanhvienModel.singleByTaiKhoan(tk).then(rows => {
+        if (rows.length > 0){
+            return res.json(false);
+        } else {
+            return res.json(true);
+        }
+    });
+}
+exports.signin_post = function(req,res,next){
+    passport.authenticate('local', (err, user, info) => {
+        if (err)
+        {
+            res.end('error occured.')
+        }
+          
+    
+        if (!user) {
+            res.end(info.message)
+            // return res.render('/guest/');
+        //   return res.render('vwAccount/login', {
+        //     layout: false,
+        //     err_message: info.message
+        //   })
+        }
+    
+        req.logIn(user, err => {
+            if (err){
+                // return next(err);
+                res.end('error occured.');
+            }
+            req.session.username=user.TaiKhoan;
+            req.session.pass = user.MatKhau;
+          return res.redirect('/guest/info');
+        });
+      })(req, res, next);
+}
+
+exports.signout_post = function(req,res,next){
+    console.log("logout");
+    req.logOut();
+    res.redirect('/guest/');
+}
+
+exports.user = function(req,res,next){
+	console.log(req.session);
 	res.render('guest/user');
 }
 exports.ticket = function (req, res, next) {

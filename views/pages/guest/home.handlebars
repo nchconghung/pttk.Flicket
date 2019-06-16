@@ -10,24 +10,49 @@
                     <option value="">USD</option>
                 </select>
             </div>
-            <div class="navbar-item signIn-container">
-                <a class="nav-link main-signInBTN" href="#">Đăng nhập</a>
-                <div id="signIn-model">
-                    <form>
-                        <p class="signInTitle">Đăng nhập tài khoản</p>
-                        <label class="signInsubTitle" for="emailSignInInput">Email</label>
-                        <input type="text" class="signInInput" id="emailSignInInput" required>
-                        <label class="signInsubTitle" for="passwordSignInInput">Password</label>
-                        <input type="text" id="passwordSignInInput" class="signInInput" required>
-                        <button type="submit" class="btn-signIn">Đăng nhập</button>
-                    </form>
+            {{#if isAuthenticated}}
+                <form id="frmSignout" action="/guest/signout" method="POST"></form>
+                <div class="navbar-item">
+                    <div class="navbar-item" id="user-btn-container">
+                    <div class="user-btn">
+                        <img src="/images/guest/users1.png" height="12px" width="auto">
+                        <span>{{authUser.TaiKhoan}}</span>
+                    </div>
+                    </div>
+                    <div id="user-instant-panel-container">
+                        <div id="user-instant-panel">
+                            <a class="user-instant-panel-element" href="/guest/info">
+                                <span>Tùy chỉnh</span>
+                                <img src="/images/guest/edit.png">
+                            </a>
+                            <a class="user-instant-panel-element" href="javascript: $('#frmSignout').submit();">
+                                <span>Đăng xuất</span>
+                                <img src="/images/guest/exit.png">
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="navbar-item">
-                <div id="signUp">
-                    <a class="nav-link" href="#">Đăng ký</a>
+            {{else}}
+                <div class="navbar-item signIn-container">
+                    <a class="nav-link main-signInBTN" href="#">Đăng nhập</a>
+                    <div id="signIn-model">
+                        <form action="/guest/signin" method="POST">
+                            <p class="signInTitle">Đăng nhập tài khoản</p>
+                            <label class="signInsubTitle" for="emailSignInInput">Tài khoản</label>
+                            <input type="text" class="signInInput" id="emailSignInInput" name="username" id="username" required>
+                            <label class="signInsubTitle" for="passwordSignInInput">Mật khẩu</label>
+                            <input type="password" id="passwordSignInInput" class="signInInput" name="password" id="password" required>
+                            <button type="submit" class="btn-signIn">Đăng nhập</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+                <div class="navbar-item">
+                    <div id="signUp">
+                        <a class="nav-link" href="#">Đăng ký</a>
+                    </div>
+                </div>
+            {{/if}}
+
         </div>
     </nav>
     <div class="relative-container">
@@ -519,7 +544,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" id="btn-home-submit-box">
+                            <button type="submit" id="btn-home-submit-box">
                                 <img class="btn-home-submit" src="/images/guest/paper-plane.png">
                             </button>
                         </div>

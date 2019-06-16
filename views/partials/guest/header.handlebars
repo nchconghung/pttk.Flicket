@@ -3,12 +3,6 @@
         <img src="/images/guest/logo/Flicket2.png" width="100" height="auto">
     </a>
     <div class="navbar-content">
-        <div class="navbar-item">
-            <select class="custom-select custom-select2">
-                <option value="" selected>VND</option>
-                <option value="">USD</option>
-            </select>
-        </div>
         {{#if isAuthenticated}}
         <form id="frmSignout" action="/guest/signout" method="POST"></form>
             <div class="navbar-item">
@@ -47,7 +41,7 @@
             </div>
             <div class="navbar-item">
                 <div id="signUp">
-                    <a class="nav-link" href="#" style="color:#7A9ED5">Đăng ký</a>
+                    <a class="nav-link" href="/guest/signup" style="color:#7A9ED5">Đăng ký</a>
                 </div>
             </div>
         {{/if}}

@@ -5,11 +5,16 @@ var auth = require('../middlewares/auth');
 
 
 router.get("/", guest_controller.index);
+router.post("/",guest_controller.index_post);
+
+router.get('/pick',guest_controller.pick);
 router.post('/pick',guest_controller.pick_post);
+
 router.get('/info',guest_controller.info);
 router.get('/passenger',guest_controller.passenger);
 router.post('/passenger',guest_controller.passenger_post);
 router.get('/payment',guest_controller.payment);
+router.post('/payment',guest_controller.payment_post)
 router.get('/processing',guest_controller.processing);
 router.get('/signup',guest_controller.signup);
 router.post('/signup',guest_controller.signup_post);

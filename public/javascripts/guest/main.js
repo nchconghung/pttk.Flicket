@@ -1184,6 +1184,8 @@ $(document).ready(function () {
             })
         }
         else {
+            var total = $("#sub-total-amount-data").data("price");
+            $("#passenger-info-form").append('<input name="txtTotalAmount" value="'+total+'">')
             $(this).unbind('submit').submit();
         }
     })
@@ -1266,5 +1268,11 @@ function UpdateLuggageTitle() {
         })
     })
 }
+$(".flight-list-element-btn").click(function(){    
+    var id = $(this).data("id");
+    console.log(id);
+    $("body").append('<form id="new-form" action="/guest/pick" method="POST"><input name="txtIdChuyenBay" value="'+id+'"></form>');
+    $("#new-form").submit();
+})
 
 

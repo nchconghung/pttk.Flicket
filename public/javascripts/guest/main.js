@@ -1115,8 +1115,7 @@ $(document).mouseup(function (e) {
 // BTN HOME
 
 // LOAD PASSENGER INPUT
-$("#stage-one-num").addClass("index-active");
-$("#stage-one-text").addClass("stage-name-active");
+
 $(document).ready(function () {
     var i;
     var adult = parseInt($(".passenger-info-type-main-content").data("adult"));

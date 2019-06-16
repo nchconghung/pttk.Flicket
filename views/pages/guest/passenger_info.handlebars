@@ -207,6 +207,8 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
 <script>
+    $("#stage-one-num").addClass("index-active");
+    $("#stage-one-text").addClass("stage-name-active");
     $(document).ready(function () {
         var numTransit = parseInt($(".plane-info-box").data("numtransit"));
         var classs = parseInt($(".plane-info-box").data("class"));
@@ -248,8 +250,6 @@
         $(".total-amount-detail").append('<div class="sub-total"><span class="type">Hành lý</span><span class="price price-luggage" data-price="0">0 VND</span></div>');
         $("#sub-total-amount-data").data("price",total);
         $("#sub-total-amount-data").text(currencyFormatDE(total));
-
-
     })
 </script>
 {{> "guest/footer"}}

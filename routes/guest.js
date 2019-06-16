@@ -16,7 +16,6 @@ router.get('/signup',guest_controller.signup);
 router.post('/signup',guest_controller.signup_post);
 router.post('/signin',guest_controller.signin_post);
 router.post('/signout',auth,guest_controller.signout_post);
-router.get('/is-available-cmnd',guest_controller.availabe_cmnd);
 router.get('/is-available-username',guest_controller.availabe_username);
 router.get('/user',auth,guest_controller.user);
 router.get('/ticket',guest_controller.ticket);

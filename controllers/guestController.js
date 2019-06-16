@@ -42,7 +42,7 @@ exports.pick = function (req, res, next) {
 			};
 			listEntity.push(e);
 		}
-		console.log(listEntity[0].lichTrinh[0].GioCatCanh);
+		// console.log(listEntity[0].lichTrinh[0].GioCatCanh);
 		res.render("guest/flight_picking", {
 			list: listEntity,
 			adult: adult,
@@ -90,7 +90,6 @@ exports.pick_post = function (req, res, next) {
 			};
 			listEntity.push(e);
 		}
-		console.log(listEntity);
 		var isEmpty;
 		if(listEntity.length==0){
 			isEmpty = true;
@@ -98,12 +97,14 @@ exports.pick_post = function (req, res, next) {
 			isEmpty = false;
 		}
 		var userdata = {
+			IdChuyenBay: 0,
 			HangGhe: hangghe,
 			NguoiLon: adult,
 			TreEm: kid,
-			EmBe: baby
+			EmBe: baby	
 		};
 		req.session.userdata = userdata;
+		console.log(req.session);
 		res.render("guest/flight_picking", {
 			isEmpty: isEmpty,
 			list: listEntity,
@@ -118,13 +119,13 @@ exports.pick_post = function (req, res, next) {
 }
 exports.info = function (req, res, next) {
 	var id = req.query.id;
+
 	var adult = req.query.adult;
 	var kid = req.query.kid;
 	var baby = req.query.baby;
 	var classs = req.query.class;
-	
 	Promise.all([chuyenBayModel.singleWithDetailById(id,classs),lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay,lichtrinh])=>{
-		console.log(chuyenbay[0]);
+		req.session.userdata.IdChuyenBay = parseInt(id);
 		res.render('guest/check_info',{
 			chuyenBay: chuyenbay[0],
 			lichTrinh: lichtrinh,
@@ -152,6 +153,7 @@ exports.processing = function (req, res, next) {
 	res.render('guest/processing');
 }
 exports.signup = function (req, res, next) {
+	console.log('signup');
 	res.render('guest/sign_up');
 }
 exports.signup_post = function(req,res,next){
@@ -162,32 +164,24 @@ exports.signup_post = function(req,res,next){
             MatKhau: hash
         }
         thanhvienModel.add(member).then(id =>{
-            var customer = {
-                CMND: req.body.CMND,
-                IdThanhVien: id
-            };
-            khachhangModel.add(customer).then(id => {
-                res.redirect('/guest/:'+id+'/edit');
-            }).catch(err => {
-                console.log(err);
-                res.end("error occured.")
-            });
+			res.redirect('/guest/'+id+'/edit');
+            
         }).catch(err => {
             console.log(err);
             res.end("error occured.")
         });
     });
 }
-exports.availabe_cmnd = function(req,res,next){
-    var cmnd = req.query.CMND;
-    khachhangModel.single(cmnd).then(rows => {
-        if (rows.length > 0){
-            return res.json(false);
-        } else {
-            return res.json(true);
-        }
-    });
-}
+// exports.availabe_cmnd = function(req,res,next){
+//     var cmnd = req.query.CMND;
+//     khachhangModel.single(cmnd).then(rows => {
+//         if (rows.length > 0){
+//             return res.json(false);
+//         } else {
+//             return res.json(true);
+//         }
+//     });
+// }
 exports.availabe_username = function(req,res,next){
     var tk = req.query.TaiKhoan;
     thanhvienModel.singleByTaiKhoan(tk).then(rows => {
@@ -226,13 +220,11 @@ exports.signin_post = function(req,res,next){
         });
       })(req, res, next);
 }
-
 exports.signout_post = function(req,res,next){
     console.log("logout");
     req.logOut();
     res.redirect('/guest/');
 }
-
 exports.user = function(req,res,next){
 	console.log(req.session);
 	res.render('guest/user');

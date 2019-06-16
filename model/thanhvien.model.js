@@ -5,17 +5,13 @@ module.exports = {
         return db.load(`select * from ThanhVien`);
     },
 
-    // allWithDetail: () => {
-    //     return db.load(`select t.*,count(l.IdGiaoDich) as soLanGiaoDich from ThanhVien t left join LichSuGiaoDich l on c.IdThanhVien=p.IdThanhVien group by `);
-    // },
-
     index: () =>{
-        return db.load(`SELECT tv.IdThanhVien,tv.TaiKhoan,tv.DiemThuong
+        return db.load(`SELECT tv.IdThanhVien,tv.TaiKhoan,tv.DiemThuong,tv.ThongTin
                         FROM ThanhVien tv  `);
     },
 
     searchWithKey: keyword =>{
-        return db.load(`SELECT tv.IdThanhVien,tv.TaiKhoan,tv.DiemThuong
+        return db.load(`SELECT tv.IdThanhVien,tv.TaiKhoan,tv.DiemThuong,tv.ThongTin
                         FROM	ThanhVien tv 
                         WHERE tv.TaiKhoan like '%${keyword}%'
                         `);

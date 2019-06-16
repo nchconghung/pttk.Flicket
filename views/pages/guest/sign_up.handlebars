@@ -5,12 +5,6 @@
     $(function(){
         $('#registerForm').validate({
             rules:{
-                CMND: {
-                    required: true,
-                    remote: {
-                        url: '/guest/is-available-cmnd'
-                    }
-                },
                 TaiKhoan: {
                     required: true,
                     remote: {
@@ -27,10 +21,6 @@
                 }
             },
             messages: {
-                CMND: {
-                    required: 'CMND/Căn cước cần được nhập',
-                    remote: 'CMND/Căn cước này đã bị đăng kí'
-                },
                 TaiKhoan: {
                     required: 'Tài khoản cần được nhập',
                     remote: 'Tài khoản này đã được dùng'
@@ -64,15 +54,6 @@
         <div id="sign-up-container">
             <div id="sign-up-main-title">
                 <span>Đăng ký thành viên Flicket</span>
-            </div>
-            <div class="sign-up-input-element">
-                <div class="sign-up-title">
-                    <span>CMND/Thẻ căn cước</span>
-                </div>
-                <div class="sign-up-note">
-                    <span>Thông tin của bạn hoàn toàn được bảo mật</span>
-                </div>
-                <input type="text" class="sign-up-input" name="CMND" >
             </div>
             <div class="sign-up-input-element">
                 <div class="sign-up-title">

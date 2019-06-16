@@ -1,7 +1,8 @@
 var express = require('express');
 var adminModel = require('../../model/admin.model');
-
-var router = express.Router()
+var bcrypt = require('bcrypt');
+var router = express.Router();
+var moment = require('moment');
 
 router.get("/",(req,res) => {
     adminModel.all()
@@ -55,17 +56,31 @@ router.get('edit/:id',(req,res)=>{
 })
 
 router.get('/add',(req,res) => {
+    
+    console.log(date);
     res.render('admin/vwAdmin/add',{
         layout: 'admin'
     });
 })
 
 router.post('/add',(req,res)=>{
-    adminModel.add(req.body).then(id=>{
-        res.redirect('/admin/admin/index/');
-    }).catch(err => {
-        console.log(err),
-        res.end('error occured.')
+    var now = new Date();
+    var date = moment(now).format('YYYY-MM-DD HH:mm:ss');
+    console.log(date);
+    var saltRounds = 10;
+    bcrypt.hash(req.body.MatKhau, saltRounds, function(err, hash) {
+        var member = {
+            TaiKhoan: req.body.TaiKhoan,
+            MatKhau: hash,
+            LanDangNhapCuoi: date
+        }
+        adminModel.add(member).then(id =>{
+			res.redirect('/admin/admin/index/');
+            
+        }).catch(err => {
+            console.log(err);
+            res.end("error occured.")
+        });
     });
 })
 
@@ -76,6 +91,17 @@ router.post('admin/update',(req,res) => {
     }).catch(err => {
         console.log(err),
         res.end('error occured.')
+    });
+})
+
+router.get('/is-available-username',(req,res) => {
+    var tk = req.query.TaiKhoan;
+    adminModel.singleByTaiKhoan(tk).then(rows => {
+        if (rows.length > 0){
+            return res.json(false);
+        } else {
+            return res.json(true);
+        }
     });
 })
   

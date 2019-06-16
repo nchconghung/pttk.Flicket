@@ -1,9 +1,16 @@
+var hbs_sections = require('express-handlebars-sections');
+var numeral = require('numeral');
+
 function hbsHelpers(hbs, path) {
   return hbs.create({
     defaultLayout: "main",
     layoutsDir: path.join(__dirname, "../views/layouts"),
     partialsDir: path.join(__dirname, "../views/partials"),
     helpers: {
+      format: val => {
+      return numeral(val).format('0,0');
+      },
+      section: hbs_sections(),
       inc: function (value, options) {
         console.log('reading it');
         return parseInt(value) + 1;

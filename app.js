@@ -32,6 +32,22 @@ app.engine(
   "handlebars",
   handlebars.engine
 );
+
+// app.engine(
+//   "handlebars",
+//   exphbs({
+//     defaultLayout: "main",
+//     layoutsDir: path.join(__dirname, "views/layouts"),
+//     partialsDir: path.join(__dirname, "views/partials"),
+//     helpers: {
+//       format: val => {
+//         return numeral(val).format('0,0');
+//       },
+//       section: hbs_sections()
+//     }
+//   })
+// );
+
 app.set("views", path.join(__dirname, "views/pages"));
 app.set("view engine", "handlebars");
 

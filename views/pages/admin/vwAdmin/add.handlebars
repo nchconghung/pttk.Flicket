@@ -1,27 +1,73 @@
 <link rel="stylesheet" href="/stylesheets/pages/admin/form-style.css">
-
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script>
+    $(function(){
+        $('#registerForm').validate({
+            rules:{
+                TaiKhoan: {
+                    required: true,
+                    remote: {
+                        url: '/admin/admin/is-available-username'
+                    }
+                },
+                MatKhau: {
+                    required: true,
+                    minlength: 6
+                },
+                Confirm: {
+                    required: true,
+                    equalTo:'#pass'
+                }
+            },
+            messages: {
+                TaiKhoan: {
+                    required: 'Tài khoản cần được nhập',
+                    remote: 'Tài khoản này đã được dùng'
+                },
+                MatKhau: {
+                    required: "Mật khẩu cần được nhập",
+                    minlength: "Mật khẩu cần dài hơn 6 kí tự"
+                },
+                Confirm: {
+                    required: "Vui lòng xác nhận lại mật khẩu",
+                    equalTo: "Không trùng với mật khẩu"
+                }
+            },
+            errorElement: 'small',
+            errorClass: 'help-block text-danger',
+            highlight: function(e){
+                $(e).removeClass('is-valid').addClass('is-invalid');
+            },
+            unhighlight: function(e){
+                $(e).removeClass('is-invalid').addClass('is-valid');
+            }
+        });
+    })
+</script>
+{{/section}}
 <!-- partial -->
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="card">
             <div class="card-body d-flex justify-content-center">
-                <form class="contact1-form validate-form" action="/admin/admin/add" method="POST">
+                <form nonvalidate id="registerForm" class="contact1-form validate-form" action="/admin/admin/add" method="POST">
                     <span class="contact1-form-title">
                         Tạo admin
                     </span>
 
-                    <div class="wrap-input1 validate-input" data-validate = "Name is required">
+                    <div class="wrap-input1 validate-input">
                         <input class="input1" type="text" name="TaiKhoan" placeholder="Username">
                         <span class="shadow-input1"></span>
                     </div>
 
-                    <div class="wrap-input1 validate-input" data-validate = "Enter your password">
-                        <input class="input1" type="text" name="MatKhau" placeholder="Password">
+                    <div class="wrap-input1 validate-input" >
+                        <input class="input1" type="password" name="MatKhau" id="pass"placeholder="Password">
                         <span class="shadow-input1"></span>
                     </div>
 
-                    <div class="wrap-input1 validate-input" data-validate = "">
-                        <input class="input1" type="text" placeholder="Retype Password">
+                    <div class="wrap-input1 validate-input" >
+                        <input class="input1" type="password" name="Confirm" placeholder="Retype Password">
                         <span class="shadow-input1"></span>
                     </div>
 

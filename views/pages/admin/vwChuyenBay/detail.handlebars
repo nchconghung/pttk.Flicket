@@ -13,7 +13,7 @@
                          <div class="col"> 
                             <span><i class="far fa-user-circle" style="margin-right: 5px;"></i>Mã chuyến bay</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="{{thanhvien.TaiKhoan}}" disabled>
+                                <input class="input1" type="text" value="{{chuyenbay.Ma}}" disabled>
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
@@ -63,34 +63,51 @@
                     <hr>
                 </div>
             </div>
-                <div class="row" style="margin-bottom:50px;">
-                    <span style="font-size:18px;color:#721777;font-weight: bold;">
-                        Lịch trình
-                    </span>  
-                    <table class="table dataTable no-footer" style="padding-right: 50px;padding-left:50px;">
-                        <tr role="row">
-                            <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >#</th>
-                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Điểm khởi hành</th>
-                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giờ cất cánh</th>
-                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Điểm đến</th>
-                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giờ hạ cánh</th>
-                            <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thời gian bay</th>
-                        </tr>
-                        <tr>          
-                            <td>{{customer.CMND}}</td>
-                            <td>{{customer.HoTen}}</td>
-                            <td>{{customer.Email}}</td>
-                            <td>{{customer.SDT}}</td>
-                            <td>{{#if customer.GioiTinh}}
-                                    Nam
-                                {{else}}
-                                    Nữ
-                                {{/if}}
-                            </td>
-                            <td>{{customer.NgaySinh}}</td>
-                        </tr>
-                    </table>
-                </div>
+            <div class="row" style="margin-bottom:50px;">
+                <span style="font-size:18px;color:#721777;font-weight: bold;">
+                    Bảng giá vé
+                </span>  
+                <table class="table dataTable no-footer" style="padding-right: 50px;padding-left:50px;">
+                    <tr role="row">
+                        <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >#</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Hạng ghế</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Người lớn</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Trẻ em</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Em bé</th>
+                    </tr>
+                    <tr>      
+                        <td>{{bgv}.HangGhe}}</td>    
+                        <td>{{bgv.LoaiHangGhe}}</td>
+                        <td>{{bgv.NguoiLon}}</td>
+                        <td>{{bgv.TreEm}}</td>
+                        <td>{{bgv.EmBe}}</td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div class="row" style="margin-bottom:50px;">
+                <span style="font-size:18px;color:#721777;font-weight: bold;">
+                    Lịch trình
+                </span>  
+                <table class="table dataTable no-footer" style="padding-right: 50px;padding-left:50px;">
+                    <tr role="row">
+                        <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >#</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Điểm khởi hành</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giờ cất cánh</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Điểm đến</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giờ hạ cánh</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thời gian bay</th>
+                    </tr>
+                    <tr>      
+                        <td>{{lichtrinh.ThuTu}}</td>    
+                        <td>{{lichtrinh.DiemKhoiHanh}}</td>
+                        <td>{{lichtrinh.GioCatCanh}}</td>
+                        <td>{{lichtrinh.DiemDen}}</td>
+                        <td>{{lichtrinh.GioHaCanh}}</td>
+                        <td>{{lichtrinh.ThoiGianBay}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </div>

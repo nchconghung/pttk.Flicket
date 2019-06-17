@@ -112,7 +112,7 @@ exports.pick_post = function (req, res, next) {
 	//
 	var cb = parseInt(req.session.userdata.IdChuyenBay);
 	var hg = parseInt(req.session.userdata.HangGhe);
-	banggiaveModel.listByChuyenBayHangGhe(cb,hg).then(rows => {
+	banggiaveModel.listByChuyenBayHangGhe(cb, hg).then(rows => {
 		var banggia = {
 			NguoiLon: rows[0].NguoiLon,
 			TreEm: rows[0].TreEm,
@@ -128,11 +128,11 @@ exports.pick_post = function (req, res, next) {
 		res.end("error occured.")
 	});
 
-	
+
 }
 
 exports.info = function (req, res, next) {
-	
+
 	var id = req.session.userdata.IdChuyenBay;
 	var adult = req.session.userdata.NguoiLon;
 	var kid = req.session.userdata.TreEm;
@@ -141,7 +141,7 @@ exports.info = function (req, res, next) {
 	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
 		req.session.userdata.IdChuyenBay = parseInt(id);
 		console.log(req.session);
-		res.render('guest/check_info',{
+		res.render('guest/check_info', {
 			chuyenBay: chuyenbay[0],
 			lichTrinh: lichtrinh,
 			adult: adult,
@@ -157,16 +157,23 @@ exports.passenger = function (req, res, next) {
 	var kid = req.session.userdata.TreEm;
 	var baby = req.session.userdata.EmBe;
 	var classs = req.session.userdata.HangGhe;
-
+	var name, phone, email;
+	if (req.session.passport) {
+		name = req.session.passport.user.ThongTin.HoTen;
+		phone = req.session.passport.user.ThongTin.SDT;
+		email = req.session.passport.user.ThongTin.Email;
+	}
 	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
-		
 		res.render('guest/passenger_info', {
 			chuyenBay: chuyenbay[0],
 			lichTrinh: lichtrinh,
 			adult: adult,
 			kid: kid,
 			baby: baby,
-			class: classs
+			class: classs,
+			name: name,
+			phone: phone,
+			email: email
 		});
 	});
 }
@@ -234,20 +241,36 @@ exports.passenger_post = function (req, res, next) {
 
 exports.payment = function (req, res, next) {
 	var id = req.session.userdata.IdChuyenBay;
+
 	var adult = req.session.userdata.NguoiLon;
 	var kid = req.session.userdata.TreEm;
 	var baby = req.session.userdata.EmBe;
 	var classs = req.session.userdata.HangGhe;
+
 	var adultName = req.session.adultName;
 	var kidName = req.session.kidName;
 	var babyName = req.session.babyName;
+
 	var contactName = req.session.contact.name;
 	var phone = req.session.contact.phone;
 	var email = req.session.contact.email;
+
 	var adultLuggage = req.session.adultLuggage;
 	var kidLuggage = req.session.kidLuggage;
 	var babyLuggage = req.session.babyLuggage;
+
 	var bookingID = req.session.bookingID;
+	var IdCard, ExpDate, CVV, CardName;
+	if (req.session.passport) {
+		IdCard = req.session.passport.user.TheTinDung.SoHieuThe;
+		ExpDate = req.session.passport.user.TheTinDung.NgayHetHan;
+		CVV = req.session.passport.user.TheTinDung.CSC;
+		CardName = req.session.passport.user.TheTinDung.HoTen;
+	}
+	IdCard = "4199148323555334";
+	ExpDate = "05/2023";
+	CVV = "122";
+	CardName = "Huy Hoang";
 
 	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
 		res.render('guest/payment', {
@@ -267,7 +290,11 @@ exports.payment = function (req, res, next) {
 			kidLuggage: kidLuggage,
 			babyLuggage: babyLuggage,
 			bookingID: bookingID,
-			point: 0
+			point: 0,
+			IdCard: IdCard,
+			ExpDate: ExpDate,
+			CVV: CVV,
+			CardName: CardName
 		});
 	});
 }
@@ -288,10 +315,10 @@ exports.payment_post = function (req, res, next) {
 }
 
 exports.processing = function (req, res, next) {
-	
-	if (true){
-		var date = '01/'+req.session.card.NgayHetHan;
-		var expDate = moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
+
+	if (true) {
+		var date = '01/' + req.session.card.NgayHetHan;
+		var expDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
 		console.log(expDate);
 		var card = {
 			SoHieuThe: req.session.card.SoHieuThe,
@@ -308,7 +335,7 @@ exports.processing = function (req, res, next) {
 			}
 			khachhangModel.add(infor).then(idkh => {
 				var now = new Date();
-  				var date = moment(now).format('YYYY-MM-DD hh:mm:ss');
+				var date = moment(now).format('YYYY-MM-DD hh:mm:ss');
 				var giaodich = {
 					KhachHangGiaoDich: idkh,
 					ChuyenBay: parseInt(req.session.userdata.IdChuyenBay),
@@ -318,7 +345,7 @@ exports.processing = function (req, res, next) {
 					MaDatCho: req.session.bookingID
 				}
 				giaodichModel.add(giaodich).then(idgd => {
-					
+
 					var kids = parseInt(req.session.userdata.TreEm);
 					var babies = parseInt(req.session.userdata.EmBe);
 					var adults = parseInt(req.session.userdata.NguoiLon);
@@ -327,10 +354,10 @@ exports.processing = function (req, res, next) {
 
 					if (adults > 0) {
 						var adultLuggage = req.session.adultLuggage;
-						var adultBirth  = req.session.adultBirth;
+						var adultBirth = req.session.adultBirth;
 						var adultName = req.session.adultName;
 
-						for (var i = 0;i<adults;i++){
+						for (var i = 0; i < adults; i++) {
 							var ve = {
 								MaVe: '21354453',
 								ChuyenBay: machuyenbay,
@@ -340,7 +367,7 @@ exports.processing = function (req, res, next) {
 								ChoNgoi: 'A324',
 								HanhLy: parseInt(adultLuggage[i])
 							};
-							var adbd = moment(adultBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
+							var adbd = moment(adultBirth[i], "DD/MM/YYYY").format("YYYY-MM-DD");
 							var hanhkhach = {
 								GiaoDich: idgd,
 								HoTen: adultName[i],
@@ -348,9 +375,9 @@ exports.processing = function (req, res, next) {
 								Ve: 0
 							};
 							veModel.add(ve).then(idve => {
-								
+
 								hanhkhach.Ve = idve;
-								
+
 								hanhkhachModel.add(hanhkhach).catch(err => {
 									console.log(err);
 									res.end("error occured.")
@@ -366,7 +393,7 @@ exports.processing = function (req, res, next) {
 						var kidLuggage = req.session.kidLuggage;
 						var kidBirth = req.session.kidBirth;
 						var kidName = req.session.kidName;
-						for (var i = 0;i<kids;i++){
+						for (var i = 0; i < kids; i++) {
 							var ve = {
 								MaVe: '21354453',
 								ChuyenBay: machuyenbay,
@@ -376,7 +403,7 @@ exports.processing = function (req, res, next) {
 								ChoNgoi: 'A324',
 								HanhLy: parseInt(kidLuggage[i])
 							};
-							var kbd = moment(kidBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
+							var kbd = moment(kidBirth[i], "DD/MM/YYYY").format("YYYY-MM-DD");
 							var hanhkhach = {
 								GiaoDich: idgd,
 								HoTen: kidName[i],
@@ -400,7 +427,7 @@ exports.processing = function (req, res, next) {
 						var babyLuggage = req.session.babyLuggage;
 						var babyBirth = req.session.babyBirth;
 						var babyName = req.session.babyName;
-						for (var i = 0;i<babies;i++){
+						for (var i = 0; i < babies; i++) {
 							var ve = {
 								MaVe: '21354453',
 								ChuyenBay: machuyenbay,
@@ -410,7 +437,7 @@ exports.processing = function (req, res, next) {
 								ChoNgoi: 'A324',
 								HanhLy: parseInt(babyLuggage[i])
 							};
-							var bbbd = moment(babyBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
+							var bbbd = moment(babyBirth[i], "DD/MM/YYYY").format("YYYY-MM-DD");
 							var hanhkhach = {
 								GiaoDich: idgd,
 								HoTen: babyName[i],
@@ -418,7 +445,7 @@ exports.processing = function (req, res, next) {
 								Ve: 0
 							};
 							veModel.add(ve).then(idve => {
-								hanhkhach.Ve=idve;
+								hanhkhach.Ve = idve;
 								hanhkhachModel.add(hanhkhach).catch(err => {
 									console.log(err);
 									res.end("error occured.")
@@ -448,21 +475,21 @@ exports.signup = function (req, res, next) {
 	console.log('signup');
 	res.render('guest/sign_up');
 }
-exports.signup_post = function(req,res,next){
-    var saltRounds = 10;
-    bcrypt.hash(req.body.MatKhau, saltRounds, function(err, hash) {
-        var member = {
-            TaiKhoan: req.body.TaiKhoan,
-            MatKhau: hash
-        }
-        thanhvienModel.add(member).then(id =>{
+exports.signup_post = function (req, res, next) {
+	var saltRounds = 10;
+	bcrypt.hash(req.body.MatKhau, saltRounds, function (err, hash) {
+		var member = {
+			TaiKhoan: req.body.TaiKhoan,
+			MatKhau: hash
+		}
+		thanhvienModel.add(member).then(id => {
 			res.redirect('/guest/user');
-            
-        }).catch(err => {
-            console.log(err);
-            res.end("error occured.")
-        });
-    });
+
+		}).catch(err => {
+			console.log(err);
+			res.end("error occured.")
+		});
+	});
 }
 // exports.availabe_cmnd = function(req,res,next){
 //     var cmnd = req.query.CMND;
@@ -484,59 +511,57 @@ exports.availabe_username = function (req, res, next) {
 		}
 	});
 }
-exports.dtsignin = function(req,res,next) {
+exports.dtsignin = function (req, res, next) {
 	passport.authenticate('local', (err, user, info) => {
-        if (err)
-        {
-            res.end('error occured.')
-        }
-          
-    
-        if (!user) {
-            res.end(info.message)
-            // return res.render('/guest/');
-        //   return res.render('vwAccount/login', {
-        //     layout: false,
-        //     err_message: info.message
-        //   })
-        }
-    
-        req.logIn(user, err => {
-            if (err){
-                // return next(err);
-                res.end('error occured.');
+		if (err) {
+			res.end('error occured.')
+		}
+
+
+		if (!user) {
+			res.end(info.message)
+			// return res.render('/guest/');
+			//   return res.render('vwAccount/login', {
+			//     layout: false,
+			//     err_message: info.message
+			//   })
+		}
+
+		req.logIn(user, err => {
+			if (err) {
+				// return next(err);
+				res.end('error occured.');
 			}
 			var redirectTo = "/processing/payment";
-        	return res.redirect(redirectTo);
-        });
-      })(req, res, next);
+			return res.redirect(redirectTo);
+		});
+	})(req, res, next);
 }
-exports.signin_post = function(req,res,next){
-    passport.authenticate('local', (err, user, info) => {
-        if (err)
-        {
-            res.end('error occured.')
-        }
-          
-    
-        if (!user) {
-            res.end(info.message)
-            // return res.render('/guest/');
-        //   return res.render('vwAccount/login', {
-        //     layout: false,
-        //     err_message: info.message
-        //   })
-        }
-    
-        req.logIn(user, err => {
-            if (err){
-                // return next(err);
-                res.end('error occured.');
+exports.signin_post = function (req, res, next) {
+	passport.authenticate('local', (err, user, info) => {
+		if (err) {
+			res.end('error occured.')
+		}
+
+
+		if (!user) {
+			res.end(info.message)
+			// return res.render('/guest/');
+			//   return res.render('vwAccount/login', {
+			//     layout: false,
+			//     err_message: info.message
+			//   })
+		}
+
+		req.logIn(user, err => {
+			if (err) {
+				// return next(err);
+				res.end('error occured.');
 			}
 			var redirectTo = "/guest/";
-        	return res.redirect(redirectTo);
-        });
-      })(req, res, next);
+			return res.redirect(redirectTo);
+		});
+	})(req, res, next);
 }
 exports.signout_post = function (req, res, next) {
 	console.log("logout");

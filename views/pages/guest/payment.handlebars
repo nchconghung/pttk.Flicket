@@ -107,25 +107,25 @@
                         <div class="info-row">
                             <label for="txtCardID">Số thẻ tín dụng</label>
                             <input id="txtCardID" type="text" required placeholder="16 chữ số mặt trên của mặt thẻ"
-                                name="txtCardID">
+                                name="txtCardID" {{#if IdCard}} value="{{IdCard}}" {{/if}}>
                         </div>
                         <div class="info-row row">
                             <div class="col-6">
                                 <label for="txtDueDate">Hiệu lực đến ngày</label>
                                 <input id="txtDueDate" type="text" class="date-input" data-language='en' required
                                     placeholder="MM/YYYY" data-min-view="months" data-view="months"
-                                    data-date-format="mm/yyyy" name="txtExpiryDate">
+                                    data-date-format="mm/yyyy" name="txtExpiryDate" {{#if ExpDate}} value="{{ExpDate}}" {{/if}}>
                             </div>
                             <div class="col-6">
                                 <label for="txtCVV">CVV</label>
                                 <input id="txtCVV" pattern="^[0-9]{3}" type="text" required placeholder="3 số CVV"
-                                    name="txtCardCVC">
+                                    name="txtCardCVC" {{#if CVV}} value="{{CVV}}" {{/if}}>
                             </div>
                         </div>
                         <div class="info-row">
                             <label for="txtCardName">Tên trên thẻ</label>
                             <input id="txtCardName" type="text" required placeholder="Tên trên thẻ"
-                                name="txtCardHolderName">
+                                name="txtCardHolderName" {{#if CardName}} value="{{CardName}}" {{/if}}>
                         </div>
                     </div>
                     <div class="price-detail-coutainter">

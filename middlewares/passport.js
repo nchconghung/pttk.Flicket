@@ -30,6 +30,12 @@ module.exports = function (app) {
             }).catch(err => {
                 return done(err, false);
             });
+          } else {
+            var user = {
+              TaiKhoan: rows[0],
+              ThongTin: [],
+              TheTinDung: []};
+            return done(null, user);
           }
         }).catch(err => {
           return done(err, false);

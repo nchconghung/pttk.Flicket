@@ -5,6 +5,7 @@ module.exports = {
         return db.load(`select * from LichSuGiaoDich`);
     },
 
+
     single: id => {
         return db.load(`select * form LichSuGiaoDich where IdGiaoDich=${id}`);
     },

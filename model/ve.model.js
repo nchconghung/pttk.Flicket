@@ -6,7 +6,7 @@ module.exports = {
     },
 
     single: id => {
-        return db.load(`select * form Ve where IdVe=${id}`);
+        return db.load(`select * from Ve where IdVe=${id}`);
     },
 
     add: entity =>{

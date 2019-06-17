@@ -6,7 +6,11 @@ module.exports = {
     },
 
     single: id => {
-        return db.load(`select e.*, IF (e.GioiTinh < 1,'Nữ','Nam') as LoaiGioiTinh from ThongTinKhachHangGiaoDich e where e.CMND like '${cmnd}'`);
+        return db.load(`select e.*, IF (e.GioiTinh < 1,'Nữ','Nam') as LoaiGioiTinh from ThongTinKhachHangGiaoDich e where e.IdKhachHang=${id}`);
+    },
+
+    singleForPP: id => {
+        return db.load(`select * from ThongTinKhachHangGiaoDich where IdKhachHang=${id}`);
     },
 
     add: entity =>{
@@ -14,10 +18,10 @@ module.exports = {
     },
 
     update: entity =>{
-        return db.update(`ThongTinKhachHangGiaoDich`,`CMND`,entity);
+        return db.update(`ThongTinKhachHangGiaoDich`,`IdKhachHang`,entity);
     },
 
     delete: id => {
-        return db.delete(`ThongTinKhachHangGiaoDich`,`CMND`,id);
+        return db.delete(`ThongTinKhachHangGiaoDich`,`IdKhachHang`,id);
     }
 }

@@ -10,6 +10,7 @@ module.exports = {
                         FROM ThanhVien tv  `);
     },
 
+
     searchWithKey: keyword =>{
         return db.load(`SELECT tv.IdThanhVien,tv.TaiKhoan,tv.DiemThuong,tv.ThongTin
                         FROM	ThanhVien tv 
@@ -29,6 +30,12 @@ module.exports = {
 
     singleByTaiKhoan: tk => {
         return db.load(`select * from ThanhVien where TaiKhoan like '${tk}'`);
+    },
+
+    detailUserById: id => {
+        return db.load(`SELECT tv.IdThanhVien,tv.TaiKhoan,tv.DiemThuong,ttkh.*,ttd.SoHieuThe,ttd.HoTen as HoTenChuThe,ttd.CSC,ttd.NgayHetHan
+                        FROM ThanhVien tv,ThongTinKhachHangGiaoDich ttkh,TheTinDung ttd
+                        WHERE tv.ThongTin = ttkh.IdKhachHang and ttkh.TheTinDung = ttd.IdThe and tv.IdThanhVien = ${id}`);
     },
 
     add: entity =>{

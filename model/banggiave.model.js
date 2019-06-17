@@ -11,6 +11,14 @@ module.exports = {
                     WHERE bgv.ChuyenBay = ${id} and hg.idHangGhe = bgv.HangGhe
                     ORDER BY bgv.HangGhe ASC`;
         return db.load(query);
+    },
+
+    listByChuyenBayHangGhe: (cb,hg) => {
+        var query = `SELECT bgv.*
+                    FROM BangGiaVe bgv
+                    WHERE bgv.ChuyenBay = ${cb} and bgv.HangGhe = ${hg}
+                    `;
+        return db.load(query);
     }
 }
 

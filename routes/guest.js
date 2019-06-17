@@ -23,6 +23,6 @@ router.post('/signout',auth,guest_controller.signout_post);
 router.get('/is-available-username',guest_controller.availabe_username);
 router.get('/user',auth,guest_controller.user);
 router.get('/ticket',guest_controller.ticket);
-
+router.post('/dtsignin',guest_controller.dtsignin);
 
 module.exports = router;

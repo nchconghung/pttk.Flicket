@@ -287,147 +287,39 @@ exports.payment_post = function (req, res, next) {
 }
 
 exports.processing = function (req, res, next) {
+	console.log(req.session);
+	var promise1;
+	var date = '01/'+req.session.card.NgayHetHan;
+	var expDate = moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
 	
-	if (true){
-		var date = '01/'+req.session.card.NgayHetHan;
-		var expDate = moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
-		console.log(expDate);
+
+	if (!req.user){
 		var card = {
 			SoHieuThe: req.session.card.SoHieuThe,
 			HoTen: req.session.card.HoTen,
 			CSC: req.session.card.CSC,
 			NgayHetHan: expDate
 		};
-		thetindungModel.add(card).then(ttdid => {
-			var infor = {
-				HoTen: req.session.contact.name,
-				Email: req.session.contact.email,
-				SDT: req.session.contact.phone,
-				TheTinDung: ttdid
-			}
-			khachhangModel.add(infor).then(idkh => {
-				var now = new Date();
-  				var date = moment(now).format('YYYY-MM-DD hh:mm:ss');
-				var giaodich = {
-					KhachHangGiaoDich: idkh,
-					ChuyenBay: parseInt(req.session.userdata.IdChuyenBay),
-					TongGiaTri: parseFloat(req.session.totalAmount),
-					DiemThuongSuDung: 0,
-					ThoiDiemGiaoDich: date,
-					MaDatCho: req.session.bookingID
+		promise1 = new Promise(function(resolve, reject) {
+			thetindungModel.add(card).then(ttdid => {
+				var infor = {
+					HoTen: req.session.contact.name,
+					Email: req.session.contact.email,
+					SDT: req.session.contact.phone,
+					TheTinDung: ttdid
 				}
-				giaodichModel.add(giaodich).then(idgd => {
-					
-					var kids = parseInt(req.session.userdata.TreEm);
-					var babies = parseInt(req.session.userdata.EmBe);
-					var adults = parseInt(req.session.userdata.NguoiLon);
-					var machuyenbay = parseInt(req.session.userdata.IdChuyenBay);
-					var hangghe = parseInt(req.session.userdata.HangGhe);
-
-					if (adults > 0) {
-						var adultLuggage = req.session.adultLuggage;
-						var adultBirth  = req.session.adultBirth;
-						var adultName = req.session.adultName;
-
-						for (var i = 0;i<adults;i++){
-							var ve = {
-								MaVe: '21354453',
-								ChuyenBay: machuyenbay,
-								HangGhe: hangghe,
-								LoaiHanhKhach: 3,
-								GiaTien: parseFloat(req.session.bgv.NguoiLon),
-								ChoNgoi: 'A324',
-								HanhLy: parseInt(adultLuggage[i])
-							};
-							var adbd = moment(adultBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
-							var hanhkhach = {
-								GiaoDich: idgd,
-								HoTen: adultName[i],
-								NgaySinh: adbd,
-								Ve: 0
-							};
-							veModel.add(ve).then(idve => {
-								
-								hanhkhach.Ve = idve;
-								
-								hanhkhachModel.add(hanhkhach).catch(err => {
-									console.log(err);
-									res.end("error occured.")
-								});
-							}).catch(err => {
-								console.log(err);
-								res.end("error occured.")
-							});
-						}
-					}
-
-					if (kids > 0) {
-						var kidLuggage = req.session.kidLuggage;
-						var kidBirth = req.session.kidBirth;
-						var kidName = req.session.kidName;
-						for (var i = 0;i<kids;i++){
-							var ve = {
-								MaVe: '21354453',
-								ChuyenBay: machuyenbay,
-								HangGhe: hangghe,
-								LoaiHanhKhach: 2,
-								GiaTien: parseFloat(req.session.bgv.TreEm),
-								ChoNgoi: 'A324',
-								HanhLy: parseInt(kidLuggage[i])
-							};
-							var kbd = moment(kidBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
-							var hanhkhach = {
-								GiaoDich: idgd,
-								HoTen: kidName[i],
-								NgaySinh: kbd,
-								Ve: 0
-							};
-							veModel.add(ve).then(idve => {
-								hanhkhach.Ve = idve;
-								hanhkhachModel.add(hanhkhach).catch(err => {
-									console.log(err);
-									res.end("error occured.")
-								});
-							}).catch(err => {
-								console.log(err);
-								res.end("error occured.")
-							});
-						}
-					}
-
-					if (babies > 0) {
-						var babyLuggage = req.session.babyLuggage;
-						var babyBirth = req.session.babyBirth;
-						var babyName = req.session.babyName;
-						for (var i = 0;i<babies;i++){
-							var ve = {
-								MaVe: '21354453',
-								ChuyenBay: machuyenbay,
-								HangGhe: hangghe,
-								LoaiHanhKhach: 1,
-								GiaTien: req.session.bgv.EmBe,
-								ChoNgoi: 'A324',
-								HanhLy: parseInt(babyLuggage[i])
-							};
-							var bbbd = moment(babyBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
-							var hanhkhach = {
-								GiaoDich: idgd,
-								HoTen: babyName[i],
-								NgaySinh: bbbd,
-								Ve: 0
-							};
-							veModel.add(ve).then(idve => {
-								hanhkhach.Ve=idve;
-								hanhkhachModel.add(hanhkhach).catch(err => {
-									console.log(err);
-									res.end("error occured.")
-								});
-							}).catch(err => {
-								console.log(err);
-								res.end("error occured.")
-							});
-						}
-					}
+				khachhangModel.add(infor).then(idkh => {
+					var now = new Date();
+					var date = moment(now).format('YYYY-MM-DD hh:mm:ss');
+					var giaodich = {
+						KhachHangGiaoDich: idkh,
+						ChuyenBay: parseInt(req.session.userdata.IdChuyenBay),
+						TongGiaTri: parseFloat(req.session.totalAmount),
+						DiemThuongSuDung: 0,
+						ThoiDiemGiaoDich: date,
+						MaDatCho: req.session.bookingID
+					};
+					resolve(giaodich);
 				}).catch(err => {
 					console.log(err);
 					res.end("error occured.")
@@ -436,13 +328,352 @@ exports.processing = function (req, res, next) {
 				console.log(err);
 				res.end("error occured.")
 			});
+			
+		});
+	} else {
+		var card = {
+			IdThe: parseInt(req.session.passport.user.TheTinDung.IdThe),
+			SoHieuThe: req.session.card.SoHieuThe,
+			HoTen: req.session.card.HoTen,
+			CSC: req.session.card.CSC,
+			NgayHetHan: expDate
+		};
+		promise1 = new Promise(function(resolve, reject) {
+			thetindungModel.update(card).then(ttdid => {
+				var infor = {
+					IdThanhVien: parseInt(req.session.passport.user.ThongTin.IdThanhVien),
+					HoTen: req.session.contact.name,
+					Email: req.session.contact.email,
+					SDT: req.session.contact.phone,
+					TheTinDung: req.session.passport.user.ThongTin.TheTinDung
+				}
+
+				req.session.passport.user.TheTinDung.SoHieuThe = req.session.card.CSC.SoHieuThe;
+				req.session.passport.user.TheTinDung.HoTen = req.session.card.HoTen;
+				req.session.passport.user.TheTinDung.CSC = req.session.card.CSC;
+				req.session.passport.user.TheTinDung.NgayHetHan = expDate;
+
+				khachhangModel.update(infor).then(idkh => {
+					var point;
+					
+					if (req.session.voucher === '0'){
+						point = 0;
+					} else {
+						if (req.session.voucher === '1')
+						{
+							point = 200;
+						} else {
+							point = 450;
+						}
+
+					}
+
+					req.session.passport.user.ThongTin.HoTen = req.session.contact.name;
+					req.session.passport.user.Email = req.session.contact.email;
+					req.session.passport.user.SDT = req.session.contact.phone;
+					req.session.passport.user.DiemThuong = parseInt(req.session.passport.user.DiemThuong) - point;
+
+					var now = new Date();
+					var date = moment(now).format('YYYY-MM-DD hh:mm:ss');
+					var giaodich = {
+						KhachHangGiaoDich: iparseInt(req.session.passport.user.ThongTin.IdThanhVien),
+						ChuyenBay: parseInt(req.session.userdata.IdChuyenBay),
+						TongGiaTri: parseFloat(req.session.totalAmount),
+						DiemThuongSuDung: 0,
+						ThoiDiemGiaoDich: date,
+						MaDatCho: req.session.bookingID
+					};
+					resolve(giaodich);
+				}).catch(err => {
+					console.log(err);
+					res.end("error occured.")
+				});
+			}).catch(err => {
+				console.log(err);
+				res.end("error occured.")
+			});
+		});
+	}
+	
+	promise1.then(function(value) {
+		console.log(value);
+		giaodichModel.add(giaodich).then(idgd => {
+					
+			var kids = parseInt(req.session.userdata.TreEm);
+			var babies = parseInt(req.session.userdata.EmBe);
+			var adults = parseInt(req.session.userdata.NguoiLon);
+			var machuyenbay = parseInt(req.session.userdata.IdChuyenBay);
+			var hangghe = parseInt(req.session.userdata.HangGhe);
+	
+			if (adults > 0) {
+				var adultLuggage = req.session.adultLuggage;
+				var adultBirth  = req.session.adultBirth;
+				var adultName = req.session.adultName;
+	
+				for (var i = 0;i<adults;i++){
+					var ve = {
+						MaVe: '21354453',
+						ChuyenBay: machuyenbay,
+						HangGhe: hangghe,
+						LoaiHanhKhach: 3,
+						GiaTien: parseFloat(req.session.bgv.NguoiLon),
+						ChoNgoi: 'A324',
+						HanhLy: parseInt(adultLuggage[i])
+					};
+					var adbd = moment(adultBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
+					var hanhkhach = {
+						GiaoDich: idgd,
+						HoTen: adultName[i],
+						NgaySinh: adbd,
+						Ve: 0
+					};
+					veModel.add(ve).then(idve => {
+						
+						hanhkhach.Ve = idve;
+						
+						hanhkhachModel.add(hanhkhach).catch(err => {
+							console.log(err);
+							res.end("error occured.")
+						});
+					}).catch(err => {
+						console.log(err);
+						res.end("error occured.")
+					});
+				}
+			}
+	
+			if (kids > 0) {
+				var kidLuggage = req.session.kidLuggage;
+				var kidBirth = req.session.kidBirth;
+				var kidName = req.session.kidName;
+				for (var i = 0;i<kids;i++){
+					var ve = {
+						MaVe: '21354453',
+						ChuyenBay: machuyenbay,
+						HangGhe: hangghe,
+						LoaiHanhKhach: 2,
+						GiaTien: parseFloat(req.session.bgv.TreEm),
+						ChoNgoi: 'A324',
+						HanhLy: parseInt(kidLuggage[i])
+					};
+					var kbd = moment(kidBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
+					var hanhkhach = {
+						GiaoDich: idgd,
+						HoTen: kidName[i],
+						NgaySinh: kbd,
+						Ve: 0
+					};
+					veModel.add(ve).then(idve => {
+						hanhkhach.Ve = idve;
+						hanhkhachModel.add(hanhkhach).catch(err => {
+							console.log(err);
+							res.end("error occured.")
+						});
+					}).catch(err => {
+						console.log(err);
+						res.end("error occured.")
+					});
+				}
+			}
+	
+			if (babies > 0) {
+				var babyLuggage = req.session.babyLuggage;
+				var babyBirth = req.session.babyBirth;
+				var babyName = req.session.babyName;
+				for (var i = 0;i<babies;i++){
+					var ve = {
+						MaVe: '21354453',
+						ChuyenBay: machuyenbay,
+						HangGhe: hangghe,
+						LoaiHanhKhach: 1,
+						GiaTien: req.session.bgv.EmBe,
+						ChoNgoi: 'A324',
+						HanhLy: parseInt(babyLuggage[i])
+					};
+					var bbbd = moment(babyBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
+					var hanhkhach = {
+						GiaoDich: idgd,
+						HoTen: babyName[i],
+						NgaySinh: bbbd,
+						Ve: 0
+					};
+					veModel.add(ve).then(idve => {
+						hanhkhach.Ve=idve;
+						hanhkhachModel.add(hanhkhach).catch(err => {
+							console.log(err);
+							res.end("error occured.")
+						});
+					}).catch(err => {
+						console.log(err);
+						res.end("error occured.")
+					});
+				}
+			}
 		}).catch(err => {
 			console.log(err);
 			res.end("error occured.")
 		});
-	}
+	  });
 	res.render('guest/processing');
 }
+
+// exports.processing = function (req, res, next) {
+// 	console.log(req.session);
+// 	if (true){
+// 		var date = '01/'+req.session.card.NgayHetHan;
+// 		var expDate = moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
+		
+// 		var card = {
+// 			SoHieuThe: req.session.card.SoHieuThe,
+// 			HoTen: req.session.card.HoTen,
+// 			CSC: req.session.card.CSC,
+// 			NgayHetHan: expDate
+// 		};
+// 		thetindungModel.add(card).then(ttdid => {
+// 			var infor = {
+// 				HoTen: req.session.contact.name,
+// 				Email: req.session.contact.email,
+// 				SDT: req.session.contact.phone,
+// 				TheTinDung: ttdid
+// 			}
+// 			khachhangModel.add(infor).then(idkh => {
+// 				var now = new Date();
+//   				var date = moment(now).format('YYYY-MM-DD hh:mm:ss');
+// 				var giaodich = {
+// 					KhachHangGiaoDich: idkh,
+// 					ChuyenBay: parseInt(req.session.userdata.IdChuyenBay),
+// 					TongGiaTri: parseFloat(req.session.totalAmount),
+// 					DiemThuongSuDung: 0,
+// 					ThoiDiemGiaoDich: date,
+// 					MaDatCho: req.session.bookingID
+// 				}
+// 				giaodichModel.add(giaodich).then(idgd => {
+					
+// 					var kids = parseInt(req.session.userdata.TreEm);
+// 					var babies = parseInt(req.session.userdata.EmBe);
+// 					var adults = parseInt(req.session.userdata.NguoiLon);
+// 					var machuyenbay = parseInt(req.session.userdata.IdChuyenBay);
+// 					var hangghe = parseInt(req.session.userdata.HangGhe);
+
+// 					if (adults > 0) {
+// 						var adultLuggage = req.session.adultLuggage;
+// 						var adultBirth  = req.session.adultBirth;
+// 						var adultName = req.session.adultName;
+
+// 						for (var i = 0;i<adults;i++){
+// 							var ve = {
+// 								MaVe: '21354453',
+// 								ChuyenBay: machuyenbay,
+// 								HangGhe: hangghe,
+// 								LoaiHanhKhach: 3,
+// 								GiaTien: parseFloat(req.session.bgv.NguoiLon),
+// 								ChoNgoi: 'A324',
+// 								HanhLy: parseInt(adultLuggage[i])
+// 							};
+// 							var adbd = moment(adultBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
+// 							var hanhkhach = {
+// 								GiaoDich: idgd,
+// 								HoTen: adultName[i],
+// 								NgaySinh: adbd,
+// 								Ve: 0
+// 							};
+// 							veModel.add(ve).then(idve => {
+								
+// 								hanhkhach.Ve = idve;
+								
+// 								hanhkhachModel.add(hanhkhach).catch(err => {
+// 									console.log(err);
+// 									res.end("error occured.")
+// 								});
+// 							}).catch(err => {
+// 								console.log(err);
+// 								res.end("error occured.")
+// 							});
+// 						}
+// 					}
+
+// 					if (kids > 0) {
+// 						var kidLuggage = req.session.kidLuggage;
+// 						var kidBirth = req.session.kidBirth;
+// 						var kidName = req.session.kidName;
+// 						for (var i = 0;i<kids;i++){
+// 							var ve = {
+// 								MaVe: '21354453',
+// 								ChuyenBay: machuyenbay,
+// 								HangGhe: hangghe,
+// 								LoaiHanhKhach: 2,
+// 								GiaTien: parseFloat(req.session.bgv.TreEm),
+// 								ChoNgoi: 'A324',
+// 								HanhLy: parseInt(kidLuggage[i])
+// 							};
+// 							var kbd = moment(kidBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
+// 							var hanhkhach = {
+// 								GiaoDich: idgd,
+// 								HoTen: kidName[i],
+// 								NgaySinh: kbd,
+// 								Ve: 0
+// 							};
+// 							veModel.add(ve).then(idve => {
+// 								hanhkhach.Ve = idve;
+// 								hanhkhachModel.add(hanhkhach).catch(err => {
+// 									console.log(err);
+// 									res.end("error occured.")
+// 								});
+// 							}).catch(err => {
+// 								console.log(err);
+// 								res.end("error occured.")
+// 							});
+// 						}
+// 					}
+
+// 					if (babies > 0) {
+// 						var babyLuggage = req.session.babyLuggage;
+// 						var babyBirth = req.session.babyBirth;
+// 						var babyName = req.session.babyName;
+// 						for (var i = 0;i<babies;i++){
+// 							var ve = {
+// 								MaVe: '21354453',
+// 								ChuyenBay: machuyenbay,
+// 								HangGhe: hangghe,
+// 								LoaiHanhKhach: 1,
+// 								GiaTien: req.session.bgv.EmBe,
+// 								ChoNgoi: 'A324',
+// 								HanhLy: parseInt(babyLuggage[i])
+// 							};
+// 							var bbbd = moment(babyBirth[i],"DD/MM/YYYY").format("YYYY-MM-DD");
+// 							var hanhkhach = {
+// 								GiaoDich: idgd,
+// 								HoTen: babyName[i],
+// 								NgaySinh: bbbd,
+// 								Ve: 0
+// 							};
+// 							veModel.add(ve).then(idve => {
+// 								hanhkhach.Ve=idve;
+// 								hanhkhachModel.add(hanhkhach).catch(err => {
+// 									console.log(err);
+// 									res.end("error occured.")
+// 								});
+// 							}).catch(err => {
+// 								console.log(err);
+// 								res.end("error occured.")
+// 							});
+// 						}
+// 					}
+// 				}).catch(err => {
+// 					console.log(err);
+// 					res.end("error occured.")
+// 				});
+// 			}).catch(err => {
+// 				console.log(err);
+// 				res.end("error occured.")
+// 			});
+// 		}).catch(err => {
+// 			console.log(err);
+// 			res.end("error occured.")
+// 		});
+// 	}
+// 	res.render('guest/processing');
+// }
 exports.signup = function (req, res, next) {
 	console.log('signup');
 	res.render('guest/sign_up');
@@ -463,16 +694,6 @@ exports.signup_post = function(req,res,next){
         });
     });
 }
-// exports.availabe_cmnd = function(req,res,next){
-//     var cmnd = req.query.CMND;
-//     khachhangModel.single(cmnd).then(rows => {
-//         if (rows.length > 0){
-//             return res.json(false);
-//         } else {
-//             return res.json(true);
-//         }
-//     });
-// }
 exports.availabe_username = function(req,res,next){
     var tk = req.query.TaiKhoan;
     thanhvienModel.singleByTaiKhoan(tk).then(rows => {

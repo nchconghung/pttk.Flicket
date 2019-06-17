@@ -48,5 +48,11 @@ module.exports = {
 
     delete: cmnd => {
         return db.delete(`ThanhVien`,`CMND`,cmnd);
+    },
+
+    updatePoint: (point,id) => {
+        return db.load(`UPDATE ThanhVien
+                        SET DiemThuong = ${point}
+                        WHERE IdThanhVien =  ${id}`);
     }
 }

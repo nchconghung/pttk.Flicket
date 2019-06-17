@@ -5,10 +5,10 @@
         <span>Vui lòng kiêm tra hộp thư của bạn </span>
     </div>
     <div id="ticket-button">
-        <button id="download-ticket">Tải xuống thông tin đơn hàng</button>
-        <button id="homepage-btn">Trang chủ</button>
+        <a id="download-ticket">Tải xuống thông tin đơn hàng</a>
+        <a id="homepage-btn" href="/">Trang chủ</a>
     </div>
-    <div id="ticket-document">
+    <div id="ticket-document" style="background-color: white">
         <div class="whole-container">
             <span class="ticket-big-title">ITENERARY/RECEIPT</span>
             <span class="ticket-big-title">HÀNH TRÌNH/PHIẾU THU</span>
@@ -132,8 +132,17 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+<script src="/javascripts/guest/dom-to-image.min.js"></script>
 <script>
     $("#stage-four-num").addClass("index-active");
     $("#stage-four-text").addClass("stage-name-active");
+    $("#download-ticket").click(function () {
+        var node = document.getElementById('ticket-document');
+        domtoimage.toBlob(document.getElementById('ticket-document'))
+            .then(function (blob) {
+                window.saveAs(blob, 'ticket.png');
+            });
+    })
 </script>
 {{> "guest/footer"}}

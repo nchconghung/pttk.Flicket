@@ -73,4 +73,6 @@ module.exports = {
     
     WHERE lt.ChuyenBay = ${id}`);
     }
+
+    
 }

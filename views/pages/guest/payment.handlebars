@@ -4,7 +4,7 @@
         <div class="flight-detail-title">
             <span>Chi tiết đặt chỗ</span>
             <span id="flight-detail-booking-id">Mã đặt chỗ<span
-                    id="flight-detail-booking-id-detail">&nbsp;&nbsp;467688254</span></span>
+                    id="flight-detail-booking-id-detail">&nbsp;&nbsp;{{bookingID}}</span></span>
         </div>
         <div id="contact-person-info">
             <span id="contact-person-name">{{contactName}}</span>
@@ -106,7 +106,8 @@
                     <div class="before-content">
                         <div class="info-row">
                             <label for="txtCardID">Số thẻ tín dụng</label>
-                            <input id="txtCardID" type="text" required placeholder="16 chữ số mặt trên của mặt thẻ" name="txtCardID">
+                            <input id="txtCardID" type="text" required placeholder="16 chữ số mặt trên của mặt thẻ"
+                                name="txtCardID">
                         </div>
                         <div class="info-row row">
                             <div class="col-6">
@@ -117,12 +118,14 @@
                             </div>
                             <div class="col-6">
                                 <label for="txtCVV">CVV</label>
-                                <input id="txtCVV" pattern="^[0-9]{3}"  type="text" required placeholder="3 số CVV" name="txtCardCVC">
+                                <input id="txtCVV" pattern="^[0-9]{3}" type="text" required placeholder="3 số CVV"
+                                    name="txtCardCVC">
                             </div>
                         </div>
                         <div class="info-row">
                             <label for="txtCardName">Tên trên thẻ</label>
-                            <input id="txtCardName" type="text" required placeholder="Tên trên thẻ" name="txtCardHolderName">
+                            <input id="txtCardName" type="text" required placeholder="Tên trên thẻ"
+                                name="txtCardHolderName">
                         </div>
                     </div>
                     <div class="price-detail-coutainter">
@@ -186,11 +189,37 @@
                             <div class="col-2">
                             </div>
                             <div class="col-5 col-5-last">
-                                <span>{{tongTienThanhToan adult chuyenBay.NguoiLon kid chuyenBay.TreEm baby chuyenBay.EmBe adultLuggage kidLuggage babyLuggage}}</span>
+                                <span
+                                    id="must-pay">{{tongTienThanhToan adult chuyenBay.NguoiLon kid chuyenBay.TreEm baby chuyenBay.EmBe adultLuggage kidLuggage babyLuggage}}</span>
                             </div>
                         </div>
                     </div>
-                    <div id="btn-payment-container">
+                    <input name="txtTotalAmount" class="luggage-input-hidden" id="total1-input"
+                        value="{{tongTien adult chuyenBay.NguoiLon kid chuyenBay.TreEm baby chuyenBay.EmBe adultLuggage kidLuggage babyLuggage}}">
+                    {{#if point}}
+                    <div class="btn-payment-container" style="margin: 0px; justify-content: flex-start;">
+                        <input name="txtVoucher" class="luggage-input-hidden" id="voucher-input" value="0"
+                            data-point="{{point}}">
+                        <div class="voucher-box">
+                            <span class="passenger-name"
+                                style="font-family: Quicksand-Medium; font-size: 17px; margin: 0px;">Sử dụng điểm
+                                thưởng</span>
+                            <div class="relative-container">
+                                <div class="luggage-input-box" id="voucher-input-box">
+                                    <span>Không sử dụng</span>
+                                    <img src="/images/guest/BTN Expand.png" width="12px" height="auto">
+                                </div>
+                                <div class="luggage-input" id="voucher-option-list" data-first-time="1"
+                                    data-pre-percent="0">
+                                    <option value="0">Không sử dụng</option>
+                                    <option value="1" id="option-one">Giảm 5%</option>
+                                    <option value="2" id="option-two">Giảm 10%</option>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
+                    <div class="btn-payment-container">
                         <button type="submit" id="btn-payment">Thanh toán bằng thẻ tín dụng</button>
                     </div>
                 </div>
@@ -203,8 +232,8 @@
             </div>
             <div class="main-info-table">
                 <div id="flight-id-info">
-                    <span id="flight-id-title">Mã chuyến bay</span>
-                    <span id="flight-id-detail">467688254</span>
+                    <span id="flight-id-title">Mã đặt chỗ</span>
+                    <span id="flight-id-detail">{{bookingID}}</span>
                 </div>
                 <span class="depart-date-text">{{getNgayBay lichTrinh.[0].GioCatCanh}}</span>
                 <div class="journey-info">
@@ -223,7 +252,7 @@
                         <span>{{tongGioBay chuyenBay.TongGioBay}}</span>
                         <div class="transit-detail">
                             <div class="circle"></div>
-                            <span >1 điểm dừng</span>
+                            <span>1 điểm dừng</span>
                         </div>
                     </div>
                 </div>
@@ -235,11 +264,11 @@
                     <img src="{{chuyenBay.Logo}}" height="30px" width="auto">
                 </div>
                 {{#each lichTrinh}}
-                    {{#ifCond this.ThuTu '<' ../this.lichTrinh.length}}
-                    <div class="transit-remind">
-                        <span><b>{{getGioBay this.GioHaCanh}}</b>&nbsp;&nbsp;quá cảnh tại {{this.DiemDen}} </span>
-                    </div>
-                    {{/ifCond}}
+                {{#ifCond this.ThuTu '<' ../this.lichTrinh.length}}
+                <div class="transit-remind">
+                    <span><b>{{getGioBay this.GioHaCanh}}</b>&nbsp;&nbsp;quá cảnh tại {{this.DiemDen}} </span>
+                </div>
+                {{/ifCond}}
                 {{/each}}
                 <div id="passenger-list">
                     <span id="passenger-list-title">Danh sách hành khách</span>
@@ -273,7 +302,9 @@
 <script src="https://js.stripe.com/v2/"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 <script>
     $("#stage-two-num").addClass("index-active");
     $("#stage-two-text").addClass("stage-name-active");
@@ -293,7 +324,36 @@
             $("#modal2-location-transit").text(n + " điểm dừng");
             $(".transit-detail span").text(n + " điểm dừng");
         }
+        var point = parseInt($("#voucher-input").data("point"));
+        if (point < 400) {
+            $("#option-two").prop('disabled', true);
+        }
+        if (point < 250) {
+            $("#option-one").prop('disabled', true);
+        }
+        $('#voucher-option-list option').click(function () {
+            $("#voucher-input").val($(this).val());
+            var total = parseInt($("#total1-input").val());
+            var percent = 1;
+            if ($(this).val() == "0") {
+                percent = 0;
+            } else if ($(this).val() == "1") {
+                percent = 0.05;
+            } else if ($(this).val() == "2") {
+                percent = 0.1;
+            }            
+            if (percent != $("#voucher-option-list").data("pre-percent")) {
+                total = total / (1 - parseFloat($("#voucher-option-list").data("pre-percent"))) * (1 - percent);
+                $("#voucher-option-list").data("pre-percent", percent);
+            }            
+            $("#must-pay").text(total
+                .toFixed(0)
+                .replace('.', ',')
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') + ' VND');
+            $("#total1-input").val(total);
+            console.log("Submit: txtTotalAmount="+$("#total1-input").val()+" - txtVoucher = "+$("#voucher-input").val());
+        })
     })
 </script>
-<script src="/javascripts/guest/checkout.js"></script>
+<script src="/javascripts/guest/user.js"></script>
 {{> "guest/footer"}}

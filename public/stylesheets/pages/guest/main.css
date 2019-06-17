@@ -64,6 +64,10 @@
   }
   .navbar-item{
     margin-left: 81px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
   .navbar-item a{
     color: white;
@@ -1554,6 +1558,15 @@
     align-items: flex-start;
     border: 1px solid #7A9ED5;
   }
+  .voucher-box{
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    
+  }
   
   .passenger-name {
     font-family: Quicksand-Medium;
@@ -1637,7 +1650,7 @@
     font-size: 15px;
   }
   
-  #btn-payment-container {
+  .btn-payment-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -2848,7 +2861,6 @@
   border-top: 1px solid #9E9D9D;
   border-bottom: 1px solid #9E9D9D;
   margin: 20px 0px;
-  display: none;
 }
 
 .edit-profile-button-container {

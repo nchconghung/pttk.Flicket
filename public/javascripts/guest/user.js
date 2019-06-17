@@ -2,6 +2,15 @@ Stripe.setPublishableKey('pk_test_2EDZoff2M6jrmmigKHXFMRzi00VKpVwSsW');
 var form = $("#payment-form");
 $(form).submit(function (e) {
     $(form).find('button').prop('disabled', true);
+    if(typeof $('#txtFormerPassword').val() != "undefined"){
+        if($('#txtNewPassword').val()==$('#txtConfirmPassword').val()){
+            return true;
+        }
+        $('#charge-error').text("Mật khẩu xác nhận không trùng khớp");
+        $('#charge-error').removeClass('d-none');
+        $(form).find('button').prop('disabled', false);
+        return false;
+    }
     var expiry_date = $('#txtDueDate').val();
     var temp = expiry_date.split("/");
     Stripe.card.createToken({
@@ -16,7 +25,7 @@ $(form).submit(function (e) {
 function stripeResponseHandler(status, response) {
 
     if (response.error) { 
-        console.log("error");
+        console.log(response.error.message);
         var s ="";
         if(response.error.code=="invalid_number"||response.error.code=="incorrect_number"){
             s="Mã số thẻ không hợp lệ!";

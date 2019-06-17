@@ -10,6 +10,16 @@ var giaodichModel = require('../model/giaodich.model');
 var veModel = require('../model/ve.model');
 var hanhkhachModel = require('../model/hanhkhach.model');
 var banggiaveModel = require('../model/banggiave.model');
+
+function randomString() {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 10; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 exports.index = function (req, res, next) {
 	res.render('guest/home', { title: 'Flicket' });
 }
@@ -167,6 +177,7 @@ exports.passenger_post = function (req, res, next) {
 		email: req.body.txtEmail
 	}
 	req.session.contact = contact;
+	req.session.bookingID = randomString();
 	if(Array.isArray(req.body.txtAdultName)){
 		req.session.adultName = req.body.txtAdultName;
 		req.session.adultBirth = req.body.txtAdultBirth;
@@ -213,8 +224,6 @@ exports.passenger_post = function (req, res, next) {
 		req.session.babyLuggage = [req.body.txtBabyLuggage];
 		}
 	}
-	
-	req.session.totalAmount = req.body.txtTotalAmount;
 	console.log("Passenger session:");
 	console.log(req.session);
 	//
@@ -237,6 +246,7 @@ exports.payment = function (req, res, next) {
 	var adultLuggage = req.session.adultLuggage;
 	var kidLuggage = req.session.kidLuggage;
 	var babyLuggage = req.session.babyLuggage;
+	var bookingID = req.session.bookingID;
 
 	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
 		res.render('guest/payment', {
@@ -254,7 +264,9 @@ exports.payment = function (req, res, next) {
 			email: email,
 			adultLuggage: adultLuggage,
 			kidLuggage: kidLuggage,
-			babyLuggage: babyLuggage
+			babyLuggage: babyLuggage,
+			bookingID: bookingID,
+			point: 0
 		});
 	});
 }
@@ -268,8 +280,10 @@ exports.payment_post = function (req, res, next) {
 		HoTen: req.body.txtCardHolderName
 	}
 	req.session.card = card;
-	
-	res.redirect("/guest/processing");
+	req.session.totalAmount = req.body.txtTotalAmount;
+	req.session.voucher = req.body.txtVoucher;
+
+	res.redirect("/guest/processing")
 }
 
 exports.processing = function (req, res, next) {
@@ -300,7 +314,7 @@ exports.processing = function (req, res, next) {
 					TongGiaTri: parseFloat(req.session.totalAmount),
 					DiemThuongSuDung: 0,
 					ThoiDiemGiaoDich: date,
-					MaDatCho: '1234135'
+					MaDatCho: req.session.bookingID
 				}
 				giaodichModel.add(giaodich).then(idgd => {
 					
@@ -531,6 +545,9 @@ exports.signout_post = function(req,res,next){
 exports.user = function(req,res,next){
 	console.log(req.session);
 	res.render('guest/user');
+}
+exports.user_post = function(req,res,next){
+	res.send(req.body);
 }
 exports.ticket = function (req, res, next) {
 	res.render('guest/ticket');

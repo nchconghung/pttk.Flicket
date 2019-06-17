@@ -35,7 +35,6 @@ $(function () {
 });
 //Nav bar
 $(".main-signInBTN").click(function () {
-    console.log("aaaaa");
     $("#signIn-model").toggleClass("show-panel");
 });
 $(document).mouseup(function (e) {
@@ -1041,21 +1040,52 @@ $(".btn-home-submit").click(function () {
     $("#change-searching-info").removeClass("change-searching-active");
     $("#change-searching-panel-container").hide();
 })
-
+$('.edit-profile-button-container1').hide();
 /*User */
 $('#password-edit-button').click(function () {
-    $("#password-edit-container").show();
+    console.log("1");
+    $("#password-edit-container").append('<div class="edit-profile-input"><label for="txtFormerPassword">Mật khẩu cũ</label><input name="txtFormerPassword" type="password" id="txtFormerPassword" required></div><div class="edit-profile-input"><label for="txtNewPassword">Mật khẩu mới</label><input name="txtNewPassword" type="password" id="txtNewPassword" required></div><div class="edit-profile-input"><label for="txtConfirmPassword">Xác nhận mật khẩu mới</label><input name="txtConfirmPassword" type="password" id="txtConfirmPassword" required></div>')
+    $('.edit-profile-button-container1').show();
     $(this).hide();
     $('#txtUserName').attr('disabled', true);
     $('#txtUserName').css('opacity', '0.42');
+    $('#txtEmail').attr('disabled', true);
+    $('#txtEmail').css('opacity', '0.42');
+    $('#txtPhone').attr('disabled', true);
+    $('#txtPhone').css('opacity', '0.42');
+    //
+    $('#txtCardID').attr('disabled', true);
+    $('#txtCardID').css('opacity', '0.42');
+    $('#txtDueDate').attr('disabled', true);
+    $('#txtDueDate').css('opacity', '0.42');
+    $('#txtCVV').attr('disabled', true);
+    $('#txtCVV').css('opacity', '0.42');
+    $('#txtCardName').attr('disabled', true);
+    $('#txtCardName').css('opacity', '0.42');
     $('#edit-profile-button-update').attr('disabled', true);
     $('#edit-profile-button-update').css('opacity', '0.42');
 })
 $('#edit-profile-button-container-cancel').click(function () {
-    $("#password-edit-container").hide();
-    $('#password-edit-button').show();
+    console.log("2");
+    $("#password-edit-button").show();
+    $("#password-edit-container").find(".edit-profile-input").remove();    
+    $('.edit-profile-button-container1').hide();
+    //
     $('#txtUserName').attr('disabled', false);
     $('#txtUserName').css('opacity', '1');
+    $('#txtEmail').attr('disabled', false);
+    $('#txtEmail').css('opacity', '1');
+    $('#txtPhone').attr('disabled', false);
+    $('#txtPhone').css('opacity', '1');
+    //
+    $('#txtCardID').attr('disabled', false);
+    $('#txtCardID').css('opacity', '1');
+    $('#txtDueDate').attr('disabled', false);
+    $('#txtDueDate').css('opacity', '1');
+    $('#txtCVV').attr('disabled', false);
+    $('#txtCVV').css('opacity', '1');
+    $('#txtCardName').attr('disabled', false);
+    $('#txtCardName').css('opacity', '1');
     $('#edit-profile-button-update').attr('disabled', false);
     $('#edit-profile-button-update').css('opacity', '1');
 })
@@ -1206,6 +1236,7 @@ $(document).ready(function () {
         $(this).parent().parent().find('span').text(temp)
         $(this).parent().parent().removeClass('above')
         $(this).parent().parent().parent().find(".luggage-input-hidden").val($(this).val());
+        $("#voucher-input").val($(this).val());
         var rs = 0;
         $(".luggage-input-hidden").each(function(){
             rs += parseInt($(this).val());
@@ -1237,7 +1268,6 @@ $(document).ready(function () {
             $(this).data("id", "1");
             $(this).text("Lưu");
         } else {
-            console.log("aaaaa");
             UpdateLuggageTitle();
             $(this).data("id", "0");
             $(this).text("Thay đổi");

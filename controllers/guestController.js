@@ -2,26 +2,29 @@ var bcrypt = require('bcrypt');
 var thanhvienModel = require('../model/thanhvien.model');
 var khachhangModel = require('../model/thongtinkhachhanggiaodich.model');
 var passport = require('passport');
-
 var chuyenBayModel = require('../model/chuyenbay.model');
 var lichTrinhModel = require('../model/lichtrinh.model');
+var pdfMake = require('pdfmake/build/pdfmake.js');
+var pdfFonts = require('pdfmake/build/vfs_fonts.js');
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+var domtoimage = require('dom-to-image');
 
 function randomString() {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < 10; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
+	var result = '';
+	var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+	var charactersLength = characters.length;
+	for (var i = 0; i < 10; i++) {
+		result += characters.charAt(Math.floor(Math.random() * charactersLength));
+	}
+	return result;
 }
 exports.index = function (req, res, next) {
 	res.render('guest/home', { title: 'Flicket' });
 }
 
-exports.index_post = function(req, res, next){
-	var adult= req.body.txtAdult;
-	var kid= req.body.txtKid;
+exports.index_post = function (req, res, next) {
+	var adult = req.body.txtAdult;
+	var kid = req.body.txtKid;
 	var baby = req.body.txtBaby;
 	var hangghe = req.body.txtClass;
 	var date = req.body.txtDate;
@@ -33,7 +36,7 @@ exports.index_post = function(req, res, next){
 		HangGhe: hangghe,
 		NguoiLon: adult,
 		TreEm: kid,
-		EmBe: baby	
+		EmBe: baby
 	};
 	req.session.userdata = userdata;
 	req.session.date = date;
@@ -73,9 +76,9 @@ exports.pick = function (req, res, next) {
 			listEntity.push(e);
 		}
 		var isEmpty;
-		if(listEntity.length==0){
+		if (listEntity.length == 0) {
 			isEmpty = true;
-		}else{
+		} else {
 			isEmpty = false;
 		}
 		var userdata = {
@@ -83,7 +86,7 @@ exports.pick = function (req, res, next) {
 			HangGhe: hangghe,
 			NguoiLon: adult,
 			TreEm: kid,
-			EmBe: baby	
+			EmBe: baby
 		};
 		req.session.userdata = userdata;
 		console.log(req.session);
@@ -99,7 +102,7 @@ exports.pick = function (req, res, next) {
 		console.log(err);
 	});
 }
-exports.pick_post = function(req,res,next){
+exports.pick_post = function (req, res, next) {
 	var id = req.body.txtIdChuyenBay;
 	//Updating session here
 	req.session.userdata.IdChuyenBay = parseInt(id);
@@ -116,9 +119,9 @@ exports.info = function (req, res, next) {
 	var kid = req.session.userdata.TreEm;
 	var baby = req.session.userdata.EmBe;
 	var classs = req.session.userdata.HangGhe;
-	Promise.all([chuyenBayModel.singleWithDetailById(id,classs),lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay,lichtrinh])=>{
+	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
 		req.session.userdata.IdChuyenBay = parseInt(id);
-		res.render('guest/check_info',{
+		res.render('guest/check_info', {
 			chuyenBay: chuyenbay[0],
 			lichTrinh: lichtrinh,
 			adult: adult,
@@ -155,50 +158,50 @@ exports.passenger_post = function (req, res, next) {
 	}
 	req.session.contact = contact;
 	req.session.bookingID = randomString();
-	if(Array.isArray(req.body.txtAdultName)){
+	if (Array.isArray(req.body.txtAdultName)) {
 		req.session.adultName = req.body.txtAdultName;
 		req.session.adultBirth = req.body.txtAdultBirth;
 		req.session.adultLuggage = req.body.txtAdultLuggage;
-	}else{
-		if(typeof req.body.txtAdultName == 'undefined'){
+	} else {
+		if (typeof req.body.txtAdultName == 'undefined') {
 			req.session.adultName = [];
 			req.session.adultBirth = [];
 			req.session.adultLuggage = [];
-		}else{
-		req.session.adultName = [req.body.txtAdultName];
-		req.session.adultBirth = [req.body.txtAdultBirth];
-		req.session.adultLuggage = [req.body.txtAdultLuggage];
+		} else {
+			req.session.adultName = [req.body.txtAdultName];
+			req.session.adultBirth = [req.body.txtAdultBirth];
+			req.session.adultLuggage = [req.body.txtAdultLuggage];
 		}
 	}
-	if(Array.isArray(req.body.txtKidName)){
+	if (Array.isArray(req.body.txtKidName)) {
 		req.session.kidName = req.body.txtKidName;
 		req.session.kidBirth = req.body.txtKidBirth;
 		req.session.kidLuggage = req.body.txtKidLuggage;
-	}else{
-		if(typeof req.body.txtKidName == 'undefined'){
+	} else {
+		if (typeof req.body.txtKidName == 'undefined') {
 			req.session.kidName = [];
 			req.session.kidBirth = [];
 			req.session.kidLuggage = [];
-		}else{
-		req.session.kidName = [req.body.txtKidName];
-		req.session.kidBirth = [req.body.txtKidBirth];
-		req.session.kidLuggage = [req.body.txtKidLuggage];
+		} else {
+			req.session.kidName = [req.body.txtKidName];
+			req.session.kidBirth = [req.body.txtKidBirth];
+			req.session.kidLuggage = [req.body.txtKidLuggage];
 		}
 	}
 
-	if(Array.isArray(req.body.txtBabyName)){
+	if (Array.isArray(req.body.txtBabyName)) {
 		req.session.babyName = req.body.txtBabyName;
 		req.session.babyBirth = req.body.txtBabyBirth;
 		req.session.babyLuggage = req.body.txtBabyLuggage;
-	}else{
-		if(typeof req.body.txtBabyName == 'undefined'){
+	} else {
+		if (typeof req.body.txtBabyName == 'undefined') {
 			req.session.babyName = [];
 			req.session.babyBirth = [];
 			req.session.babyLuggage = [];
-		}else{
-		req.session.babyName = [req.body.txtBabyName];
-		req.session.babyBirth = [req.body.txtBabyBirth];
-		req.session.babyLuggage = [req.body.txtBabyLuggage];
+		} else {
+			req.session.babyName = [req.body.txtBabyName];
+			req.session.babyBirth = [req.body.txtBabyBirth];
+			req.session.babyLuggage = [req.body.txtBabyLuggage];
 		}
 	}
 	console.log("Passenger session:");
@@ -274,21 +277,21 @@ exports.signup = function (req, res, next) {
 	console.log('signup');
 	res.render('guest/sign_up');
 }
-exports.signup_post = function(req,res,next){
-    var saltRounds = 10;
-    bcrypt.hash(req.body.MatKhau, saltRounds, function(err, hash) {
-        var member = {
-            TaiKhoan: req.body.TaiKhoan,
-            MatKhau: hash
-        }
-        thanhvienModel.add(member).then(id =>{
-			res.redirect('/guest/'+id+'/edit');
-            
-        }).catch(err => {
-            console.log(err);
-            res.end("error occured.")
-        });
-    });
+exports.signup_post = function (req, res, next) {
+	var saltRounds = 10;
+	bcrypt.hash(req.body.MatKhau, saltRounds, function (err, hash) {
+		var member = {
+			TaiKhoan: req.body.TaiKhoan,
+			MatKhau: hash
+		}
+		thanhvienModel.add(member).then(id => {
+			res.redirect('/guest/' + id + '/edit');
+
+		}).catch(err => {
+			console.log(err);
+			res.end("error occured.")
+		});
+	});
 }
 // exports.availabe_cmnd = function(req,res,next){
 //     var cmnd = req.query.CMND;
@@ -300,54 +303,52 @@ exports.signup_post = function(req,res,next){
 //         }
 //     });
 // }
-exports.availabe_username = function(req,res,next){
-    var tk = req.query.TaiKhoan;
-    thanhvienModel.singleByTaiKhoan(tk).then(rows => {
-        if (rows.length > 0){
-            return res.json(false);
-        } else {
-            return res.json(true);
-        }
-    });
+exports.availabe_username = function (req, res, next) {
+	var tk = req.query.TaiKhoan;
+	thanhvienModel.singleByTaiKhoan(tk).then(rows => {
+		if (rows.length > 0) {
+			return res.json(false);
+		} else {
+			return res.json(true);
+		}
+	});
 }
-exports.signin_post = function(req,res,next){
-    passport.authenticate('local', (err, user, info) => {
-        if (err)
-        {
-            res.end('error occured.')
-        }
-          
-    
-        if (!user) {
-            res.end(info.message)
-            // return res.render('/guest/');
-        //   return res.render('vwAccount/login', {
-        //     layout: false,
-        //     err_message: info.message
-        //   })
-        }
-    
-        req.logIn(user, err => {
-            if (err){
-                // return next(err);
-                res.end('error occured.');
-            }
-            req.session.username=user.TaiKhoan;
-            req.session.pass = user.MatKhau;
-          return res.redirect('/guest');
-        });
-      })(req, res, next);
+exports.signin_post = function (req, res, next) {
+	passport.authenticate('local', (err, user, info) => {
+		console.log(req.originalUrl);
+		if (err) {
+			res.end('error occured.')
+		}
+		if (!user) {
+			res.end(info.message)
+			// return res.render('/guest/');
+			//   return res.render('vwAccount/login', {
+			//     layout: false,
+			//     err_message: info.message
+			//   })
+		}
+
+		req.logIn(user, err => {
+			if (err) {
+				// return next(err);
+				res.end('error occured.');
+			}
+			req.session.username = user.TaiKhoan;
+			req.session.pass = user.MatKhau;
+			return res.redirect('/guest');
+		});
+	})(req, res, next);
 }
-exports.signout_post = function(req,res,next){
-    console.log("logout");
-    req.logOut();
-    res.redirect('/guest/');
+exports.signout_post = function (req, res, next) {
+	console.log("logout");
+	req.logOut();
+	res.redirect('/guest/');
 }
-exports.user = function(req,res,next){
+exports.user = function (req, res, next) {
 	console.log(req.session);
 	res.render('guest/user');
 }
-exports.user_post = function(req,res,next){
+exports.user_post = function (req, res, next) {
 	res.send(req.body);
 }
 exports.ticket = function (req, res, next) {

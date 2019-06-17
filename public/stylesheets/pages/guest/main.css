@@ -3059,6 +3059,13 @@
   justify-content: space-between;
   margin: 20px 0px;
 }
+#ticket-button a{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
 
 #download-ticket {
   color: white;

@@ -762,6 +762,9 @@ exports.signin_post = function(req,res,next){
         });
       })(req, res, next);
 }
+exports.signin = function(req,res,next){
+	res.render('guest/sign_in');
+}
 exports.signout_post = function(req,res,next){
     console.log("logout");
     req.logOut();
@@ -790,7 +793,7 @@ exports.ticket = function (req, res, next) {
 	//remove session here
 
 	//sample data
-	
+
 	// var bookingID = "ABGHDEUJ";
 	// var id = 1;
 	// var adultName = ["Nguyen Van A","Nguyen Thi B"];
@@ -823,4 +826,12 @@ exports.ticket = function (req, res, next) {
 			totalAmount: totalAmount
 		});
 	});
+}
+
+exports.profile = function(req, res, next){
+	res.render('guest/profile');
+}
+
+exports.profile_post = function(req, res, next){
+
 }

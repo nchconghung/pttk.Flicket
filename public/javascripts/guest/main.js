@@ -304,6 +304,7 @@ $("#flight-info-btn").click(function () {
     $('#flight-modal2-info').show();
     $('#passenger-modal2-info').hide();
 })
+$('#expDate').datepicker();
 $("#passenger-info-btn").click(function () {
     if (!$(this).hasClass('modal-menu-bar-option-active')) {
         $(this).addClass('modal-menu-bar-option-active');

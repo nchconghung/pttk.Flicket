@@ -1,0 +1,83 @@
+{{> "guest/header"}}
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script>
+    $(function(){
+        $('#registerForm').validate({
+            rules:{
+                TaiKhoan: {
+                    required: true,
+                    remote: {
+                        url: '/guest/is-available-username'
+                    }
+                },
+                MatKhau: {
+                    required: true,
+                    minlength: 6
+                },
+                Confirm: {
+                    required: true,
+                    equalTo:'#pass'
+                }
+            },
+            messages: {
+                TaiKhoan: {
+                    required: 'Tài khoản cần được nhập',
+                    remote: 'Tài khoản này đã được dùng'
+                },
+                MatKhau: {
+                    required: "Mật khẩu cần được nhập",
+                    minlength: "Mật khẩu cần dài hơn 6 kí tự"
+                },
+                Confirm: {
+                    required: "Vui lòng xác nhận lại mật khẩu",
+                    equalTo: "Không trùng với mật khẩu"
+                }
+            },
+            errorElement: 'small',
+            errorClass: 'help-block text-danger',
+            highlight: function(e){
+                $(e).removeClass('is-valid').addClass('is-invalid');
+            },
+            unhighlight: function(e){
+                $(e).removeClass('is-invalid').addClass('is-valid');
+            }
+        });
+    })
+</script>
+{{/section}}
+<div id="sign-up-main-container" style="padding: 0px 150px;">
+    <div id="sign-up-img">
+        <img src="/images/guest/sign_in_image.gif" height="380px" width="auto">
+    </div>
+    <form novalidate action="/guest/signup" method="POST" id="registerForm">
+        <div id="sign-up-container" style="margin-bottom: 0px">
+            <div id="sign-up-main-title">
+                <span>Đăng ký thành viên Flicket</span>
+            </div>
+            <div id="charge-error" class="alert alert-danger d-none" style="margin-top: 20px;">
+
+            </div>
+            <div class="sign-up-input-element">
+                <div class="sign-up-title">
+                    <span>Tài khoản</span>
+                </div>
+                <div class="sign-up-note">
+                    <span>Không được chứa dấu, số và ký tự đặc biệt</span>
+                </div>
+                <input type="text" class="sign-up-input" name = "TaiKhoan">
+            </div>
+            <div class="sign-up-input-element">
+                <div class="sign-up-title">
+                    <span>Mật khẩu</span>
+                </div>
+                <div class="sign-up-note">
+                    <span>Tối thiểu 6 ký tự</span>
+                </div>
+                <input type="password" name="MatKhau" id="pass"class="sign-up-input" >
+            </div>
+            <div id="sign-up-page-btn-container">
+                <button type="submit" id="sign-up-page-btn">Đăng nhập</button>
+            </div>
+    </form>
+</div>

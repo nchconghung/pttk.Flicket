@@ -26,7 +26,7 @@ router.post('/signup',guest_controller.signup_post);
 router.get('/signin',guest_controller.signin);
 router.post('/signin',guest_controller.signin_post);
 
-router.get('/profile',guest_controller.profile);
+router.get('/:id/profile',guest_controller.profile);
 router.post('/profile',guest_controller.profile_post);
 
 router.post('/signout',auth,guest_controller.signout_post);

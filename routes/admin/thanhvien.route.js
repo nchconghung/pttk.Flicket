@@ -150,28 +150,32 @@ router.get('/add/:id/infor',(req,res)=>{
 })
 
 router.post('/addinfor',(req,res)=>{
-    var idTV = req.body.IdThanhVien;
-    var thetindung = {
-        SoHieuThe: req.body.SoHieuThe,
-        HoTen: req.body.TenChuThe,
-        CSC: req.body.CSC,
-        NgayHetHan: req.body.NgayHetHan
-    };
-    var khachhang = {
+
+    var date = '01/'+ req.body.NgayHetHan;
+	var expDate = moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
+	var thongtin ={
         HoTen: req.body.HoTen,
         Email: req.body.Email,
         SDT: req.body.SDT,
-        IdThe: 0
-    }
-    thetindungModel.add(thetindung).then(id => {
-        khachhang.IdThe = id;
-        thongtinkhachhangModel.add(khachhang).then(idTT=>{
-            thanhvienModel.updateInfor(idTV,idTT).then(rows=>{
-                res.render('admin/vwKhachHang/add',{
-                    layout: 'admin'
-                });
-            })
+        TheTinDung: 0
+	};
 
+	var thetindung = {
+		SoHieuThe: req.body.SoHieuThe,
+        HoTen: req.body.TenChuThe,
+        CSC: req.body.CSC,
+        NgayHetHan: expDate
+	};
+
+	var IdThanhVien = parseInt(req.body.IdThanhVien);
+	console.log(IdThanhVien);
+	//update to db here
+	thetindungModel.add(thetindung).then(id => {
+        thongtin.TheTinDung = id;
+        khachhangModel.add(thongtin).then(idTT=>{
+            thanhvienModel.updateInfor(IdThanhVien,idTT).then(rows=>{
+                res.redirect('/admin/member/index');
+            })
         }).catch(err => {
             console.log(err),
             res.end('error occured.')
@@ -180,7 +184,6 @@ router.post('/addinfor',(req,res)=>{
         console.log(err),
         res.end('error occured.')
     });
-    
 })
 
 router.post('/add',(req,res) => {

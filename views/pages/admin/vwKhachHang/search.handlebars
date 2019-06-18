@@ -4,124 +4,70 @@
     <div class="content-wrapper">
         <div class="card">
             <div class="card-body">
-                <form class="d-flex justify-content-center">
-                    <select class="custom-select select-search-fk" >
+                <form class="d-flex justify-content-center" action="/admin/customer/search" method="POST">
+                    <select class="custom-select select-search-fk" disabled>
                         <option value="" selected>Id</option>
-                        <option value="hoten" >Họ tên</option>
-                        <option value="ve">Email</option>
                     </select>    
-                    <input type="text" class="form-control input-search-fk" placeholder="Keyword...">
-                    <btn class="btn btn-success btn-search-fk"><i class="fas fa-search"></i></btn>
+                    <input name="IdKhachHang" type="text" class="form-control input-search-fk" placeholder="Id Khách hàng">
+                    <button class="btn btn-success btn-search-fk"><i class="fas fa-search"></i></button>
                 </form>
-                <br>
-                <h5>Kết quả:</h5>
-                                    <div class="row">
-                        <div class="col-12">
-                            <div class="table-responsive">
-                            <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                                <div class="row">
-                                <div class="col-sm-12">
-                                    <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
-                                <thead>
-                                <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Họ tên</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Email</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >SĐT</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thành viên</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thời điểm giao dịch</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giao dịch</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Công cụ</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                        <tr role="row" >
-                                            <td class="sorting_1">1</td>           
-                                            <td>Nguyễn Công Hưng</td>
-                                            <td>nchconghung@gmail.com</td>
-                                            <td>0969327333</td>
-                                            <td>
-                                                <a class="badge badge-info" href="#" style="font-weight: bold;font-size:13px;">Xem</a>
-                                            </td>
-                                            <td>14:30:00 14-6-2019</td>
-                                            <td>
-                                                <a class="badge badge-info" href="#" style="font-weight: bold;font-size:13px;">Chi tiết</a>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fas fa-cog"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">Xóa</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                            </div>
-                        </div>
-                        </div>
-                            </div>
-                        </div>
-                    </div>
 
                 {{#if result}}
+                    <br>
+                    <h5>Kết quả:</h5>     
+                    <br>
                     <div class="row">
                         <div class="col-12">
                             <div class="table-responsive">
                             <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                                 <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
-                                <thead>
-                                <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
-                                    <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >CMND</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Họ tên</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thành Viên</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Vé đặt hiện tại</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Email</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >SĐT</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giới tính</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Ngày Sinh</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Công cụ</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each list}}
-                                        <tr role="row" >
-                                            <td class="sorting_1">1</td>           
-                                            <td>281144960</td>
-                                            <td>Nguyễn Công Hưng</td>
-                                            <td>
-                                                <a class="badge badge-info" href="#" style="font-weight: bold;font-size:13px;">Xem</a>
-                                            </td>
-                                            <td>12</td>
-                                            <td>nchconghung@gmail.com</td>
-                                            <td>0969327027</td>
-                                            <td>Nam</td>
-                                            <td>27-08-1998</td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                       <i class="fas fa-cog"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Xem chi tiết vé</a>
-                                                        <a class="dropdown-item" href="#">Chỉnh sửa</a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" href="#">Xóa</a>
-                                                    </div>
+                            <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
+                            <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
+                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Họ tên</th>
+                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Email</th>
+                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >SĐT</th>
+                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thành viên</th>
+                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thời điểm giao dịch</th>
+                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giao dịch</th>
+                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Công cụ</th>
+                            </tr>
+                            </thead>
+                            <tbody>                        
+                                {{#each list}}
+                                    <tr role="row" >
+                                        <td class="sorting_1">{{this.IdKhachHang}}</td>           
+                                        <td>{{this.HoTen}}</td>
+                                        <td>{{this.Email}}</td>
+                                        <td>{{this.SDT}}</td>
+                                        <td>
+                                            <a class="badge badge-info" href="/admin/customer/{{this.IdThanhVien}}/detail" style="font-weight: bold;font-size:13px;">{{this.TaiKhoan}}</a>
+                                        </td>
+                                        <td>{{this.ThoiDiemGiaoDich}}</td>
+                                        <td>
+                                            <a class="badge badge-info" href="#" style="font-weight: bold;font-size:13px;">Chi tiết</a>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-cog"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="/admin/customer/{{this.IdKhachHang}}/edit">Chỉnh sửa</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <form action="/admin/customer/{{this.IdKhachHang}}/delete">  
+                                                            <button class="dropdown-item"  type="submit">Xóa</button>
+                                                    </form>
+                                                    
                                                 </div>
-                                            </td>
-                                        </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
+                                            </div>
+                                        </td>
+                                    </tr> 
+                                {{/each}}
+                            </tbody>
+                        </table>
                             </div>
                         </div>
                         </div>

@@ -25,9 +25,13 @@ module.exports = {
     },
 
     single: id => {
-        return db.load(`select * from ThanhVien where id=${id}`);
+        return db.load(`select * from ThanhVien where IdThanhVien=${id}`);
     },
-
+    updateInfor: (id,idInfor) => {
+        return db.load(`UPDATE ThanhVien
+        SET ThongTin = ${idInfor}
+        WHERE IdThanhVien =  ${id}`);
+    },
     singleByTaiKhoan: tk => {
         return db.load(`select * from ThanhVien where TaiKhoan like '${tk}'`);
     },

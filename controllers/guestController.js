@@ -288,7 +288,7 @@ exports.payment_post = function (req, res, next) {
 }
 
 exports.processing = function (req, res, next) {
-	console.log(req.session);
+	//console.log(req.session);
 	var promise1;
 	var date = '01/'+req.session.card.NgayHetHan;
 	var expDate = moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
@@ -807,6 +807,24 @@ exports.ticket = function (req, res, next) {
 	var contact = req.session.contact;
 
 	//remove session here
+	delete req.session['userdata'];
+	delete req.session['date'];
+	delete req.session['depart'];
+	delete req.session['arrive'];
+	delete req.session['bgv'];
+	delete req.session['contact'];
+	delete req.session['bookingID'];
+	delete req.session['adultName'];
+	delete req.session['adultBirth'];
+	delete req.session['adultLuggage'];
+	delete req.session['kidName'];
+	delete req.session['kidBirth'];
+	delete req.session['kidLuggage'];
+	delete req.session['babyName'];
+	delete req.session['babyBirth'];
+	delete req.session['babyLuggage'];
+	delete req.session['card'];
+	delete req.session['totalMount'];
 
 	//sample data
 

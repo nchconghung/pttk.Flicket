@@ -1,136 +1,84 @@
 <link rel="stylesheet" href="/stylesheets/pages/admin/form-style.css">
 
 <!-- partial -->
-
-{{#section 'js'}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-<script>
-    $(function(){
-        $('#addForm').validate({
-            rules:{
-                CMND: {
-                    required: true,
-                    remote:{
-                        url:'/guest/is-available-cmnd'
-                    }
-                },
-                HoTen: {
-                    required: true
-                },
-                Email: {
-                    required: true,
-                    email: true
-                },
-                SDT: {
-                    required: true
-                }
-            },
-            messages:{
-                CMND: {
-                    required: 'CMND/Căn cước cần được nhập',
-                    remote: 'CMND/Căn cước này đã bị đăng kí'
-                },
-                HoTen: {
-                    required: 'Họ tên cần được nhập'
-                },
-                Email: {
-                    required: 'Email cần được nhập',
-                    email: 'Vui lòng nhập email chính xác'
-                },
-                SDT: {
-                    required: 'SDT cần được nhập'
-                }
-            },
-            errorElement: 'small',
-            errorClass: 'help-block text-danger',
-            highlight: function(e){
-                $(e).removeClass('is-valid').addClass('is-invalid');
-            },
-            unhighlight: function(e){
-                $(e).removeClass('is-invalid').addClass('is-valid');
-            }
-        });
-    })
-</script>
-{{/section}}
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="card d-flex flex-column justify-content-center">
-            <span class="contact1-form-title" style="margin-top:30px;">
-                        Thêm mới thành viên
+            <div class="card-body d-flex justify-content-center ">
+                <form class="contact1-form validate-form" style="width: 1000px;" action = "/admin/customer/add" method="POST">
+                    <span class="contact1-form-title">
+                       Thêm khách hàng
                     </span>
-            <div class="card-body d-flex justify-content-center">
-                <form novalidate action="/admin/customer/add" method="POST" class="contact1-form" style="width:1000px;" id="addForm">    
-                    <div class="d-flex justify-content-center">
-                        <div class="wrap-input1 validate-input" style="width:400px;" >
-                            <span>CMND</span> 
-                            <input class="input1" type="text" name="CMND" placeholder="CMND/Căn cước">
+                    <br><hr>
+                    <span class="contact1-form-title">
+                       Thêm thông tin
+                    </span>
+                    <div class="">
+                        <span style="margin-left: 200px;"><i class="fas fa-signature" style="margin-right: 5px;"></i>Họ tên:</span>
+                        <div class="wrap-input1 validate-input d-flex justify-content-center align-items-center" >   
+                            <input class="input1" name= "HoTen"type="text" style="width:500px; ">
                         </div>
                     </div>
-                    
-                    <div class="row" >
-                        <div class="col">
-                            <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Họ tên</span>
-                            <div class="wrap-input1 validate-input" >   
-                                <input class="input1" type="text" name="HoTen" placeholder="Họ tên" >
-                                <span class="shadow-input1"></span>
+                    <div class=""> 
+                            <span style="margin-left: 200px;"><i class="far fa-envelope" style="margin-right: 5px;"></i>Email:</span>
+                            <div class="wrap-input1 validate-input d-flex justify-content-center align-items-center">
+                                <input class="input1" name="Email" type="email" style="width:500px; " >
                             </div>
-                        </div>
-
-                        <div class="col"> 
-                            <span><i class="far fa-envelope" style="margin-right: 5px;"></i>Email</span>
-                            <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" name="Email" placeholder="ex@gmail.com" >
-                                <span class="shadow-input1"></span>
-                            </div>
-                        </div>
-                        
                     </div>
-
+                    <div class="">
+                        <span style="margin-left: 200px;"><i class="fas fa-phone" style="margin-right: 5px;"></i>SĐT:</span>
+                        <div class="wrap-input1 validate-input d-flex justify-content-center align-items-center">
+                            <input class="input1" name="SDT" type="text" style="width:500px; " >
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <span class="contact1-form-title">
+                       Thêm thông tin Thẻ tín dụng
+                    </span>
                     <div class="row">
                         <div class="col">
-                            <span><i class="fas fa-phone" style="margin-right: 5px;"></i>SĐT</span>
-                            <div class="wrap-input1 validate-input" >
-                                <input class="input1" type="text" name="SDT" placeholder="SĐT" >
+                            <span><i class="far fa-id-badge" style="margin-right: 5px;"></i>Số hiệu thẻ:</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" name="SoHieuThe" type="text" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                         <div class="col">
-                            <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Ngày sinh</span>
-                            <div class="wrap-input1 validate-input" >
-                                <input class="input1" type="date" name="NgaySinh" >
+                            <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Họ tên chủ thẻ</span>
+                            <div class="wrap-input1 validate-input" >   
+                                <input class="input1" type="text"  name="TenChuThe">
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
-                    </div>
 
-                    <span><i class="fas fa-venus-mars" style="margin-right: 5px;"></i>Giới tính:</span>
-                    <div class="wrap-input1 validate-input" style="width: 270px;">
-                        <select class="input1 select-search-fk " aria-placeholder="Giới tính" name="GioiTinh">
-                            <option value="1">Nam</option>
-                            <option value="0">Nữ</option>
-                        </select>
-                        <span class="shadow-input1"></span>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <span><i class="far fa-id-badge" style="margin-right: 5px;"></i>CSC</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" name="CSC" type="text">
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Ngày hết hạn</span>
+                            <div class="wrap-input1 validate-input" >   
+                                <input class="input1" type="date" name="NgayHetHan">
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
 
-                    <div class="container-contact1-form-btn">
-                        <a class="contact1-form-btn" href="/admin/" style="margin-right: 50px;color:white;font-weight: bold;">
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <button class="contact1-form-btn" type="submit" style="margin-right: 30px;">
                             <span>
-                                Trở về
-                                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <button class="contact1-form-btn" type="submit">
-                            <span>
-                                Tạo mới
+                                Thêm mới
                                 <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                             </span>
                         </button>
                     </div>
-                    
-                </form>
-            </div> 
-        </div>
+        </form>
     </div>
 </div>
 

@@ -13,14 +13,14 @@
                          <div class="col"> 
                             <span><i class="far fa-user-circle" style="margin-right: 5px;"></i>Tài khoản</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="nchconghung" disabled>
+                                <input class="input1" type="text" value="nchconghung" readonly="readonly">
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                         <div class="col">
                             <span><i class="fas fa-coins" style="margin-right: 5px;"></i>Điểm thưởng</span>
                             <div class="wrap-input1 validate-input" >   
-                                <input class="input1" type="text"  value="0" >
+                                <input class="input1" type="text"  readonly="readonly" value="0" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
@@ -30,14 +30,14 @@
                         <div class="col">
                             <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Họ tên</span>
                             <div class="wrap-input1 validate-input" >   
-                                <input class="input1" type="text"  value="Nguyễn Công Hưng" >
+                                <input class="input1" type="text"  value="Nguyễn Công Hưng"  readonly="readonly">
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                         <div class="col"> 
                             <span><i class="far fa-envelope" style="margin-right: 5px;"></i>Email</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="email" value="nchconghung@gmail.com" >
+                                <input class="input1" type="email" value="nchconghung@gmail.com" readonly="readonly" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
@@ -46,42 +46,42 @@
                         <div class="col">
                             <span><i class="fas fa-phone" style="margin-right: 5px;"></i>SĐT</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="0969327333" >
+                                <input class="input1" type="text" value="0969327333" readonly="readonly">
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                         <div class="col">
                             <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Ngày sinh</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="date" value="" >
+                                <input class="input1" type="date" value="" readonly="readonly">
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                     </div>
                     <span><i class="fas fa-venus-mars" style="margin-right: 5px;"></i>Giới tính:</span>
                     <div class="wrap-input1 validate-input" style="width: 270px;">
-                        <select class="input1 select-search-fk " aria-placeholder="Giới tính" name="GioiTinh">
+                        <select class="input1 select-search-fk " aria-placeholder="Giới tính" name="GioiTinh" readonly="readonly">
                             <option value="1">Nam</option>
                             <option value="0">Nữ</option>
                         </select>
                         <span class="shadow-input1"></span>
                     </div>
                     <hr>
-                    <span class="contact1-form-title">
+                    <span class="contact1-form-title" >
                         Thông tin thẻ tín dụng
                     </span>
                     <div class="row">
                         <div class="col">
                             <span><i class="far fa-id-badge" style="margin-right: 5px;"></i>Số hiệu thẻ:</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="email" value="{{thanhvien.Email}}" >
+                                <input class="input1" type="email" value="{{thanhvien.Email}}" readonly="readonly" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                         <div class="col">
                             <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Họ tên</span>
                             <div class="wrap-input1 validate-input" >   
-                                <input class="input1" type="text"  value="{{thanhvien.HoTen}}" >
+                                <input class="input1" type="text"  value="{{thanhvien.HoTen}}"readonly="readonly" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
@@ -91,14 +91,14 @@
                         <div class="col">
                             <span><i class="fas fa-pencil-alt" style="margin-right: 5px;"></i>Mã CSC</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="{{thanhvien.SDT}}" >
+                                <input class="input1" type="text" value="{{thanhvien.SDT}}"readonly="readonly" >
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                         <div class="col">
                             <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Ngày hết hạn</span>
                             <div class="wrap-input1 validate-input">
-                                <input class="input1" type="text" value="{{thanhvien.NgaySinh}}" >
+                                <input class="input1" type="text" value="{{thanhvien.NgaySinh}}" readonly="readonly">
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>

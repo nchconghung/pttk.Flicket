@@ -130,19 +130,25 @@
         <div class="col-9" id="user-account-content">
             <div class="user-account-content-element" id="edit-profile-interface">
                 <form action="/guest/user" method="POST" id="payment-form">
+                    <div id="charge-error-pass" class="alert alert-danger {{#if passError}} {{else}}d-none {{/if}}" style="margin-top: 20px;">
+                        Mật khẫu cũ không hợp lệ!<br>Cập nhật mật khẩu không thành công
+                    </div>
                     <label style="margin-bottom: 10px;font-size: 17px;font-weight: 500;color: #7A9ED5;">Thông tin cá
                         nhân</label>
                     <div class="edit-profile-input">
                         <label for="txtUserName">Họ và tên</label>
-                        <input type="text" id="txtUserName" placeholder="Nguyen Van A" name="txtName" value="{{thongTin.HoTen}}" required>
+                        <input type="text" id="txtUserName" placeholder="Nguyen Van A" name="txtName"
+                            value="{{thongTin.HoTen}}" required>
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtEmail">Email</label>
-                        <input type="email" id="txtEmail" placeholder="email@example.com" value="{{thongTin.Email}}" name="txtEmail" required>
+                        <input type="email" id="txtEmail" placeholder="email@example.com" value="{{thongTin.Email}}"
+                            name="txtEmail" required>
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtPhone">Số điện thoại</label>
-                        <input type="tel" id="txtPhone"  type="tel" pattern="[0-9]{10}" value="{{thongTin.SDT}}" maxlength="10" name="txtPhone" required>
+                        <input type="tel" id="txtPhone" type="tel" pattern="[0-9]{10}" value="0{{thongTin.SDT}}"
+                            maxlength="10" name="txtPhone" required>
                     </div>
                     <div class="edit-profile-input">
                         <span id="password-edit-title">Mật khẩu</span>
@@ -164,7 +170,7 @@
                         <div class="edit-profile-button-container edit-profile-button-container1">
                             <button type="button" id="edit-profile-button-container-cancel">Hủy</button>
                             <button type="submit" id="edit-profile-button-save">Lưu thay đổi</button>
-                        </div> 
+                        </div>
                         <div id="charge-error1" class="alert alert-danger d-none" style="margin-top: 20px;">
 
                         </div>
@@ -174,30 +180,30 @@
                     <label
                         style="margin-top: 30px;margin-bottom: 10px;font-size: 17px;font-weight: 500;color: #7A9ED5;">Thẻ
                         ngân hàng</label>
-                        <div id="charge-error" class="alert alert-danger d-none" style="margin-top: 20px;">
+                    <div id="charge-error" class="alert alert-danger d-none" style="margin-top: 20px;">
 
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtCardID">Mã số thẻ</label>
-                        <input type="text" id="txtCardID" name="txtCardID" value="{{thongTin.SoHieuThe}}" placeholder="16 chữ số mặt trên của thẻ"
-                            required>
+                        <input type="text" id="txtCardID" name="txtCardID" value="{{thongTin.SoHieuThe}}"
+                            placeholder="16 chữ số mặt trên của thẻ" required>
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtDueDate">Hiệu lực đến</label>
                         <input id="txtDueDate" type="text" class="date-input" data-language='en' required
-                            placeholder="MM/YYYY" data-min-view="months" data-view="months" value="{{thongTin.NgayHetHan}}" data-date-format="mm/yyyy"
-                            name="txtExpiryDate">
+                            placeholder="MM/YYYY" data-min-view="months" data-view="months"
+                            value="{{thongTin.NgayHetHan}}" data-date-format="mm/yyyy" name="txtExpiryDate">
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtCVV">Mã CVV</label>
-                        <input type="text" id="txtCVV" pattern="^[0-9]{3}" maxlength="3" name="txtCVV" placeholder="3 số CVV" value="{{thongTin.CSC}}"
-                            required>
+                        <input type="text" id="txtCVV" pattern="^[0-9]{3}" maxlength="3" name="txtCVV"
+                            placeholder="3 số CVV" value="{{thongTin.CSC}}" required>
                     </div>
                     <div class="edit-profile-input" style="margin-bottom: 15px">
                         <label for="txtCardHolderName">Tên trên thẻ</label>
-                        <input type="text" id="txtCardName" name="txtCardHolderName" placeholder="Tên trên thẻ" value="{{thongTin.TenChuThe}}"
-                            required>
-                    </div>                    
+                        <input type="text" id="txtCardName" name="txtCardHolderName" placeholder="Tên trên thẻ"
+                            value="{{thongTin.TenChuThe}}" required>
+                    </div>
                     <div class="edit-profile-button-container">
                         <button type="submit" id="edit-profile-button-update">Cập nhật</button>
                     </div>

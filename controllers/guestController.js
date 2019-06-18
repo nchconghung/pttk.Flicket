@@ -790,10 +790,34 @@ exports.user = function(req,res,next){
 		console.log(err);
 		res.end("error");
 	});
-	
+
+	// var tt = {
+	// 	IdKhachHang: 26,
+	// 	HoTen: 'Nguyen Cong Hung',
+	// 	Email: 'nchconghung@gmail.com',
+	// 	SDT: '901234567',
+	// 	IdThe: 28,
+	// 	TenChuThe: 'Nguyen Van C',
+	// 	SoHieuThe: '4177570960373208',
+	// 	NgayHetHan: '12-2024',
+	// 	CSC: '681' };
+	// var gd = [{
+	// 	IdGiaoDich: 25,
+	// 	KhachHangGiaoDich: 26,
+	// 	ChuyenBay: 91,
+	// 	TongGiaTri: 1439000,
+	// 	DiemThuongSuDung: 0,
+	// 	ThoiDiemGiaoDich: '2019-06-16T23:21:22.000Z',
+	// 	MaDatCho: 'CSJABFPFP6',
+	// 	ThoiGianGiaoDich: '06:21:22 17-6-2019' }]
+	// res.render("guest/user",{
+	// 		thongTin: tt,
+	// 		giaodich: gd
+	// 	})
 }
 //Hàm post trang user
 exports.user_post = function(req,res,next){
+	//Cap nhat thong tin
 	var HoTen = req.body.txtName;
 	var Email = req.body.txtEmail;
 	var SDT = req.body.txtPhone;
@@ -801,10 +825,38 @@ exports.user_post = function(req,res,next){
 	var NgayHetHan = req.body.txtExpiryDate;
 	var CSC = req.body.txtCVV;
 	var TenChuThe = req.body.txtCardHolderName;
+	//Cap nhat mat khau
+	var MatKhauCu = req.body.txtFormerPassword;
+	var MatKhauMoi = req.body.txtNewPassword;
 	//update to db here
+	if(typeof MatKhauCu !="undefine"){
+		//Luồng cập nhật mật khẩu
 
-	//
-	res.redirect("/guest/user");
+
+		//Render như sau khi mật khẩu cũ sai
+		var idThanhVien = parseInt(req.session.passport.user.TaiKhoan.IdThanhVien);
+		var idThongTin = parseInt(req.session.passport.user.TaiKhoan.ThongTin);
+		Promise.all([
+			khachhangModel.singleForUser(idThanhVien),
+			giaodichModel.detailForUser(idThongTin)
+		]).then(([tt,gd])=>{
+			console.log(tt[0]);
+			console.log(gd)
+			res.render("guest/user",{
+				thongTin: tt[0],
+				giaodich: gd,
+				passError:true
+			})
+		}).catch(err=>{
+			console.log(err);
+			res.end("error");
+		});
+
+	}else{
+		//Luồng cập nhật thông tin
+		
+	}
+	
 }
 exports.ticket = function (req, res, next) {
 	var bookingID = req.session.bookingID;

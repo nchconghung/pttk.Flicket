@@ -142,7 +142,7 @@
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtPhone">Số điện thoại</label>
-                        <input type="tel" id="txtPhone" name="txtPhone" required>
+                        <input type="tel" id="txtPhone"  type="tel" pattern="[0-9]{10}" maxlength="10" name="txtPhone" required>
                     </div>
                     <div class="edit-profile-input">
                         <span id="password-edit-title">Mật khẩu</span>
@@ -165,12 +165,18 @@
                             <button type="button" id="edit-profile-button-container-cancel">Hủy</button>
                             <button type="submit" id="edit-profile-button-save">Lưu thay đổi</button>
                         </div> 
+                        <div id="charge-error1" class="alert alert-danger d-none" style="margin-top: 20px;">
+
+                        </div>
                         {{!-- <div class="edit-profile-button-container"><button type="button" id="edit-profile-button-container-cancel">Hủy</button><button type="submit" id="edit-profile-button-save">Lưu thay đổi</button></div> --}}
                     </div>
 
                     <label
                         style="margin-top: 30px;margin-bottom: 10px;font-size: 17px;font-weight: 500;color: #7A9ED5;">Thẻ
                         ngân hàng</label>
+                        <div id="charge-error" class="alert alert-danger d-none" style="margin-top: 20px;">
+
+                    </div>
                     <div class="edit-profile-input">
                         <label for="txtCardID">Mã số thẻ</label>
                         <input type="text" id="txtCardID" name="txtCardID" placeholder="16 chữ số mặt trên của thẻ"
@@ -191,10 +197,7 @@
                         <label for="txtCardHolderName">Tên trên thẻ</label>
                         <input type="text" id="txtCardName" name="txtCardHolderName" placeholder="Tên trên thẻ"
                             required>
-                    </div>
-                    <div id="charge-error" class="alert alert-danger d-none" style="margin-top: 20px;">
-
-                    </div>
+                    </div>                    
                     <div class="edit-profile-button-container">
                         <button type="submit" id="edit-profile-button-update">Cập nhật</button>
                     </div>

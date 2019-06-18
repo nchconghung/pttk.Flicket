@@ -99,7 +99,7 @@
                                         <img src="/images/guest/vietnam.png">
                                         <span>+84</span>
                                     </div>
-                                    <input id="txtPhoneNum" name="txtPhoneNum" type="tel" pattern="[0-9]{9}" {{#if phone}} value="{{phone}}" {{/if}}>
+                                    <input id="txtPhoneNum" name="txtPhoneNum" max-length="9" type="tel" pattern="^[0-9]{9}" {{#if phone}} value="{{phone}}" {{/if}}>
                                 </div>
                                 <span class="input-note">VD: +84 901234567 trong đó (+84) là mã quốc gia và
                                     901234567 là số di động</span>

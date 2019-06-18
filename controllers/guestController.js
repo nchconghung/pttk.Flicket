@@ -692,7 +692,7 @@ exports.signup_post = function(req,res,next){
             MatKhau: hash
         }
         thanhvienModel.add(member).then(id =>{
-			res.redirect('/guest/user');
+			res.redirect('/guest/'+id+'/profile');
             
         }).catch(err => {
             console.log(err);
@@ -744,9 +744,10 @@ exports.signin_post = function(req,res,next){
             res.end('error occured.')
         }
           
-    
         if (!user) {
-            res.end(info.message)
+            return res.render('guest/sign_in', {
+				err_message: info.message
+			  })
             // return res.render('/guest/');
         //   return res.render('vwAccount/login', {
         //     layout: false,
@@ -875,7 +876,10 @@ exports.ticket = function (req, res, next) {
 }
 
 exports.profile = function(req, res, next){
-	res.render('guest/profile');
+	var id = req.params.id;
+	res.render('guest/profile',{
+		IdThanhVien: id
+	});
 }
 //Hàm post trang profile sau đăng ký
 exports.profile_post = function(req, res, next){
@@ -887,10 +891,38 @@ exports.profile_post = function(req, res, next){
 	var CSC = req.body.cvv;
 	var TenChuThe = req.body.cardName;
 
+	var date = '01/'+ NgayHetHan;
+	var expDate = moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
+	var thongtin ={
+		HoTen: HoTen,
+		Email: Email,
+		SDT: SDT,
+		TheTinDung: 0
+	};
 
+	var thetindung = {
+		SoHieuThe: SoHieuThe,
+		NgayHetHan: expDate,
+		CSC: CSC,
+		HoTen: TenChuThe
+	};
+
+	var IdThanhVien = parseInt(req.body.IdThanhVien);
+	console.log(IdThanhVien);
 	//update to db here
-	
-	//
-	res.redirect("/guest");
+	thetindungModel.add(thetindung).then(id => {
+        thongtin.TheTinDung = id;
+        khachhangModel.add(thongtin).then(idTT=>{
+            thanhvienModel.updateInfor(IdThanhVien,idTT).then(rows=>{
+                res.redirect('/guest/signin');
+            })
+        }).catch(err => {
+            console.log(err),
+            res.end('error occured.')
+        });
+    }).catch(err => {
+        console.log(err),
+        res.end('error occured.')
+    });
 
 }

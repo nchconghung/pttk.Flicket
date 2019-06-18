@@ -15,7 +15,7 @@ module.exports = function (app) {
   }, (username, password, done) => {
     thanhvienModel.singleByTaiKhoan(username).then(rows => {
       if (rows.length === 0) {
-        return done(null, false, { message: 'Invalid Username' });
+        return done(null, false, { message: 'Tài khoản không đúng' });
       }
       var ret = bcrypt.compareSync(password, rows[0].MatKhau);
       if (ret) {
@@ -41,7 +41,7 @@ module.exports = function (app) {
           return done(err, false);
         });
       } else {
-        return done(null, false, { message: 'Invalid Password' });
+        return done(null, false, { message: 'Mật khẩu không đúng' });
       }
     }).catch(err => {
       return done(err, false);

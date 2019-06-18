@@ -2,10 +2,12 @@ var express = require('express');
 var thanhvienModel = require('../../model/thanhvien.model');
 var khachhangModel = require('../../model/thongtinkhachhanggiaodich.model');
 var giaodichModel = require('../../model/giaodich.model');
+var thetindungModel = require('../../model/thetindung.model');
 var bcrypt = require('bcrypt');
-var router = express.Router()
+var router = express.Router();
+var auth = require('../../middlewares/auth-admin');
 
-router.get("/",(req,res) => {
+router.get("/",auth,(req,res) => {
     thanhvienModel.index()
         .then(rows => {
             res.render('admin/vwThanhVien/index',{
@@ -18,7 +20,7 @@ router.get("/",(req,res) => {
         });
 })
 
-router.get("/index",(req,res) => {
+router.get("/index",auth,(req,res) => {
     thanhvienModel.index()
         .then(rows => {
             res.render('admin/vwThanhVien/index',{
@@ -31,7 +33,7 @@ router.get("/index",(req,res) => {
         });
 })
 
-router.get('/:id/detail',(req,res)=>{
+router.get('/:id/detail',auth,(req,res)=>{
     var id = req.params.id;
     res.render('admin/vwThanhVien/detail',{
         layout: 'admin',
@@ -63,14 +65,14 @@ router.get('/:id/detail',(req,res)=>{
     // });
 })
 
-router.get('/search',(req,res)=>{
+router.get('/search',auth,(req,res)=>{
     res.render('admin/vwThanhVien/search',{
         layout: 'admin',
         result: false
     })
 })
 
-router.post('/search',(req,res)=>{
+router.post('/search',auth,(req,res)=>{
 
     thanhvienModel.searchWithKey(req.body.Keyword).then(rows=>{
         if (rows.length > 0) {
@@ -92,14 +94,14 @@ router.post('/search',(req,res)=>{
     });
 })
 
-router.get('/edit',(req,res)=>{
+router.get('/edit',auth,(req,res)=>{
     res.render('admin/vwThanhVien/edit',{
         layout: 'admin',
         error: false
     });
 })
 
-router.get('/:id/edit',(req,res)=>{
+router.get('/:id/edit',auth,(req,res)=>{
     var id = req.params.id;
     if (isNaN(id)){
         res.render('admin/vwThanhVien/edit',{
@@ -123,7 +125,7 @@ router.get('/:id/edit',(req,res)=>{
     })
 })
 
-router.post('/update',(req,res) => {
+router.post('/update',auth,(req,res) => {
     thanhvienModel.update(req.body).then(n => {
         res.redirect('/admin/member');
     }).catch(err => {
@@ -132,7 +134,7 @@ router.post('/update',(req,res) => {
     });
 })
 
-router.get('/add',(req,res) => {
+router.get('/add',auth,(req,res) => {
     res.render('admin/vwThanhVien/add',{
         layout: 'admin',
         exists: false,
@@ -140,7 +142,7 @@ router.get('/add',(req,res) => {
     });
 })
 
-router.get('/add/:id/infor',(req,res)=>{
+router.get('/add/:id/infor',auth,(req,res)=>{
     var id = req.params.id;
     console.log("infor");
     res.render('admin/vwThanhVien/add_infor',{
@@ -149,32 +151,30 @@ router.get('/add/:id/infor',(req,res)=>{
     });
 })
 
-router.post('/addinfor',(req,res)=>{
-
-    var date = '01/'+ req.body.NgayHetHan;
-	var expDate = moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
-	var thongtin ={
+router.post('/addinfor',auth,(req,res)=>{
+    console.log("add infor");
+    var expDate = req.body.NgayHetHan;
+	var thongtin = {
         HoTen: req.body.HoTen,
         Email: req.body.Email,
         SDT: req.body.SDT,
         TheTinDung: 0
 	};
-
 	var thetindung = {
 		SoHieuThe: req.body.SoHieuThe,
         HoTen: req.body.TenChuThe,
         CSC: req.body.CSC,
         NgayHetHan: expDate
 	};
-
-	var IdThanhVien = parseInt(req.body.IdThanhVien);
-	console.log(IdThanhVien);
+    var IdThanhVien = parseInt(req.body.IdThanhVien);
 	//update to db here
 	thetindungModel.add(thetindung).then(id => {
         thongtin.TheTinDung = id;
+        console.log(thongtin);
         khachhangModel.add(thongtin).then(idTT=>{
+            console.log(idTT);
             thanhvienModel.updateInfor(IdThanhVien,idTT).then(rows=>{
-                res.redirect('/admin/member/index');
+                res.redirect('/admin/member/index/');
             })
         }).catch(err => {
             console.log(err),
@@ -186,7 +186,7 @@ router.post('/addinfor',(req,res)=>{
     });
 })
 
-router.post('/add',(req,res) => {
+router.post('/add',auth,(req,res) => {
     var saltRounds = 10;
     bcrypt.hash(req.body.MatKhau, saltRounds, function(err, hash) {
         var member = {
@@ -211,13 +211,11 @@ router.post('/insert',(req,res)=>{
         MatKhau: req.body.MatKhau,
         DiemThuong: req.body.DiemThuong
     };
-    console.log(member);
     thanhvienModel.add(member).then(id=>{
         var customer = {
             CMND: req.body.CMND,
             IdThanhVien: id
         };
-        console.log(customer);
         khachhangModel.update(customer).catch(err => {
             console.log(err),
             res.end('error occured.')
@@ -235,8 +233,8 @@ router.post('/insert',(req,res)=>{
 })
 
 router.post('/delete', (req, res) => {
-    thanhvienModel.delete(req.body.IdGiaoDich).then(n => {
-      res.redirect('/admin/member');
+    thanhvienModel.delete(req.body.IdThanhVien).then(n => {
+      res.redirect('/admin/member/index/');
     }).catch(err => {
       console.log(err);
       res.end('error occured.')

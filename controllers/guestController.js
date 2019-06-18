@@ -375,8 +375,8 @@ exports.processing = function (req, res, next) {
 					// }
 
 					req.session.passport.user.ThongTin.HoTen = req.session.contact.name;
-					req.session.passport.user.Email = req.session.contact.email;
-					req.session.passport.user.SDT = req.session.contact.phone;
+					req.session.passport.user.ThongTin.Email = req.session.contact.email;
+					req.session.passport.user.ThongTin.SDT = req.session.contact.phone;
 					
 
 					var now = new Date();
@@ -817,44 +817,97 @@ exports.user = function(req,res,next){
 }
 //Hàm post trang user
 exports.user_post = function(req,res,next){
-	//Cap nhat thong tin
-	var HoTen = req.body.txtName;
-	var Email = req.body.txtEmail;
-	var SDT = req.body.txtPhone;
-	var SoHieuThe = req.body.txtCardID;
-	var NgayHetHan = req.body.txtExpiryDate;
-	var CSC = req.body.txtCVV;
-	var TenChuThe = req.body.txtCardHolderName;
+	console.log('in push');
+	var idTV = parseInt(req.session.passport.user.TaiKhoan.IdThanhVien);
+
 	//Cap nhat mat khau
 	var MatKhauCu = req.body.txtFormerPassword;
 	var MatKhauMoi = req.body.txtNewPassword;
 	//update to db here
-	if(typeof MatKhauCu !="undefine"){
+	if(typeof MatKhauCu !== "undefined"){
 		//Luồng cập nhật mật khẩu
-
-
+		var userpass = req.session.passport.user.TaiKhoan.MatKhau;
+		var ret = bcrypt.compareSync(MatKhauCu, userpass);
+		if (ret) {
+			var saltRounds = 10;
+			bcrypt.hash(MatKhauMoi, saltRounds, function(err, hash) {
+				thanhvienModel.updatePassword(hash,idTV).then(id =>{
+					req.session.passport.user.TaiKhoan.MatKhau = hash;
+					res.redirect('/guest/user');
+				}).catch(err => {
+					console.log(err);
+					res.end("error occured.");
+				});
+			}).catch(err => {
+				console.log(err);
+			});
+		} 
 		//Render như sau khi mật khẩu cũ sai
-		var idThanhVien = parseInt(req.session.passport.user.TaiKhoan.IdThanhVien);
+		else {
+			console.log(MatKhauMoi);
+			var idThanhVien = parseInt(req.session.passport.user.TaiKhoan.IdThanhVien);
+			var idThongTin = parseInt(req.session.passport.user.TaiKhoan.ThongTin);
+			Promise.all([
+				khachhangModel.singleForUser(idThanhVien),
+				giaodichModel.detailForUser(idThongTin)
+			]).then(([tt,gd])=>{
+				res.render("guest/user",{
+					thongTin: tt[0],
+					giaodich: gd,
+					passError:true
+				})
+			}).catch(err=>{
+				console.log(err);
+				res.end("error");
+			});
+		}
+		
+	}else{
+		console.log('in cap nhat');
+		//Cap nhat thong tin
+		var HoTen = req.body.txtName;
+		var Email = req.body.txtEmail;
+		var SDT = req.body.txtPhone;
+		var SoHieuThe = req.body.txtCardID;
+		var NgayHetHan = req.body.txtExpiryDate;
+		var CSC = req.body.txtCVV;
+		var TenChuThe = req.body.txtCardHolderName;
+
+		var date = '01/'+ NgayHetHan;
+		var expDate = moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
+		console.log(date);
+		console.log(expDate);
+		console.log(req.session.passport.user.ThongTin.TheTinDung);
+		var idTheTinDung = parseInt(req.session.passport.user.ThongTin.TheTinDung);
 		var idThongTin = parseInt(req.session.passport.user.TaiKhoan.ThongTin);
+		console.log(idTheTinDung);
+		console.log(idThongTin);
+		var thongtin ={
+			IdKhachHang: idThongTin,
+			HoTen: HoTen,
+			Email: Email,
+			SDT: SDT,
+			TheTinDung: idTheTinDung
+		};
+
+		var thetindung = {
+			IdThe: idTheTinDung,
+			SoHieuThe: SoHieuThe,
+			NgayHetHan: expDate,
+			CSC: CSC,
+			HoTen: TenChuThe
+		};
+		console.log(thongtin);
+		console.log(thetindung);
 		Promise.all([
-			khachhangModel.singleForUser(idThanhVien),
-			giaodichModel.detailForUser(idThongTin)
-		]).then(([tt,gd])=>{
-			console.log(tt[0]);
-			console.log(gd)
-			res.render("guest/user",{
-				thongTin: tt[0],
-				giaodich: gd,
-				passError:true
-			})
-		}).catch(err=>{
+			khachhangModel.update(thongtin),
+			thetindungModel.update(thetindung)
+		]).then(([idkh,idttd]) => {
+			res.redirect('/guest/user');
+		}).catch(err=> {
 			console.log(err);
 			res.end("error");
 		});
-
-	}else{
-		//Luồng cập nhật thông tin
-		
 	}
 	
 }
@@ -960,7 +1013,6 @@ exports.profile_post = function(req, res, next){
 	};
 
 	var IdThanhVien = parseInt(req.body.IdThanhVien);
-	console.log(IdThanhVien);
 	//update to db here
 	thetindungModel.add(thetindung).then(id => {
         thongtin.TheTinDung = id;

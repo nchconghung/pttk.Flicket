@@ -4,8 +4,9 @@ var lichtrinhModel = require('../../model/lichtrinh.model');
 var bgvModel = require('../../model/banggiave.model');
 var moment = require('moment');
 var router = express.Router();
+var auth = require('../../middlewares/auth-admin');
 
-router.get("/",(req,res) => {
+router.get("/",auth,(req,res) => {
     chuyenbayModel.all()
         .then(rows => {
             res.render('admin/vwChuyenBay/index',{
@@ -18,7 +19,7 @@ router.get("/",(req,res) => {
         });
 });
 
-router.get("/index",(req,res) => {
+router.get("/index",auth,(req,res) => {
     chuyenbayModel.all()
         .then(rows => {
             for (var i =0;i< rows.length;i++){
@@ -34,14 +35,14 @@ router.get("/index",(req,res) => {
         });
 });
 
-router.get("/search",(req,res) => {
+router.get("/search",auth,(req,res) => {
     res.render('admin/vwChuyenBay/search',{
         layout:'admin',
         flat:false
     });
 });
 
-router.post("/index",(req,res) => {
+router.post("/index",auth,(req,res) => {
     var ma = req.params.id.keyword;
     
     chuyenbayModel.searchByMaChuyenBay(ma).then(rows => {
@@ -53,7 +54,7 @@ router.post("/index",(req,res) => {
     });
 });
 
-router.get('/:id/detail',(req,res)=>{
+router.get('/:id/detail',auth,(req,res)=>{
     var id = req.params.id;
     
     Promise.all([

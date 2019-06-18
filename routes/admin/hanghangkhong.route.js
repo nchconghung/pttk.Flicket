@@ -1,10 +1,10 @@
 var express = require('express');
 var chuyenbayModel = require('../../model/chuyenbay.model');
 var hhkModel = require('../../model/hanghangkhong.model');
-
+var auth = require('../../middlewares/auth-admin');
 var router = express.Router()
 
-router.get("/",(req,res) => {
+router.get("/",auth,(req,res) => {
     hhkModel.all()
         .then(rows => {
             res.render('admin/vwHangHangKhong/index',{
@@ -17,7 +17,7 @@ router.get("/",(req,res) => {
         });
 });
 
-router.get('/list/:id',(req,res)=>{ 
+router.get('/list/:id',auth,(req,res)=>{ 
     var id = req.params.id;
     
     chuyenbayModel.allByHHK(id).then(rows => {

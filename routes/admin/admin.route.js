@@ -3,7 +3,7 @@ var adminModel = require('../../model/admin.model');
 var bcrypt = require('bcrypt');
 var router = express.Router();
 var moment = require('moment');
-
+var auth = require('../../middlewares/auth-admin');
 router.get("/",(req,res) => {
     adminModel.all()
         .then(rows => {
@@ -17,7 +17,7 @@ router.get("/",(req,res) => {
         });
 })
 
-router.get("/index",(req,res) => {
+router.get("/index",auth,(req,res) => {
     adminModel.all()
         .then(rows => {
             res.render('admin/vwAdmin/index',{
@@ -29,7 +29,7 @@ router.get("/index",(req,res) => {
             res.end("error occured.")
         });
 })
-router.get('edit/:id',(req,res)=>{
+router.get('edit/:id',auth,(req,res)=>{
     var id = req.params.id;
     if (isNaN(id)){
         res.render('admin/vwAdmin/edit',{
@@ -54,14 +54,14 @@ router.get('edit/:id',(req,res)=>{
     })
 })
 
-router.get('/add',(req,res) => {
+router.get('/add',auth,(req,res) => {
     console.log("add");
     res.render('admin/vwAdmin/add',{
         layout: 'admin'
     });
 })
 
-router.post('/add',(req,res)=>{
+router.post('/add',auth,(req,res)=>{
     // var now = new Date();
     // var date = moment(now).format('YYYY-MM-DD HH:mm:ss');
     console.log(date);
@@ -82,7 +82,7 @@ router.post('/add',(req,res)=>{
     });
 })
 
-router.post('admin/update',(req,res) => {
+router.post('admin/update',auth,(req,res) => {
     var id = req.params.id;
     adminModel.update(req.body).then(n => {
         res.redirect('/admin/admin/' + id + '/detail');
@@ -92,7 +92,7 @@ router.post('admin/update',(req,res) => {
     });
 })
 
-router.get('/is-available-username',(req,res) => {
+router.get('/is-available-username',auth,(req,res) => {
     var tk = req.query.TaiKhoan;
     adminModel.singleByTaiKhoan(tk).then(rows => {
         if (rows.length > 0){

@@ -29,8 +29,8 @@ module.exports = {
     },
     updateInfor: (id,idInfor) => {
         return db.load(`UPDATE ThanhVien
-        SET ThongTin = ${idInfor}
-        WHERE IdThanhVien =  ${id}`);
+                        SET ThongTin = ${idInfor}
+                        WHERE IdThanhVien =  ${id}`);
     },
     singleByTaiKhoan: tk => {
         return db.load(`select * from ThanhVien where TaiKhoan like '${tk}'`);
@@ -51,12 +51,17 @@ module.exports = {
     },
 
     delete: cmnd => {
-        return db.delete(`ThanhVien`,`CMND`,cmnd);
+        return db.delete(`ThanhVien`,`IdThanhVien`,cmnd);
     },
 
     updatePoint: (point,id) => {
         return db.load(`UPDATE ThanhVien
                         SET DiemThuong = ${point}
+                        WHERE IdThanhVien =  ${id}`);
+    },
+    updatePassword: (pass,id) => {
+        return db.load(`UPDATE ThanhVien
+                        SET MatKhau = '${pass}'
                         WHERE IdThanhVien =  ${id}`);
     }
 }

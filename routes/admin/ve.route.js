@@ -3,7 +3,7 @@ var veModel = require('../../model/ve.model');
 
 var router = express.Router()
 
-router.get("/",(req,res) => {
+router.get("/",auth,(req,res) => {
     veModel.all()
         .then(rows => {
             res.render('admin/vwVe/index',{
@@ -15,7 +15,7 @@ router.get("/",(req,res) => {
         });
 })
 
-router.get('/:id/detail',(req,res)=>{
+router.get('/:id/detail',auth,(req,res)=>{
     var id = req.params.id;
     
     veModel.single(id).then(rows => {

@@ -1,7 +1,8 @@
 var express = require('express');
 var thanhvienModel = require('../../model/thanhvien.model');
 var khachhangModel = require('../../model/thongtinkhachhanggiaodich.model');
-var lichsugiaodichModel = require('../../model/giaodich.model');
+var giaodichModel = require('../../model/giaodich.model');
+var bcrypt = require('bcrypt');
 var router = express.Router()
 
 router.get("/",(req,res) => {
@@ -143,40 +144,63 @@ router.get('/add/:id/infor',(req,res)=>{
     var id = req.params.id;
     console.log("infor");
     res.render('admin/vwThanhVien/add_infor',{
-        layout: 'admin'
+        layout: 'admin',
+        IdThanhVien: id
     });
 })
 
-router.post('/add',(req,res) => {
-    khachhangModel.single(req.body.CMND).then(rows => {
-        if (rows.length > 0) {
-            if (rows[0].IdThanhVien === null){
-                res.render('admin/vwThanhVien/add',{
-                    layout: 'admin',
-                    exists: true,
-                    hasAcc: false,
-                    customer: rows[0]
+router.post('/addinfor',(req,res)=>{
+    var idTV = req.body.IdThanhVien;
+    var thetindung = {
+        SoHieuThe: req.body.SoHieuThe,
+        HoTen: req.body.TenChuThe,
+        CSC: req.body.CSC,
+        NgayHetHan: req.body.NgayHetHan
+    };
+    var khachhang = {
+        HoTen: req.body.HoTen,
+        Email: req.body.Email,
+        SDT: req.body.SDT,
+        IdThe: 0
+    }
+    thetindungModel.add(thetindung).then(id => {
+        khachhang.IdThe = id;
+        thongtinkhachhangModel.add(khachhang).then(idTT=>{
+            thanhvienModel.updateInfor(idTV,idTT).then(rows=>{
+                res.render('admin/vwKhachHang/add',{
+                    layout: 'admin'
                 });
-            } else{
-                res.render('admin/vwThanhVien/add',{
-                    layout: 'admin',
-                    exists: true,
-                    hasAcc: true,
-                    IdThanhVien: rows[0].IdThanhVien
-                });
-            }
-        } else {
-            res.render('admin/vwThanhVien/add',{
-                layout: 'admin',
-                exists: false,
-                search: false
-            });
-        }
+            })
+
+        }).catch(err => {
+            console.log(err),
+            res.end('error occured.')
+        });
     }).catch(err => {
         console.log(err),
         res.end('error occured.')
     });
+    
 })
+
+router.post('/add',(req,res) => {
+    var saltRounds = 10;
+    bcrypt.hash(req.body.MatKhau, saltRounds, function(err, hash) {
+        var member = {
+            TaiKhoan: req.body.TaiKhoan,
+            MatKhau: hash,
+            DiemThuong: req.body.DiemThuong
+        }
+        thanhvienModel.add(member).then(id =>{
+            res.redirect('/admin/member/add/'+ id + '/infor/');
+            
+        }).catch(err => {
+            console.log(err);
+            res.end("error occured.")
+        });
+    });
+})
+
 
 router.post('/insert',(req,res)=>{
     var member = {

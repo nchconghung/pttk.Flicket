@@ -45,7 +45,7 @@ function hbsHelpers(hbs, path) {
       formatMonney: function (money, options) {
         return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       }
-      , diemHaCanh: function (num, list, options) {
+      ,diemHaCanh: function (num, list, options) {
         return list[num - 1].DiemDen;
       },
       thoiGianQuaCanh: function (list, options) {

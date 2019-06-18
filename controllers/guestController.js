@@ -57,6 +57,7 @@ exports.pick = function (req, res, next) {
 	var adult = req.session.userdata.NguoiLon;
 	var kid = req.session.userdata.TreEm;
 	var baby = req.session.userdata.EmBe;
+	console.log(req.session);
 	Promise.all([
 		chuyenBayModel.listWithDetailByParams(diemdi, diemden, ngaydi, hangghe),
 		lichTrinhModel.listWithDetailByParams(diemdi, diemden, ngaydi, hangghe),

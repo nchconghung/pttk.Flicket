@@ -6,8 +6,8 @@ $(form).submit(function (e) {
         if($('#txtNewPassword').val()==$('#txtConfirmPassword').val()){
             return true;
         }
-        $('#charge-error').text("Mật khẩu xác nhận không trùng khớp");
-        $('#charge-error').removeClass('d-none');
+        $('#charge-error1').text("Mật khẩu xác nhận không trùng khớp");
+        $('#charge-error1').removeClass('d-none');
         $(form).find('button').prop('disabled', false);
         return false;
     }

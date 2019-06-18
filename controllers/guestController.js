@@ -78,11 +78,13 @@ exports.pick = function (req, res, next) {
 			listEntity.push(e);
 		}
 		var isEmpty;
-		if(listEntity.length==0){
+		if(listEntity.length == 0){
 			isEmpty = true;
-		}else{
+		}
+		else{
 			isEmpty = false;
 		}
+		console.log("isEmpty: "+isEmpty);
 		var userdata = {
 			IdChuyenBay: 0,
 			HangGhe: hangghe,

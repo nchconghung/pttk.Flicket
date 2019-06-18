@@ -134,15 +134,15 @@
                         nhân</label>
                     <div class="edit-profile-input">
                         <label for="txtUserName">Họ và tên</label>
-                        <input type="text" id="txtUserName" placeholder="Nguyen Van A" name="txtName" required>
+                        <input type="text" id="txtUserName" placeholder="Nguyen Van A" name="txtName" value="{{thongTin.HoTen}}" required>
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtEmail">Email</label>
-                        <input type="email" id="txtEmail" placeholder="email@example.com" name="txtEmail" required>
+                        <input type="email" id="txtEmail" placeholder="email@example.com" value="{{thongTin.Email}}" name="txtEmail" required>
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtPhone">Số điện thoại</label>
-                        <input type="tel" id="txtPhone"  type="tel" pattern="[0-9]{10}" maxlength="10" name="txtPhone" required>
+                        <input type="tel" id="txtPhone"  type="tel" pattern="[0-9]{10}" value="{{thongTin.SDT}}" maxlength="10" name="txtPhone" required>
                     </div>
                     <div class="edit-profile-input">
                         <span id="password-edit-title">Mật khẩu</span>
@@ -179,23 +179,23 @@
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtCardID">Mã số thẻ</label>
-                        <input type="text" id="txtCardID" name="txtCardID" placeholder="16 chữ số mặt trên của thẻ"
+                        <input type="text" id="txtCardID" name="txtCardID" value="{{thongTin.SoHieuThe}}" placeholder="16 chữ số mặt trên của thẻ"
                             required>
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtDueDate">Hiệu lực đến</label>
                         <input id="txtDueDate" type="text" class="date-input" data-language='en' required
-                            placeholder="MM/YYYY" data-min-view="months" data-view="months" data-date-format="mm/yyyy"
+                            placeholder="MM/YYYY" data-min-view="months" data-view="months" value="{{thongTin.NgayHetHan}}" data-date-format="mm/yyyy"
                             name="txtExpiryDate">
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtCVV">Mã CVV</label>
-                        <input type="text" id="txtCVV" pattern="^[0-9]{3}" maxlength="3" name="txtCVV" placeholder="3 số CVV"
+                        <input type="text" id="txtCVV" pattern="^[0-9]{3}" maxlength="3" name="txtCVV" placeholder="3 số CVV" value="{{thongTin.CSC}}"
                             required>
                     </div>
                     <div class="edit-profile-input" style="margin-bottom: 15px">
                         <label for="txtCardHolderName">Tên trên thẻ</label>
-                        <input type="text" id="txtCardName" name="txtCardHolderName" placeholder="Tên trên thẻ"
+                        <input type="text" id="txtCardName" name="txtCardHolderName" placeholder="Tên trên thẻ" value="{{thongTin.TenChuThe}}"
                             required>
                     </div>                    
                     <div class="edit-profile-button-container">
@@ -212,124 +212,29 @@
                         <span>Thời gian</span>
                     </div>
                     <div class="col-3">
-                        <span>Giá tiền</span>
+                        <span>Điểm thưởng</span>
                     </div>
                     <div class="col-4">
-                        <span>Ngân hàng</span>
+                        <span>Tiền thanh toán</span>
                     </div>
                 </div>
+                {{#each giaodich}}
                 <div class="transaction-history-record row">
                     <div class="col-2">
-                        <span>123123123</span>
+                        <span>{{this.MaDatCho}}</span>
                     </div>
                     <div class="col-3">
-                        <span>19/05/2019</span>
+                        <span>{{getNgayBay this.ThoiDiemGiaoDich}}</span>
                     </div>
                     <div class="col-3">
-                        <span>VND 3,350,000</span>
+                        <span>{{this.DiemThuongSuDung}}</span>
                     </div>
                     <div class="col-4">
-                        <span>BIDV</span>
+                        <span>{{formatMoney this.TongGiaTri}} VND</span>
                     </div>
                 </div>
-                <div class="transaction-history-record row">
-                    <div class="col-2">
-                        <span>123123123</span>
-                    </div>
-                    <div class="col-3">
-                        <span>19/05/2019</span>
-                    </div>
-                    <div class="col-3">
-                        <span>VND 3,350,000</span>
-                    </div>
-                    <div class="col-4">
-                        <span>BIDV</span>
-                    </div>
-                </div>
-                <div class="transaction-history-record row">
-                    <div class="col-2">
-                        <span>123123123</span>
-                    </div>
-                    <div class="col-3">
-                        <span>19/05/2019</span>
-                    </div>
-                    <div class="col-3">
-                        <span>VND 3,350,000</span>
-                    </div>
-                    <div class="col-4">
-                        <span>BIDV</span>
-                    </div>
-                </div>
-                <div class="transaction-history-record row">
-                    <div class="col-2">
-                        <span>123123123</span>
-                    </div>
-                    <div class="col-3">
-                        <span>19/05/2019</span>
-                    </div>
-                    <div class="col-3">
-                        <span>VND 3,350,000</span>
-                    </div>
-                    <div class="col-4">
-                        <span>BIDV</span>
-                    </div>
-                </div>
-                <div class="transaction-history-record row">
-                    <div class="col-2">
-                        <span>123123123</span>
-                    </div>
-                    <div class="col-3">
-                        <span>19/05/2019</span>
-                    </div>
-                    <div class="col-3">
-                        <span>VND 3,350,000</span>
-                    </div>
-                    <div class="col-4">
-                        <span>BIDV</span>
-                    </div>
-                </div>
-                <div class="transaction-history-record row">
-                    <div class="col-2">
-                        <span>123123123</span>
-                    </div>
-                    <div class="col-3">
-                        <span>19/05/2019</span>
-                    </div>
-                    <div class="col-3">
-                        <span>VND 3,350,000</span>
-                    </div>
-                    <div class="col-4">
-                        <span>BIDV</span>
-                    </div>
-                </div>
-                <div class="transaction-history-record row">
-                    <div class="col-2">
-                        <span>123123123</span>
-                    </div>
-                    <div class="col-3">
-                        <span>19/05/2019</span>
-                    </div>
-                    <div class="col-3">
-                        <span>VND 3,350,000</span>
-                    </div>
-                    <div class="col-4">
-                        <span>BIDV</span>
-                    </div>
-                </div>
-                <div class="transaction-history-record row">
-                    <div class="col-2">
-                        <span>123123123</span>
-                    </div>
-                    <div class="col-3">
-                        <span>19/05/2019</span>
-                    </div>
-                    <div class="col-3">
-                        <span>VND 3,350,000</span>
-                    </div>
-                    <div class="col-4">
-                        <span>BIDV</span>
-                    </div>
-                </div>
+                {{/each}}
+
             </div>
             <div class="user-account-content-element" id="my-reservation-interface" style="display: none">
                 <div class="reservation-record">

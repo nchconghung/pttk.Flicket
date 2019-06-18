@@ -789,6 +789,7 @@ exports.user = function(req,res,next){
 		console.log(err);
 		res.end("error");
 	});
+	
 }
 //Hàm post trang user
 exports.user_post = function(req,res,next){
@@ -801,6 +802,8 @@ exports.user_post = function(req,res,next){
 	var TenChuThe = req.body.txtCardHolderName;
 	//update to db here
 
+	//
+	res.redirect("/guest/user");
 }
 exports.ticket = function (req, res, next) {
 	var bookingID = req.session.bookingID;
@@ -868,6 +871,8 @@ exports.profile_post = function(req, res, next){
 
 
 	//update to db here
-
+	
+	//
+	res.redirect("/guest");
 
 }

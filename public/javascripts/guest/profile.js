@@ -5,7 +5,6 @@ $(form).submit(function (e) {
     $('#charge-error').addClass('d-none');
     $(form).find('button').prop('disabled', true);
     var expiry_date = $('#expDate').val();
-    alert($('#cardID').val() +" "+ expiry_date+" "+$('#CVV').val()+" "+$("#cardName").val());
     var temp = expiry_date.split("/");
     Stripe.card.createToken({
         number: $('#cardID').val(),

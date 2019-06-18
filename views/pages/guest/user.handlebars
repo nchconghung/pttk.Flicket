@@ -134,11 +134,11 @@
                         nhân</label>
                     <div class="edit-profile-input">
                         <label for="txtUserName">Họ và tên</label>
-                        <input type="text" id="txtUserName" placeholder="Nguyen Van A" required>
+                        <input type="text" id="txtUserName" placeholder="Nguyen Van A" name="txtName" required>
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtEmail">Email</label>
-                        <input type="email" id="txtEmail" placeholder="email@example.com" required>
+                        <input type="email" id="txtEmail" placeholder="email@example.com" name="txtEmail" required>
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtPhone">Số điện thoại</label>
@@ -190,7 +190,7 @@
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtCVV">Mã CVV</label>
-                        <input type="text" id="txtCVV" pattern="^[0-9]{3}" name="txtCVV" placeholder="3 số CVV"
+                        <input type="text" id="txtCVV" pattern="^[0-9]{3}" maxlength="3" name="txtCVV" placeholder="3 số CVV"
                             required>
                     </div>
                     <div class="edit-profile-input" style="margin-bottom: 15px">

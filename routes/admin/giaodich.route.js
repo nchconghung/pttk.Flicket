@@ -1,5 +1,5 @@
 var express = require('express');
-var lichSuGiaoDichModel = require('../../model/lichsugiaodich.model');
+var giaodichModel = require('../../model/giaodich.model');
 
 var router = express.Router()
 
@@ -10,7 +10,7 @@ router.get('/add',(req,res) => {
 })
 
 router.post('/add',(req,res)=>{
-    lichSuGiaoDichModel.add(req.body).then(id=>{
+    giaodichModel.add(req.body).then(id=>{
         res.render('admin/vwLichSuGiaoDich/add',{
             layout: 'admin'
         });
@@ -21,7 +21,7 @@ router.post('/add',(req,res)=>{
 })
 
 router.post('/update',(req,res) => {
-    lichSuGiaoDichModel.update(req.body).then(n => {
+    giaodichModel.update(req.body).then(n => {
         res.redirect('admin/member/'+req.body.IdThanhVien+'/history');
     }).catch(err => {
         console.log(err),
@@ -31,7 +31,7 @@ router.post('/update',(req,res) => {
 
 router.post('/delete', (req, res) => {
     var id = req.body.IdGiaoDich;
-    lichSuGiaoDichModel.delete(req.body.IdGiaoDich).then(n => {
+    giaodichModel.delete(req.body.IdGiaoDich).then(n => {
       res.redirect('admin/member/'+id+'/edit');
     }).catch(err => {
       console.log(err);

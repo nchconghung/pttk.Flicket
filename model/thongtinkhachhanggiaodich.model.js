@@ -4,7 +4,19 @@ module.exports = {
     all: () =>{
         return db.load(`select *,IF (GioiTinh < 1,'Nữ','Nam') as LoaiGioiTinh from ThongTinKhachHangGiaoDich`);
     },
-
+    allForAdminIndex: () => {
+        return db.load(`select IdKhachHang,HoTen,Email,SDT,GiaoDich.IdGiaoDich,GiaoDich.ThoiDiemGiaoDich,ThanhVien.IdThanhVien,date_format(GiaoDich.ThoiDiemGiaoDich,"%H:%i:%s %d-%c-%Y") as ThoiDiemGiaoDich
+            from ThongTinKhachHangGiaoDich
+            inner join GiaoDich on IdKhachHang = GiaoDich.KhachHangGiaoDich
+            left join ThanhVien on IdKhachHang = ThanhVien.ThongTin`);
+    },
+    singleForUser: id => {
+        return db.load(`select IdKhachHang,ThongTinKhachHangGiaoDich.HoTen,Email,SDT,TheTinDung.IdThe,TheTinDung.HoTen as TenChuThe,TheTinDung.SoHieuThe,date_format(TheTinDung.NgayHetHan,"%m-%Y") as NgayHetHan,TheTinDung.CSC
+            from ThongTinKhachHangGiaoDich 
+            inner join TheTinDung on TheTinDung.IdThe = TheTinDung
+            inner join ThanhVien on ThanhVien.ThongTin = IdKhachHang and ThanhVien.IdThanhVien = ${id}
+            `);
+    },
     single: id => {
         return db.load(`select e.*, IF (e.GioiTinh < 1,'Nữ','Nam') as LoaiGioiTinh from ThongTinKhachHangGiaoDich e where e.IdKhachHang=${id}`);
     },

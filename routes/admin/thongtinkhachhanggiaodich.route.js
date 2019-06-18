@@ -4,20 +4,11 @@ var thongtinkhachhangModel = require('../../model/thongtinkhachhanggiaodich.mode
 var router = express.Router()
 
 router.get("/",(req,res) => {
-    thongtinkhachhangModel.all()
-        .then(rows => {
-            res.render('admin/vwKhachHang/index',{
-                layout: 'admin',
-                list: rows
-            });
-        }).catch(err => {
-            console.log(err);
-            res.end("error occured.")
-        });
+    res.redirect("/admin/flight/index");
 })
 
 router.get("/index",(req,res) => {
-    thongtinkhachhangModel.all()
+    thongtinkhachhangModel.allForAdminIndex()
         .then(rows => {
             res.render('admin/vwKhachHang/index',{
                 layout: 'admin',

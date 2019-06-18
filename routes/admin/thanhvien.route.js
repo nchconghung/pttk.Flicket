@@ -1,7 +1,7 @@
 var express = require('express');
 var thanhvienModel = require('../../model/thanhvien.model');
 var khachhangModel = require('../../model/thongtinkhachhanggiaodich.model');
-var lichsugiaodichModel = require('../../model/lichsugiaodich.model');
+var lichsugiaodichModel = require('../../model/giaodich.model');
 var router = express.Router()
 
 router.get("/",(req,res) => {

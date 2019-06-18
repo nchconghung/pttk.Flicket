@@ -9,7 +9,7 @@ module.exports = {
 
     detailForUser: id => {
         return db.load(`
-        SELECT gd.*
+        SELECT gd.*,date_format(gd.ThoiDiemGiaoDich,"%H:%i:%s %d-%c-%Y") as ThoiGianGiaoDich
         FROM GiaoDich gd
         INNER JOIN ChuyenBay cb
         ON cb.IdChuyenBay = gd.ChuyenBay

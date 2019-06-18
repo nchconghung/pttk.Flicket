@@ -21,7 +21,7 @@ var khachhangAdminRouter = require('./routes/admin/thongtinkhachhanggiaodich.rou
 var thanhvienAdminRouter = require('./routes/admin/thanhvien.route')
 var hangHangKhongAdminRouter = require('./routes/admin/hanghangkhong.route')
 var chuyenbayAdminRouter = require('./routes/admin/chuyenbay.route')
-var lichsugiaodichAdminRouter = require('./routes/admin/lichsugiaodich.route')
+var giaodichAdminRouter = require('./routes/admin/giaodich.route')
 
 
 var app = express();
@@ -71,7 +71,7 @@ app.use('/flight',flightRouter);
 
 app.use('/admin',adminRouter);
 app.use('/admin/member',thanhvienAdminRouter);
-app.use('/admin/history',lichsugiaodichAdminRouter);
+app.use('/admin/history',giaodichAdminRouter);
 app.use('/admin/admin',adminAdminRouter);
 app.use('/admin/customer',khachhangAdminRouter);
 app.use('/admin/flight',chuyenbayAdminRouter);

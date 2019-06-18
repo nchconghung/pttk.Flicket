@@ -680,7 +680,7 @@ exports.processing = function (req, res, next) {
 // 	}
 // 	res.render('guest/processing');
 // }
-exports.signup = function (req, res, next) {
+	exports.signup = function (req, res, next) {
 	console.log('signup');
 	res.render('guest/sign_up');
 }
@@ -773,8 +773,22 @@ exports.signout_post = function(req,res,next){
     res.redirect('/guest/');
 }
 exports.user = function(req,res,next){
-	console.log(req.session);
-	res.render('guest/user');
+	var idThanhVien = parseInt(req.session.passport.user.TaiKhoan.IdThanhVien);
+	var idThongTin = parseInt(req.session.passport.user.TaiKhoan.ThongTin);
+	Promise.all([
+		khachhangModel.singleForUser(idThanhVien),
+		giaodichModel.detailForUser(idThongTin)
+	]).then(([tt,gd])=>{
+		console.log(tt[0]);
+		console.log(gd)
+		res.render("guest/user",{
+			thongTin: tt[0],
+			giaodich: gd
+		})
+	}).catch(err=>{
+		console.log(err);
+		res.end("error");
+	});
 }
 //Hàm post trang user
 exports.user_post = function(req,res,next){

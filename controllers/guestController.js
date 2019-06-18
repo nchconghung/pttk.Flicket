@@ -588,6 +588,10 @@ exports.ticket = function (req, res, next) {
 	var classs = req.session.userdata.HangGhe;
 	var contact = req.session.contact;
 
+	//remove session here
+
+	//sample data
+	
 	// var bookingID = "ABGHDEUJ";
 	// var id = 1;
 	// var adultName = ["Nguyen Van A","Nguyen Thi B"];

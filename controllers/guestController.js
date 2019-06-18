@@ -790,8 +790,17 @@ exports.user = function(req,res,next){
 		res.end("error");
 	});
 }
+//Hàm post trang user
 exports.user_post = function(req,res,next){
-	res.send(req.body);
+	var HoTen = req.body.txtName;
+	var Email = req.body.txtEmail;
+	var SDT = req.body.txtPhone;
+	var SoHieuThe = req.body.txtCardID;
+	var NgayHetHan = req.body.txtExpiryDate;
+	var CSC = req.body.txtCVV;
+	var TenChuThe = req.body.txtCardHolderName;
+	//update to db here
+
 }
 exports.ticket = function (req, res, next) {
 	var bookingID = req.session.bookingID;
@@ -865,7 +874,18 @@ exports.ticket = function (req, res, next) {
 exports.profile = function(req, res, next){
 	res.render('guest/profile');
 }
-
+//Hàm post trang profile sau đăng ký
 exports.profile_post = function(req, res, next){
+	var HoTen = req.body.name;
+	var Email = req.body.email;
+	var SDT = req.body.phone;
+	var SoHieuThe = req.body.cardID;
+	var NgayHetHan = req.body.expDate;
+	var CSC = req.body.cvv;
+	var TenChuThe = req.body.cardName;
+
+
+	//update to db here
+
 
 }

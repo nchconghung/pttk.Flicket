@@ -762,6 +762,9 @@ exports.signin_post = function(req,res,next){
         });
       })(req, res, next);
 }
+exports.signin = function(req,res,next){
+	res.render('guest/sign_in');
+}
 exports.signout_post = function(req,res,next){
     console.log("logout");
     req.logOut();
@@ -775,5 +778,60 @@ exports.user_post = function(req,res,next){
 	res.send(req.body);
 }
 exports.ticket = function (req, res, next) {
-	res.render('guest/ticket');
+	var bookingID = req.session.bookingID;
+	var id = req.session.userdata.IdChuyenBay;
+	var adultName = req.session.adultName;
+	var kidName = req.session.kidName;
+	var babyName = req.session.babyName;
+	var adultBirth = req.session.adultBirth;
+	var kidBirth = req.session.kidBirth;
+	var babyBirth = req.session.babyBirth;
+	var totalAmount = req.session.totalAmount;
+	var classs = req.session.userdata.HangGhe;
+	var contact = req.session.contact;
+
+	//remove session here
+
+	//sample data
+
+	// var bookingID = "ABGHDEUJ";
+	// var id = 1;
+	// var adultName = ["Nguyen Van A","Nguyen Thi B"];
+	// var kidName = ["Nguyen Thi C"];
+	// var babyName = [];
+	// var adultBirth = ["12/05/1990","30/08/1985"];
+	// var kidBirth = ["01/01/2004"];
+	// var babyBirth = [];
+	// var totalAmount = 3500000;
+	// var classs = 1;
+	// var contact = {
+	// 	name: "Tran Thi Hong Gam",
+	// 	phone: 321321321,
+	// 	email: "gamvn@gmail.com"
+	// }
+	
+	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
+		res.render('guest/ticket', {
+			chuyenBay: chuyenbay[0],
+			lichTrinh: lichtrinh,
+			class: classs,
+			adultName: adultName,
+			kidName: kidName,
+			babyName: babyName,
+			contact: contact,
+			adultBirth: adultBirth,
+			kidBirth: kidBirth,
+			babyBirth: babyBirth,
+			bookingID: bookingID,
+			totalAmount: totalAmount
+		});
+	});
+}
+
+exports.profile = function(req, res, next){
+	res.render('guest/profile');
+}
+
+exports.profile_post = function(req, res, next){
+
 }

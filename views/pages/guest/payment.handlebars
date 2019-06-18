@@ -119,7 +119,7 @@
                             <div class="col-6">
                                 <label for="txtCVV">CVV</label>
                                 <input id="txtCVV" pattern="^[0-9]{3}" type="text" required placeholder="3 số CVV"
-                                    name="txtCardCVC" {{#if CVV}} value="{{CVV}}" {{/if}}>
+                                    name="txtCardCVC" maxlength="3" {{#if CVV}} value="{{CVV}}" {{/if}}>
                             </div>
                         </div>
                         <div class="info-row">

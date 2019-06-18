@@ -24,6 +24,31 @@ function hbsHelpers(hbs, path) {
           "%": lvalue % rvalue
         }[operator];
       },
+      math1: function (lvalue, operator, rvalue, tvalue, options) {
+        lvalue = parseFloat(lvalue);
+        rvalue = parseFloat(rvalue);
+        tvalue = parseFloat(tvalue);
+        return {
+          "+": lvalue + rvalue + tvalue,
+          "-": lvalue - rvalue - tvalue,
+          "*": lvalue * rvalue * tvalue,
+          "/": lvalue / rvalue / tvalue,
+          "%": lvalue % rvalue % tvalue
+        }[operator];
+      },
+      math2: function (lvalue, operator, rvalue, tvalue, uvalue, options) {
+        lvalue = parseFloat(lvalue);
+        rvalue = parseFloat(rvalue);
+        tvalue = parseFloat(tvalue);
+        uvalue = parseFloat(uvalue);
+        return {
+          "+": lvalue + rvalue + tvalue + uvalue,
+          "-": lvalue - rvalue - tvalue + uvalue,
+          "*": lvalue * rvalue * tvalue + uvalue,
+          "/": lvalue / rvalue / tvalue + uvalue,
+          "%": lvalue % rvalue % tvalue + uvalue
+        }[operator];
+      },
       gioHaCanh: function (num, list, options) {
         var date = new Date(list[num - 1].GioHaCanh);
         var h = date.getHours();
@@ -42,7 +67,7 @@ function hbsHelpers(hbs, path) {
         var mytime = h + ':' + m;
         return mytime;
       },
-      formatMonney: function (money, options) {
+      formatMoney: function (money, options) {
         return money.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       }
       ,diemHaCanh: function (num, list, options) {
@@ -187,6 +212,15 @@ function hbsHelpers(hbs, path) {
           rs += parseInt(b);
         })
         return rs;
+      },
+      getHangGhe: function(id, options){
+        if(id=="1") return "Eco";
+        if(id=="2") return "Bus";
+        if(id=="3") return "Fir";
+        if(id=="4") return "Pre";
+      },
+      truyXuat: function(list,index, options){
+        return list[index];
       }
     }
   });

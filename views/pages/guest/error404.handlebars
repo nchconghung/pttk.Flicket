@@ -1,0 +1,17 @@
+<div class="row" >
+    <div class="col-6" style="display: flex; flex-direction: row; justify-content: flex-end;align-items: center">
+        <div style="display: flex; flex-direction: column;justify-content: space-between;align-items: flex-start; margin-right: 100px;">
+            <span style="font-family: Quicksand; font-weight: 700; font-size: 70px;">404 </span>
+            <span style="font-family: Quicksand; font-weight: 500; font-size: 25px;">Oops! Đường dẫn này lỗi rồi!<br>Quay lại trang chủ sau 5s... </span>
+        </div>
+    </div>
+    <div class="col-6" style="display: flex; flex-direction: row; justify-content: flex-start;align-items: center">
+        <img src="/images/guest/error404.gif">
+    </div>
+</div>
+
+<script>
+    window.setTimeout(function(){
+        window.location.href = "/guest";
+    }, 5000);
+</script>

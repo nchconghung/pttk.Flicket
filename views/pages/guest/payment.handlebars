@@ -325,6 +325,7 @@
             $(".transit-detail span").text(n + " điểm dừng");
         }
         var point = parseInt($("#voucher-input").data("point"));
+        console.log(point);
         if (point < 400) {
             $("#option-two").prop('disabled', 'disabled');
         }

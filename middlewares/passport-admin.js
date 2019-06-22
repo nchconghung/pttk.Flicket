@@ -10,7 +10,7 @@ module.exports = function (app) {
         resave: true,
         saveUninitialized: true
     }));
-    console("vao passport");
+    console.log("vao passport");
     app.use(passport.initialize());
     
     var ls = new LocalStrategy({
@@ -20,7 +20,7 @@ module.exports = function (app) {
         adminModel.singleByTaiKhoan(username).then(rows => {
           
         if (rows.length === 0) {
-          return done(null, false, { message: 'Invalid Username.' });
+          return done(null, false, { message: 'Nhập sai.Vui lòng thử lại.' });
         }
         
         var user = {
@@ -31,13 +31,14 @@ module.exports = function (app) {
         if (ret) {
           return done(null, user);
         }
-        return done(null, false, { message: 'Invalid Password' });
+        return done(null, false, {message: 'Nhập sai.Vui lòng thử lại.' });
       }).catch(err => {
-        return done(err, false);
+        console.log(err);
+        return done(err, false, {message: 'Đã xảy ra lỗi.Hãy thử lại.' });
       })
     });
   
-    passport.use('fAdmin',ls);
+    passport.use('admin',ls);
   
     passport.serializeUser((user, done) => {
       return done(null, user);

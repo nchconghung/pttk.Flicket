@@ -1,7 +1,6 @@
 var express = require('express');
 var thongtinkhachhangModel = require('../../model/thongtinkhachhanggiaodich.model');
 var thetindungModel = require('../../model/thetindung.model');
-var auth = require('../../middlewares/auth-admin');
 var router = express.Router()
 
 router.get("/",(req,res) => {

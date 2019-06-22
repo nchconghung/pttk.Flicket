@@ -3,7 +3,6 @@ var adminModel = require('../../model/admin.model');
 var bcrypt = require('bcrypt');
 var router = express.Router();
 var moment = require('moment');
-var auth = require('../../middlewares/auth-admin');
 router.get("/",(req,res) => {
     adminModel.all()
         .then(rows => {

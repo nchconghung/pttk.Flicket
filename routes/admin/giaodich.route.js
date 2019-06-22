@@ -1,7 +1,6 @@
 var express = require('express');
 var giaodichModel = require('../../model/giaodich.model');
 var hanhkhachModel = require('../../model/hanhkhach.model');
-var auth = require('../../middlewares/auth-admin');
 var moment = require('moment');
 var router = express.Router();
 

@@ -35,6 +35,11 @@ function hbsHelpers(hbs, path) {
       isSelected: function (value, key) {
         return value === key ? 'selected' : ''; 
       },
+      isDisabled: function (value,key){
+        if (value < key) 
+          return 'disabled';
+      }
+      ,
       math1: function (lvalue, operator, rvalue, tvalue, options) {
         lvalue = parseFloat(lvalue);
         rvalue = parseFloat(rvalue);

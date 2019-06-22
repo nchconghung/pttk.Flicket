@@ -6,10 +6,7 @@
         $('#registerForm').validate({
             rules:{
                 MatKhauCu: {
-                    required: true,
-                    remote: {
-                        url: '/admin/is-correct-password'
-                    }
+                    required: true
                 },
                 MatKhauMoi: {
                     required: true,
@@ -22,8 +19,7 @@
             },
             messages: {
                 MatKhauCu: {
-                    required: 'Mật khẩu cũ cần được nhập',
-                    remote: 'Mật khẩu không đúng'
+                    required: 'Mật khẩu cũ cần được nhập'
                 },
                 MatKhauMoi: {
                     required: "Mật khẩu cần được nhập",
@@ -51,10 +47,21 @@
     <div class="content-wrapper">
         <div class="card">
             <div class="card-body d-flex justify-content-center">
-                <form nonvalidate id="registerForm" class="contact1-form validate-form" action="/admin/admin/add" method="POST">
+                <form nonvalidate id="registerForm" class="contact1-form validate-form" action="/admin/change-pass" method="POST">
                     <span class="contact1-form-title">
                         Đổi mật khẩu 
                     </span>
+                    {{#if hasMess}}
+                        <br>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{message}}
+                        </div>
+                        <br>
+                        <hr>
+                    {{/if}}
                     
                     <div class="wrap-input1 validate-input" >
                         <input class="input1" type="password" name="MatKhauCu" placeholder="Mật khẩu cũ">

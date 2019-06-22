@@ -326,10 +326,10 @@
         }
         var point = parseInt($("#voucher-input").data("point"));
         if (point < 400) {
-            $("#option-two").prop('disabled', true);
+            $("#option-two").prop('disabled', 'disabled');
         }
         if (point < 250) {
-            $("#option-one").prop('disabled', true);
+            $("#option-one").prop('disabled', 'disabled');
         }
         $('#voucher-option-list option').click(function () {
             $("#voucher-input").val($(this).val());

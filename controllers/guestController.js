@@ -289,7 +289,7 @@ exports.payment_post = function (req, res, next) {
 	req.session.card = card;
 	req.session.totalAmount = req.body.txtTotalAmount;
 	req.session.voucher = req.body.txtVoucher;
-	
+	console.log("voucher "+req.body.txtVoucher);
 	res.redirect("/guest/processing")
 }
 
@@ -678,7 +678,6 @@ exports.user = function(req,res,next){
 }
 //Hàm post trang user
 exports.user_post = function(req,res,next){
-	console.log('in push');
 	var idTV = parseInt(req.session.passport.user.TaiKhoan.IdThanhVien);
 
 	//Cap nhat mat khau
@@ -699,14 +698,10 @@ exports.user_post = function(req,res,next){
 					console.log(err);
 					res.end("error occured.");
 				});
-			}).catch(err => {
-				console.log("error 2");
-				console.log(err);
 			});
 		} 
 		//Render như sau khi mật khẩu cũ sai
 		else {
-			console.log(MatKhauMoi);
 			var idThanhVien = parseInt(req.session.passport.user.TaiKhoan.IdThanhVien);
 			var idThongTin = parseInt(req.session.passport.user.TaiKhoan.ThongTin);
 			Promise.all([

@@ -24,4 +24,5 @@ module.exports = {
     delete: id => {
         return db.delete(`HanhKhach`,`IdHanhKhach`,id);
     }
+
 }

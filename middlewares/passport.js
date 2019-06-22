@@ -28,7 +28,8 @@ module.exports = function (app) {
                 TheTinDung: ttdrows[0]};
               return done(null, user);
             }).catch(err => {
-                return done(err, false);
+                console.log(err);
+                return done(err, false,{ message: 'Đã xảy ra lỗi.Hãy thử lại.' });
             });
           } else {
             var user = {
@@ -38,13 +39,15 @@ module.exports = function (app) {
             return done(null, user);
           }
         }).catch(err => {
-          return done(err, false);
+          console.log(err);
+          return done(err, false,{ message: 'Đã xảy ra lỗi.Hãy thử lại.' });
         });
       } else {
         return done(null, false, { message: 'Mật khẩu không đúng' });
       }
     }).catch(err => {
-      return done(err, false);
+      console.log(err);
+      return done(err, false,{ message: 'Đã xảy ra lỗi.Hãy thử lại.' });
     });
   });
 

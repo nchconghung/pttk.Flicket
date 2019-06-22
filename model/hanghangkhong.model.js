@@ -12,4 +12,7 @@ module.exports = {
     single: id => {
         return db.load(`select * form ChangBay where IdChangBay=${id}`);
     },
+    count: ()=>{
+        return db.load(`select count(HangHangKhong.IdHangHangKhong) as TongSoHHK from HangHangKhong`);
+    }
 }

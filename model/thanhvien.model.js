@@ -10,7 +10,9 @@ module.exports = {
                         FROM ThanhVien tv  `);
     },
 
-
+    count: ()=>{
+        return db.load(`select count(ThanhVien.IdThanhVien) as TongSoThanhVien from ThanhVien`);
+    },
     searchWithKey: keyword =>{
         return db.load(`SELECT tv.IdThanhVien,tv.TaiKhoan,tv.DiemThuong,tv.ThongTin
                         FROM	ThanhVien tv 

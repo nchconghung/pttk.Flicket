@@ -45,5 +45,8 @@ module.exports = {
 
     delete: id => {
         return db.delete(`ThongTinKhachHangGiaoDich`,`IdKhachHang`,id);
+    },
+    count: ()=>{
+        return db.load(`select count(ThongTinKhachHangGiaoDich.IdKhachHang) as TongSoKhachHang from ThongTinKhachHangGiaoDich`);
     }
 }

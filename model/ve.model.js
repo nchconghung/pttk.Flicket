@@ -19,5 +19,8 @@ module.exports = {
 
     delete: id => {
         return db.delete(`Ve`,`IdVe`,id);
+    },
+    count: ()=>{
+        return db.load(`select count(Ve.IdVe) as TongSoVe from Ve`);
     }
 }

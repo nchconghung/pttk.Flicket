@@ -19,7 +19,7 @@
                                     <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
                                     <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Tài khoản</th>
                                     <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Điểm thưởng</th>                            
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Lịch sử giao dịch</th>
+                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Chi tiết</th>
                                     <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Công cụ</th>
                                 </tr>
                                 </thead>
@@ -31,7 +31,7 @@
                                         <td>{{this.DiemThuong}}</td>
                                         
                                         <td>
-                                            <a class="badge badge-info" href="/admin/member/{{this.IdThanhVien}}/history/" style="font-weight: bold;font-size:13px;">Xem</a>
+                                            <a class="badge badge-info" href="/admin/member/{{this.IdThanhVien}}/detail/" style="font-weight: bold;font-size:13px;">Xem</a>
                                         </td>
                                         <td>
                                             <div class="btn-group">
@@ -39,7 +39,7 @@
                                                     <i class="fas fa-cog"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="/admin/member/{{this.IdThanhVien}}/detail/">Xem chi tiết</a>
+                                                    {{!-- <a class="dropdown-item" href="/admin/member/{{this.IdThanhVien}}/detail/">Xem chi tiết</a> --}}
                                                     <a class="dropdown-item" href="/admin/member/{{this.IdThanhVien}}/edit/">Chỉnh sửa</a>
                                                     <div class="dropdown-divider"></div>
                                                     <form  action="/admin/member/delete" method="POST">

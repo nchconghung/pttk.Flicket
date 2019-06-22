@@ -24,6 +24,17 @@ function hbsHelpers(hbs, path) {
           "%": lvalue % rvalue
         }[operator];
       },
+      loaiKhach: function (value) {
+        if (value === 3)
+         return 'Người lớn';
+          else if (value === 2)
+          return 'Trẻ Em';
+          else 
+          return 'Em bé';
+      },
+      isSelected: function (value, key) {
+        return value === key ? 'selected' : ''; 
+      },
       math1: function (lvalue, operator, rvalue, tvalue, options) {
         lvalue = parseFloat(lvalue);
         rvalue = parseFloat(rvalue);

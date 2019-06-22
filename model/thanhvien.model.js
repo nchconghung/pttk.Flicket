@@ -37,9 +37,11 @@ module.exports = {
     },
 
     detailUserById: id => {
-        return db.load(`SELECT tv.IdThanhVien,tv.TaiKhoan,tv.DiemThuong,ttkh.*,ttd.SoHieuThe,ttd.HoTen as HoTenChuThe,ttd.CSC,ttd.NgayHetHan
-                        FROM ThanhVien tv,ThongTinKhachHangGiaoDich ttkh,TheTinDung ttd
-                        WHERE tv.ThongTin = ttkh.IdKhachHang and ttkh.TheTinDung = ttd.IdThe and tv.IdThanhVien = ${id}`);
+        return db.load(`select ThanhVien.IdThanhVien,ThanhVien.TaiKhoan,ThanhVien.DiemThuong,ThongTinKhachHangGiaoDich.*,TheTinDung.SoHieuThe,TheTinDung.HoTen as TenChuThe,TheTinDung.CSC,TheTinDung.NgayHetHan
+                        from ThanhVien
+                        inner join ThongTinKhachHangGiaoDich on ThongTinKhachHangGiaoDich.IdKhachHang = ThongTin
+                        inner join TheTinDung on ThongTinKhachHangGiaoDich.TheTinDung = TheTinDung.IdThe
+                        where ThanhVien.IdThanhVien = ${id}`);
     },
 
     add: entity =>{

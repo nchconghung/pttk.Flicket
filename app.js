@@ -71,7 +71,7 @@ app.use('/flight',flightRouter);
 
 app.use('/admin',adminRouter);
 app.use('/admin/member',thanhvienAdminRouter);
-app.use('/admin/history',giaodichAdminRouter);
+app.use('/admin/deal',giaodichAdminRouter);
 app.use('/admin/admin',adminAdminRouter);
 app.use('/admin/customer',khachhangAdminRouter);
 app.use('/admin/flight',chuyenbayAdminRouter);

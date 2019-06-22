@@ -17,7 +17,7 @@ router.get("/",(req,res) => {
         });
 })
 
-router.get("/index",auth,(req,res) => {
+router.get("/index",(req,res) => {
     adminModel.all()
         .then(rows => {
             res.render('admin/vwAdmin/index',{
@@ -29,42 +29,18 @@ router.get("/index",auth,(req,res) => {
             res.end("error occured.")
         });
 })
-router.get('edit/:id',auth,(req,res)=>{
-    var id = req.params.id;
-    if (isNaN(id)){
-        res.render('admin/vwAdmin/edit',{
-            layout:'admin',
-            error: true
-        });
-    }
 
-    adminModel.single(id).then(rows => {
-        if (rows.length >0){
-            res.render('admin/vwAdmin/edit',{
-                layout:'admin',
-                error: false,
-                item: rows[0]
-            });
-        } else {
-            res.render('admin/vwAdmin/edit',{
-                layout:'admin',
-                error: true
-            });
-        }
-    })
-})
-
-router.get('/add',auth,(req,res) => {
-    console.log("add");
+router.get('/add',(req,res) => {
+    console.log(req.session);
     res.render('admin/vwAdmin/add',{
         layout: 'admin'
     });
 })
 
-router.post('/add',auth,(req,res)=>{
+router.post('/add',(req,res)=>{
     // var now = new Date();
     // var date = moment(now).format('YYYY-MM-DD HH:mm:ss');
-    console.log(date);
+    console.log("add");
     var saltRounds = 10;
     bcrypt.hash(req.body.MatKhau, saltRounds, function(err, hash) {
         var member = {
@@ -82,17 +58,7 @@ router.post('/add',auth,(req,res)=>{
     });
 })
 
-router.post('admin/update',auth,(req,res) => {
-    var id = req.params.id;
-    adminModel.update(req.body).then(n => {
-        res.redirect('/admin/admin/' + id + '/detail');
-    }).catch(err => {
-        console.log(err),
-        res.end('error occured.')
-    });
-})
-
-router.get('/is-available-username',auth,(req,res) => {
+router.get('/is-available-username',(req,res) => {
     var tk = req.query.TaiKhoan;
     adminModel.singleByTaiKhoan(tk).then(rows => {
         if (rows.length > 0){

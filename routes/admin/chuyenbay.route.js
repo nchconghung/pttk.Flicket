@@ -6,7 +6,7 @@ var moment = require('moment');
 var router = express.Router();
 var auth = require('../../middlewares/auth-admin');
 
-router.get("/",auth,(req,res) => {
+router.get("/",(req,res) => {
     chuyenbayModel.all()
         .then(rows => {
             res.render('admin/vwChuyenBay/index',{
@@ -19,7 +19,7 @@ router.get("/",auth,(req,res) => {
         });
 });
 
-router.get("/index",auth,(req,res) => {
+router.get("/index",(req,res) => {
     chuyenbayModel.all()
         .then(rows => {
             for (var i =0;i< rows.length;i++){
@@ -35,14 +35,28 @@ router.get("/index",auth,(req,res) => {
         });
 });
 
-router.get("/search",auth,(req,res) => {
+router.get("/search",(req,res) => {
+    console.log('search');
     res.render('admin/vwChuyenBay/search',{
         layout:'admin',
-        flat:false
+        result: false
     });
 });
 
-router.post("/index",auth,(req,res) => {
+router.post("/search",(req,res) => {
+    var machuyenbay = req.body.MaChuyenBay;
+    chuyenbayModel.searchByMaChuyenBay(machuyenbay).then(result => {
+        res.render('admin/vwChuyenBay/search',{
+            layout:'admin',
+            result: true,
+            list: result,
+            key: machuyenbay
+        });
+    })
+
+});
+
+router.post("/index",(req,res) => {
     var ma = req.params.id.keyword;
     
     chuyenbayModel.searchByMaChuyenBay(ma).then(rows => {
@@ -54,7 +68,7 @@ router.post("/index",auth,(req,res) => {
     });
 });
 
-router.get('/:id/detail',auth,(req,res)=>{
+router.get('/:id/detail',(req,res)=>{
     var id = req.params.id;
     
     Promise.all([

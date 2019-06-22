@@ -4,11 +4,11 @@ var thetindungModel = require('../../model/thetindung.model');
 var auth = require('../../middlewares/auth-admin');
 var router = express.Router()
 
-router.get("/",auth,(req,res) => {
+router.get("/",(req,res) => {
     res.redirect("/admin/customer/index");
 })
 
-router.get("/index",auth,(req,res) => {
+router.get("/index",(req,res) => {
     thongtinkhachhangModel.allForAdminIndex()
         .then(rows => {
             res.render('admin/vwKhachHang/index',{
@@ -21,14 +21,14 @@ router.get("/index",auth,(req,res) => {
         });
 })
 
-router.get("/search",auth,(req,res) => {
+router.get("/search",(req,res) => {
     res.render('admin/vwKhachHang/search',{
         layout: 'admin',
         result: false
     });
 })
 
-router.post("/search/",auth,(req,res) => {
+router.post("/search/",(req,res) => {
     console.log(req.body.IdKhachHang);
     thongtinkhachhangModel.searchById(req.body.IdKhachHang).then(rows => {
         res.render('admin/vwKhachHang/search',{
@@ -40,7 +40,7 @@ router.post("/search/",auth,(req,res) => {
 
 })
 
-router.get('/:id/detail',auth,(req,res)=>{
+router.get('/:id/detail',(req,res)=>{
     var id = req.params.id;
     
     res.render('admin/vwKhachHang/detail',{
@@ -65,7 +65,7 @@ router.get('/:id/detail',auth,(req,res)=>{
 
 
 
-router.get('/:id/edit',auth,(req,res)=>{
+router.get('/:id/edit',(req,res)=>{
     var id = parseInt(req.params.id);
     console.log(id);
     thongtinkhachhangModel.singleForAdmin(id).then(rows=>{
@@ -94,19 +94,19 @@ router.get('/:id/edit',auth,(req,res)=>{
     // })
 })
 
-router.get('/add',auth,(req,res) => {
+router.get('/add',(req,res) => {
     res.render('admin/vwKhachHang/add',{
         layout: 'admin'
     });
 })
 
-router.get('/add',auth,(req,res) => {
+router.get('/add',(req,res) => {
     res.render('admin/vwKhachHang/add',{
         layout: 'admin'
     });
 })
 
-router.post('/add',auth,(req,res)=>{
+router.post('/add',(req,res)=>{
     var thetindung = {
         SoHieuThe: req.body.SoHieuThe,
         HoTen: req.body.TenChuThe,
@@ -136,7 +136,7 @@ router.post('/add',auth,(req,res)=>{
     
 })
 
-router.post('/update',auth,(req,res) => {
+router.post('/update',(req,res) => {
     console.log(req.body);
     thongtinkhachhangModel.update(req.body).then(n => {
         res.redirect('/admin/customer');
@@ -146,7 +146,7 @@ router.post('/update',auth,(req,res) => {
     });
 })
 
-router.post('/delete', auth,(req, res) => {
+router.post('/delete',(req, res) => {
     thongtinkhachhangModel.delete(req.body.IdKhachHang).then(n => {
       res.redirect('/admin/customer/index/');
     }).catch(err => {

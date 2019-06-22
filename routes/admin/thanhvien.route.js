@@ -6,8 +6,9 @@ var thetindungModel = require('../../model/thetindung.model');
 var bcrypt = require('bcrypt');
 var router = express.Router();
 var auth = require('../../middlewares/auth-admin');
+var moment= require('moment');
 
-router.get("/",auth,(req,res) => {
+router.get("/",(req,res) => {
     thanhvienModel.index()
         .then(rows => {
             res.render('admin/vwThanhVien/index',{
@@ -20,7 +21,7 @@ router.get("/",auth,(req,res) => {
         });
 })
 
-router.get("/index",auth,(req,res) => {
+router.get("/index",(req,res) => {
     thanhvienModel.index()
         .then(rows => {
             res.render('admin/vwThanhVien/index',{
@@ -33,46 +34,33 @@ router.get("/index",auth,(req,res) => {
         });
 })
 
-router.get('/:id/detail',auth,(req,res)=>{
-    var id = req.params.id;
-    res.render('admin/vwThanhVien/detail',{
-        layout: 'admin',
-    });
-    // Promise.all([
-    //     thanhvienModel.detailWithId(id),
-    //     lichsugiaodichModel.listWithDetailByIdThanhVien(id)
-    // ]).then(([detail,rows])=>{
-    //     if (detail.length > 0) {
-    //         for (var i =0;i< rows.length;i++){
-    //             rows[i].ThoiDiemGiaoDich = moment(rows[i].ThoiDiemGiaoDich).format('MM Do YYYY, hh:mm:ss');
-    //             rows[i].GioCatCanh = moment(rows[i].GioCatCanh).format('MM Do YYYY, hh:mm:ss');
-    //         }
-    //         res.render('admin/vwThanhVien/detail',{
-    //             result: true,
-    //             layout: 'admin',
-    //             thanhvien: detail[0],
-    //             history: rows
-    //         });
-    //     } else {
-    //         res.render('admin/vwThanhVien/detail',{
-    //             layout: 'admin',
-    //             result: false
-    //         });
-    //     }
-    // }).catch(err => {
-    //   console.log(err);
-    //   res.end('error occured.')
-    // });
+router.get('/:id/detail',(req,res)=>{
+    var id = parseInt(req.params.id);
+    thanhvienModel.detailUserById(id).then(rows => {
+            var bd = moment(rows[0].NgaySinh,'YYYY-MM-DD').format('YYYY-MM-DD');
+            rows[0].NgaySinh = bd;
+            var expD = moment(rows[0].NgayHetHan,'YYYY-MM-DD').format('YYYY-MM-DD');
+            rows[0].NgayHetHan = expD;
+        giaodichModel.allHistoryById(rows[0].IdKhachHang).then(list => {
+            res.render('admin/vwThanhVien/detail',{
+                thanhvien: rows[0],
+                history: list,
+                layout: 'admin',
+            });
+        })
+        
+    })
+    
 })
 
-router.get('/search',auth,(req,res)=>{
+router.get('/search/',(req,res)=>{
     res.render('admin/vwThanhVien/search',{
         layout: 'admin',
         result: false
     })
 })
 
-router.post('/search',auth,(req,res)=>{
+router.post('/search/',(req,res)=>{
 
     thanhvienModel.searchWithKey(req.body.Keyword).then(rows=>{
         if (rows.length > 0) {
@@ -94,38 +82,59 @@ router.post('/search',auth,(req,res)=>{
     });
 })
 
-router.get('/edit',auth,(req,res)=>{
-    res.render('admin/vwThanhVien/edit',{
-        layout: 'admin',
-        error: false
-    });
-})
-
-router.get('/:id/edit',auth,(req,res)=>{
-    var id = req.params.id;
-    if (isNaN(id)){
-        res.render('admin/vwThanhVien/edit',{
-            layout: 'admin',
-            error: true
-        });
+router.post('/edit',(req,res)=>{
+    console.log(req.body);
+    var bd = moment(req.body.NgaySinh,'YYYY-MM-DD').format('YYYY-MM-DD');
+    var DiemThuong = parseInt(req.body.DiemThuong);
+    var exd = moment(req.body.NgayHetHan,'YYYY-MM-DD').format('YYYY-MM-DD');
+    
+    var thongtin = {
+        IdKhachHang : parseInt(req.body.IdKhachHang),
+        HoTen: req.body.HoTen,
+        Email: req.body.Email,
+        SDT: req.body.SDT,
+        NgaySinh: bd,
+        GioiTinh: parseInt(req.body.GioiTinh),
+        TheTinDung: parseInt(req.body.TheTinDung)
     }
-
-    thanhvienModel.single(id).then(rows => {
-        if (rows.length >0){
-            res.render('admin/vwThanhVien/edit',{
-                layout: 'admin',
-                error: false,
-                thanhvien: rows[0]
-            });
-        } else {
-            res.render('admin/vwThanhVien/edit',{
-                error: true
-            });
-        }
+    
+    var thetindung = {
+        IdThe: parseInt(req.body.TheTinDung),
+        SoHieuThe: req.body.SoHieuThe,
+        HoTen: req.body.TenChuThe,
+        CSC: req.body.CSC,
+        NgayHetHan: exd
+    }
+    console.log(thongtin);
+    console.log(thetindung);
+    Promise.all([
+        thanhvienModel.updatePoint(DiemThuong,parseInt(req.body.IdThanhVien)),
+        khachhangModel.update(thongtin),
+        thetindungModel.update(thetindung)
+    ]).then(([i1,i2,i3])=> {
+        res.redirect("/admin/member/" + parseInt(req.body.IdThanhVien)+"/edit");
     })
 })
 
-router.post('/update',auth,(req,res) => {
+router.get('/:id/edit',(req,res)=>{
+     var id = parseInt(req.params.id);
+        thanhvienModel.detailUserById(id).then(rows => {
+            var bd = moment(rows[0].NgaySinh,'YYYY-MM-DD').format('YYYY-MM-DD');
+            rows[0].NgaySinh = bd;
+            var expD = moment(rows[0].NgayHetHan,'YYYY-MM-DD').format('YYYY-MM-DD');
+            rows[0].NgayHetHan = expD;
+        giaodichModel.allHistoryById(rows[0].IdKhachHang).then(list => {
+            res.render('admin/vwThanhVien/edit',{
+                thanhvien: rows[0],
+                history: list,
+                layout: 'admin',
+            });
+        })
+        
+    })
+})
+
+router.post('/update',(req,res) => {
     thanhvienModel.update(req.body).then(n => {
         res.redirect('/admin/member');
     }).catch(err => {
@@ -134,7 +143,7 @@ router.post('/update',auth,(req,res) => {
     });
 })
 
-router.get('/add',auth,(req,res) => {
+router.get('/add',(req,res) => {
     res.render('admin/vwThanhVien/add',{
         layout: 'admin',
         exists: false,
@@ -142,7 +151,7 @@ router.get('/add',auth,(req,res) => {
     });
 })
 
-router.get('/add/:id/infor',auth,(req,res)=>{
+router.get('/add/:id/infor',(req,res)=>{
     var id = req.params.id;
     console.log("infor");
     res.render('admin/vwThanhVien/add_infor',{
@@ -151,7 +160,7 @@ router.get('/add/:id/infor',auth,(req,res)=>{
     });
 })
 
-router.post('/addinfor',auth,(req,res)=>{
+router.post('/addinfor',(req,res)=>{
     console.log("add infor");
     var expDate = req.body.NgayHetHan;
 	var thongtin = {
@@ -184,9 +193,9 @@ router.post('/addinfor',auth,(req,res)=>{
         console.log(err),
         res.end('error occured.')
     });
-})
+}),
 
-router.post('/add',auth,(req,res) => {
+router.post('/add',(req,res) => {
     var saltRounds = 10;
     bcrypt.hash(req.body.MatKhau, saltRounds, function(err, hash) {
         var member = {
@@ -202,7 +211,7 @@ router.post('/add',auth,(req,res) => {
             res.end("error occured.")
         });
     });
-})
+}),
 
 
 router.post('/insert',(req,res)=>{
@@ -230,7 +239,7 @@ router.post('/insert',(req,res)=>{
         console.log(err),
         res.end('error occured.')
     });
-})
+}),
 
 router.post('/delete', (req, res) => {
     thanhvienModel.delete(req.body.IdThanhVien).then(n => {

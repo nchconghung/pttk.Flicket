@@ -15,6 +15,9 @@ module.exports = {
                         ORDER BY cab.GioCatCanh DESC,cb.IdChuyenBay ASC
                         LIMIT 1000`);
     },
+count: ()=> {
+    return db.load(`select count(ChuyenBay.IdChuyenBay) as TongSoChuyenBay from ChuyenBay`);
+},
 
 allByHHK: (id) =>{
     return db.load(`SELECT cb.*,cab.GioCatCanh,ddi.DiaDiem as DiaDiemDi,dden.DiaDiem as DiaDiemDen

@@ -1,0 +1,154 @@
+<link rel="stylesheet" href="/stylesheets/pages/admin/form-style.css">
+
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="card d-flex flex-column justify-content-center">
+            <div class="card-body d-flex justify-content-center ">
+                <div class="contact1-form validate-form" style="width: 1000px;">
+                    <span class="contact1-form-title">
+                        Thông tin giao dịch
+                    </span>
+                    <div class="col"> 
+                        <span><i class="far fa-user-circle" style="margin-right: 5px;"></i>Id Giao Dịch</span>
+                        <div class="wrap-input1 validate-input">
+                            <input class="input1" type="text" value="{{giaodich.IdGiaoDich}}" readonly='readonly'>
+                            <span class="shadow-input1"></span>
+                        </div>
+                    </div>
+                    <div class="row" >
+                         <div class="col"> 
+                            <span><i class="far fa-user-circle" style="margin-right: 5px;"></i>Mã đặt chỗ</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="text" value="{{giaodich.MaDatCho}}" readonly='readonly'>
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span><i class="fas fa-coins" style="margin-right: 5px;"></i>Thời điểm giao dịch</span>
+                            <div class="wrap-input1 validate-input" >   
+                                <input class="input1" type="text" value="{{giaodich.ThoiDiemGiaoDich}}" readonly='readonly'>
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"> 
+                                <span><i class="far fa-id-card" style="margin-right: 5px;"></i>Tổng giá trị</span>
+                                <div class="wrap-input1 validate-input">
+                                    <input class="input1" type="email" value="{{giaodich.TongGiaTri}}" readonly='readonly'>
+                                    <span class="shadow-input1"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <span><i class="fas fa-signature" style="margin-right: 5px;"></i>Điểm thưởng sử dụng: </span>
+                                <div class="wrap-input1 validate-input" >   
+                                    <input class="input1" type="text" readonly='readonly' value="{{giaodich.DiemThuongSuDung}}" >
+                                    <span class="shadow-input1"></span>
+                                </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <span class="contact1-form-title">
+                        Thông tin khách hàng giao dịch
+                    </span>
+                    <div class="row" >   
+                        <div class="col"> 
+                            <span><i class="far fa-envelope" style="margin-right: 5px;"></i>Id Khách hàng</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="email" value="{{giaodich.IdKhachHang}}" readonly='readonly'>
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span><i class="fas fa-phone" style="margin-right: 5px;"></i>Họ tên</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="text" value="{{giaodich.HoTen}}" readonly='readonly'>
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row" >   
+                        <div class="col"> 
+                            <span><i class="far fa-envelope" style="margin-right: 5px;"></i>Số điện thoại</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="email" value="{{giaodich.SDT}}" readonly='readonly'>
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span><i class="fas fa-phone" style="margin-right: 5px;"></i>Email</span>
+                            <div class="wrap-input1 validate-input">
+                                <input class="input1" type="text" value="{{giaodich.Email}}" readonly='readonly'>
+                                <span class="shadow-input1"></span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:50px;">
+                <span style="font-size:18px;color:#721777;font-weight: bold;margin-left:60px;">
+                    Thông tin chuyến bay
+                </span>  
+                <table class="table dataTable no-footer" style="padding-right: 50px;padding-left:50px;">
+                    <tr role="row">
+                        <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Mã chuyến bay</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Hãng hàng không</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Loại máy bay</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thời điểm bay</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Điểm khởi hành</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Điểm đến</th>
+                    </tr>
+                    <tr>      
+                        <tr>
+                        <td>{{giaodich.MaChuyenBay}}</td>    
+                        <td>{{giaodich.HHK}}</td>
+                        <td>{{giaodich.LoaiMayBay}}</td>
+                        <td>{{giaodich.GioCatCanh}}</td>
+                        <td>{{giaodich.DiaDiemDi}}</td>
+                        <td>{{giaodich.DiaDiemDen}}</td>
+                        </tr>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div class="row" style="margin-bottom:50px;">
+                <span style="font-size:18px;color:#721777;font-weight: bold;margin-left:60px;">
+                    Danh sách vé đặt
+                </span>  
+                <table class="table dataTable no-footer" style="padding-right: 50px;padding-left:50px;">
+                    <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Hành khách</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Ngày sinh</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Mã vé</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Hạng ghế</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Loại khách</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Chỗ ngồi</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Giá tiền</th>
+                        <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Hành lý</th>
+                    </tr>
+                    <tbody>
+                        {{#each listve}}
+                            <tr> 
+                                <td>{{this.HoTen}}</td>    
+                                <td>{{this.NgaySinh}}</td>
+                                <td>{{this.MaVe}}</td>
+                                <td>{{this.HangGhe}}</td>
+                                <td>{{loaiKhach this.LoaiHanhKhach}}</td>
+                                <td>{{this.ChoNgoi}}</td>
+                                <td>{{this.GiaTien}}</td>
+                                <td>{{this.HanhLy}}</td>
+                            <tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

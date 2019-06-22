@@ -18,7 +18,7 @@ module.exports = function (app) {
       passwordField: 'password'
     }, (username, password, done) => {
         adminModel.singleByTaiKhoan(username).then(rows => {
-          console.log("vai truy xuat");
+          
         if (rows.length === 0) {
           return done(null, false, { message: 'Invalid Username.' });
         }
@@ -28,7 +28,7 @@ module.exports = function (app) {
             isAdmin: true
           };
         var ret = bcrypt.compareSync(password, rows[0].MatKhau);
-        if (password == user.user.MatKhau) {
+        if (ret) {
           return done(null, user);
         }
         return done(null, false, { message: 'Invalid Password' });
@@ -37,7 +37,7 @@ module.exports = function (app) {
       })
     });
   
-    passport.use('admin',ls);
+    passport.use('fAdmin',ls);
   
     passport.serializeUser((user, done) => {
       return done(null, user);

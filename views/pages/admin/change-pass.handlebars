@@ -1,0 +1,89 @@
+<link rel="stylesheet" href="/stylesheets/pages/admin/form-style.css">
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script>
+    $(function(){
+        $('#registerForm').validate({
+            rules:{
+                MatKhauCu: {
+                    required: true,
+                    remote: {
+                        url: '/admin/is-correct-password'
+                    }
+                },
+                MatKhauMoi: {
+                    required: true,
+                    minlength: 6
+                },
+                Confirm: {
+                    required: true,
+                    equalTo:'#pass'
+                }
+            },
+            messages: {
+                MatKhauCu: {
+                    required: 'Mật khẩu cũ cần được nhập',
+                    remote: 'Mật khẩu không đúng'
+                },
+                MatKhauMoi: {
+                    required: "Mật khẩu cần được nhập",
+                    minlength: "Mật khẩu cần dài hơn 6 kí tự"
+                },
+                Confirm: {
+                    required: "Vui lòng xác nhận lại mật khẩu",
+                    equalTo: "Không trùng với mật khẩu"
+                }
+            },
+            errorElement: 'small',
+            errorClass: 'help-block text-danger',
+            highlight: function(e){
+                $(e).removeClass('is-valid').addClass('is-invalid');
+            },
+            unhighlight: function(e){
+                $(e).removeClass('is-invalid').addClass('is-valid');
+            }
+        });
+    })
+</script>
+{{/section}}
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="card">
+            <div class="card-body d-flex justify-content-center">
+                <form nonvalidate id="registerForm" class="contact1-form validate-form" action="/admin/admin/add" method="POST">
+                    <span class="contact1-form-title">
+                        Đổi mật khẩu 
+                    </span>
+                    
+                    <div class="wrap-input1 validate-input" >
+                        <input class="input1" type="password" name="MatKhauCu" placeholder="Mật khẩu cũ">
+                        <span class="shadow-input1"></span>
+                    </div>
+
+                    <div class="wrap-input1 validate-input" >
+                        <input class="input1" type="password" name="MatKhauMoi" id="pass"placeholder="Mật khẩu mới">
+                        <span class="shadow-input1"></span>
+                    </div>
+
+                    <div class="wrap-input1 validate-input" >
+                        <input class="input1" type="password" name="Confirm" placeholder="Xác nhận lại mật khẩu">
+                        <span class="shadow-input1"></span>
+                    </div>
+
+                    <div class="container-contact1-form-btn">
+                        <button class="contact1-form-btn" type="submit">
+                            <span>
+                                Cập nhật
+                                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

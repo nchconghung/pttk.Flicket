@@ -8,27 +8,31 @@ router.get('/',function(req,res,next){
 	res.redirect('/admin/login');
 });
 
+router.get('/dashboard',function(req,res,next){
+	res.render('admin/dashboard',{
+		layout: 'admin'
+	})
+})
+
 router.get('/login',function(req,res,next){
 	res.render("admin/login",{
 		layout:false
 	});
 });
 
-router.post('/login',function(req,res,next){
-	passport.authenticate('admin', (err, user, info) => {
+router.post('/signin',function(req,res,next){
+	
+	passport.authenticate('fAdmin', (err, user, info) => {
+		console.log(req.body);
         if (err)
         {
             res.end('error occured.')
         }
           
-    
         if (!user) {
-            res.end(info.message)
-            // return res.render('/guest/');
-        //   return res.render('vwAccount/login', {
-        //     layout: false,
-        //     err_message: info.message
-        //   })
+            return res.render('admin/login', {
+				err_message: info.message
+			  })
         }
     
         req.logIn(user, err => {
@@ -36,26 +40,22 @@ router.post('/login',function(req,res,next){
                 // return next(err);
                 res.end('error occured.');
 			}
-			var redirectTo = "/admin/admin/index/";
+			var redirectTo = "/admin/dashboard/";
         	return res.redirect(redirectTo);
         });
       })(req, res, next);
-	// passport.authenticate('admin', (err, user, info) => {
-	// 	if (err)
-	// 	  return next(err);
-	
-	// 	if (!user) {
-	// 	  return res.render('admin/login', {
-	// 		layout: false,
-	// 		err_message: info.message
-	// 	  })
-	// 	}
-	
-	// 	req.logIn(user, err => {
-	// 	  if (err)
-	// 		return next(err);
-	// 	  return res.redirect("/admin/admin/index/");
-	// 	});
-	//   })(req, res, next);
 });
+
+router.get('/change-pass',(req,res) => {
+    res.render('admin/change-pass',{
+        layout: 'admin'
+    });
+})
+
+router.get('/logout',(req,res) => {
+	req.logOut();
+    res.redirect('/admin/login',{
+		layout:false
+	});
+})
 module.exports = router;

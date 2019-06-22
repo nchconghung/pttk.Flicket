@@ -4,56 +4,59 @@
     <div class="content-wrapper">
         <div class="card">
             <div class="card-body">
-                <form class="d-flex justify-content-center">
+                <form class="d-flex justify-content-center" action="/admin/flight/search" method="POST">
                     <select class="custom-select select-search-fk" disabled>
-                        <option value="1" disabled selected>Mã chuyến bay</option>
-                    </select>
-                    <input type="text" class="form-control input-search-fk" placeholder="Keyword...">
-                    <btn class="btn btn-success btn-search-fk"><i class="fas fa-search"></i></btn>
+                        <option value="" selected>Mã chuyến bay</option>
+                    </select>    
+                    <input name="MaChuyenBay" type="text" class="form-control input-search-fk" placeholder="Nhập mã chuyến bay">
+                    <button class="btn btn-success btn-search-fk"><i class="fas fa-search"></i></button>
                 </form>
-                <br>
-                {{#if flat}}
-                    <h5>Kết quả</h5>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="table-responsive">
-                            <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                                <div class="row">
-                                <div class="col-sm-12">
-                                    <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
-                                <thead>
-                                <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
-                                    <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Mã chuyến bay</th>
-                                    <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Thời gian bay</th>
-                                    <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Điểm khởi hành</th>
-                                    <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Điểm đến</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Loại máy bay</th>
-                                    <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Chi tiết</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    {{#each list}}
-                                        <tr role="row" >
-                                            <td class="sorting_1">{{this.IdChuyenBay}}</td>           
-                                            <td>{{this.MaChuyenBay}}</td>
-                                            <td>{{this.GioCatCanh}}</td>
-                                            <td>{{this.DiaDiemDi}}</td>
-                                            <td>{{this.DiaDiemDen}}</td>
-                                            <td>{{this.LoaiMayBay}}</td>
-                                            <td>
-                                                <a class="btn btn-success" href="/admin/flight/detail?id={{this.IdChuyenBay}}">Chi tiết</a>
-                                            </td>
-                                        </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
-                            </div>
-                        </div>
-                        </div>
-                            </div>
+
+                {{#if result}}
+                    <br>
+                    <h5>Kết quả của {{key}}:</h5>     
+                    <br>
+                   <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                        <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                            <div class="row">
+                            <div class="col-sm-12">
+                                <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
+                            <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
+                                <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Mã chuyến bay</th>
+                                <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Thời gian bay</th>
+                                <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Điểm khởi hành</th>
+                                <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Điểm đến</th>
+                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Loại máy bay</th>
+                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Chi tiết</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            
+                                {{#each list}}
+                                    <tr role="row" >
+                                        <td class="sorting_1">{{this.IdChuyenBay}}</td>           
+                                        <td>{{this.MaChuyenBay}}</td>
+                                        <td>{{this.GioCatCanh}}</td>
+                                        <td>{{this.DiaDiemDi}}</td>
+                                        <td>{{this.DiaDiemDen}}</td>
+                                        <td>{{this.LoaiMayBay}}</td>
+                                        <td>
+                                            <a class="btn btn-success" href="/admin/flight/{{this.IdChuyenBay}}/detail">Chi tiết</a>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
                         </div>
                     </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
                 {{/if}}
             </div>
         </div>

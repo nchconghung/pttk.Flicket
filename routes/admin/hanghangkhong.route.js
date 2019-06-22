@@ -4,7 +4,7 @@ var hhkModel = require('../../model/hanghangkhong.model');
 var auth = require('../../middlewares/auth-admin');
 var router = express.Router()
 
-router.get("/",auth,(req,res) => {
+router.get("/",(req,res) => {
     hhkModel.all()
         .then(rows => {
             res.render('admin/vwHangHangKhong/index',{
@@ -17,7 +17,7 @@ router.get("/",auth,(req,res) => {
         });
 });
 
-router.get('/list/:id',auth,(req,res)=>{ 
+router.get('/list/:id',(req,res)=>{ 
     var id = req.params.id;
     
     chuyenbayModel.allByHHK(id).then(rows => {

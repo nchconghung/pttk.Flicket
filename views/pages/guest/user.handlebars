@@ -122,10 +122,10 @@
                 <img src="/images/guest/credit-card.png">
                 <span class="user-account-menu-option-info">Thẻ của tôi</span>
             </div> --}}
-            <div class="user-account-menu-option">
+            {{!-- <div class="user-account-menu-option">
                 <img src="/images/guest/exit.png">
                 <span class="user-account-menu-option-info">Đăng xuất</span>
-            </div>
+            </div> --}}
         </div>
         <div class="col-9" id="user-account-content">
             <div class="user-account-content-element" id="edit-profile-interface">
@@ -147,7 +147,7 @@
                     </div>
                     <div class="edit-profile-input">
                         <label for="txtPhone">Số điện thoại</label>
-                        <input type="tel" id="txtPhone" type="tel" pattern="[0-9]{10}" value="0{{thongTin.SDT}}"
+                        <input type="tel" id="txtPhone" type="tel" pattern="[0-9]{10}" value="{{thongTin.SDT}}"
                             maxlength="10" name="txtPhone" required>
                     </div>
                     <div class="edit-profile-input">
@@ -283,7 +283,7 @@
                         <span class="reservation-more-info">Chi tiết chuyến bay</span>
                     </div>
                 </div>
-                <div class="reservation-record">
+                {{!-- <div class="reservation-record">
                     <div class="row" style="height: 65px">
                         <div class="col-4 reservation-first-column">
                             <span class="reservation-code-title">Mã vé: &nbsp;&nbsp;<span
@@ -342,7 +342,7 @@
                     <div class="reservation-more-info-container">
                         <span class="reservation-more-info">Chi tiết chuyến bay</span>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="user-account-content-element" id="my-point-interface" style="display: none">
                 <div id="my-point-container">

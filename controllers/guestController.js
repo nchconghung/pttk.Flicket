@@ -158,6 +158,7 @@ exports.passenger = function (req, res, next) {
 	var kid = req.session.userdata.TreEm;
 	var baby = req.session.userdata.EmBe;
 	var classs = req.session.userdata.HangGhe;
+	var user = req.session.passport.user;
 
 	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
 		
@@ -167,7 +168,8 @@ exports.passenger = function (req, res, next) {
 			adult: adult,
 			kid: kid,
 			baby: baby,
-			class: classs
+			class: classs,
+			user: user
 		});
 	});
 }
@@ -249,6 +251,8 @@ exports.payment = function (req, res, next) {
 	var kidLuggage = req.session.kidLuggage;
 	var babyLuggage = req.session.babyLuggage;
 	var bookingID = req.session.bookingID;
+	var point = req.session.passport.user.TaiKhoan.DiemThuong;
+	var user = req.session.passport.user;
 
 	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
 		res.render('guest/payment', {
@@ -268,7 +272,8 @@ exports.payment = function (req, res, next) {
 			kidLuggage: kidLuggage,
 			babyLuggage: babyLuggage,
 			bookingID: bookingID,
-			point: 0
+			point: point,
+			user: user
 		});
 	});
 }
@@ -840,6 +845,7 @@ exports.user_post = function(req,res,next){
 					res.end("error occured.");
 				});
 			}).catch(err => {
+				console.log("error 2");
 				console.log(err);
 			});
 		} 

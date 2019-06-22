@@ -221,6 +221,16 @@ function hbsHelpers(hbs, path) {
       },
       truyXuat: function(list,index, options){
         return list[index];
+      },
+      SDT: function(num){
+        return num.substring(1);
+      },
+      ExpDate: function(date){
+        var d = new Date(date);
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        month = month < 10 ? '0' + month : month;
+        return month + "/" + year;
       }
     }
   });

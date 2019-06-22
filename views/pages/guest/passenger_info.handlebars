@@ -88,7 +88,7 @@
                     <div class="before-content">
                         <div class="info-row">
                             <label for="txtNameContact">Họ và tên (VD: Nguyen Thi Ngoc Anh)</label>
-                            <input id="txtNameContact" type="text" name="txtNameContact" {{#if name}} value="{{name}}" {{/if}} required>
+                            <input id="txtNameContact" type="text" name="txtNameContact" {{#if user}} value="{{user.ThongTin.HoTen}}" {{/if}} required>
                             <span class="input-note">như trên CMND (không dấu)</span>
                         </div>
                         <div class="info-row row">
@@ -99,14 +99,14 @@
                                         <img src="/images/guest/vietnam.png">
                                         <span>+84</span>
                                     </div>
-                                    <input id="txtPhoneNum" name="txtPhoneNum" max-length="9" type="tel" pattern="^[0-9]{9}" {{#if phone}} value="{{phone}}" {{/if}}>
+                                    <input id="txtPhoneNum" name="txtPhoneNum" max-length="9" type="tel" pattern="^[0-9]{9}" {{#if user}} value="{{SDT user.ThongTin.SDT}}" {{/if}}>
                                 </div>
                                 <span class="input-note">VD: +84 901234567 trong đó (+84) là mã quốc gia và
                                     901234567 là số di động</span>
                             </div>
                             <div class="col-5">
                                 <label for="txtEmail">Email</label>
-                                <input id="txtEmail" type="email" name="txtEmail" {{#if email}} value="{{email}}" {{/if}} required>
+                                <input id="txtEmail" type="email" name="txtEmail" required {{#if user}} value="{{user.ThongTin.Email}}" {{/if}}>
                                 <span class="input-note">VD: email@example.com</span>
                             </div>
                         </div>

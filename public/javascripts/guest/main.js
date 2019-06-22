@@ -183,8 +183,7 @@ $(".switch").click(function (e) {
 })
 /*Datepicker*/
 $("#depart-date").datepicker({
-    dateFormat: "D, dd/mm/yyyy",
-    minDate: new Date()
+    dateFormat: "D, dd/mm/yyyy"
     // onSelect: function onSelect(fd, date) {
     //     $("#arrival-date").datepicker({
     //         dateFormat: "D, dd/mm/yyyy",
@@ -807,7 +806,7 @@ $('#airline-jetstar').on('change', evt => {
     if ($(evt.target).is(':checked')) {
         recover_airline();
         $(".flight-list-element").each(function () {
-            if ($(this).data("airline") != "jetstar" && $(this).css("display") != "none") {
+            if ($(this).data("airline") != "Jetstar" && $(this).css("display") != "none") {
                 $(this).data("jetstar-remove", true);
                 $(this).hide();
             } else {
@@ -827,7 +826,7 @@ $('#airline-vietjet').on('change', evt => {
     if ($(evt.target).is(':checked')) {
         recover_airline();
         $(".flight-list-element").each(function () {
-            if ($(this).data("airline") != "vietjet" && $(this).css("display") != "none") {
+            if ($(this).data("airline") != "Vietjet" && $(this).css("display") != "none") {
                 $(this).data("vietjet-remove", true);
                 $(this).hide();
             } else {
@@ -847,7 +846,7 @@ $('#airline-vnairline').on('change', evt => {
     if ($(evt.target).is(':checked')) {
         recover_airline();
         $(".flight-list-element").each(function () {
-            if ($(this).data("airline") != "vnairline" && $(this).css("display") != "none") {
+            if ($(this).data("airline") != "VietNamAirlines" && $(this).css("display") != "none") {
                 $(this).data("vnairline-remove", true);
                 $(this).hide();
             } else {

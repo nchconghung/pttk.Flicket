@@ -141,7 +141,6 @@ exports.info = function (req, res, next) {
 	var classs = req.session.userdata.HangGhe;
 	Promise.all([chuyenBayModel.singleWithDetailById(id,classs),lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay,lichtrinh])=>{
 		req.session.userdata.IdChuyenBay = parseInt(id);
-		console.log(req.session);
 		res.render('guest/check_info',{
 			chuyenBay: chuyenbay[0],
 			lichTrinh: lichtrinh,
@@ -165,7 +164,6 @@ exports.passenger = function (req, res, next) {
 		user = req.session.passport.user;
 	}
 	
-
 	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
 		res.render('guest/passenger_info', {
 			chuyenBay: chuyenbay[0],
@@ -176,7 +174,7 @@ exports.passenger = function (req, res, next) {
 			class: classs,
 			user: user
 		});
-	});
+	})
 }
 exports.passenger_post = function (req, res, next) {
 	//upload to session here
@@ -233,9 +231,6 @@ exports.passenger_post = function (req, res, next) {
 		req.session.babyLuggage = [req.body.txtBabyLuggage];
 		}
 	}
-	console.log("Passenger session:");
-	console.log(req.session);
-	//
 	res.redirect('/guest/payment');
 }
 
@@ -265,28 +260,55 @@ exports.payment = function (req, res, next) {
 		point = req.session.passport.user.TaiKhoan.DiemThuong;
 	}
 
-	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
-		res.render('guest/payment', {
-			chuyenBay: chuyenbay[0],
-			lichTrinh: lichtrinh,
-			adult: adult,
-			kid: kid,
-			baby: baby,
-			class: classs,
-			adultName: adultName,
-			kidName: kidName,
-			babyName: babyName,
-			contactName: contactName,
-			phone: phone,
-			email: email,
-			adultLuggage: adultLuggage,
-			kidLuggage: kidLuggage,
-			babyLuggage: babyLuggage,
-			bookingID: bookingID,
-			point: point,
-			user: user
+	
+	if (!req.user){
+		Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
+			res.render('guest/payment', {
+				chuyenBay: chuyenbay[0],
+				lichTrinh: lichtrinh,
+				adult: adult,
+				kid: kid,
+				baby: baby,
+				class: classs,
+				adultName: adultName,
+				kidName: kidName,
+				babyName: babyName,
+				contactName: contactName,
+				phone: phone,
+				email: email,
+				adultLuggage: adultLuggage,
+				kidLuggage: kidLuggage,
+				babyLuggage: babyLuggage,
+				bookingID: bookingID
+			});
 		});
-	});
+	} else {
+		var point = req.session.passport.user.TaiKhoan.DiemThuong;
+		var user = req.session.passport.user;
+
+		Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
+			res.render('guest/payment', {
+				chuyenBay: chuyenbay[0],
+				lichTrinh: lichtrinh,
+				adult: adult,
+				kid: kid,
+				baby: baby,
+				class: classs,
+				adultName: adultName,
+				kidName: kidName,
+				babyName: babyName,
+				contactName: contactName,
+				phone: phone,
+				email: email,
+				adultLuggage: adultLuggage,
+				kidLuggage: kidLuggage,
+				babyLuggage: babyLuggage,
+				bookingID: bookingID,
+				point: point,
+				user: user
+			});
+		});
+	}
 }
 
 exports.payment_post = function (req, res, next) {
@@ -300,17 +322,15 @@ exports.payment_post = function (req, res, next) {
 	req.session.card = card;
 	req.session.totalAmount = req.body.txtTotalAmount;
 	req.session.voucher = req.body.txtVoucher;
-	console.log("voucher "+req.body.txtVoucher);
 	res.redirect("/guest/processing")
 }
 
 exports.processing = function (req, res, next) {
-	//console.log(req.session);
+	console.log(req.session);
+	var voucher = req.session.voucher;
 	var promise1;
 	var date = '01/'+req.session.card.NgayHetHan;
 	var expDate = moment(date,'DD/MM/YYYY').format('YYYY-MM-DD');
-	
-
 	if (!req.user){
 		var card = {
 			SoHieuThe: req.session.card.SoHieuThe,
@@ -328,12 +348,14 @@ exports.processing = function (req, res, next) {
 				}
 				khachhangModel.add(infor).then(idkh => {
 					var now = new Date();
-					var date = moment(now).format('YYYY-MM-DD hh:mm:ss');
+					var date = moment(now).format('YYYY-MM-DD HH:mm:ss');
+					var diemthuong = 0;
+					
 					var giaodich = {
 						KhachHangGiaoDich: idkh,
 						ChuyenBay: parseInt(req.session.userdata.IdChuyenBay),
 						TongGiaTri: parseFloat(req.session.totalAmount),
-						DiemThuongSuDung: 0,
+						DiemThuongSuDung: diemthuong,
 						ThoiDiemGiaoDich: date,
 						MaDatCho: req.session.bookingID
 					};
@@ -372,42 +394,36 @@ exports.processing = function (req, res, next) {
 				req.session.passport.user.TheTinDung.NgayHetHan = expDate;
 
 				khachhangModel.update(infor).then(idkh => {
-					var point =0;
-					
-					// if (req.session.voucher === '0'){
-					// 	point = 0;
-					// } else {
-					// 	if (req.session.voucher === '1')
-					// 	{
-					// 		point = 200;
-					// 	} else {
-					// 		point = 450;
-					// 	}
-					// 	req.session.passport.user.DiemThuong = parseInt(req.session.passport.user.DiemThuong) - point;
-					// 	var point = parseInt(req.session.passport.user.DiemThuong);
-					// 	thanhvienModel.updatePoint(point,req.session.passport.user.TaiKhoan.IdThanhVien).catch(err => {
-					// 		console.log(err);
-					// 		res.end("error occured.")
-					// 	});
-					// }
-				var _point = parseInt(req.session.passport.user.TaiKhoan.DiemThuong) + parseInt(parseFloat(req.session.totalAmount)/50000);
-				var idThanhVien = parseInt(req.session.passport.user.TaiKhoan.IdThanhVien);
-				thanhvienModel.updatePoint(_point,idThanhVien).then(result => {
+					var diemthuongsudung = 0;
+					if (voucher === '1' )
+					{
+						diemthuongsudung = 200;
+					}
+					if (voucher === '2')
+					{
+						diemthuongsudung = 450;
+					}
+					var _point = parseInt(req.session.passport.user.TaiKhoan.DiemThuong) + parseInt(parseFloat(req.session.totalAmount)/50000) - diemthuongsudung;
+					var idThanhVien = parseInt(req.session.passport.user.TaiKhoan.IdThanhVien);
+					thanhvienModel.updatePoint(_point,idThanhVien).then(result => {
 					req.session.passport.user.ThongTin.HoTen = req.session.contact.name;
 					req.session.passport.user.ThongTin.Email = req.session.contact.email;
 					req.session.passport.user.ThongTin.SDT = req.session.contact.phone;
-					
+					req.session.passport.user.TaiKhoan.DiemThuong = _point;
 
 					var now = new Date();
-					var date = moment(now).format('YYYY-MM-DD hh:mm:ss');
+					var date = moment(now).format('YYYY-MM-DD HH:mm:ss');
+					
+					
 					var giaodich = {
 						KhachHangGiaoDich: parseInt(req.session.passport.user.ThongTin.IdKhachHang),
 						ChuyenBay: parseInt(req.session.userdata.IdChuyenBay),
 						TongGiaTri: parseFloat(req.session.totalAmount),
-						DiemThuongSuDung: point,
+						DiemThuongSuDung: diemthuongsudung,
 						ThoiDiemGiaoDich: date,
 						MaDatCho: req.session.bookingID
 					};
+					console.log(giaodich);
 					resolve(giaodich);
 				})
 					
@@ -421,9 +437,7 @@ exports.processing = function (req, res, next) {
 			});
 		});
 	}
-	
 	promise1.then(function(value) {
-		console.log(value);
 		giaodichModel.add(value).then(idgd => {
 					
 			var kids = parseInt(req.session.userdata.TreEm);

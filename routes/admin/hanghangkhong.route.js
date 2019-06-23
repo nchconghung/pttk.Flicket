@@ -1,7 +1,6 @@
 var express = require('express');
 var chuyenbayModel = require('../../model/chuyenbay.model');
 var hhkModel = require('../../model/hanghangkhong.model');
-var auth = require('../../middlewares/auth-admin');
 var router = express.Router()
 
 router.get("/",(req,res) => {

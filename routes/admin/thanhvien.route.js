@@ -5,7 +5,6 @@ var giaodichModel = require('../../model/giaodich.model');
 var thetindungModel = require('../../model/thetindung.model');
 var bcrypt = require('bcrypt');
 var router = express.Router();
-var auth = require('../../middlewares/auth-admin');
 var moment= require('moment');
 
 router.get("/",(req,res) => {

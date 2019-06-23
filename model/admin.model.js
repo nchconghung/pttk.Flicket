@@ -19,6 +19,10 @@ module.exports = {
         return db.update(`Admin`,`Id`,entity);
     },
 
+    updatePass: (id,pass) =>{
+        return db.load(`update Admin set MatKhau='${pass}' where Id=${id}`);
+    },
+
     delete: id => {
         return db.delete(`Admin`,`Id`,id);
     }

@@ -6,14 +6,17 @@ var hhkModel = require('../model/hanghangkhong.model');
 var giaodichModel = require('../model/giaodich.model');
 var thanhvienModel = require('../model/thanhvien.model');
 var khachhangModel = require('../model/thongtinkhachhanggiaodich.model');
+var adminModel = require('../model/admin.model');
+var auth = require('../middlewares/auth-admin');
 var router = express.Router();
 var passport = require('passport');
+var bcrypt = require('bcrypt');
 /* GET Homepage Admin */
 router.get('/',function(req,res,next){
 	res.redirect('/admin/login');
 });
 
-router.get('/dashboard',function(req,res,next){
+router.get('/dashboard',auth,function(req,res,next){
     Promise.all([
         hhkModel.count(),
         chuyenBayModel.count(),
@@ -43,7 +46,7 @@ router.get('/login',function(req,res,next){
 
 router.post('/signin',function(req,res,next){
 	
-	passport.authenticate('fAdmin', (err, user, info) => {
+	passport.authenticate('admin', (err, user, info) => {
 		console.log(req.body);
         if (err)
         {
@@ -60,23 +63,46 @@ router.post('/signin',function(req,res,next){
             if (err){
                 // return next(err);
                 res.end('error occured.');
-			}
+            }
+            console.log("success");
 			var redirectTo = "/admin/dashboard/";
         	return res.redirect(redirectTo);
         });
       })(req, res, next);
 });
 
-router.get('/change-pass',(req,res) => {
+router.get('/change-pass',auth,(req,res) => {
     res.render('admin/change-pass',{
         layout: 'admin'
     });
 })
 
-router.get('/logout',(req,res) => {
+router.post('/change-pass',auth,(req,res) => {
+    var ret = bcrypt.compareSync(req.body.MatKhauCu, req.session.passport.user.user.MatKhau);
+    if (ret){
+        var saltRounds = 10;
+        var id = parseInt(req.session.passport.user.user.Id);
+        bcrypt.hash(req.body.MatKhauMoi, saltRounds, function(err, hash) {
+            adminModel.updatePass(id,hash).then(id => {
+                res.render('admin/change-pass',{
+                    layout: 'admin'
+                });
+            })
+        })
+        
+    } else {
+        res.render('admin/change-pass',{
+            layout: 'admin',
+            message: 'Vui lòng nhập đúng mật khẩu để đổi.',
+            hasMess: true
+        });
+    }
+    
+})
+
+router.get('/logout',auth,(req,res) => {
+    console.log('logout');
 	req.logOut();
-    res.redirect('/admin/login',{
-		layout:false
-	});
+    res.redirect('/admin/login');
 })
 module.exports = router;

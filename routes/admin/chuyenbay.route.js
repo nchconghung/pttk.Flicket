@@ -4,7 +4,6 @@ var lichtrinhModel = require('../../model/lichtrinh.model');
 var bgvModel = require('../../model/banggiave.model');
 var moment = require('moment');
 var router = express.Router();
-var auth = require('../../middlewares/auth-admin');
 
 router.get("/",(req,res) => {
     chuyenbayModel.all()

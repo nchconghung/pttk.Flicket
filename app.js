@@ -22,7 +22,7 @@ var thanhvienAdminRouter = require('./routes/admin/thanhvien.route')
 var hangHangKhongAdminRouter = require('./routes/admin/hanghangkhong.route')
 var chuyenbayAdminRouter = require('./routes/admin/chuyenbay.route')
 var giaodichAdminRouter = require('./routes/admin/giaodich.route')
-
+var adminAuth = require('./middlewares/auth-admin')
 
 var app = express();
 
@@ -61,8 +61,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 require('./middlewares/session')(app);
 require('./middlewares/passport')(app);
+require('./middlewares/passport-admin')(app);
 
 app.use(require('./middlewares/auth-locals.mdw'));
+// app.use(require('./middlewares/auth-admin'));
 
 app.use('/', indexRouter);
 app.use('/guest',guestRouter);
@@ -70,12 +72,12 @@ app.use('/users', usersRouter);
 app.use('/flight',flightRouter);
 
 app.use('/admin',adminRouter);
-app.use('/admin/member',thanhvienAdminRouter);
-app.use('/admin/deal',giaodichAdminRouter);
-app.use('/admin/admin',adminAdminRouter);
-app.use('/admin/customer',khachhangAdminRouter);
-app.use('/admin/flight',chuyenbayAdminRouter);
-app.use('/admin/airlines',hangHangKhongAdminRouter);
+app.use('/admin/member',adminAuth,thanhvienAdminRouter);
+app.use('/admin/deal',adminAuth,giaodichAdminRouter);
+app.use('/admin/admin',adminAuth,adminAdminRouter);
+app.use('/admin/customer',adminAuth,khachhangAdminRouter);
+app.use('/admin/flight',adminAuth,chuyenbayAdminRouter);
+app.use('/admin/airlines',adminAuth,hangHangKhongAdminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

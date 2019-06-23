@@ -158,10 +158,15 @@ exports.passenger = function (req, res, next) {
 	var kid = req.session.userdata.TreEm;
 	var baby = req.session.userdata.EmBe;
 	var classs = req.session.userdata.HangGhe;
-	var user = req.session.passport.user;
+	var user;
+	if (typeof req.session.passport === "undefined"){
+		user = undefined;
+	}else{
+		user = req.session.passport.user;
+	}
+	
 
 	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
-		
 		res.render('guest/passenger_info', {
 			chuyenBay: chuyenbay[0],
 			lichTrinh: lichtrinh,
@@ -251,8 +256,14 @@ exports.payment = function (req, res, next) {
 	var kidLuggage = req.session.kidLuggage;
 	var babyLuggage = req.session.babyLuggage;
 	var bookingID = req.session.bookingID;
-	var point = req.session.passport.user.TaiKhoan.DiemThuong;
-	var user = req.session.passport.user;
+	var user, point;
+	if (typeof req.session.passport === "undefined"){
+		user = undefined;
+		point = 0;
+	}else{
+		user = req.session.passport.user;
+		point = req.session.passport.user.TaiKhoan.DiemThuong;
+	}
 
 	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
 		res.render('guest/payment', {

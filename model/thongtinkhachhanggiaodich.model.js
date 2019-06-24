@@ -7,7 +7,7 @@ module.exports = {
     allForAdminIndex: () => {
         return db.load(`select IdKhachHang,HoTen,Email,SDT,GiaoDich.IdGiaoDich,ThanhVien.IdThanhVien,ThanhVien.TaiKhoan,date_format(GiaoDich.ThoiDiemGiaoDich,"%H:%i:%s %d-%c-%Y") as ThoiDiemGiaoDich
             from ThongTinKhachHangGiaoDich
-            inner join GiaoDich on IdKhachHang = GiaoDich.KhachHangGiaoDich
+            left join GiaoDich on IdKhachHang = GiaoDich.KhachHangGiaoDich
             left join ThanhVien on IdKhachHang = ThanhVien.ThongTin`);
     },
     searchById: id => {

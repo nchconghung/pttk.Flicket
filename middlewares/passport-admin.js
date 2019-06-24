@@ -10,7 +10,6 @@ module.exports = function (app) {
         resave: true,
         saveUninitialized: true
     }));
-    console.log("vao passport");
     app.use(passport.initialize());
     
     var ls = new LocalStrategy({

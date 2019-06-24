@@ -55,21 +55,17 @@
                             </div>
                         </div>
                         <div class="col">
-                            <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Ngày sinh</span>
-                            <div class="wrap-input1 validate-input">
-                                <input class="input1" type="date" name="NgaySinh" value="{{thanhvien.NgaySinh}}" >
+                            <span><i class="fas fa-venus-mars" style="margin-right: 5px;"></i>Giới tính:</span>
+                            <div class="wrap-input1 validate-input" style="width: 270px;">
+                                <select class="input1 select-search-fk " aria-placeholder="Giới tính" name="GioiTinh">
+                                    <option value="1" {{isSelected this.GioiTinh 1}}>Nam</option>
+                                    <option value="0" {{isSelected this.GioiTinh 0}}>Nữ</option>
+                                </select>
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                     </div>
-                    <span><i class="fas fa-venus-mars" style="margin-right: 5px;"></i>Giới tính:</span>
-                    <div class="wrap-input1 validate-input" style="width: 270px;">
-                        <select class="input1 select-search-fk " aria-placeholder="Giới tính" name="GioiTinh">
-                            <option value="1" {{isSelected this.GioiTinh 1}}>Nam</option>
-                            <option value="0" {{isSelected this.GioiTinh 0}}>Nữ</option>
-                        </select>
-                        <span class="shadow-input1"></span>
-                    </div>
+                    
                     <hr>
                     <span class="contact1-form-title" >
                         Thông tin thẻ tín dụng
@@ -118,58 +114,9 @@
                             </button>
                     </div>
                     </form>
-                    <span style="font-size:18px;color:#721777;font-weight: bold;">
-                        Lịch sử giao dịch
-                    </span>  
+                      
                 </div>
             </div>
-                <div class="row" style="margin-bottom:50px;">
-                    <div class="col-12">
-                        <div class="table-responsive">
-                            <div id="order-listing_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <hr>
-                                        <table id="order-listing" class="table dataTable no-footer" role="grid" aria-describedby="order-listing_info">
-                                            <thead>
-                                            <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 63px;font-weight: bold;" aria-sort="ascending" >#</th>
-                                                <th  class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 79px;font-weight: bold;" >Mã đặt chỗ</th>
-                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 54px;font-weight: bold;" >Mã chuyến bay</th>
-                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Thời điểm giao dịch</th>
-                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Ngày bay</th>
-                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Điểm khởi hành</th>
-                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Điểm đến</th>
-                                                <th class="sorting" tabindex="0" aria-controls="order-listing" rowspan="1" colspan="1" style="width: 100px;font-weight: bold;" >Công cụ</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>          
-                                                {{#each history}}
-                                                    <tr role="row" >
-                                                        <td class="sorting_1">{{this.IdGiaoDich}}</td>  
-                                                        <td>{{this.MaDatCho}}</td>         
-                                                        <td>{{this.MaChuyenBay}}</td>
-                                                        <td>{{this.ThoiDiemGiaoDich}}</td>
-                                                        <td>{{this.NgayBay}}</td>
-                                                        
-                                                        <td>{{this.DiemKhoiHanh}}</td>
-                                                        <td>{{this.DiemDen}}</td>
-                                                        <td >
-                                                            <form action="/admin/history/delete" method="POST">
-                                                            <input type="hidden" name="IdGiaoDich" value="{{this.IdGiaoDich}}">
-                                                                <button class="btn btn-danger" type="submit">Xóa</button>
-                                                            </form>
-                                                        </td>
-                                                    </tr>                        
-                                                {{/each}}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

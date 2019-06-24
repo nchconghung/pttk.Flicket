@@ -51,21 +51,17 @@
                             </div>
                         </div>
                         <div class="col">
-                            <span><i class="far fa-calendar-alt" style="margin-right: 5px;"></i>Ngày sinh</span>
-                            <div class="wrap-input1 validate-input">
-                                <input class="input1" type="date" value="{{thanhvien.NgaySinh}}" readonly="readonly">
+                            <span><i class="fas fa-venus-mars" style="margin-right: 5px;"></i>Giới tính:</span>
+                            <div class="wrap-input1 validate-input" style="width: 270px;">
+                                <select class="input1 select-search-fk " aria-placeholder="Giới tính" name="GioiTinh" disabled>
+                                    <option value="1" {{isSelected this.GioiTinh 1}}>Nam</option>
+                                    <option value="0" {{isSelected this.GioiTinh 0}}>Nữ</option>
+                                </select>
                                 <span class="shadow-input1"></span>
                             </div>
                         </div>
                     </div>
-                    <span><i class="fas fa-venus-mars" style="margin-right: 5px;"></i>Giới tính:</span>
-                    <div class="wrap-input1 validate-input" style="width: 270px;">
-                        <select class="input1 select-search-fk " aria-placeholder="Giới tính" name="GioiTinh" readonly="readonly">
-                            <option value="1" {{isSelected this.GioiTinh 1}}>Nam</option>
-                            <option value="0" {{isSelected this.GioiTinh 0}}>Nữ</option>
-                        </select>
-                        <span class="shadow-input1"></span>
-                    </div>
+                    
                     <hr>
                     <span class="contact1-form-title" >
                         Thông tin thẻ tín dụng

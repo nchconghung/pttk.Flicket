@@ -4,8 +4,8 @@
         <div class="card">
             <div class="card-body">
                 <div style="display: flex;justify-content: space-between;align-items: baseline;">
-                    <h3 class="card-title">Danh sách khách hàng</h3>
-                    <button class="btn btn-infor">Thêm khách hàng</button>
+                    <h3 class="card-title">Danh sách thông tin khách hàng giao dịch</h3>
+                    <a class="btn btn-secondary" href="/admin/customer/add/">Thêm khách hàng</a>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -29,7 +29,7 @@
                             <tbody>                        
                                 {{#each list}}
                                     <tr role="row" >
-                                        <td class="sorting_1">{{this.IdKhachHang}}</td>           
+                                        <td class="sorting_1">+</td>           
                                         <td>{{this.HoTen}}</td>
                                         <td>{{this.Email}}</td>
                                         <td>{{this.SDT}}</td>
@@ -38,7 +38,7 @@
                                         </td>
                                         <td>{{this.ThoiDiemGiaoDich}}</td>
                                         <td>
-                                            <a class="badge badge-info" href="/admin/deal/{{this.IdGiaoDich}}/detail" style="font-weight: bold;font-size:13px;">Chi tiết</a>
+                                            <a class="badge badge-info" href="/admin/deal/{{this.IdGiaoDich}}/detail" style="font-weight: bold;font-size:13px;">{{this.IdGiaoDich}}</a>
                                         </td>
                                         <td>
                                             <div class="btn-group">
@@ -50,6 +50,7 @@
                                                     <div class="dropdown-divider"></div>
                                                     <form  action="/admin/customer/delete" method="POST">
                                                         <input type="hidden" value="{{this.IdKhachHang}}" name = "IdKhachHang">
+                                                        <input type="hidden" value="{{this.IdGiaoDich}}" name = "IdGiaoDich">
                                                         <button class="dropdown-item" type="submit">Xóa</button>
                                                     </form>
                                                 </div>

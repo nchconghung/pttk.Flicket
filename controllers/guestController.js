@@ -570,7 +570,8 @@ exports.signup_post = function(req,res,next){
     bcrypt.hash(req.body.MatKhau, saltRounds, function(err, hash) {
         var member = {
             TaiKhoan: req.body.TaiKhoan,
-            MatKhau: hash
+			MatKhau: hash,
+			DiemThuong: 0
         }
         thanhvienModel.add(member).then(id =>{
 			res.redirect('/guest/'+id+'/profile');

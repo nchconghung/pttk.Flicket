@@ -73,7 +73,8 @@ module.exports = {
 
     delete: id => {
         return db.delete(`GiaoDich`,`IdGiaoDich`,id);
+    },
+    idGiaoDichByIdKhachHang: id => {
+        return db.load(`select IdGiaoDich from GiaoDich where KhachHangGiaoDich = ${id}`);
     }
-
-
 }

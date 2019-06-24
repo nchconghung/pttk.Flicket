@@ -37,7 +37,13 @@ module.exports = {
     singleByTaiKhoan: tk => {
         return db.load(`select * from ThanhVien where TaiKhoan like '${tk}'`);
     },
-
+    singleByThongTin: tt => {
+        return db.load(`select IdThanhVien from ThanhVien where ThongTin = ${tt}`);
+    },
+    thongTinById: id => {
+        return db.load(`select ThongTin from ThanhVien where IdThanhVien = ${id}`);
+    }
+    ,
     detailUserById: id => {
         return db.load(`select ThanhVien.IdThanhVien,ThanhVien.TaiKhoan,ThanhVien.DiemThuong,ThongTinKhachHangGiaoDich.*,TheTinDung.SoHieuThe,TheTinDung.HoTen as TenChuThe,TheTinDung.CSC,TheTinDung.NgayHetHan
                         from ThanhVien

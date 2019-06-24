@@ -4,7 +4,7 @@ module.exports = {
 	all: () =>{
         return db.load(`SELECT hhk.*,COUNT(cb.IdChuyenBay) as TongChuyenBay 
                         FROM HangHangKhong hhk
-                        INNER JOIN ChuyenBay cb
+                        left JOIN ChuyenBay cb
                         ON cb.HangHangKhong = hhk.idHangHangKhong
                         GROUP BY hhk.idHangHangKhong`);
     },

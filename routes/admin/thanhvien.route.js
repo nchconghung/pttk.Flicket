@@ -3,21 +3,14 @@ var thanhvienModel = require('../../model/thanhvien.model');
 var khachhangModel = require('../../model/thongtinkhachhanggiaodich.model');
 var giaodichModel = require('../../model/giaodich.model');
 var thetindungModel = require('../../model/thetindung.model');
+var hanhkhachModel = require('../../model/hanhkhach.model');
+var veModel = require('../../model/ve.model')
 var bcrypt = require('bcrypt');
 var router = express.Router();
 var moment= require('moment');
 
 router.get("/",(req,res) => {
-    thanhvienModel.index()
-        .then(rows => {
-            res.render('admin/vwThanhVien/index',{
-                layout: 'admin',
-                list: rows
-            });
-        }).catch(err => {
-            console.log(err);
-            res.end("error occured.")
-        });
+    res.redirect('/admin/member/index/');
 })
 
 router.get("/index",(req,res) => {
@@ -36,17 +29,24 @@ router.get("/index",(req,res) => {
 router.get('/:id/detail',(req,res)=>{
     var id = parseInt(req.params.id);
     thanhvienModel.detailUserById(id).then(rows => {
+        if (rows.length > 0) {
             var bd = moment(rows[0].NgaySinh,'YYYY-MM-DD').format('YYYY-MM-DD');
             rows[0].NgaySinh = bd;
             var expD = moment(rows[0].NgayHetHan,'YYYY-MM-DD').format('YYYY-MM-DD');
             rows[0].NgayHetHan = expD;
-        giaodichModel.allHistoryById(rows[0].IdKhachHang).then(list => {
+            giaodichModel.allHistoryById(rows[0].IdKhachHang).then(list => {
+                res.render('admin/vwThanhVien/detail',{
+                    thanhvien: rows[0],
+                    history: list,
+                    layout: 'admin',
+                });
+            })
+        } else {
             res.render('admin/vwThanhVien/detail',{
                 thanhvien: rows[0],
-                history: list,
                 layout: 'admin',
             });
-        })
+        }
         
     })
     
@@ -83,7 +83,7 @@ router.post('/search/',(req,res)=>{
 
 router.post('/edit',(req,res)=>{
     console.log(req.body);
-    var bd = moment(req.body.NgaySinh,'YYYY-MM-DD').format('YYYY-MM-DD');
+    // var bd = moment(req.body.NgaySinh,'YYYY-MM-DD').format('YYYY-MM-DD');
     var DiemThuong = parseInt(req.body.DiemThuong);
     var exd = moment(req.body.NgayHetHan,'YYYY-MM-DD').format('YYYY-MM-DD');
     
@@ -92,7 +92,7 @@ router.post('/edit',(req,res)=>{
         HoTen: req.body.HoTen,
         Email: req.body.Email,
         SDT: req.body.SDT,
-        NgaySinh: bd,
+        
         GioiTinh: parseInt(req.body.GioiTinh),
         TheTinDung: parseInt(req.body.TheTinDung)
     }
@@ -134,8 +134,9 @@ router.get('/:id/edit',(req,res)=>{
 })
 
 router.post('/update',(req,res) => {
+    var thongtin=
     thanhvienModel.update(req.body).then(n => {
-        res.redirect('/admin/member');
+        res.redirect('/admin/member/');
     }).catch(err => {
         console.log(err),
         res.end('error occured.')
@@ -241,8 +242,98 @@ router.post('/insert',(req,res)=>{
 }),
 
 router.post('/delete', (req, res) => {
-    thanhvienModel.delete(req.body.IdThanhVien).then(n => {
-      res.redirect('/admin/member/index/');
+    var idthanhvien = parseInt(req.body.IdThanhVien);
+    console.log(idthanhvien);
+    thanhvienModel.thongTinById(idthanhvien).then(tv => {
+        console.log(tv[0].ThongTin);
+        if (tv[0].ThongTin === null) {
+            thanhvienModel.delete(idthanhvien).then(rs => {
+                res.redirect("/admin/member/index/");
+            }).catch(err => {
+                console.log(err);
+                res.end('error occured.')
+            });
+            
+        } else {
+            var idkhachhang= parseInt(tv[0].ThongTin);
+            giaodichModel.idGiaoDichByIdKhachHang(idkhachhang).then(result => {
+                if (result.length > 0){
+                    for (var i=0;i<result.length;i++){
+                        var idd = result[i].IdGiaoDich;
+                        hanhkhachModel.listHKVeByIdGiaoDich(idd).then(result1 => {
+                            var promise1;
+                            promise1 = new Promise(function(resolve, reject) {
+                                if (result1.length> 0){
+                                    for (var i=0;i<result1.length;i++){
+                                        var idhanhkhach = result1[i].IdHanhKhach;
+                                        var idve = result1[i].IdVe;
+                                        hanhkhachModel.delete(idhanhkhach).then(i => {
+                                            veModel.delete(idve).catch(err => {
+                                                
+                                                console.log(err);
+                                                res.end('error occured.')
+                                            });
+                                            
+                                        }).catch(err => {
+                                            console.log(err);
+                                            res.end('error occured.')
+                                        });
+                                    }
+                                    resolve(result);
+                                } else {
+                                    resolve(result);
+                                }
+                            });
+                            promise1.then(function(value) {
+                                console.log(value);
+                                var promise2 ;
+                                promise2 = new Promise(function(resolve,reject){
+                                    for (var i=0;i< value.length;i++){
+                                        giaodichModel.delete(value[i].IdGiaoDich).catch(err => {
+                                            console.log(err);
+                                            res.end('error occured.')
+                                        });
+                                    }
+                                    resolve('result');
+                                });
+                                promise2.then(function(value){
+                                    thanhvienModel.delete(idthanhvien).then(id2=> {
+                                        khachhangModel.delete(idkhachhang).then(rs => {
+                                            res.redirect("/admin/member/index/");
+                                        }).catch(err => {
+                                            console.log(err);
+                                            res.end('error occured.')
+                                        });
+                                    }).catch(err => {
+                                        console.log(err);
+                                        res.end('error occured.')
+                                    });
+                                });
+                                
+                            });
+                        }).catch(err => {
+                            console.log(err);
+                            res.end('error occured.')
+                        });
+                    }
+                } else {
+                    thanhvienModel.delete(idthanhvien).then(id2=> {
+                        khachhangModel.delete(idkhachhang).then(rs => {
+                            res.redirect("/admin/member/index/");
+                        }).catch(err => {
+                            console.log(err);
+                            res.end('error occured.')
+                        });
+                    }).catch(err => {
+                        console.log(err);
+                        res.end('error occured.')
+                    });
+                }
+            }).catch(err => {
+                console.log(err);
+                res.end('error occured.')
+              });
+        }
     }).catch(err => {
       console.log(err);
       res.end('error occured.')

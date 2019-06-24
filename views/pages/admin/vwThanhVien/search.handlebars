@@ -51,7 +51,11 @@
                                                     <div class="dropdown-menu">
                                                         {{!-- <a class="dropdown-item" href="/admin/member/{{this.IdThanhVien}}/detail/">Xem chi tiết</a> --}}
                                                         <a class="dropdown-item" href="/admin/member/{{this.IdThanhVien}}/edit/">Chỉnh sửa</a>
-                                                        <a class="dropdown-item" href="#">Xóa</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <form  action="/admin/member/delete" method="POST">
+                                                            <input type="hidden" value="{{this.IdThanhVien}}" name = "IdThanhVien">
+                                                            <button class="dropdown-item" type="submit">Xóa</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </td>

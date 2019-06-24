@@ -23,6 +23,12 @@ module.exports = {
 
     delete: id => {
         return db.delete(`HanhKhach`,`IdHanhKhach`,id);
+    },
+    listHKVeByIdGiaoDich: id => {
+        return db.load(`select HanhKhach.IdHanhKhach,Ve.IdVe
+                        from HanhKhach
+                        inner join Ve
+                        on Ve.IdVe = HanhKhach.Ve
+                        where HanhKhach.GiaoDich = ${id}`);
     }
-
 }

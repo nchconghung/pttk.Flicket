@@ -157,35 +157,24 @@ exports.passenger = function (req, res, next) {
 	var kid = req.session.userdata.TreEm;
 	var baby = req.session.userdata.EmBe;
 	var classs = req.session.userdata.HangGhe;
-	if (!req.user) {
-		Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
-			
-			res.render('guest/passenger_info', {
-				chuyenBay: chuyenbay[0],
-				lichTrinh: lichtrinh,
-				adult: adult,
-				kid: kid,
-				baby: baby,
-				class: classs
-			});
-		});
-	} else {
-		
-		var user = req.session.passport.user;
-
-		Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
-			
-			res.render('guest/passenger_info', {
-				chuyenBay: chuyenbay[0],
-				lichTrinh: lichtrinh,
-				adult: adult,
-				kid: kid,
-				baby: baby,
-				class: classs,
-				user: user
-			});
-		});
+	var user;
+	if (typeof req.session.passport === "undefined"){
+		user = undefined;
+	}else{
+		user = req.session.passport.user;
 	}
+	
+	Promise.all([chuyenBayModel.singleWithDetailById(id, classs), lichTrinhModel.singleWithDetailByIdChuyenBay(id)]).then(([chuyenbay, lichtrinh]) => {
+		res.render('guest/passenger_info', {
+			chuyenBay: chuyenbay[0],
+			lichTrinh: lichtrinh,
+			adult: adult,
+			kid: kid,
+			baby: baby,
+			class: classs,
+			user: user
+		});
+	})
 }
 exports.passenger_post = function (req, res, next) {
 	//upload to session here
@@ -262,6 +251,14 @@ exports.payment = function (req, res, next) {
 	var kidLuggage = req.session.kidLuggage;
 	var babyLuggage = req.session.babyLuggage;
 	var bookingID = req.session.bookingID;
+	var user, point;
+	if (typeof req.session.passport === "undefined"){
+		user = undefined;
+		point = 0;
+	}else{
+		user = req.session.passport.user;
+		point = req.session.passport.user.TaiKhoan.DiemThuong;
+	}
 
 	
 	if (!req.user){
